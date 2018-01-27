@@ -9,12 +9,6 @@ func _init():
     init_headlines()
     init_messages()
 
-func prepare(world, countries):
-    for h in headlines:
-        h.prepare(world, countries)
-    for m in messages:
-        m.prepare(world, countries)
-
 func get_propability(world, countries):
     return randf() < 0.05
 

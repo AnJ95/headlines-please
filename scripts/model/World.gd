@@ -67,7 +67,7 @@ func next_day():
 
 func get_scenario():
     var s = scenarios[0]
-    s.countries = [countries[0], countries[1]]
+    s.prepare(self, [countries[0], countries[1]])
     return s
     
     for s in scenarios:
@@ -82,7 +82,7 @@ func get_scenario():
 func make_format_dic(countries):
     var format_dic = {}
     for c in range(countries.size()):
-       format_dic["country_"+c] = countries[c].name 
+       format_dic["country_" + str(c + 1)] = countries[c].name 
     return format_dic
     
     

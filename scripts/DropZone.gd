@@ -30,7 +30,7 @@ func goto_state_1():
 	var headlines = []
 	for infoNode in get_node("/root/Main/InfoManager").get_children():
 		if infoNode.isSelected:
-			for headline in infoNode.message.get_headlines:
+			for headline in infoNode.message.get_headlines():
 				headlines.append(headline)
 	
 	var curY = padY;
