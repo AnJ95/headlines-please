@@ -75,8 +75,4 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "Margin", "custom_colors" ]
 
-[connection signal="mouse_entered" from="." to="." method="_on_Info_mouse_entered"]
-
-[connection signal="mouse_exited" from="." to="." method="_on_Info_mouse_exited"]
-
 

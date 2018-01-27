@@ -61,8 +61,10 @@ func go_back_to_state_0():
 		if infoNode.isSelected:
 			infoNode.visible = true
 			infoNode.isSelected = false
+			infoNode.add_to_draggables()
 			infoNode.update_view()
 			infoNode.shuffle_position()
+			
 	for headline in get_node("State_1/headlines").get_children():
 		headline.queue_free()
 	current_state = 0

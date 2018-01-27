@@ -8,6 +8,9 @@ var isDragging = false
 var startMousePos
 var startThisPos
 
+func _ready():
+	connect("mouse_entered", self, "on_mouse_entered")
+	connect("mouse_exited", self, "on_mouse_exited")
 
 func _process(delta):
 	if isMouseIn:
@@ -37,6 +40,12 @@ func stop_drag():
 func move_to_top():
 	get_parent().move_child(self, get_parent().get_child_count() - 1)
 	pass
+	
+func on_mouse_entered():
+	isMouseIn = true
+
+func on_mouse_exited():
+	isMouseIn = false
 
 func internal_start_drag():
 	startMousePos = get_viewport().get_mouse_position()
@@ -45,5 +54,4 @@ func internal_start_drag():
 	start_drag()
 
 func internal_stop_drag():
-	
 	stop_drag()
