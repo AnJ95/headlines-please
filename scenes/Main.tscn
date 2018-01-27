@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/table.png" type="Texture" id=2]
@@ -10,9 +10,10 @@
 [ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=8]
 [ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=9]
 [ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
-[ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=11]
+[ext_resource path="res://scenes/Airmail.gd" type="Script" id=11]
+[ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=12]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -108,10 +109,29 @@ texture = ExtResource( 9 )
 position = Vector2( 672.606, 483.742 )
 texture = ExtResource( 10 )
 
-[node name="r-post" type="Sprite" parent="." index="8"]
+[node name="Airmail" type="Control" parent="." index="8"]
 
-position = Vector2( 106.524, -91.2198 )
-texture = ExtResource( 11 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 83.0
+margin_top = -143.0
+margin_right = 220.0
+margin_bottom = 129.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 11 )
+
+[node name="Sprite" type="Sprite" parent="Airmail" index="0"]
+
+position = Vector2( -54.0035, -77.5157 )
+texture = ExtResource( 12 )
+centered = false
+_sections_unfolded = [ "Offset" ]
 
 [connection signal="day_ended" from="." to="." method="_on_Main_day_ended"]
 
