@@ -99,6 +99,10 @@ texture = ExtResource( 10 )
 position = Vector2( 106.524, -91.2198 )
 texture = ExtResource( 11 )
 
-[connection signal="dawn_of_a_new_day" from="." to="InfoArea" method="_on_Main_dawn_of_a_new_day"]
+[connection signal="day_ended" from="." to="InfoManager" method="_on_Main_day_ended"]
+
+[connection signal="day_started" from="." to="InfoManager" method="_on_Main_day_started"]
+
+[connection signal="message_arrived" from="." to="InfoManager" method="_on_Main_message_arrived"]
 
 
