@@ -1,52 +1,41 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
-[ext_resource path="res://images/table.png" type="Texture" id=2]
-[ext_resource path="res://images/map.png" type="Texture" id=3]
-[ext_resource path="res://images/fax.png" type="Texture" id=4]
-[ext_resource path="res://images/pictures.png" type="Texture" id=5]
-[ext_resource path="res://images/tweeter.png" type="Texture" id=6]
-[ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scripts/InfoManager.gd" type="Script" id=8]
+[ext_resource path="res://resources/sprites/table.png" type="Texture" id=2]
+[ext_resource path="res://resources/sprites/map.png" type="Texture" id=3]
+[ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/InfoManager.gd" type="Script" id=5]
+[ext_resource path="res://resources/sprites/phaxogram.png" type="Texture" id=6]
+[ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=7]
+[ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=8]
+[ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=9]
+[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
+[ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=11]
 
-[node name="Main" type="Node2D" index="0"]
+[node name="Main" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="table" type="Sprite" parent="." index="0"]
 
+position = Vector2( 400, 220 )
 texture = ExtResource( 2 )
-centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
+_sections_unfolded = [ "Transform" ]
 
 [node name="map" type="Sprite" parent="." index="1"]
 
+position = Vector2( 291.888, -50.1511 )
 texture = ExtResource( 3 )
-centered = false
-_sections_unfolded = [ "Offset" ]
 
-[node name="fax" type="Sprite" parent="." index="2"]
+[node name="DropZone" parent="." index="2" instance=ExtResource( 4 )]
 
-texture = ExtResource( 4 )
-centered = false
+margin_left = 276.0
+margin_top = 105.0
+margin_right = 531.0
+margin_bottom = 421.0
 
-[node name="pictures" type="Sprite" parent="." index="3"]
-
-position = Vector2( -156, -1 )
-texture = ExtResource( 5 )
-centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="tweeter" type="Sprite" parent="." index="4"]
-
-texture = ExtResource( 6 )
-centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="DropZone" parent="." index="5" instance=ExtResource( 7 )]
-
-[node name="InfoManager" type="Control" parent="." index="6"]
+[node name="InfoManager" type="Control" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -61,8 +50,40 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 8 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Rect", "Transform", "Z Index" ]
+
+[node name="phaxogram" type="Sprite" parent="." index="4"]
+
+position = Vector2( 118.733, 437.124 )
+texture = ExtResource( 6 )
+
+[node name="add-on" type="Sprite" parent="." index="5"]
+
+position = Vector2( 531.641, 49.7458 )
+texture = ExtResource( 7 )
+
+[node name="tweetr" type="Sprite" parent="." index="6"]
+
+position = Vector2( 563.72, 0 )
+texture = ExtResource( 8 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="screen0" type="Sprite" parent="tweetr" index="0"]
+
+position = Vector2( 116.656, 168.622 )
+texture = ExtResource( 9 )
+
+[node name="pictsource" type="Sprite" parent="." index="7"]
+
+position = Vector2( 672.606, 483.742 )
+texture = ExtResource( 10 )
+
+[node name="r-post" type="Sprite" parent="." index="8"]
+
+position = Vector2( 106.524, -91.2198 )
+texture = ExtResource( 11 )
 
 [connection signal="dawn_of_a_new_day" from="." to="InfoManager" method="_on_Main_dawn_of_a_new_day"]
 

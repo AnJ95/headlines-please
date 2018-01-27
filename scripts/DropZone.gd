@@ -2,8 +2,9 @@ extends Control
 
 var current_state = 0
 var max_state = 2
-const padX = 10;
-const padY = 10;
+const padX = 18;
+const initial_padY = 40
+const padY = 4;
 
 const headlineScene = preload("res://scenes/Headline.tscn")
 
@@ -30,10 +31,11 @@ func goto_state_1():
 	var headlines = []
 	for infoNode in get_node("/root/Main/InfoManager").get_children():
 		if infoNode.isSelected:
+			infoNode.visible = false
 			for headline in infoNode.message.get_headlines():
 				headlines.append(headline)
 	
-	var curY = padY;
+	var curY = initial_padY;
 	
 	for headline in headlines:
 		var headlineNode = headlineScene.instance()
@@ -43,12 +45,25 @@ func goto_state_1():
 		curY += headlineNode.get_end().y - headlineNode.get_begin().y + padY
 		
 	show_current_state()
+	
+func go_back_to_state_0():
+	for infoNode in get_node("/root/Main/InfoManager").get_children():
+		if infoNode.isSelected:
+			infoNode.visible = true
+			infoNode.isSelected = false
+			infoNode.shuffle_position()
+	current_state = 0
+	show_current_state()
+	
+func go_back_to_state_1():
+	current_state = 1
+	show_current_state()
 
 # This means headline has been selected
 func goto_state_2(headline):
 	current_state = 2
 	
-	get_node("State_2/Headline").init(Vector2(padX, padY), headline, null, null)
+	get_node("State_2/Headline").init(headline, Vector2(padX, initial_padY), null, null)
 	show_current_state()
 
 # This means everything is done
