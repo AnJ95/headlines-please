@@ -1,14 +1,12 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://images/table.png" type="Texture" id=1]
 [ext_resource path="res://images/map.png" type="Texture" id=2]
 [ext_resource path="res://images/fax.png" type="Texture" id=3]
 [ext_resource path="res://images/newspaper.png" type="Texture" id=4]
 [ext_resource path="res://images/pictures.png" type="Texture" id=5]
-[ext_resource path="res://resources/sprites/mat.png" type="Texture" id=6]
-[ext_resource path="res://images/tweeter.png" type="Texture" id=7]
-[ext_resource path="res://scenes/Info.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Article.tscn" type="PackedScene" id=9]
+[ext_resource path="res://images/tweeter.png" type="Texture" id=6]
+[ext_resource path="res://scenes/Info.tscn" type="PackedScene" id=7]
 
 [node name="Main" type="Node2D" index="0"]
 
@@ -45,15 +43,15 @@ texture = ExtResource( 5 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Mat" type="Control" parent="." index="5"]
+[node name="DropZone" type="Control" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 542.0
-margin_top = 303.0
-margin_right = 811.0
+margin_left = 274.0
+margin_top = 184.0
+margin_right = 524.0
 margin_bottom = 497.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
@@ -62,16 +60,9 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Material", "Rect", "Transform" ]
 
-[node name="Sprite" type="Sprite" parent="Mat" index="0"]
-
-scale = Vector2( 1.47541, 1.04918 )
-texture = ExtResource( 6 )
-centered = false
-_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
-
 [node name="tweeter" type="Sprite" parent="." index="6"]
 
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 
@@ -92,51 +83,26 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Rect", "Transform", "Z Index" ]
 
-[node name="Info2" parent="InfoManager" index="0" instance=ExtResource( 8 )]
+[node name="Info2" parent="InfoManager" index="0" instance=ExtResource( 7 )]
 
 margin_left = 165.0
 margin_top = 146.0
 margin_right = 256.0
 margin_bottom = 219.0
 
-[node name="Info3" parent="InfoManager" index="1" instance=ExtResource( 8 )]
+[node name="Info3" parent="InfoManager" index="1" instance=ExtResource( 7 )]
 
 margin_left = 180.0
 margin_top = 80.0
 margin_right = 271.0
 margin_bottom = 153.0
 
-[node name="Info" parent="InfoManager" index="2" instance=ExtResource( 8 )]
+[node name="Info" parent="InfoManager" index="2" instance=ExtResource( 7 )]
 
 margin_left = 196.0
 margin_top = 87.0
 margin_right = 287.0
 margin_bottom = 160.0
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Pause", "Rect", "Transform" ]
-
-[node name="ArticleManager" type="Node2D" parent="." index="8"]
-
-position = Vector2( 502.253, 352.332 )
-
-[node name="Article" parent="ArticleManager" index="0" instance=ExtResource( 9 )]
-
-margin_left = -164.0
-margin_top = -136.0
-margin_right = -126.0
-margin_bottom = -99.0
-
-[node name="Article2" parent="ArticleManager" index="1" instance=ExtResource( 9 )]
-
-margin_left = -164.0
-margin_top = -66.0
-margin_right = -124.0
-margin_bottom = -26.0
-
-[node name="Article3" parent="ArticleManager" index="2" instance=ExtResource( 9 )]
-
-margin_left = -164.0
-margin_top = 4.0
-margin_right = -124.0
-margin_bottom = 44.0
 
 
