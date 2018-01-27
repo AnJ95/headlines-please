@@ -74,10 +74,12 @@ func start_drag():
 
 
 func stop_drag():
-	var mat = get_tree().get_current_scene().get_node("DropZone")
+	var dropZone = get_tree().get_current_scene().get_node("DropZone")
 	var infoManager = get_tree().get_current_scene().get_node("InfoManager")
-	isSelected = get_global_rect().intersects(mat.get_global_rect())
-	update_view();
+	
+	if dropZone.current_state == 0:
+		isSelected = get_global_rect().intersects(dropZone.get_global_rect())
+		update_view();
 
 func update_view():
 	if isSelected:

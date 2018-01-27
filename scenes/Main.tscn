@@ -12,7 +12,7 @@
 [ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
 [ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=11]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]

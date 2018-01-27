@@ -6,7 +6,7 @@
 [ext_resource path="res://resources/sprites/btn-x.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Headline.tscn" type="PackedScene" id=5]
 
-[node name="DropZone" type="Control" index="0"]
+[node name="DropZone" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -109,6 +109,20 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 4 )
 _sections_unfolded = [ "Textures" ]
+
+[node name="headlines" type="Control" parent="State_1" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
 [node name="State_2" type="Control" parent="." index="2"]
 

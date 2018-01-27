@@ -8,6 +8,10 @@
 
 config_version=3
 
+position=0
+pos=false
+window=0
+
 [application]
 
 config/name="HeadlinesPlease"
