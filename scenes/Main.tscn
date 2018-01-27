@@ -1,21 +1,53 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://resources/sprites/newspaper.png" type="Texture" id=1]
+[ext_resource path="res://resources/sprites/mat.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Info.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Article.tscn" type="PackedScene" id=3]
 
-[node name="Main" type="Node2D" index="0"]
+[node name="Main" type="Node2D"]
 
 _sections_unfolded = [ "Transform" ]
 
-[node name="newspaper" type="Sprite" parent="." index="0"]
+[node name="Mat" type="Control" parent="." index="0"]
 
-position = Vector2( 499.173, 501.18 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 667.0
+margin_top = 217.0
+margin_right = 988.0
+margin_bottom = 569.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="Mat" index="0"]
+
+scale = Vector2( 1.75432, 1.91524 )
 texture = ExtResource( 1 )
+centered = false
+_sections_unfolded = [ "Animation", "Offset", "Transform", "Visibility" ]
 
-[node name="InfoManager" type="Node2D" parent="." index="1"]
+[node name="InfoManager" type="Control" parent="." index="1"]
 
-position = Vector2( 50.7124, 32.9631 )
-_sections_unfolded = [ "Z Index" ]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 8.0
+margin_top = 6.0
+margin_right = 665.0
+margin_bottom = 342.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect", "Transform", "Z Index" ]
 
 [node name="Info2" parent="InfoManager" index="0" instance=ExtResource( 2 )]
 
@@ -24,12 +56,40 @@ margin_top = 146.0
 margin_right = 256.0
 margin_bottom = 219.0
 
-[node name="Info" parent="InfoManager" index="1" instance=ExtResource( 2 )]
+[node name="Info3" parent="InfoManager" index="1" instance=ExtResource( 2 )]
+
+margin_left = 180.0
+margin_top = 80.0
+margin_right = 271.0
+margin_bottom = 153.0
+
+[node name="Info" parent="InfoManager" index="2" instance=ExtResource( 2 )]
 
 margin_left = 113.0
 margin_top = 101.0
 margin_right = 204.0
 margin_bottom = 174.0
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Transform" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Pause", "Rect", "Transform" ]
+
+[node name="ArticleManager" type="Node2D" parent="." index="2"]
+
+position = Vector2( 502.253, 352.332 )
+
+[node name="Article" parent="ArticleManager" index="0" instance=ExtResource( 3 )]
+
+margin_right = 38.0
+margin_bottom = 37.0
+
+[node name="Article2" parent="ArticleManager" index="1" instance=ExtResource( 3 )]
+
+margin_top = 70.0
+margin_right = 40.0
+margin_bottom = 110.0
+
+[node name="Article3" parent="ArticleManager" index="2" instance=ExtResource( 3 )]
+
+margin_top = 140.0
+margin_right = 40.0
+margin_bottom = 180.0
 
 
