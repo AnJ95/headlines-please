@@ -2,11 +2,14 @@ extends Control
 
 const InfoScene = preload("res://scenes/Info.tscn")
 
-func _on_Main_dawn_of_a_new_day( world ):
-    for s in world.current_scenarios:
-        var scenario = world.current_scenarios[s]
-        for m in range(scenario.messages.size()):
-            var message = scenario.messages[m]
-            var info_node = InfoScene.instance()
-            get_node("/root/Main/Draggables").add_child(info_node)
-            info_node.init(message)
+func _on_Main_day_ended(world):
+    for c in get_children():
+        c.queue_free()
+
+func _on_Main_day_started(world):
+    return
+
+func _on_Main_message_arrived(message):
+    var info_node = InfoScene.instance()
+    add_child(info_node)
+    info_node.init(message)
