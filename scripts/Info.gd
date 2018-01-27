@@ -1,6 +1,6 @@
 extends "res://scripts/Draggable.gd"
 
-
+var selectedDropZone = null
 
 const BORDER_COLOR_DEFAULT = Color(0.4, 0.4, 0.4, 1)
 const BORDER_COLOR_SELECTED = Color(0.9, 0.3, 0.3, 1)
@@ -59,23 +59,28 @@ func start_drag():
 
 
 func stop_drag():
-	var dropZone = get_node("/root/Main/Draggables/DropZone")
+	
 	var draggables = get_node("/root/Main/Draggables")
 	
 	#var infoManager = get_tree().get_current_scene().get_node("InfoArea")
 	
-	for dropZone in get_tree().get_nodes_in_group("dropzone"):
-		if dropZone.current_state == 0:
-			isSelected = get_global_rect().intersects(dropZone.get_global_rect())
-			if (isSelected):
-				add_to_dropzone()
-			else: 
-				add_to_draggables()
-			update_view();
-			return #TODO maybe sort by children index first?
+	var i = draggables.get_child_count() - 1
+	while i >= 0:
+		var child = draggables.get_children()[i]
+		i -= 1
+		if (child.is_in_group("dropzone")):
+			print(str(i) + ": " + str(child))
+			if child.current_state == 0:
+				if (get_global_rect().intersects(child.get_global_rect())):
+					selectedDropZone = child
+					add_to_dropzone(child)
+					update_view();
+					return
+	selectedDropZone = null
+	add_to_draggables()
 
-func add_to_dropzone():
-	var dropZone = get_node("/root/Main/Draggables/DropZone")
+
+func add_to_dropzone(dropZone):
 	self.rect_position -= dropZone.rect_position - get_parent().rect_position
 	get_parent().remove_child(self)
 	dropZone.add_child(self)
@@ -87,7 +92,7 @@ func add_to_draggables():
 	draggables.add_child(self)
 
 func update_view():
-	if isSelected:
+	if selectedDropZone != null:
 		get_node("Border").color = BORDER_COLOR_SELECTED
 	else:
 		get_node("Border").color = BORDER_COLOR_DEFAULT

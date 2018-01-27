@@ -27,8 +27,8 @@ func show_current_state():
 func goto_state_1():
 	
 	var hasMinOne = false
-	for infoNode in get_tree().get_nodes_in_group("info"):
-		if infoNode.isSelected:
+	for infoNode in get_tree().get_nodes_in_group("info"): # TODO was passiert wenn info da, aber keine headline davon abgeleitet?
+		if infoNode.selectedDropZone == self:
 			hasMinOne = true
 			break
 	if not hasMinOne:
@@ -40,7 +40,7 @@ func goto_state_1():
 	
 	var headlines = []
 	for infoNode in get_tree().get_nodes_in_group("info"):
-		if infoNode.isSelected:
+		if infoNode.selectedDropZone == self:
 			infoNode.visible = false
 			for headline in infoNode.message.get_headlines():
 				headlines.append(headline)
@@ -58,9 +58,9 @@ func goto_state_1():
 	
 func go_back_to_state_0():
 	for infoNode in get_tree().get_nodes_in_group("info"):
-		if infoNode.isSelected:
+		if infoNode.selectedDropZone == self:
 			infoNode.visible = true
-			infoNode.isSelected = false
+			infoNode.selectedDropZone = null
 			infoNode.add_to_draggables()
 			infoNode.update_view()
 			infoNode.shuffle_position()

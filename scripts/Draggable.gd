@@ -1,8 +1,5 @@
 extends Control
 
-# if this node has been moved to mat
-var isSelected = false
-
 var isMouseIn = false
 var isDragging = false
 var startMousePos

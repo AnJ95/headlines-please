@@ -12,7 +12,7 @@
 [ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
 [ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=11]
 
-[node name="Main" type="Node2D" index="0"]
+[node name="Main" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -60,7 +60,21 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="DropZone" parent="Draggables" index="0" instance=ExtResource( 5 )]
+[node name="DropZone2" parent="Draggables" index="0" instance=ExtResource( 5 )]
+
+margin_left = 256.0
+margin_top = 58.0
+margin_right = 511.0
+margin_bottom = 374.0
+
+[node name="DropZone3" parent="Draggables" index="1" instance=ExtResource( 5 )]
+
+margin_left = 307.0
+margin_top = 82.0
+margin_right = 562.0
+margin_bottom = 398.0
+
+[node name="DropZone" parent="Draggables" index="2" instance=ExtResource( 5 )]
 
 margin_left = 276.0
 margin_top = 105.0
@@ -99,10 +113,10 @@ texture = ExtResource( 10 )
 position = Vector2( 106.524, -91.2198 )
 texture = ExtResource( 11 )
 
-[connection signal="day_ended" from="." to="InfoManager" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="." method="_on_Main_day_ended"]
 
-[connection signal="day_started" from="." to="InfoManager" method="_on_Main_day_started"]
+[connection signal="day_started" from="." to="." method="_on_Main_day_started"]
 
-[connection signal="message_arrived" from="." to="InfoManager" method="_on_Main_message_arrived"]
+[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
 
 

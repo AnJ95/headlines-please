@@ -44,7 +44,7 @@ func _process(delta):
 
     last_time = time
     time += delta
-    print(time)
+    #print(time)
     if time >= DAY_CYCLE_TIME:
        end_day()
        # next_day()
@@ -97,17 +97,11 @@ func get_scenario():
            pass
 
 
-
-
-
 func make_format_dic(countries):
     var format_dic = {}
     for c in range(countries.size()):
        format_dic["country_" + str(c + 1)] = countries[c].name
     return format_dic
-
-
-
 
 
 func fisher_yates(array):
@@ -116,3 +110,12 @@ func fisher_yates(array):
         var tmp = array[j]
         array[j] = array[i]
         array[i] = tmp
+
+
+func _on_Main_day_started( world ):
+    pass # replace with function body
+
+
+func _on_Main_day_ended( world ):
+    for c in get_tree().get_nodes_in_group("info"):
+        c.queue_free()

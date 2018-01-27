@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/Info.gd" type="Script" id=1]
 
-[node name="Info" type="Control"]
+[node name="Info" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
