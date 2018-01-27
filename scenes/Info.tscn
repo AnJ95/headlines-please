@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/Info.gd" type="Script" id=1]
 
-[node name="Info" type="Control"]
+[node name="Info" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -16,7 +16,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Margin", "Mouse", "Transform" ]
+_sections_unfolded = [ "Anchor", "Margin", "Mouse", "Transform" ]
 
 [node name="Border" type="ColorRect" parent="." index="0"]
 
@@ -50,9 +50,9 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.910156, 0.870159, 0.654175, 1 )
-_sections_unfolded = [ "Margin" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." index="2"]
+[node name="Label" type="Label" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -60,26 +60,18 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 92.0
-margin_bottom = 62.0
+margin_right = 83.0
+margin_bottom = 49.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_colors/default_color = Color( 0, 0, 0, 1 )
-bbcode_enabled = false
-bbcode_text = "Ambassador died under questionable circumstances"
-visible_characters = -1
+autowrap = true
 percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
-text = "Ambassador died under questionable circumstances"
-scroll_active = false
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
+lines_skipped = 0
+max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "Margin" ]
 
 [connection signal="mouse_entered" from="." to="." method="_on_Info_mouse_entered"]

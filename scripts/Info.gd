@@ -6,21 +6,50 @@ var isSelected = false
 const BORDER_COLOR_DEFAULT = Color(0.4, 0.4, 0.4, 1)
 const BORDER_COLOR_SELECTED = Color(0.9, 0.3, 0.3, 1)
 
+const PADDING = 15
+const BORDER = 2
+
 var isMouseIn = false
 var isDragging = false
 var startMousePos
 var startThisPos
+var timeYet = 0
+
+var hasSetSize = false
+
+var width = 120
 
 func _ready():
-	shuffle_position()
-	update_view();
-	init("[b]HALLO[/b]")
+	pass
 
 func init(strContent):
-	get_node("RichTextLabel").parse_bbcode(strContent)
-
+	shuffle_position()
+	update_view();
+	
+	get_node("Label").rect_size = Vector2(width, 1000)
+	get_node("Label").set_text(strContent)
 
 func _process(delta):
+	
+	if not hasSetSize:
+		timeYet += delta 
+		if timeYet > 0.1:
+			hasSetSize = true
+			
+			var size = Vector2(width, get_node("Label").get_combined_minimum_size().y)
+			
+			rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
+			
+			get_node("Border").rect_position = Vector2(0, 0)
+			get_node("Border").rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
+			
+			get_node("Background").rect_position = Vector2(BORDER, BORDER)
+			get_node("Background").rect_size = size + Vector2(2*PADDING, 2*PADDING)
+			
+			get_node("Label").rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
+			get_node("Label").rect_size = size
+			
+			
 	if isMouseIn:
 		if Input.is_mouse_button_pressed(BUTTON_LEFT):
 			if not isDragging:

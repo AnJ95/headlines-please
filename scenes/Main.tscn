@@ -6,7 +6,7 @@
 [ext_resource path="res://images/pictures.png" type="Texture" id=4]
 [ext_resource path="res://images/tweeter.png" type="Texture" id=5]
 [ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Info.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/InfoManager.gd" type="Script" id=7]
 
 [node name="Main" type="Node2D"]
 
@@ -59,28 +59,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = ExtResource( 7 )
 _sections_unfolded = [ "Rect", "Transform", "Z Index" ]
-
-[node name="Info2" parent="InfoManager" index="0" instance=ExtResource( 7 )]
-
-margin_left = 63.0
-margin_top = 204.0
-margin_right = 154.0
-margin_bottom = 277.0
-
-[node name="Info3" parent="InfoManager" index="1" instance=ExtResource( 7 )]
-
-margin_left = 78.0
-margin_top = 138.0
-margin_right = 169.0
-margin_bottom = 211.0
-
-[node name="Info" parent="InfoManager" index="2" instance=ExtResource( 7 )]
-
-margin_left = 94.0
-margin_top = 145.0
-margin_right = 185.0
-margin_bottom = 218.0
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Pause", "Rect", "Transform" ]
 
 
