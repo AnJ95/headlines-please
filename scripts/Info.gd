@@ -6,7 +6,7 @@ var isSelected = false
 const BORDER_COLOR_DEFAULT = Color(0.4, 0.4, 0.4, 1)
 const BORDER_COLOR_SELECTED = Color(0.9, 0.3, 0.3, 1)
 
-const PADDING = 15
+const PADDING = 5
 const BORDER = 2
 
 var isMouseIn = false
