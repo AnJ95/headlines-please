@@ -16,6 +16,7 @@ var width = 120
 var message
 
 func _ready():
+	add_to_group("info")
 	pass
 
 func init(message):
@@ -58,7 +59,14 @@ func start_drag():
 
 
 func stop_drag():
-	pass
+	var dropZone = get_node("/root/Main/DropZone")
+	#var infoManager = get_tree().get_current_scene().get_node("InfoArea")
+	
+	for dropZone in get_tree().get_nodes_in_group("dropzone"):
+		if dropZone.current_state == 0:
+			isSelected = get_global_rect().intersects(dropZone.get_global_rect())
+			update_view();
+			return #TODO maybe sort by children index first?
 
 func update_view():
 	if isSelected:
@@ -73,7 +81,7 @@ func _on_Info_mouse_exited():
 	isMouseIn = false
 
 func shuffle_position():
-	var outer = get_parent().get_global_rect()
+	var outer = get_node("/root/Main/InfoArea").get_global_rect()
 	var inner = get_global_rect()
 
 	var maxW = outer.size.x - inner.size.x

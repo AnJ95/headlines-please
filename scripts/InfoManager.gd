@@ -8,5 +8,5 @@ func _on_Main_dawn_of_a_new_day( world ):
         for m in range(scenario.messages.size()):
             var message = scenario.messages[m]
             var info_node = InfoScene.instance()
-            add_child(info_node)
+            get_node("/root/Main/Draggables").add_child(info_node)
             info_node.init(message)

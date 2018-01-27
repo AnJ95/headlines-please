@@ -12,7 +12,7 @@
 [ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
 [ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=11]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -35,7 +35,7 @@ margin_top = 105.0
 margin_right = 531.0
 margin_bottom = 421.0
 
-[node name="InfoManager" type="Control" parent="." index="3"]
+[node name="InfoArea" type="Control" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -53,17 +53,31 @@ size_flags_vertical = 1
 script = ExtResource( 5 )
 _sections_unfolded = [ "Rect", "Transform", "Z Index" ]
 
-[node name="phaxogram" type="Sprite" parent="." index="4"]
+[node name="Draggables" type="Control" parent="." index="4"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+
+[node name="phaxogram" type="Sprite" parent="." index="5"]
 
 position = Vector2( 118.733, 437.124 )
 texture = ExtResource( 6 )
 
-[node name="add-on" type="Sprite" parent="." index="5"]
+[node name="add-on" type="Sprite" parent="." index="6"]
 
 position = Vector2( 531.641, 49.7458 )
 texture = ExtResource( 7 )
 
-[node name="tweetr" type="Sprite" parent="." index="6"]
+[node name="tweetr" type="Sprite" parent="." index="7"]
 
 position = Vector2( 563.72, 0 )
 texture = ExtResource( 8 )
@@ -75,16 +89,16 @@ _sections_unfolded = [ "Offset", "Transform" ]
 position = Vector2( 116.656, 168.622 )
 texture = ExtResource( 9 )
 
-[node name="pictsource" type="Sprite" parent="." index="7"]
+[node name="pictsource" type="Sprite" parent="." index="8"]
 
 position = Vector2( 672.606, 483.742 )
 texture = ExtResource( 10 )
 
-[node name="r-post" type="Sprite" parent="." index="8"]
+[node name="r-post" type="Sprite" parent="." index="9"]
 
 position = Vector2( 106.524, -91.2198 )
 texture = ExtResource( 11 )
 
-[connection signal="dawn_of_a_new_day" from="." to="InfoManager" method="_on_Main_dawn_of_a_new_day"]
+[connection signal="dawn_of_a_new_day" from="." to="InfoArea" method="_on_Main_dawn_of_a_new_day"]
 
 

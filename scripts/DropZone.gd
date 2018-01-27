@@ -1,4 +1,4 @@
-extends Control
+extends "res://scripts/Draggable.gd"
 
 var current_state = 0
 var max_state = 2
@@ -10,6 +10,7 @@ const headlineScene = preload("res://scenes/Headline.tscn")
 
 func _ready():
 	show_current_state()
+	add_to_group("dropzone")
 	pass
 
 
@@ -26,7 +27,7 @@ func show_current_state():
 func goto_state_1():
 	
 	var hasMinOne = false
-	for infoNode in get_node("/root/Main/InfoManager").get_children():
+	for infoNode in get_tree().get_nodes_in_group("info"):
 		if infoNode.isSelected:
 			hasMinOne = true
 			break
@@ -38,7 +39,7 @@ func goto_state_1():
 	var world = get_node("/root/Main");
 	
 	var headlines = []
-	for infoNode in get_node("/root/Main/InfoManager").get_children():
+	for infoNode in get_tree().get_nodes_in_group("info"):
 		if infoNode.isSelected:
 			infoNode.visible = false
 			for headline in infoNode.message.get_headlines():
@@ -56,7 +57,7 @@ func goto_state_1():
 	show_current_state()
 	
 func go_back_to_state_0():
-	for infoNode in get_node("/root/Main/InfoManager").get_children():
+	for infoNode in get_tree().get_nodes_in_group("info"):
 		if infoNode.isSelected:
 			infoNode.visible = true
 			infoNode.isSelected = false

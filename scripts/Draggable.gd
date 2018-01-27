@@ -8,6 +8,7 @@ var isDragging = false
 var startMousePos
 var startThisPos
 
+
 func _process(delta):
 	if isMouseIn:
 		if Input.is_mouse_button_pressed(BUTTON_LEFT):
@@ -44,10 +45,5 @@ func internal_start_drag():
 	start_drag()
 
 func internal_stop_drag():
-	var dropZone = get_tree().get_current_scene().get_node("DropZone")
-	var infoManager = get_tree().get_current_scene().get_node("InfoManager")
 	
-	if dropZone.current_state == 0:
-		isSelected = get_global_rect().intersects(dropZone.get_global_rect())
-		update_view();
 	stop_drag()
