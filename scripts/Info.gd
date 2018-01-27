@@ -22,12 +22,12 @@ var width = 120
 func _ready():
 	pass
 
-func init(strContent):
+func init(text, messsage_id, scenario):
 	shuffle_position()
 	update_view();
 	
 	get_node("Label").rect_size = Vector2(width, 1000)
-	get_node("Label").set_text(strContent)
+	get_node("Label").set_text(text)
 
 func _process(delta):
 	

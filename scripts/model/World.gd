@@ -20,16 +20,12 @@ func _init():
     countries.append(Country.new("trialidat and errorgo"))
 
     for c in countries:
-        print(c.name)
         c.prepare(self)
 
-    init_scenarios()
-
-    for s in scenarios:
-        print(s.name)
-        
+    init_scenarios()        
     
-    #TODO first day
+    
+func _ready():    
     next_day()
 
 
@@ -57,7 +53,7 @@ func next_day():
     var next_scenario = get_scenario()
     current_scenarios[next_scenario.name] = next_scenario
     print(current_scenarios)
-    
+    print("emit sig")
     emit_signal("dawn_of_a_new_day", self);
     
     
@@ -70,7 +66,9 @@ func next_day():
 
 
 func get_scenario():
-    return scenarios[0]
+    var s = scenarios[0]
+    s.countries = [countries[0], countries[1]]
+    return s
     
     
     

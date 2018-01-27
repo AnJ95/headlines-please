@@ -1,17 +1,14 @@
 extends Control
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+const InfoScene = preload("res://scenes/Info.tscn")
 
-func _ready():
-	var infoScene = load("res://scenes/Info.tscn")
-	for i in range(10):
-		var infoNode = infoScene.instance()
-		add_child(infoNode)
-		infoNode.init("goto_state_2 goto_state_2 goto_state_2 goto_state_2 goto_state_2 goto_state_2 goto_state_2 goto_state_2 goto_state_2 ")
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _on_Main_dawn_of_a_new_day( world ):
+    print("doand")
+    for s in world.current_scenarios:
+        var scenario = world.current_scenarios[s]
+        for m in range(scenario.messages.size()):
+            var message = scenario.messages[m]
+            print(message)
+            var info_node = InfoScene.instance()
+            add_child(info_node)
+            info_node.init( message.get_text(world, scenario.countries), m, s)
