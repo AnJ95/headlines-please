@@ -70,18 +70,23 @@ func get_scenario():
     s.countries = [countries[0], countries[1]]
     return s
     
-    
-    
-    
-    
-    
-    
-    
-    
     for s in scenarios:
         var num_countries = s.num_countries
         if s.get_propability(self):
            pass
+    
+    
+    
+    
+    
+func make_format_dic(countries):
+    var format_dic = {}
+    for c in range(countries.size()):
+       format_dic["country_"+c] = countries[c].name 
+    return format_dic
+    
+    
+    
 
 
 func fisher_yates(array):
