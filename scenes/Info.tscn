@@ -2,30 +2,46 @@
 
 [ext_resource path="res://scripts/Info.gd" type="Script" id=1]
 
-[node name="Info" type="Control" index="0"]
+[node name="Info" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 90.0
-margin_bottom = 60.0
+margin_right = 94.0
+margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect", "Transform" ]
+_sections_unfolded = [ "Margin", "Mouse", "Transform" ]
 
-[node name="ColorRect" type="ColorRect" parent="." index="0"]
+[node name="Border" type="ColorRect" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -2.0
-margin_top = -2.0
+margin_right = 94.0
+margin_bottom = 64.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.320312, 0.320312, 0.320312, 1 )
+_sections_unfolded = [ "Margin" ]
+
+[node name="Background" type="ColorRect" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 2.0
+margin_top = 2.0
 margin_right = 92.0
 margin_bottom = 62.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -33,17 +49,19 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 1, 1, 1, 1 )
-_sections_unfolded = [ "Material", "Mouse", "Theme" ]
+color = Color( 0.910156, 0.870159, 0.654175, 1 )
+_sections_unfolded = [ "Margin" ]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." index="1"]
+[node name="RichTextLabel" type="RichTextLabel" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 90.0
-margin_bottom = 60.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 92.0
+margin_bottom = 62.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 2
@@ -62,7 +80,7 @@ scroll_active = false
 scroll_following = false
 selection_enabled = false
 override_selected_font_color = false
-_sections_unfolded = [ "BBCode", "Focus", "Hint", "Material", "Mouse", "Pause", "Rect", "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+_sections_unfolded = [ "BBCode", "Margin" ]
 
 [connection signal="mouse_entered" from="." to="." method="_on_Info_mouse_entered"]
 
