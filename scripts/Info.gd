@@ -18,16 +18,19 @@ var timeYet = 0
 var hasSetSize = false
 
 var width = 120
+var message
 
 func _ready():
 	pass
 
-func init(text, messsage_id, scenario):
+func init(message):
+	self.message = message
+	
 	shuffle_position()
 	update_view();
 	
 	get_node("Label").rect_size = Vector2(width, 1000)
-	get_node("Label").set_text(text)
+	get_node("Label").set_text(message.text)
 
 func _process(delta):
 	

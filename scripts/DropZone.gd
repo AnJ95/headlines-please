@@ -5,6 +5,7 @@ var max_state = 2
 const padX = 10;
 const padY = 10;
 
+const headlineScene = preload("res://scenes/Headline.tscn")
 
 func _ready():
 	show_current_state()
@@ -24,8 +25,13 @@ func show_current_state():
 func goto_state_1():
 	current_state = 1
 	
-	var headlines = ["Ambassador dead", "Ambassador killed", "This is war"]
-	var headlineScene = load("res://scenes/Headline.tscn")
+	var world = get_node("/root/Main");
+	
+	var headlines = []
+	for infoNode in get_node("/root/Main/InfoManager").get_children():
+		if infoNode.isSelected:
+			for headline in infoNode.message.get_headlines:
+				headlines.append(headline)
 	
 	var curY = padY;
 	
@@ -33,7 +39,7 @@ func goto_state_1():
 		var headlineNode = headlineScene.instance()
 		get_node("State_1").add_child(headlineNode)
 		
-		headlineNode.init(Vector2(padX, curY), headline, self, "goto_state_2")
+		headlineNode.init(headline, Vector2(padX, curY), self, "goto_state_2")
 		curY += headlineNode.get_end().y - headlineNode.get_begin().y + padY
 		
 	show_current_state()
