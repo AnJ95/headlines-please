@@ -23,97 +23,95 @@ signal day_ended(world)
 signal message_arrived(message)
 
 func _init():
-	countries.append(Country.new("Testonia"))
-	countries.append(Country.new("Debugtania"))
-	countries.append(Country.new("Try Catchistan"))
-	countries.append(Country.new("Trialidat and Errorgo"))
+    countries.append(Country.new("Testonia"))
+    countries.append(Country.new("Debugtania"))
+    countries.append(Country.new("Try Catchistan"))
+    countries.append(Country.new("Trialidat and Errorgo"))
 
-	for c in countries:
-		c.prepare(self)
+    for c in countries:
+        c.prepare(self)
 
-	load_scenarios()
+    load_scenarios()
 
 
 func _ready():
-	next_day()
+    next_day()
 
 func _process(delta):
+    if not game_running:
+        return
+        
+    for s in current_scenarios:
+        for m in current_scenarios[s].messages:
+            if m.arrival_time * DAY_CYCLE_TIME > last_time && m.arrival_time * DAY_CYCLE_TIME <= time:
+                emit_signal("message_arrived", m);
 
-	if game_running:
-		for s in current_scenarios:
-			for m in current_scenarios[s].messages:
-				if m.arrival_time * DAY_CYCLE_TIME > last_time && m.arrival_time * DAY_CYCLE_TIME <= time:
-					emit_signal("message_arrived", m);
-	
-		last_time = time
-		time += delta
-		#print(time)
-		if time >= DAY_CYCLE_TIME:
-			game_running = false
-			end_day()
-			# next_day()
+    last_time = time
+    time += delta
+    if time >= DAY_CYCLE_TIME:
+        end_day()
 
 
 func load_scenarios():
-	var dir = Directory.new()
-	if dir.open("res://scripts/model/scenarios") == OK:
-		dir.list_dir_begin(true)
-		var file_name = dir.get_next()
-		while (file_name != ""):
-			if dir.current_is_dir():
-				continue
-			var LoadedScenario = load("res://scripts/model/scenarios/" + file_name)
-			scenarios.append(LoadedScenario.new())
-			file_name = dir.get_next()
-		dir.list_dir_end ( )
-	else:
-		print("An error occurred when trying to access the path.")
+    var dir = Directory.new()
+    if dir.open("res://scripts/model/scenarios") == OK:
+        dir.list_dir_begin(true)
+        var file_name = dir.get_next()
+        while (file_name != ""):
+            if dir.current_is_dir():
+                continue
+            var LoadedScenario = load("res://scripts/model/scenarios/" + file_name)
+            scenarios.append(LoadedScenario.new())
+            file_name = dir.get_next()
+        dir.list_dir_end ( )
+    else:
+        print("An error occurred when trying to access the path.")
 
 
 
 func next_day():
-	current_scenarios = {}
-	for i in range(1):
-		var next_scenario = get_scenario()
-		current_scenarios[next_scenario.name] = next_scenario
+    current_scenarios = {}
+    for i in range(1):
+        var next_scenario = get_scenario()
+        current_scenarios[next_scenario.name] = next_scenario
 
-	emit_signal("day_started", self)
+    emit_signal("day_started", self)
 
-	day += 1
-	time = 0
-	last_time = -1
+    day += 1
+    time = 0
+    last_time = -1
 
 
 func end_day():
-	emit_signal("day_ended", self)
+    game_running = false
+    emit_signal("day_ended", self)
 
 
 func get_scenario():
-	var s = scenarios[0]
-	s.prepare(self, [countries[0], countries[1]])
-	return s
+    var s = scenarios[0]
+    s.prepare(self, [countries[0], countries[1]])
+    return s
 
-	for s in scenarios:
-		var num_countries = s.num_countries
-		if s.get_propability(self):
-		   pass
+    for s in scenarios:
+        var num_countries = s.num_countries
+        if s.get_propability(self):
+           pass
 
 
 func make_format_dic(countries):
-	var format_dic = {}
-	for c in range(countries.size()):
-	   format_dic["country_" + str(c + 1)] = countries[c].name
-	return format_dic
+    var format_dic = {}
+    for c in range(countries.size()):
+       format_dic["country_" + str(c + 1)] = countries[c].name
+    return format_dic
 
 
 func fisher_yates(array):
-	for i in range(0, array.size()-2):
-		var j = i + randi() % (array.size() - i)
-		var tmp = array[j]
-		array[j] = array[i]
-		array[i] = tmp
+    for i in range(0, array.size()-2):
+        var j = i + randi() % (array.size() - i)
+        var tmp = array[j]
+        array[j] = array[i]
+        array[i] = tmp
 
 
 func _on_Main_day_started( world ):
-	pass # replace with function body
-
+    pass # replace with function body
