@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Info.gd" type="Script" id=1]
-[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=2]
+[ext_resource path="res://resources/sprites/note.png" type="Texture" id=2]
+[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=3]
 
 [node name="Info" type="Control" index="0"]
 
@@ -12,12 +13,13 @@ anchor_bottom = 0.0
 margin_right = 94.0
 margin_bottom = 64.0
 rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Margin", "Mouse", "Size Flags", "Theme", "Transform" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Transform" ]
 
 [node name="Border" type="ColorRect" parent="." index="0"]
 
@@ -35,23 +37,12 @@ size_flags_vertical = 1
 color = Color( 0.320312, 0.320312, 0.320312, 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="Background" type="ColorRect" parent="." index="1"]
+[node name="Background" type="Sprite" parent="." index="1"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 92.0
-margin_bottom = 62.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 0.910156, 0.870159, 0.654175, 1 )
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
 [node name="Label" type="Label" parent="." index="2"]
 
@@ -69,7 +60,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Late last night Karl Gustav, {country_1}s Ambassador in {country_2}, was brought to the hospital."
 autowrap = true

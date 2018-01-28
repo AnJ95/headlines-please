@@ -7,10 +7,10 @@ path="res://.import/note.png-ace67559978ec75822c29226fe6cbed8.stex"
 [deps]
 
 source_file="res://resources/sprites/note.png"
-source_md5="a1270c4c4ab91ad04d973877caf9a64e"
+source_md5="5abc3dd1cdc4b449a1974c77a72fbb20"
 
 dest_files=[ "res://.import/note.png-ace67559978ec75822c29226fe6cbed8.stex" ]
-dest_md5="efbdb8a2526f78ad30116c2a43e3c149"
+dest_md5="8adadccdba8cbb5a6115f3f8e844db9c"
 
 [params]
 
