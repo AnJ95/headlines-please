@@ -4,7 +4,7 @@ const Scenario = preload("res://scripts/model/Scenario.gd")
 const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
 
-const DAY_CYCLE_TIME = 15
+const DAY_CYCLE_TIME = 1000
 
 var countries = []
 var scenarios = []
@@ -129,13 +129,17 @@ func params_to_string(p):
     
 func cap_values():
     for c in countries:
-        if c.readers > 1:
-            c.readers = 1
-        if c.readers < 0:
-            c.readers = 0
-        
+        for p in c.params:
+            c.params[p] = cap(c.params[p])
+        c.readers = cap(c.readers)
     pass
 
+func cap(val):
+    if (val > 1):
+        return 1
+    if (val < 0):
+        return 0
+    return val
 
 func fisher_yates(array):
     for i in range(0, array.size()-2):
