@@ -1,9 +1,5 @@
 extends "res://scripts/Draggable.gd"
 
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
-
 var minY
 const scrollHeight = 200
 var maxY
@@ -35,7 +31,6 @@ func stop_drag():
 
 
 func handIn(draggable):
-	# if self is DropZone and self.selected_headline != null:
 	handIns.append(draggable)
 	
 	

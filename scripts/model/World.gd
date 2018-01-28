@@ -4,7 +4,7 @@ const Scenario = preload("res://scripts/model/Scenario.gd")
 const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
 
-const DAY_CYCLE_TIME = 1
+const DAY_CYCLE_TIME = 15
 
 var countries = []
 var scenarios = []
@@ -40,18 +40,18 @@ func _ready():
 func _process(delta):
 
 	if game_running:
-		
-	for s in current_scenarios:
-		for m in current_scenarios[s].messages:
-			if m.arrival_time * DAY_CYCLE_TIME > last_time && m.arrival_time * DAY_CYCLE_TIME <= time:
-				emit_signal("message_arrived", m);
-
-	last_time = time
-	time += delta
-	#print(time)
-	if time >= DAY_CYCLE_TIME:
-		end_day()
-		# next_day()
+		for s in current_scenarios:
+			for m in current_scenarios[s].messages:
+				if m.arrival_time * DAY_CYCLE_TIME > last_time && m.arrival_time * DAY_CYCLE_TIME <= time:
+					emit_signal("message_arrived", m);
+	
+		last_time = time
+		time += delta
+		#print(time)
+		if time >= DAY_CYCLE_TIME:
+			game_running = false
+			end_day()
+			# next_day()
 
 
 func load_scenarios():
@@ -85,10 +85,7 @@ func next_day():
 
 
 func end_day():
-	game_running = false
 	emit_signal("day_ended", self)
-
-
 
 
 func get_scenario():
@@ -119,15 +116,4 @@ func fisher_yates(array):
 
 func _on_Main_day_started( world ):
 	pass # replace with function body
-
-
-func _on_Main_day_ended( world ):
-	for c in get_tree().get_nodes_in_group("info"):
-		c.queue_free() # TODO animate outwards
-	for c in get_tree().get_nodes_in_group("dropzone"):
-		c.queue_free() # TODO animate outwards
-
-	get_node("/root/Main/DayEndScreen").visible = true # TODO animate fade in
-	
-	
 
