@@ -4,7 +4,7 @@ const Scenario = preload("res://scripts/model/Scenario.gd")
 const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
 
-const DAY_CYCLE_TIME = 30
+export var DAY_CYCLE_TIME = 45
 
 var countries = []
 var scenarios = []
@@ -13,7 +13,7 @@ var current_scenarios = {}
 
 var game_running = true
 var day = 0
-var time = DAY_CYCLE_TIME;
+var time = 0;
 var last_time = -1;
 var money = 100
 var popularity = {}
@@ -38,13 +38,13 @@ func _ready():
     next_day()
 
 func _process(delta):
-    
+
     get_node("Countdown").set_text(str(abs(round(DAY_CYCLE_TIME - time))))
-    
-    
+
+
     if not game_running:
         return
-        
+
     for s in current_scenarios:
         for m in current_scenarios[s].messages:
             if m.arrival_time * DAY_CYCLE_TIME > last_time && m.arrival_time * DAY_CYCLE_TIME <= time:
@@ -72,8 +72,8 @@ func load_scenarios():
         print("An error occurred when trying to access the path.")
 
 
-
 func next_day():
+    print("next_day")
     current_scenarios = {}
     for i in range(1):
         var next_scenario = get_scenario()
@@ -85,16 +85,24 @@ func next_day():
     day += 1
     time = 0
     last_time = -1
+    game_running = true
+
+    emit_signal("day_started", self)
 
 
 func end_day():
+    print("end_day")
     game_running = false
     emit_signal("day_ended", self)
 
 
 func get_scenario():
-    var s = scenarios[0]
-    s.prepare(self, [countries[0], countries[1]])
+    var s_num = randi() % scenarios.size()
+    var s = scenarios[s_num]
+    var s_countries = []
+    for i in range(s.num_countries):
+        s_countries.append(countries[i])
+    s.prepare(self, s_countries)
     return s
 
     for s in scenarios:
@@ -113,12 +121,12 @@ const MAX_READERS_CHANGE = 0.08
 const MAX_PARAM_CHANGE = 0.08
 
 func broadcast_headline(headline):
-    
+
     print("adding headline: " + params_to_string(headline.params))
-    
+
     var readerChanges = {}
     var totalReaders = get_total_readers()
-    
+
     for country in countries:
         print("country before: " + params_to_string(country.params) + " readers: " + str(country.readers))
         var sum_dist = 0 # sth between 0 (best case) and params_num (worst case)
@@ -129,11 +137,11 @@ func broadcast_headline(headline):
             country.params[p] += dist * MAX_PARAM_CHANGE * country.readers
             sum_dist += abs(dist)
         var norm_dist = sum_dist / country.params.size()
-        
+
         readerChanges[country.name] = (0.5 - norm_dist) * 2 * MAX_READERS_CHANGE * headline.drama
         country.readers += readerChanges[country.name]
         print("country after: " + params_to_string(country.params) + " readers: " + str(country.readers))
-    
+
     return get_total_readers() - totalReaders
 
 
@@ -145,7 +153,7 @@ func get_total_readers():
 
 func params_to_string(p):
     return str(p)
-    
+
 func cap_values():
     for c in countries:
         for p in c.params:

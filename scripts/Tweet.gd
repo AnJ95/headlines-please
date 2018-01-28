@@ -79,7 +79,6 @@ func stop_drag():
                     
     if is_in_feed():
         selectedDropZone = null
-        #delete copy
         rect_position = static_copy.rect_position
         static_copy.queue_free()
     else:
@@ -103,6 +102,12 @@ func add_to_dropzone(dropZone):
     else:
         rect_position -= dropZone.rect_position - get_parent().rect_position
         dropZone.add_child(static_copy)
+        
+func reset():
+    queue_free()
+    
+func add_to_draggables():
+    pass
     
 func is_in_feed():
     return selectedDropZone == null

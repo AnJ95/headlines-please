@@ -1,13 +1,16 @@
 extends "res://scripts/Draggable.gd"
 
+const Info = preload("res://scripts/Info.gd")
+const Tweet = preload("res://scripts/Tweet.gd")
+const headlineScene = preload("res://scenes/Headline.tscn")
+
 var current_state = 0
 var max_state = 2
 var selected_headline = null
-const padX = 18;
+const padX = 18
 const initial_padY = 40
-const padY = 4;
+const padY = 4
 
-const headlineScene = preload("res://scenes/Headline.tscn")
 
 func _ready():
     show_current_state()
@@ -59,12 +62,13 @@ func goto_state_1():
     
 func go_back_to_state_0():
     for infoNode in get_tree().get_nodes_in_group("info"):
-        if infoNode.selectedDropZone == self:
+        if infoNode.selectedDropZone == self && infoNode is Info : #TODO is??????
             infoNode.visible = true
             infoNode.selectedDropZone = null
             infoNode.add_to_draggables()
-            infoNode.update_view()
-            infoNode.shuffle_position()
+            infoNode.reset()
+        if infoNode is Tweet:
+            infoNode.reset()
             
     for headline in get_node("State_1/headlines").get_children():
         headline.queue_free()

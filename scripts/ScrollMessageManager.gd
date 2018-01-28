@@ -10,15 +10,14 @@ export var max_messages = 3
 var nodes = []
 
 func _on_Main_day_ended(world):
-    for n in nodes:
-        n.queue_free()
+    pass
 
 func _on_Main_day_started(world):
-    return
+    for n in nodes:
+        n.queue_free()
+    nodes = []
 
 func _on_Main_message_arrived(message):
-    print(message.type)
-    print(message_type)
     if message.type == message_type:
         add(message)
     
