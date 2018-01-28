@@ -103,6 +103,9 @@ func make_format_dic(countries):
     for c in range(countries.size()):
        format_dic["country_" + str(c + 1)] = countries[c].name
     return format_dic
+    
+func broadcast_headline(headline):
+    pass
 
 
 func fisher_yates(array):

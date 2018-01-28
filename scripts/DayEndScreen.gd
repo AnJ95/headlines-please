@@ -41,7 +41,7 @@ func _process(delta):
             draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)
             
             var labelStr
-            if (draggable is DropZone) and draggable.selected_headline != null:
+            if draggable_is_valid(draggable):
                 var rating = get_rating(draggable)
                 labelStr = "Readers "
                 if rating > 0:
@@ -58,6 +58,9 @@ func get_rating(draggable):
     else:
         return randi(10)
 
+func draggable_is_valid(draggable):
+    return draggable is DropZone and draggable.selected_headline != null
+
 func _on_Main_day_ended(world):
     isRunning = true
     timeYet = 0
@@ -71,4 +74,7 @@ func _on_Main_day_ended(world):
 
     get_node("/root/Main/DayEndScreen").visible = true # TODO animate fade in
     
+    for draggable in Airmail.handIns:
+        if draggable_is_valid(draggable):
+            world.broadcast_headline(draggable.selected_headline)
     
