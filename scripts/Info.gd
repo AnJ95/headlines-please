@@ -19,15 +19,16 @@ onready var outer = get_node("/root/Main/InfoArea")
 
 func _ready():
     add_to_group("info")
-    
-    shuffle_position()
-    update_view();
-    
+    reset()
     get_node("Label").rect_size = Vector2(width, 1000)
     get_node("Label").set_text(message.text)
 
 func init(message):
     self.message = message
+    
+func reset():
+    shuffle_position()
+    update_view()
 
 func _process(delta):
     
@@ -48,7 +49,6 @@ func _process(delta):
             
             get_node("Label").rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
             get_node("Label").rect_size = size
-            
             
     pass
 

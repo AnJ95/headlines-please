@@ -9,3 +9,11 @@ func _on_Main_message_arrived(message):
         info_node.init(message)
         get_node("/root/Main/Draggables").add_child(info_node)
 
+
+
+func _on_Main_day_started( world ):
+    pass # replace with function body
+
+
+func _on_Main_day_ended( world ):
+    pass # replace with function body

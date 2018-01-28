@@ -4,7 +4,7 @@ const Scenario = preload("res://scripts/model/Scenario.gd")
 const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
 
-const DAY_CYCLE_TIME = 30
+export var DAY_CYCLE_TIME = 45
 
 var countries = []
 var scenarios = []
@@ -13,7 +13,7 @@ var current_scenarios = {}
 
 var game_running = true
 var day = 0
-var time = DAY_CYCLE_TIME;
+var time = 0;
 var last_time = -1;
 var money = 100
 var popularity = {}
@@ -72,28 +72,36 @@ func load_scenarios():
         print("An error occurred when trying to access the path.")
 
 
-
 func next_day():
+    print("next_day")
     current_scenarios = {}
     for i in range(1):
         var next_scenario = get_scenario()
         current_scenarios[next_scenario.name] = next_scenario
-
-    emit_signal("day_started", self)
+    print("current_scenarios")
+    print(current_scenarios)
 
     day += 1
     time = 0
     last_time = -1
+    game_running = true
+    
+    emit_signal("day_started", self)
 
 
 func end_day():
+    print("end_day")
     game_running = false
     emit_signal("day_ended", self)
 
 
 func get_scenario():
-    var s = scenarios[0]
-    s.prepare(self, [countries[0], countries[1]])
+    var s_num = randi() % scenarios.size()
+    var s = scenarios[s_num]
+    var s_countries = []
+    for i in range(s.num_countries):
+        s_countries.append(countries[i])
+    s.prepare(self, s_countries)
     return s
 
     for s in scenarios:

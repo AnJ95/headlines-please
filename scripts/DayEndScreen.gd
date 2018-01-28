@@ -73,11 +73,6 @@ func _on_Main_day_ended(world):
     currentSlot = -1
     self.world = world
     doneScenarios = []
-    
-    for c in get_tree().get_nodes_in_group("info"):
-        c.queue_free() # TODO animate outwards
-    for c in get_tree().get_nodes_in_group("dropzone"):
-        c.queue_free() # TODO animate outwards
 
     get_node("/root/Main/DayEndScreen").visible = true # TODO animate fade in
 
