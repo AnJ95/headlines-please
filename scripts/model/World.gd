@@ -105,7 +105,7 @@ func make_format_dic(countries):
     return format_dic
 
 const MAX_READERS_CHANGE = 0.08
-const MAX_PARAM_CHANGE = 0.04
+const MAX_PARAM_CHANGE = 0.08
 
 func broadcast_headline(headline):
     
@@ -121,7 +121,7 @@ func broadcast_headline(headline):
             # assert: country params in (0,1]
             #         headline params in (0,1)
             var dist = headline.params[p]- country.params[p]
-            country.params[p] += dist * MAX_PARAM_CHANGE
+            country.params[p] += dist * MAX_PARAM_CHANGE * country.readers
             sum_dist += abs(dist)
         var norm_dist = sum_dist / country.params.size()
         
