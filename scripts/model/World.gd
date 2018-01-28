@@ -103,8 +103,37 @@ func make_format_dic(countries):
     for c in range(countries.size()):
        format_dic["country_" + str(c + 1)] = countries[c].name
     return format_dic
-    
+
+const MAX_READERS_CHANGE = 0.04
+const MAX_PARAM_CHANGE = 0.04
+
 func broadcast_headline(headline):
+    
+    print("adding headline: " + params_to_string(headline.params))
+    
+    for country in countries:
+        print("country before: " + params_to_string(country.params) + " readers: " + country.readers)
+        var sum_dist = 0 # sth between 0 (best case) and params_num (worst case)
+        for p in headline.params:
+            # assert: country params in (0,1]
+            #         headline params in (0,1)
+            var dist = headline.params[p]- country.params[p]
+            country.params[p] + dist * MAX_PARAM_CHANGE
+            sum_dist += abs(dist)
+        var norm_dist = sum_dist / country.params.count()
+        country.readers += (0.5 - norm_dist) * 2 * MAX_READERS_CHANGE
+        print("country after: " + params_to_string(country.params) + " readers: " + country.readers)
+
+func params_to_string(p):
+    return "(" + p["economy"] + ", " + p["satisfaction"] + ", " + p["xenophobia"] + ")"
+    
+func cap_values():
+    for c in countries:
+        if c.readers > 1:
+            c.readers = 1
+        if c.readers < 0:
+            c.readers = 0
+        
     pass
 
 

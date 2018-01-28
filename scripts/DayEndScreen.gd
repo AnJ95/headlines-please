@@ -77,4 +77,6 @@ func _on_Main_day_ended(world):
     for draggable in Airmail.handIns:
         if draggable_is_valid(draggable):
             world.broadcast_headline(draggable.selected_headline)
+
+    world.cap_values()
     

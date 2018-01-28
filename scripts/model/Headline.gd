@@ -2,9 +2,9 @@ const FormatUtils = preload("res://scripts/FormatUtils.gd")
 
 var text
 var params = {
-    "economy" : randf() * 0.2 - 0.1 + 1,
-    "satisfaction" : randf() * 0.2 - 0.1 + 1,
-    "xenophobia" : randf() * 0.2 - 0.1 + 1
+    "economy" : randf() * 0.3 - 0.15 + 0.5,
+    "satisfaction" : randf() * 0.3 - 0.15 + 0.5,
+    "xenophobia" : randf() * 0.3 - 0.15 + 0.5
 }
 var format_string
 
