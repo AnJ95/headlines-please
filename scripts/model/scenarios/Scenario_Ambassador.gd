@@ -15,14 +15,14 @@ func get_propability(world, countries):
 #TODO set an effect for each Headline
 
 func init_headlines():
-    headlines.append(Headline.new("{country_1}s Amassador in {country_2} in hospital."))
-    headlines.append(Headline.new("{country_1}s Amassador in {country_2} died."))
-    headlines.append(Headline.new("{country_2}: Amassador of {country_1} died under unresolved circumstances."))
-    headlines.append(Headline.new("{country_1}s Amassador in {country_2} was murdered."))
-    headlines.append(Headline.new("{country_1}s Amassador in {country_2} was poisoned! Was the secret service involved?"))
-    headlines.append(Headline.new("{country_1}s Amassador in {country_2} died! Secret service possible?!"))
-    headlines.append(Headline.new("{country_2}: {country_1}s Amassador was arrested."))
-    headlines.append(Headline.new("{country_2}: {country_1}s Amassador died after having a stroke."))
+    headlines.append(Headline.new("{country_1}s Amassador in {country_2} in hospital.",1,1,1))
+    headlines.append(Headline.new("{country_1}s Amassador in {country_2} died.",1,1,1))
+    headlines.append(Headline.new("{country_2}: Amassador of {country_1} died under unresolved circumstances.",1,1,1))
+    headlines.append(Headline.new("{country_1}s Amassador in {country_2} was murdered.",1,1,1))
+    headlines.append(Headline.new("{country_1}s Amassador in {country_2} was poisoned! Was the secret service involved?",1,1,1))
+    headlines.append(Headline.new("{country_1}s Amassador in {country_2} died! Secret service possible?!",1,1,1))
+    headlines.append(Headline.new("{country_2}: {country_1}s Amassador was arrested.",1,1,1))
+    headlines.append(Headline.new("{country_2}: {country_1}s Amassador died after having a stroke.",1,1,1))
 
 
 func init_messages():

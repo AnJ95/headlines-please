@@ -6,6 +6,7 @@ export(PackedScene) var MessageScene
 export(Vector2) var anchor_pos
 export(int, "TWEET", "NOTE", "PHAX") var message_type
 export var max_messages = 3
+export var set_to_back = false
 
 var nodes = []
 
@@ -27,6 +28,8 @@ func add(message):
     var message_node = MessageScene.instance()
     message_node.init(message)
     add_child(message_node)
+    if set_to_back:
+        message_node.get_parent().move_child(message_node, 0)
     nodes.append(message_node)
     message_node.rect_position = anchor_pos
     

@@ -3,14 +3,17 @@ const FormatUtils = preload("res://scripts/FormatUtils.gd")
 var scenario_name
 var text
 var params = {
-    "bias" : randf() * 0.3 - 0.15 + 0.5,
-    "satisfaction" : randf() * 0.3 - 0.15 + 0.5,
+    "bias" : 0,
+    "satisfaction" : 0
 }
-var drama = randf() * 0.3 - 0.15 + 0.5
+var drama = 0
 var format_string
 
-func _init(format_string):
+func _init(format_string, satisfaction, bias, drama):
     self.format_string = format_string
+    self.params.satisfaction = satisfaction
+    self.params.bias = bias
+    self.drama = drama
 
 func prepare(world, scenario):
     scenario_name = scenario.name

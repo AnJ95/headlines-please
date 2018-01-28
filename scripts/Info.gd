@@ -12,7 +12,7 @@ var timeYet = 0
 
 var hasSetSize = false
 
-var width = 120
+export var width = 120
 var message
 
 onready var outer = get_node("/root/Main/InfoArea")
@@ -44,8 +44,8 @@ func _process(delta):
             get_node("Border").rect_position = Vector2(0, 0)
             get_node("Border").rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
             
-            get_node("Background").rect_position = Vector2(BORDER, BORDER)
-            get_node("Background").rect_size = size + Vector2(2*PADDING, 2*PADDING)
+            #get_node("Background").rect_position = Vector2(BORDER, BORDER)
+            #get_node("Background").rect_size = size + Vector2(2*PADDING, 2*PADDING)
             
             get_node("Label").rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
             get_node("Label").rect_size = size

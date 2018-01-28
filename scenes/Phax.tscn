@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Info.gd" type="Script" id=1]
-[ext_resource path="res://resources/sprites/note.png" type="Texture" id=2]
+[ext_resource path="res://resources/sprites/phax-paper.png" type="Texture" id=2]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=3]
 
-[node name="Info" type="Control" index="0"]
+[node name="Info" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 94.0
-margin_bottom = 64.0
+margin_right = 65.0
+margin_bottom = 65.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
@@ -20,6 +20,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Transform" ]
+width = 65
 
 [node name="Border" type="ColorRect" parent="." index="0"]
 
