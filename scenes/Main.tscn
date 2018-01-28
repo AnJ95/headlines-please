@@ -132,7 +132,7 @@ bus = "Master"
 [node name="AudioStreamPlayerNode" type="AudioStreamPlayer" parent="Draggables/Airmail" index="2"]
 
 stream = ExtResource( 10 )
-volume_db = 0.0
+volume_db = 20.0
 autoplay = false
 mix_target = 0
 bus = "Master"

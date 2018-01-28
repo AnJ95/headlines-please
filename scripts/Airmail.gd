@@ -18,16 +18,21 @@ func move_drag():
     rect_position.x = startThisPos.x
     if rect_position.y < minY:
         rect_position.y = minY
-        audio_stream_player.stop()
-    if rect_position.y > maxY:
+        audio_stream_player_grab.stop()
+    elif rect_position.y > maxY:
         rect_position.y = maxY
-        
-    if rect_position.y > minY && !audio_stream_player.playing:
-        audio_stream_player.play()
+        audio_stream_player_grab.stop()
+    else:
+        if !audio_stream_player.playing:
+            audio_stream_player.play()
+        if !audio_stream_player_grab.playing:
+            audio_stream_player_grab.play()
             
     
     
 func start_drag():
+    if !audio_stream_player.playing:
+        audio_stream_player.play()
     audio_stream_player_grab.play()
     pass
 
@@ -38,6 +43,7 @@ func stop_drag():
     else:
         rect_position.y = minY # TODO animate
         isVacuuming = false
+        audio_stream_player.stop()
     audio_stream_player_grab.stop()
 
 
