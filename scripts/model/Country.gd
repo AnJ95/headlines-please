@@ -6,11 +6,13 @@ const MAX_INHABITANTS = 100
 const MIN_RELATIONSHIP = 0.25
 const MAX_RELATIONSHIP = 0.75
 
+const MIN_PARAM = 0.25
+const MAX_PARAM = 0.75
+
 var inhabitants = 0
 var params = {
-    "economy" : 0.5,
-    "satisfaction" : 0.5,
-    "xenophobia" : 0.5
+    "bias" : randf() * (MAX_PARAM - MIN_PARAM) + MIN_PARAM,
+    "satisfaction" : randf() * (MAX_PARAM - MIN_PARAM) + MIN_PARAM
 }
 var readers = 0.1 # between 0 and 1, representing fraction of inhabitants
 var relationships = {} # between 0 and 1, 1 for each other country

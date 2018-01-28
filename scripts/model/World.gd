@@ -104,7 +104,7 @@ func make_format_dic(countries):
        format_dic["country_" + str(c + 1)] = countries[c].name
     return format_dic
 
-const MAX_READERS_CHANGE = 0.04
+const MAX_READERS_CHANGE = 0.08
 const MAX_PARAM_CHANGE = 0.04
 
 func broadcast_headline(headline):
@@ -121,7 +121,8 @@ func broadcast_headline(headline):
             country.params[p] += dist * MAX_PARAM_CHANGE
             sum_dist += abs(dist)
         var norm_dist = sum_dist / country.params.size()
-        country.readers += (0.5 - norm_dist) * 2 * MAX_READERS_CHANGE
+        
+        country.readers += (0.5 - norm_dist) * 2 * MAX_READERS_CHANGE * headline.drama
         print("country after: " + params_to_string(country.params) + " readers: " + str(country.readers))
 
 func params_to_string(p):
