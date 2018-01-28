@@ -7,10 +7,10 @@ path="res://.import/phax-paper.png-4bf707c858dd48fa3a0e6ca21c6d281f.stex"
 [deps]
 
 source_file="res://resources/sprites/phax-paper.png"
-source_md5="aab0ccf424d592b340dcc1f1aced5358"
+source_md5="0ef48534c3e624b0be771d57a08ee0ba"
 
 dest_files=[ "res://.import/phax-paper.png-4bf707c858dd48fa3a0e6ca21c6d281f.stex" ]
-dest_md5="e78083d3cc0db8ab58c5a4ec5f9a3cb7"
+dest_md5="f83ceeb5a3397913262988a9f61fbe28"
 
 [params]
 

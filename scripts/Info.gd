@@ -12,7 +12,7 @@ var timeYet = 0
 
 var hasSetSize = false
 
-var width = 120
+export var width = 120
 var message
 
 onready var outer = get_node("/root/Main/InfoArea")

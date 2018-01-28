@@ -23,6 +23,7 @@ MessageScene = ExtResource( 2 )
 anchor_pos = Vector2( -65, 105 )
 message_type = 0
 max_messages = 5
+set_to_back = false
 
 [node name="front" type="Sprite" parent="." index="0"]
 
@@ -46,5 +47,7 @@ volume_db = 0.0
 autoplay = false
 mix_target = 0
 bus = "Master"
+
+[node name="image" type="Sprite" parent="." index="4"]
 
 
