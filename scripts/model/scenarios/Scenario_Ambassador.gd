@@ -26,18 +26,18 @@ func init_headlines():
 
 
 func init_messages():
-    messages.append(Message.new(Message.TWITTER, [1,2], "I heard gun shots near {country_1}s embassy last night."))
-    messages.append(Message.new(Message.TWITTER, [], "What did happen in {country_1}s embassy?", 0.1))
-    messages.append(Message.new(Message.TWITTER, [], "press conference canceled = free afternoon yay", 0.2))
-    messages.append(Message.new(Message.TWITTER, [0,2], "Hallo Welt1", 0.05))
-    messages.append(Message.new(Message.TWITTER, [0,2], "Hallo Welt2", 0.06))
-    messages.append(Message.new(Message.TWITTER, [0,2], "Hallo Welt3", 0.07))
-    messages.append(Message.new(Message.TWITTER, [0,2], "Hallo Welt4", 0.08))
+    messages.append(Message.new(Message.TWEET, [1,2], "I heard gun shots near {country_1}s embassy last night."))
+    messages.append(Message.new(Message.TWEET, [], "What did happen in {country_1}s embassy?", 0.1))
+    messages.append(Message.new(Message.TWEET, [], "press conference canceled = free afternoon yay", 0.2))
+    messages.append(Message.new(Message.TWEET, [0,2], "Hallo Welt1", 0.05))
+    messages.append(Message.new(Message.TWEET, [0,2], "Hallo Welt2", 0.06))
+    messages.append(Message.new(Message.TWEET, [0,2], "Hallo Welt3", 0.07))
+    messages.append(Message.new(Message.TWEET, [0,2], "Hallo Welt4", 0.08))
 
     messages.append(Message.new(Message.NOTE, [0], "Pressconference canceled"))
     messages.append(Message.new(Message.NOTE, [0], "Late last night Karl Gustav, {country_1}s Ambassador in {country_2}, was brought to the hospital."))
     messages.append(Message.new(Message.NOTE, [], "After the death of the aAutopsy"))
     messages.append(Message.new(Message.NOTE, [1,2,3,4,5], "It's still unclear whether the secret service of {country_2} was responsible for the death of {country_1}s ambassador"))
 
-    messages.append(Message.new(Message.TELEGRAPH, [1,3], "Because of ... an autopsy of the dead ambassador was issued.", 0.25))
-    messages.append(Message.new(Message.TELEGRAPH, [1,3], "The autopsy finds toxic substances in the ambassadors body", 0.66))
+    messages.append(Message.new(Message.PHAX, [1,3], "Because of ... an autopsy of the dead ambassador was issued.", 0.25))
+    messages.append(Message.new(Message.PHAX, [1,3], "The autopsy finds toxic substances in the ambassadors body", 0.66))

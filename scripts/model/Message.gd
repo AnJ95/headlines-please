@@ -1,6 +1,6 @@
 const FormatUtils = preload("res://scripts/FormatUtils.gd")
 
-enum { TWITTER, NOTE, TELEGRAPH }
+enum { TWEET, NOTE, PHAX }
 
 var type
 var format_string

@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/Tweet.gd" type="Script" id=1]
+[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=2]
 
-[node name="Tweet" type="Control"]
+[node name="Tweet" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -16,7 +17,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect", "Transform" ]
+_sections_unfolded = [ "Mouse", "Rect", "Transform" ]
 PADDING = 2
 BORDER = 2
 WIDTH = 132
@@ -24,6 +25,7 @@ HEIGHT = 44
 
 [node name="Border" type="ColorRect" parent="." index="0"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -40,6 +42,7 @@ _sections_unfolded = [ "Margin" ]
 
 [node name="Background" type="ColorRect" parent="." index="1"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -71,13 +74,14 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0546875, 1, 0, 1 )
 text = "firefox kittens boobs network capacity"
 autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "BBCode", "Grow Direction" ]
+_sections_unfolded = [ "BBCode", "Grow Direction", "custom_fonts" ]
 
 [connection signal="mouse_entered" from="." to="." method="_on_Info_mouse_entered"]
 

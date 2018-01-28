@@ -4,7 +4,7 @@ const Message = preload("res://scripts/model/Message.gd")
 const TweetScene = preload("res://scenes/Tweet.tscn")
 
 export(Vector2) var anchor_pos
-export var max_tweets = 5
+export var max_tweets = 1
 
 var tweets = []
 
@@ -17,7 +17,7 @@ func _on_Main_day_started(world):
     return
 
 func _on_Main_message_arrived(message):
-    if message.type == Message.TWEET:
+    if message.type == Message.PHAX:
         add_tweet(message)
     
 func add_tweet(message):
