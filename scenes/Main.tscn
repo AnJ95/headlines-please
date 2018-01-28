@@ -7,14 +7,12 @@
 [ext_resource path="res://scripts/Airmail.gd" type="Script" id=5]
 [ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=6]
 [ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=7]
-[ext_resource path="res://resources/sprites/phaxogram.png" type="Texture" id=8]
+[ext_resource path="res://scenes/Phaxogram.tscn" type="PackedScene" id=8]
 [ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=9]
 [ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
 [ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=11]
 [ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=12]
 [ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=13]
-
-
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -28,6 +26,7 @@ _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+DAY_CYCLE_TIME = 5
 
 [node name="table" type="Sprite" parent="." index="0"]
 
@@ -118,10 +117,12 @@ margin_top = 105.0
 margin_right = 531.0
 margin_bottom = 421.0
 
-[node name="phaxogram" type="Sprite" parent="." index="4"]
+[node name="Phaxogram" parent="." index="4" instance=ExtResource( 8 )]
 
-position = Vector2( 118.733, 437.124 )
-texture = ExtResource( 8 )
+margin_left = 117.0
+margin_top = 434.0
+margin_right = 157.0
+margin_bottom = 474.0
 
 [node name="add-on" type="Sprite" parent="." index="5"]
 
@@ -235,16 +236,22 @@ margin_right = 682.0
 margin_bottom = 176.0
 _sections_unfolded = [ "Offset", "Rect", "Transform" ]
 
+[connection signal="day_ended" from="." to="Tweetr" method="_on_Main_day_ended"]
+
 [connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
-[connection signal="day_ended" from="." to="Tweetr" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
 
 [connection signal="day_started" from="." to="." method="_on_Main_day_started"]
 
 [connection signal="day_started" from="." to="Tweetr" method="_on_Main_day_started"]
 
-[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
+[connection signal="day_started" from="." to="Phaxogram" method="_on_Main_day_started"]
 
 [connection signal="message_arrived" from="." to="Tweetr" method="_on_Main_message_arrived"]
+
+[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
+
+[connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
 
 

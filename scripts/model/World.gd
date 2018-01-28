@@ -4,7 +4,7 @@ const Scenario = preload("res://scripts/model/Scenario.gd")
 const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
 
-const DAY_CYCLE_TIME = 1000
+export var DAY_CYCLE_TIME = 45
 
 var countries = []
 var scenarios = []

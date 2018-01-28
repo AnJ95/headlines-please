@@ -17,7 +17,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Offset", "Transform" ]
-tweet_pos = Vector2( -65, 105 )
+anchor_pos = Vector2( -65, 105 )
 max_tweets = 5
 
 [node name="front" type="Sprite" parent="." index="0"]
