@@ -111,6 +111,9 @@ func broadcast_headline(headline):
     
     print("adding headline: " + params_to_string(headline.params))
     
+    var readerChanges = {}
+    var totalReaders = get_total_readers()
+    
     for country in countries:
         print("country before: " + params_to_string(country.params) + " readers: " + str(country.readers))
         var sum_dist = 0 # sth between 0 (best case) and params_num (worst case)
@@ -122,11 +125,21 @@ func broadcast_headline(headline):
             sum_dist += abs(dist)
         var norm_dist = sum_dist / country.params.size()
         
-        country.readers += (0.5 - norm_dist) * 2 * MAX_READERS_CHANGE * headline.drama
+        readerChanges[country.name] = (0.5 - norm_dist) * 2 * MAX_READERS_CHANGE * headline.drama
+        country.readers += readerChanges[country.name]
         print("country after: " + params_to_string(country.params) + " readers: " + str(country.readers))
+    
+    return get_total_readers() - totalReaders
+
+
+func get_total_readers():
+    var total = 0
+    for country in countries:
+        total += country.readers * country.inhabitants
+    return total
 
 func params_to_string(p):
-    return "(" + str(p["economy"]) + ", " + str(p["satisfaction"]) + ", " + str(p["xenophobia"]) + ")"
+    return str(p)
     
 func cap_values():
     for c in countries:

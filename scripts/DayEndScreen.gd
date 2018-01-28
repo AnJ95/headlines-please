@@ -5,6 +5,7 @@ var isRunning = false
 var timeYet = 0
 var currentSlot = -1
 var world
+var doneScenarios = []
 
 const DropZone = preload("res://scripts/DropZone.gd")
 
@@ -36,17 +37,22 @@ func _process(delta):
             world.next_day()
         else:
             var draggable = Airmail.handIns[currentSlot]
-            
+  
             DraggableHolder.add_child(draggable)
             draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)
             
             var labelStr
+            var scenario = draggable.selected_headline.scenario_name
             if draggable_is_valid(draggable):
-                var rating = get_rating(draggable)
-                labelStr = "Readers "
-                if rating > 0:
-                    labelStr += "+"
-                labelStr += str(rating)
+                if (doneScenarios.has(scenario)):
+                    labelStr = "Redundant Article!"
+                else:
+                    doneScenarios.append(scenario)
+                    var rating = round(world.broadcast_headline(draggable.selected_headline))
+                    labelStr = "Readers "
+                    if rating > 0:
+                        labelStr += "+"
+                    labelStr += str(rating)
             else:
                 labelStr = "..."
             
@@ -66,6 +72,7 @@ func _on_Main_day_ended(world):
     timeYet = 0
     currentSlot = -1
     self.world = world
+    doneScenarios = []
     
     for c in get_tree().get_nodes_in_group("info"):
         c.queue_free() # TODO animate outwards
@@ -73,10 +80,6 @@ func _on_Main_day_ended(world):
         c.queue_free() # TODO animate outwards
 
     get_node("/root/Main/DayEndScreen").visible = true # TODO animate fade in
-    
-    for draggable in Airmail.handIns:
-        if draggable_is_valid(draggable):
-            world.broadcast_headline(draggable.selected_headline)
 
     world.cap_values()
     

@@ -1,5 +1,6 @@
 const FormatUtils = preload("res://scripts/FormatUtils.gd")
 
+var scenario_name
 var text
 var params = {
     "bias" : randf() * 0.3 - 0.15 + 0.5,
@@ -12,6 +13,7 @@ func _init(format_string):
     self.format_string = format_string
 
 func prepare(world, scenario):
+    scenario_name = scenario.name
     text = FormatUtils.format(format_string, world.make_format_dic(scenario.countries))
 
 func effect(world):
