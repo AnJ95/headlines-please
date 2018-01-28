@@ -7,60 +7,60 @@ var startThisPos
 var Airmail
 
 func _ready():
-	Airmail = get_node("/root/Main/Draggables/Airmail")
-	connect("mouse_entered", self, "on_mouse_entered")
-	connect("mouse_exited", self, "on_mouse_exited")
+    Airmail = get_node("/root/Main/Draggables/Airmail")
+    connect("mouse_entered", self, "on_mouse_entered")
+    connect("mouse_exited", self, "on_mouse_exited")
 
 func _process(delta):
-	if isMouseIn:
-		if Input.is_mouse_button_pressed(BUTTON_LEFT):
-			if not isDragging:
-				internal_start_drag()
-			isDragging = true
-			internal_move_drag();
-		else:
-			if isDragging:
-				internal_stop_drag()
-			isDragging = false
+    if isMouseIn:
+        if Input.is_mouse_button_pressed(BUTTON_LEFT):
+            if not isDragging:
+                internal_start_drag()
+            isDragging = true
+            internal_move_drag();
+        else:
+            if isDragging:
+                internal_stop_drag()
+            isDragging = false
 
 func internal_move_drag():
-	rect_position = startThisPos + (get_viewport().get_mouse_position() - startMousePos)
-	move_drag()
-	
+    rect_position = startThisPos + (get_viewport().get_mouse_position() - startMousePos)
+    move_drag()
+    
 func move_drag():
-	pass
-	
+    pass
+    
 func start_drag():
-	pass
+    pass
 
 func stop_drag():
-	pass
-	
+    pass
+    
 func move_to_top():
-	get_parent().move_child(self, get_parent().get_child_count() - 1)
-	pass
-	
+    get_parent().move_child(self, get_parent().get_child_count() - 1)
+    pass
+    
 func on_mouse_entered():
-	isMouseIn = true
+    isMouseIn = true
 
 func on_mouse_exited():
-	isMouseIn = false
+    isMouseIn = false
 
 func internal_start_drag():
-	startMousePos = get_viewport().get_mouse_position()
-	startThisPos = Vector2(rect_position.x, rect_position.y)
-	move_to_top()
-	start_drag()
+    startMousePos = get_viewport().get_mouse_position()
+    startThisPos = Vector2(rect_position.x, rect_position.y)
+    move_to_top()
+    start_drag()
 
 func internal_stop_drag():
-	if can_be_vacuumed() and Airmail.isVacuuming and Airmail.get_global_rect().has_point(get_viewport().get_mouse_position()):
-		vacuum()
-	else:
-		stop_drag()
-	
+    if can_be_vacuumed() and Airmail.isVacuuming and Airmail.get_global_rect().has_point(get_viewport().get_mouse_position()):
+        vacuum()
+    else:
+        stop_drag()
+    
 func vacuum():
-	Airmail.handIn(self)
-	self.get_parent().remove_child(self)
-	
+    Airmail.handIn(self)
+    self.get_parent().remove_child(self)
+    
 func can_be_vacuumed():
-	return false
+    return false
