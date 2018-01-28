@@ -4,14 +4,14 @@
 [ext_resource path="res://resources/sprites/table.png" type="Texture" id=2]
 [ext_resource path="res://resources/sprites/map.png" type="Texture" id=3]
 [ext_resource path="res://scripts/InfoManager.gd" type="Script" id=4]
-[ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=5]
-[ext_resource path="res://resources/sprites/phaxogram.png" type="Texture" id=6]
-[ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=7]
-[ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=8]
-[ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=9]
-[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
-[ext_resource path="res://scenes/Airmail.gd" type="Script" id=11]
-[ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=12]
+[ext_resource path="res://scenes/Airmail.gd" type="Script" id=5]
+[ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=6]
+[ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=7]
+[ext_resource path="res://resources/sprites/phaxogram.png" type="Texture" id=8]
+[ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=9]
+[ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=10]
+[ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=11]
+[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=12]
 
 [node name="Main" type="Node2D" index="0"]
 
@@ -36,9 +36,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 8.0
-margin_top = 6.0
-margin_right = 272.0
-margin_bottom = 342.0
+margin_top = 49.0
+margin_right = 251.0
+margin_bottom = 428.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -61,21 +61,45 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="DropZone2" parent="Draggables" index="0" instance=ExtResource( 5 )]
+[node name="Airmail" type="Control" parent="Draggables" index="0"]
+
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 30.0
+margin_top = -221.0
+margin_right = 167.0
+margin_bottom = 51.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="Draggables/Airmail" index="0"]
+
+texture = ExtResource( 6 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="DropZone2" parent="Draggables" index="1" instance=ExtResource( 7 )]
 
 margin_left = 256.0
 margin_top = 58.0
 margin_right = 511.0
 margin_bottom = 374.0
 
-[node name="DropZone3" parent="Draggables" index="1" instance=ExtResource( 5 )]
+[node name="DropZone3" parent="Draggables" index="2" instance=ExtResource( 7 )]
 
 margin_left = 307.0
 margin_top = 82.0
 margin_right = 562.0
 margin_bottom = 398.0
 
-[node name="DropZone" parent="Draggables" index="2" instance=ExtResource( 5 )]
+[node name="DropZone" parent="Draggables" index="3" instance=ExtResource( 7 )]
 
 margin_left = 276.0
 margin_top = 105.0
@@ -85,53 +109,29 @@ margin_bottom = 421.0
 [node name="phaxogram" type="Sprite" parent="." index="4"]
 
 position = Vector2( 118.733, 437.124 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 
 [node name="add-on" type="Sprite" parent="." index="5"]
 
 position = Vector2( 531.641, 49.7458 )
-texture = ExtResource( 7 )
+texture = ExtResource( 9 )
 
 [node name="tweetr" type="Sprite" parent="." index="6"]
 
 position = Vector2( 563.72, 0 )
-texture = ExtResource( 8 )
+texture = ExtResource( 10 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="screen0" type="Sprite" parent="tweetr" index="0"]
 
 position = Vector2( 116.656, 168.622 )
-texture = ExtResource( 9 )
+texture = ExtResource( 11 )
 
 [node name="pictsource" type="Sprite" parent="." index="7"]
 
 position = Vector2( 672.606, 483.742 )
-texture = ExtResource( 10 )
-
-[node name="Airmail" type="Control" parent="." index="8"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 83.0
-margin_top = -143.0
-margin_right = 220.0
-margin_bottom = 129.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-script = ExtResource( 11 )
-
-[node name="Sprite" type="Sprite" parent="Airmail" index="0"]
-
-position = Vector2( -54.0035, -77.5157 )
 texture = ExtResource( 12 )
-centered = false
-_sections_unfolded = [ "Offset" ]
 
 [connection signal="day_ended" from="." to="." method="_on_Main_day_ended"]
 

@@ -71,7 +71,7 @@ func stop_drag():
 		if (child.is_in_group("dropzone")):
 			print(str(i) + ": " + str(child))
 			if child.current_state == 0:
-				if (get_global_rect().intersects(child.get_global_rect())):
+				if (child.get_global_rect().has_point(get_viewport().get_mouse_position())):
 					selectedDropZone = child
 					add_to_dropzone(child)
 					update_view();
