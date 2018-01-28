@@ -58,6 +58,7 @@ func _process(delta):
                 labelStr = "..."
             
             label.set_text(labelStr)
+            label.set_text(labelStr)
 
 func get_rating(draggable):
     if self is DropZone and self.selected_headline != null:

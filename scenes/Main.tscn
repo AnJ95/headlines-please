@@ -28,7 +28,7 @@ _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 5
+DAY_CYCLE_TIME = 60
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
@@ -169,9 +169,34 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="DayEndScreen" type="Control" parent="." index="9"]
+[node name="Money" type="Label" parent="." index="9"]
 
-editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 563.0
+margin_top = 62.0
+margin_right = 608.0
+margin_bottom = 83.0
+rect_scale = Vector2( 1.5, 1.5 )
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 13 )
+custom_colors/font_color = Color( 0.96875, 0.745247, 0.151367, 1 )
+text = "100$"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+
+[node name="DayEndScreen" type="Control" parent="." index="10"]
+
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -266,27 +291,27 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
-
 [connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="PaperArea" method="_on_Main_day_ended"]
 
-[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="Tweetr" method="_on_Main_day_ended"]
 
-[connection signal="day_started" from="." to="Phaxogram" method="_on_Main_day_started"]
+[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
 [connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
 
 [connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
 
+[connection signal="day_started" from="." to="Phaxogram" method="_on_Main_day_started"]
+
 [connection signal="day_started" from="." to="Tweetr" method="_on_Main_day_started"]
 
-[connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
-
 [connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
+
+[connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
 
 [connection signal="message_arrived" from="." to="Tweetr" method="_on_Main_message_arrived"]
 

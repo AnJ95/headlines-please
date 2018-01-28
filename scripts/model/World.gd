@@ -4,7 +4,11 @@ const Scenario = preload("res://scripts/model/Scenario.gd")
 const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
 
+const COSTS_PER_DAY = 35
+const MONEY_PER_READER = 1
+
 export var DAY_CYCLE_TIME = 45
+
 
 var countries = []
 var scenarios = []
@@ -93,6 +97,11 @@ func next_day():
 func end_day():
     print("end_day")
     game_running = false
+    
+    money -= COSTS_PER_DAY
+    money += get_total_readers() * MONEY_PER_READER
+    get_node("Money").set_text(str(round(money)) + "$")
+    
     emit_signal("day_ended", self)
 
 
