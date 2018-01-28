@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/Map.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/map.png" type="Texture" id=2]
+[ext_resource path="res://resources/sprites/pins.png" type="Texture" id=3]
+[ext_resource path="res://scenes/CountryInfo.tscn" type="PackedScene" id=4]
 
-[node name="Map" type="Control"]
+[node name="Map" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -26,5 +28,33 @@ position = Vector2( -85.5746, 1.62141 )
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="pins" type="Sprite" parent="." index="1"]
+
+position = Vector2( 115.93, 148.02 )
+texture = ExtResource( 3 )
+
+[node name="CountryHolsten" parent="." index="2" instance=ExtResource( 4 )]
+
+[node name="CountryReldan" parent="." index="3" instance=ExtResource( 4 )]
+
+margin_left = -137.0
+margin_top = 153.0
+margin_right = -10.0
+margin_bottom = 241.0
+
+[node name="CountryLemuria" parent="." index="4" instance=ExtResource( 4 )]
+
+margin_left = 243.0
+margin_top = 13.0
+margin_right = 370.0
+margin_bottom = 101.0
+
+[node name="CountryHesperdia" parent="." index="5" instance=ExtResource( 4 )]
+
+margin_left = 217.0
+margin_top = 205.0
+margin_right = 344.0
+margin_bottom = 293.0
 
 

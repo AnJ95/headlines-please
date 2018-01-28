@@ -23,10 +23,10 @@ signal day_ended(world)
 signal message_arrived(message)
 
 func _init():
-    countries.append(Country.new("Testonia"))
-    countries.append(Country.new("Debugtania"))
-    countries.append(Country.new("Try Catchistan"))
-    countries.append(Country.new("Trialidat and Errorgo"))
+    countries.append(Country.new("Holsten"))
+    countries.append(Country.new("Reldan"))
+    countries.append(Country.new("Lemuria"))
+    countries.append(Country.new("Hesperdia"))
 
     for c in countries:
         c.prepare(self)
@@ -79,6 +79,7 @@ func next_day():
         var next_scenario = get_scenario()
         current_scenarios[next_scenario.name] = next_scenario
 
+    get_node("Draggables/Map").update(countries)
     emit_signal("day_started", self)
 
     day += 1

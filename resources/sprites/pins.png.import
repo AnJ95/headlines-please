@@ -7,10 +7,10 @@ path="res://.import/pins.png-97b8f1aa6b470699b85a7ee20c5b5648.stex"
 [deps]
 
 source_file="res://resources/sprites/pins.png"
-source_md5="8fe5da2a9d74f694c4bd95aaec9057af"
+source_md5="d622f78e57b1826ac31b0df270f88f5f"
 
 dest_files=[ "res://.import/pins.png-97b8f1aa6b470699b85a7ee20c5b5648.stex" ]
-dest_md5="d10299c2f7e71ef2aaf9076dfbbdc798"
+dest_md5="533d62a67e23660fc49294bbd504d318"
 
 [params]
 

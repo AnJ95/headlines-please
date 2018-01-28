@@ -42,8 +42,9 @@ func _process(delta):
             draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)
             
             var labelStr
-            var scenario = draggable.selected_headline.scenario_name
+            
             if draggable_is_valid(draggable):
+                var scenario = draggable.selected_headline.scenario_name
                 if (doneScenarios.has(scenario)):
                     labelStr = "Redundant Article!"
                 else:

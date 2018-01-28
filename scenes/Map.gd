@@ -20,3 +20,9 @@ func start_drag():
 
 func stop_drag():
     pass
+    
+func update(countries):
+    for country in countries:
+        print("Country" + country.name)
+        get_node("Country" + country.name).update(country)
+    pass
