@@ -4,7 +4,7 @@ const Scenario = preload("res://scripts/model/Scenario.gd")
 const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
 
-const DAY_CYCLE_TIME = 1000
+const DAY_CYCLE_TIME = 30
 
 var countries = []
 var scenarios = []
@@ -112,20 +112,20 @@ func broadcast_headline(headline):
     print("adding headline: " + params_to_string(headline.params))
     
     for country in countries:
-        print("country before: " + params_to_string(country.params) + " readers: " + country.readers)
+        print("country before: " + params_to_string(country.params) + " readers: " + str(country.readers))
         var sum_dist = 0 # sth between 0 (best case) and params_num (worst case)
         for p in headline.params:
             # assert: country params in (0,1]
             #         headline params in (0,1)
             var dist = headline.params[p]- country.params[p]
-            country.params[p] + dist * MAX_PARAM_CHANGE
+            country.params[p] += dist * MAX_PARAM_CHANGE
             sum_dist += abs(dist)
-        var norm_dist = sum_dist / country.params.count()
+        var norm_dist = sum_dist / country.params.size()
         country.readers += (0.5 - norm_dist) * 2 * MAX_READERS_CHANGE
-        print("country after: " + params_to_string(country.params) + " readers: " + country.readers)
+        print("country after: " + params_to_string(country.params) + " readers: " + str(country.readers))
 
 func params_to_string(p):
-    return "(" + p["economy"] + ", " + p["satisfaction"] + ", " + p["xenophobia"] + ")"
+    return "(" + str(p["economy"]) + ", " + str(p["satisfaction"]) + ", " + str(p["xenophobia"]) + ")"
     
 func cap_values():
     for c in countries:
