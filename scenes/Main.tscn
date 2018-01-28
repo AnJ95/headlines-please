@@ -10,10 +10,10 @@
 [ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=8]
 [ext_resource path="res://scenes/Phaxogram.tscn" type="PackedScene" id=9]
 [ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
-[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=11]
-[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=12]
-[ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=13]
-[ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=14]
+[ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=11]
+[ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=13]
+[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=14]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=15]
 
 [sub_resource type="DynamicFont" id=1]
@@ -21,7 +21,7 @@
 size = 50
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 12 )
+font_data = ExtResource( 14 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [node name="Main" type="Node2D" index="0"]
@@ -131,21 +131,34 @@ margin_bottom = 508.0
 position = Vector2( 771.792, 508.539 )
 texture = ExtResource( 10 )
 
-[node name="DayEndScreen" type="Control" parent="." index="6"]
+[node name="add-on" type="Sprite" parent="." index="6"]
+
+position = Vector2( 612.918, 49.7458 )
+texture = ExtResource( 11 )
+
+[node name="Tweetr" parent="." index="7" instance=ExtResource( 12 )]
+
+margin_left = 763.0
+margin_top = 176.0
+margin_right = 763.0
+margin_bottom = 176.0
+_sections_unfolded = [ "Offset", "Rect", "Transform" ]
+
+[node name="DayEndScreen" type="Control" parent="." index="8"]
 
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 801.0
-margin_bottom = 440.0
+margin_right = 880.0
+margin_bottom = 500.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 11 )
+script = ExtResource( 13 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 
 [node name="ColorRect" type="ColorRect" parent="DayEndScreen" index="0"]
@@ -154,14 +167,15 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 803.0
-margin_bottom = 443.0
+margin_right = 880.0
+margin_bottom = 500.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.566406, 0.566406, 0.566406, 0.718235 )
+_sections_unfolded = [ "Anchor", "Rect" ]
 
 [node name="DraggableHolder" type="Control" parent="DayEndScreen/ColorRect" index="0"]
 
@@ -188,9 +202,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1.0
-margin_top = -9.0
-margin_right = 800.0
-margin_bottom = 61.0
+margin_top = 11.0
+margin_right = 879.0
+margin_bottom = 79.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
@@ -213,7 +227,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1.0
 margin_top = 362.0
-margin_right = 800.0
+margin_right = 880.0
 margin_bottom = 432.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
@@ -226,19 +240,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
-
-[node name="add-on" type="Sprite" parent="." index="7"]
-
-position = Vector2( 612.918, 49.7458 )
-texture = ExtResource( 13 )
-
-[node name="Tweetr" parent="." index="8" instance=ExtResource( 14 )]
-
-margin_left = 763.0
-margin_top = 176.0
-margin_right = 763.0
-margin_bottom = 176.0
-_sections_unfolded = [ "Offset", "Rect", "Transform" ]
 
 [node name="Countdown" type="Label" parent="." index="9"]
 
@@ -265,28 +266,28 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="PaperArea" method="_on_Main_day_ended"]
 
-[connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
-
-[connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
-
 [connection signal="day_ended" from="." to="Tweetr" method="_on_Main_day_ended"]
 
-[connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
+[connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
 
-[connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
+[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
 [connection signal="day_started" from="." to="Phaxogram" method="_on_Main_day_started"]
 
+[connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
+
 [connection signal="day_started" from="." to="Tweetr" method="_on_Main_day_started"]
 
-[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
+[connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
 
 [connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
 
 [connection signal="message_arrived" from="." to="Tweetr" method="_on_Main_message_arrived"]
+
+[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
 
 

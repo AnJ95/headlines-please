@@ -11,13 +11,13 @@ const DropZone = preload("res://scripts/DropZone.gd")
 
 var Airmail
 var DraggableHolder
-var Label
+onready var label = get_node("ColorRect/Label")
+onready var heading = get_node("ColorRect/Heading")
 
 
 func _ready():
     Airmail = get_node("/root/Main/Draggables/Airmail")
     DraggableHolder = get_node("ColorRect/DraggableHolder")
-    Label = get_node("ColorRect/Label")
     
 func _process(delta):
     if not isRunning:
@@ -57,7 +57,7 @@ func _process(delta):
             else:
                 labelStr = "..."
             
-            Label.set_text(labelStr)
+            label.set_text(labelStr)
 
 func get_rating(draggable):
     if self is DropZone and self.selected_headline != null:
@@ -74,6 +74,8 @@ func _on_Main_day_ended(world):
     currentSlot = -1
     self.world = world
     doneScenarios = []
+    
+    heading.set_text("Day " + str(world.day) + " over!")
 
     get_node("/root/Main/DayEndScreen").visible = true # TODO animate fade in
 
