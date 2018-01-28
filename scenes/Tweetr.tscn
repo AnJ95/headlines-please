@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scripts/TweetManager.gd" type="Script" id=1]
-[ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=2]
-[ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=3]
+[ext_resource path="res://scripts/ScrollMessageManager.gd" type="Script" id=1]
+[ext_resource path="res://scenes/Tweet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=3]
+[ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=4]
 
 [node name="Tweetr" type="Control"]
 
@@ -17,17 +18,19 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Offset", "Transform" ]
+MessageScene = ExtResource( 2 )
 anchor_pos = Vector2( -65, 105 )
-max_tweets = 5
+message_type = 0
+max_messages = 5
 
 [node name="front" type="Sprite" parent="." index="0"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="screen" type="Sprite" parent="." index="1"]
 
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="TweetAncor" type="Node2D" parent="." index="2"]

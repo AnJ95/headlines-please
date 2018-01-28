@@ -1,0 +1,35 @@
+extends Control
+
+const Message = preload("res://scripts/model/Message.gd")
+
+export(PackedScene) var MessageScene
+export(Vector2) var anchor_pos
+export(int, "TWEET", "NOTE", "PHAX") var message_type
+export var max_messages = 3
+
+var nodes = []
+
+func _on_Main_day_ended(world):
+    for n in nodes:
+        n.queue_free()
+
+func _on_Main_day_started(world):
+    return
+
+func _on_Main_message_arrived(message):
+    print(message.type)
+    print(message_type)
+    if message.type == message_type:
+        add(message)
+    
+func add(message):
+    var message_node = MessageScene.instance()
+    message_node.init(message)
+    add_child(message_node)
+    nodes.append(message_node)
+    message_node.rect_position = anchor_pos
+    for n in nodes:
+        n.rect_position -= Vector2(0, message_node.rect_size.y)
+    
+    while nodes.size() > max_messages:
+        nodes.pop_front().queue_free()

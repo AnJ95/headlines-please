@@ -15,18 +15,19 @@ var hasSetSize = false
 var width = 120
 var message
 
+onready var outer = get_node("/root/Main/InfoArea")
+
 func _ready():
     add_to_group("info")
-    pass
-
-func init(message):
-    self.message = message
     
     shuffle_position()
     update_view();
     
     get_node("Label").rect_size = Vector2(width, 1000)
     get_node("Label").set_text(message.text)
+
+func init(message):
+    self.message = message
 
 func _process(delta):
     
