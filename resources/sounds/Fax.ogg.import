@@ -7,12 +7,12 @@ path="res://.import/Fax.ogg-f699a5f17e96b3adaa0cf6997bf25338.oggstr"
 [deps]
 
 source_file="res://resources/sounds/Fax.ogg"
-source_md5="07d58b83974161a1699c7486e005db8a"
+source_md5="99895115c8d5c1e40a9f936d586f97a2"
 
 dest_files=[ "res://.import/Fax.ogg-f699a5f17e96b3adaa0cf6997bf25338.oggstr" ]
-dest_md5="300f25553a333eaa990dd251f7ae54f2"
+dest_md5="4fc2a20097597439d5c844155a19af32"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

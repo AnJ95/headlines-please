@@ -10,9 +10,9 @@ source_file="res://resources/sounds/Newsticker.ogg"
 source_md5="59e45bfae3cafda099d3e5c4873a6f09"
 
 dest_files=[ "res://.import/Newsticker.ogg-f93bf10c82611f30db762a5e36bc8dc7.oggstr" ]
-dest_md5="0133d5ddb44f544c867f21759a14fd73"
+dest_md5="5c08be05e61755dfb57e4d002499230f"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

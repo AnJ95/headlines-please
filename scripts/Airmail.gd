@@ -6,6 +6,10 @@ var maxY
 var handIns = []
 var isVacuuming = false
 
+onready var audio_stream_player = get_node("AudioStreamPlayer")
+onready var audio_stream_player_node = get_node("AudioStreamPlayerNode")
+onready var audio_stream_player_grab = get_node("AudioStreamPlayerGrab")
+
 func _ready():
     minY = rect_position.y
     maxY = minY + scrollHeight
@@ -14,10 +18,17 @@ func move_drag():
     rect_position.x = startThisPos.x
     if rect_position.y < minY:
         rect_position.y = minY
+        audio_stream_player.stop()
     if rect_position.y > maxY:
         rect_position.y = maxY
+        
+    if rect_position.y > minY && !audio_stream_player.playing:
+        audio_stream_player.play()
+            
+    
     
 func start_drag():
+    audio_stream_player_grab.play()
     pass
 
 func stop_drag():
@@ -27,10 +38,12 @@ func stop_drag():
     else:
         rect_position.y = minY # TODO animate
         isVacuuming = false
+    audio_stream_player_grab.stop()
 
 
 
 func handIn(draggable):
+    audio_stream_player_node.play()
     handIns.append(draggable)
     
     

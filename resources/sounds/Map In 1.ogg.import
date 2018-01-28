@@ -10,9 +10,9 @@ source_file="res://resources/sounds/Map In 1.ogg"
 source_md5="a13dfb4380ba87f5b6f21350f6f4c4d1"
 
 dest_files=[ "res://.import/Map In 1.ogg-df463a22eaa5a9e283bd22621b649390.oggstr" ]
-dest_md5="08ffc545d44b2514aa86238081fb1a9f"
+dest_md5="92091d377eb89508a7d4cc75d35e80dd"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -55,8 +55,24 @@ func _process(delta):
     if time >= DAY_CYCLE_TIME:
         end_day()
 
+var Scenario_Factory = load("res://scripts/model/scenarios/Scenario_factory.gd")
+var Scenario_Ghettofire = load("res://scripts/model/scenarios/Scenario_ghettofire.gd")
+var Scenario_Hotel = load("res://scripts/model/scenarios/Scenario_hotel.gd")
+var Scenario_Practice_Flight = load("res://scripts/model/scenarios/Scenario_practice_flight.gd")
+var Scenario_small_1 = load("res://scripts/model/scenarios/Scenario_practice_flight.gd")
+var Scenario_small_2 = load("res://scripts/model/scenarios/Scenario_practice_flight.gd")
+#var Scenario_Ambassador = load("res://scripts/model/scenarios/Scenario_Ambassador.gd")
 
 func load_scenarios():
+    #scenarios.append(Scenario_Ambassador.new())
+    scenarios.append(Scenario_Factory.new())
+    scenarios.append(Scenario_Ghettofire.new())
+    scenarios.append(Scenario_Hotel.new())
+    scenarios.append(Scenario_Practice_Flight.new())
+    scenarios.append(Scenario_small_1.new())
+    scenarios.append(Scenario_small_2.new())
+    return
+    #TODO geht das so überhaubt?
     var dir = Directory.new()
     if dir.open("res://scripts/model/scenarios") == OK:
         dir.list_dir_begin(true)
@@ -75,7 +91,7 @@ func load_scenarios():
 func next_day():
     print("next_day")
     current_scenarios = {}
-    for i in range(1):
+    for i in range(2):
         var next_scenario = get_scenario()
         current_scenarios[next_scenario.name] = next_scenario
 

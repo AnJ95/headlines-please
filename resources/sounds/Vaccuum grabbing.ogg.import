@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Vaccuum grabbing.ogg-856cf58a4729dbf25f32380e9f229c20.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/Vaccuum grabbing.ogg"
+source_md5="61022b6e49f8dfcca99b6fc1b9cd741d"
+
+dest_files=[ "res://.import/Vaccuum grabbing.ogg-856cf58a4729dbf25f32380e9f229c20.oggstr" ]
+dest_md5="a8e2c41e6c89ae213bb1f5f6c30d7b3c"
+
+[params]
+
+loop=false
+loop_offset=0

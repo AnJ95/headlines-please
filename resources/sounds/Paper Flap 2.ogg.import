@@ -10,9 +10,9 @@ source_file="res://resources/sounds/Paper Flap 2.ogg"
 source_md5="9c83be458b20b0d9ddbf2783054f91a8"
 
 dest_files=[ "res://.import/Paper Flap 2.ogg-87d2e60c714b679c3b216fcec472f9a9.oggstr" ]
-dest_md5="6cbe032d7f930324ed75a8b9853e37e8"
+dest_md5="afbc7f628bb28c7c30ad445820404ca8"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

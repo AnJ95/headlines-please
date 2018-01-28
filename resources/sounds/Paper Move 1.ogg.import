@@ -10,9 +10,9 @@ source_file="res://resources/sounds/Paper Move 1.ogg"
 source_md5="eb6d9965ac116a8d52d0ecfe3f3f18f6"
 
 dest_files=[ "res://.import/Paper Move 1.ogg-4f61dac9db34579525d09d2cc293b7ee.oggstr" ]
-dest_md5="5336626d40e05972977a5f77b94ca319"
+dest_md5="73477ae2b310384417d12948d68c4ebc"
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

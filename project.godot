@@ -8,10 +8,6 @@
 
 config_version=3
 
-position=null
-pos=null
-window=null
-
 [application]
 
 config/name="HeadlinesPlease"
@@ -23,6 +19,13 @@ config/icon="res://icon.png"
 window/size/width=880
 window/size/height=500
 window/size/resizable=false
+
+[importer_defaults]
+
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
+}
 
 [rendering]
 

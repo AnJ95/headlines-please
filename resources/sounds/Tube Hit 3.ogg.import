@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Tube Hit 3.ogg-43ae8a9f7828aad3516cf0173120f1ce.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/Tube Hit 3.ogg"
+source_md5="32b1b17bf752fd766864b1938d38aa4f"
+
+dest_files=[ "res://.import/Tube Hit 3.ogg-43ae8a9f7828aad3516cf0173120f1ce.oggstr" ]
+dest_md5="57e6afe71533b7677e6b65046a25bd7f"
+
+[params]
+
+loop=false
+loop_offset=0
