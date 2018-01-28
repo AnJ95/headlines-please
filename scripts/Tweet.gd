@@ -15,6 +15,8 @@ onready var label = get_node("Label")
 onready var bg = get_node("Background")
 onready var border = get_node("Border")
 
+var is_selected
+
 func _ready():
     add_to_group("info")
     label.rect_size = Vector2(WIDTH, HEIGHT)
@@ -56,7 +58,7 @@ func stop_drag():
 
     for dropZone in get_tree().get_nodes_in_group("dropzone"):
         if dropZone.current_state == 0:
-            isSelected = get_global_rect().intersects(dropZone.get_global_rect())
+            is_selected = get_global_rect().intersects(dropZone.get_global_rect())
             #update_view();
             return #TODO maybe sort by children index first?
 

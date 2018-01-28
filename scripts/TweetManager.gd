@@ -10,6 +10,7 @@ var tweets = []
 
 func _on_Main_day_ended(world):
     for t in tweets:
+        print(t)
         t.queue_free()
 
 func _on_Main_day_started(world):
