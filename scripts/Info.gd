@@ -106,3 +106,7 @@ func shuffle_position():
 	var maxH = outer.size.y - inner.size.y
 
 	rect_position = Vector2(randf() * maxW, randf() * maxH)
+
+
+func can_be_vacuumed():
+	return true

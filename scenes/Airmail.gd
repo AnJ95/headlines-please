@@ -7,8 +7,8 @@ extends "res://scripts/Draggable.gd"
 var minY
 const scrollHeight = 200
 var maxY
-
-var acceptsDrops = false
+var handIns = []
+var isVacuuming = false
 
 func _ready():
 	minY = rect_position.y
@@ -27,7 +27,15 @@ func start_drag():
 func stop_drag():
 	if rect_position.y - minY > scrollHeight / 2:
 		rect_position.y = maxY # TODO animate
-		acceptsDrops = true
+		isVacuuming = true
 	else:
 		rect_position.y = minY # TODO animate
-		acceptsDrops = false
+		isVacuuming = false
+
+
+
+func handIn(draggable):
+	# if self is DropZone and self.selected_headline != null:
+	handIns.append(draggable)
+	
+	

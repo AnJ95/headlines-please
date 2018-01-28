@@ -4,8 +4,10 @@ var isMouseIn = false
 var isDragging = false
 var startMousePos
 var startThisPos
+var Airmail
 
 func _ready():
+	Airmail = get_node("/root/Main/Draggables/Airmail")
 	connect("mouse_entered", self, "on_mouse_entered")
 	connect("mouse_exited", self, "on_mouse_exited")
 
@@ -51,4 +53,14 @@ func internal_start_drag():
 	start_drag()
 
 func internal_stop_drag():
-	stop_drag()
+	if can_be_vacuumed() and Airmail.isVacuuming and Airmail.get_global_rect().has_point(get_viewport().get_mouse_position()):
+		vacuum()
+	else:
+		stop_drag()
+	
+func vacuum():
+	Airmail.handIn(self)
+	self.get_parent().remove_child(self)
+	
+func can_be_vacuumed():
+	return false

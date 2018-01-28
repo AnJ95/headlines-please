@@ -2,6 +2,7 @@ extends "res://scripts/Draggable.gd"
 
 var current_state = 0
 var max_state = 2
+var selected_headline = null
 const padX = 18;
 const initial_padY = 40
 const padY = 4;
@@ -72,12 +73,13 @@ func go_back_to_state_0():
 	
 func go_back_to_state_1():
 	current_state = 1
+	selected_headline = null
 	show_current_state()
 
 # This means headline has been selected
 func goto_state_2(headline):
 	current_state = 2
-	
+	selected_headline = headline
 	get_node("State_2/Headline").init(headline, Vector2(padX, initial_padY), null, null)
 	show_current_state()
 
@@ -85,4 +87,7 @@ func goto_state_2(headline):
 func goto_state_3():
 	current_state = 3
 	show_current_state()
+	
+func can_be_vacuumed():
+	return true
 
