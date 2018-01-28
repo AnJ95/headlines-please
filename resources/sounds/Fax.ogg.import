@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Fax.ogg-f699a5f17e96b3adaa0cf6997bf25338.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/Fax.ogg"
+source_md5="07d58b83974161a1699c7486e005db8a"
+
+dest_files=[ "res://.import/Fax.ogg-f699a5f17e96b3adaa0cf6997bf25338.oggstr" ]
+dest_md5="300f25553a333eaa990dd251f7ae54f2"
+
+[params]
+
+loop=true
+loop_offset=0

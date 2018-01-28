@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Paper Flap 1.ogg-3007c6e51c8ead4557dbf84c116e8c93.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/Paper Flap 1.ogg"
+source_md5="235831f1b3e6d31aab9f98c5d1e3e3f3"
+
+dest_files=[ "res://.import/Paper Flap 1.ogg-3007c6e51c8ead4557dbf84c116e8c93.oggstr" ]
+dest_md5="26a53c4d5d83c82c5abae445617a50c7"
+
+[params]
+
+loop=true
+loop_offset=0

@@ -9,6 +9,8 @@ export var max_messages = 3
 
 var nodes = []
 
+onready var audio_stream_player = get_node("AudioStreamPlayer")
+
 func _on_Main_day_ended(world):
     pass
 
@@ -27,6 +29,9 @@ func add(message):
     add_child(message_node)
     nodes.append(message_node)
     message_node.rect_position = anchor_pos
+    
+    audio_stream_player.play()
+    
     for n in nodes:
         n.rect_position -= Vector2(0, message_node.rect_size.y)
     

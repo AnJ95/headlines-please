@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Map In 2.ogg-28b856f00bfdfe9c4d4f7826ccc05f95.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/Map In 2.ogg"
+source_md5="c7ba783bb8edb4e1c77bde59d57023fe"
+
+dest_files=[ "res://.import/Map In 2.ogg-28b856f00bfdfe9c4d4f7826ccc05f95.oggstr" ]
+dest_md5="0b9d7df5fc42524cfb3b6da96a0caa2a"
+
+[params]
+
+loop=true
+loop_offset=0
