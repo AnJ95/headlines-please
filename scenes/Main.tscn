@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/table.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=11]
 [ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=12]
 [ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=13]
+[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -234,6 +235,31 @@ margin_right = 682.0
 margin_bottom = 176.0
 _sections_unfolded = [ "Offset", "Rect", "Transform" ]
 
+[node name="Countdown" type="Label" parent="." index="8"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 586.0
+margin_top = 30.0
+margin_right = 613.0
+margin_bottom = 51.0
+rect_scale = Vector2( 1.7, 1.7 )
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 14 )
+custom_colors/font_color = Color( 0.96875, 0.745247, 0.151367, 1 )
+text = "60"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
+
 [connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
@@ -244,10 +270,10 @@ _sections_unfolded = [ "Offset", "Rect", "Transform" ]
 
 [connection signal="day_started" from="." to="Tweetr" method="_on_Main_day_started"]
 
-[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
-
 [connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
 
 [connection signal="message_arrived" from="." to="Tweetr" method="_on_Main_message_arrived"]
+
+[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
 
 

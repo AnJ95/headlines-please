@@ -38,6 +38,10 @@ func _ready():
     next_day()
 
 func _process(delta):
+    
+    get_node("Countdown").set_text(str(abs(round(DAY_CYCLE_TIME - time))))
+    
+    
     if not game_running:
         return
         
