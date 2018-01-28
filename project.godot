@@ -8,9 +8,9 @@
 
 config_version=3
 
-position=0
-pos=false
-window=0
+position=null
+pos=null
+window=null
 
 [application]
 
@@ -20,8 +20,9 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/width=800
-window/size/height=440
+window/size/width=880
+window/size/height=500
+window/size/resizable=false
 
 [rendering]
 
