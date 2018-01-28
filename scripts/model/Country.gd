@@ -2,7 +2,7 @@ var name = ""
 
 var economic_strength = 0.0
 var citizen_satisfaction = 0.0
-var war_enthusiasm = 0.0
+var xenophobie = 0.0
 
 var relationships = {}
 
