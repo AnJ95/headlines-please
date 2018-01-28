@@ -49,6 +49,7 @@ _sections_unfolded = [ "Rect", "Transform", "Z Index" ]
 
 [node name="Draggables" type="Control" parent="." index="3"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -118,6 +119,7 @@ texture = ExtResource( 9 )
 
 [node name="tweetr" type="Sprite" parent="." index="6"]
 
+editor/display_folded = true
 position = Vector2( 563.72, 0 )
 texture = ExtResource( 10 )
 centered = false
@@ -132,6 +134,37 @@ texture = ExtResource( 11 )
 
 position = Vector2( 672.606, 483.742 )
 texture = ExtResource( 12 )
+
+[node name="DayEndScreen" type="Control" parent="." index="8"]
+
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 801.0
+margin_bottom = 440.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Margin" ]
+
+[node name="ColorRect" type="ColorRect" parent="DayEndScreen" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 803.0
+margin_bottom = 438.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.566406, 0.566406, 0.566406, 0.519333 )
 
 [connection signal="day_ended" from="." to="." method="_on_Main_day_ended"]
 
