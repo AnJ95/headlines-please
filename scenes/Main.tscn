@@ -1,29 +1,30 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/table.png" type="Texture" id=2]
 [ext_resource path="res://resources/sprites/map.png" type="Texture" id=3]
 [ext_resource path="res://scripts/InfoManager.gd" type="Script" id=4]
-[ext_resource path="res://scenes/Airmail.gd" type="Script" id=5]
+[ext_resource path="res://scripts/Airmail.gd" type="Script" id=5]
 [ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=6]
 [ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/sprites/phaxogram.png" type="Texture" id=8]
 [ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=9]
-[ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=10]
-[ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=11]
-[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=12]
-[ext_resource path="res://scenes/DayEndScreen.gd" type="Script" id=13]
-[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=14]
+[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=10]
+[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=11]
+[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=12]
+[ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=13]
+
+
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 50
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 14 )
+font_data = ExtResource( 12 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
@@ -127,25 +128,12 @@ texture = ExtResource( 8 )
 position = Vector2( 531.641, 49.7458 )
 texture = ExtResource( 9 )
 
-[node name="tweetr" type="Sprite" parent="." index="6"]
-
-editor/display_folded = true
-position = Vector2( 563.72, 0 )
-texture = ExtResource( 10 )
-centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="screen0" type="Sprite" parent="tweetr" index="0"]
-
-position = Vector2( 116.656, 168.622 )
-texture = ExtResource( 11 )
-
-[node name="pictsource" type="Sprite" parent="." index="7"]
+[node name="pictsource" type="Sprite" parent="." index="6"]
 
 position = Vector2( 672.606, 483.742 )
-texture = ExtResource( 12 )
+texture = ExtResource( 10 )
 
-[node name="DayEndScreen" type="Control" parent="." index="8"]
+[node name="DayEndScreen" type="Control" parent="." index="7"]
 
 visible = false
 anchor_left = 0.0
@@ -159,7 +147,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 13 )
+script = ExtResource( 11 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 
 [node name="ColorRect" type="ColorRect" parent="DayEndScreen" index="0"]
@@ -239,10 +227,20 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
+[node name="Tweetr" parent="." index="8" instance=ExtResource( 13 )]
+
+position = Vector2( 682, 176 )
+
 [connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
+
+[connection signal="day_ended" from="." to="Tweetr" method="_on_Main_day_ended"]
 
 [connection signal="day_started" from="." to="." method="_on_Main_day_started"]
 
+[connection signal="day_started" from="." to="Tweetr" method="_on_Main_day_started"]
+
 [connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
+
+[connection signal="message_arrived" from="." to="Tweetr" method="_on_Main_message_arrived"]
 
 
