@@ -26,8 +26,9 @@ func init_headlines():
 
 
 func init_messages():
-    messages.append(Message.new(Message.TWITTER, [1,2], "I heard gun shots near {country_1}s embassy last night. Did something happen?"))
-    messages.append(Message.new(Message.TWITTER, [], "pressconference canceled = free afternoon yay"))
+    messages.append(Message.new(Message.TWITTER, [1,2], "I heard gun shots near {country_1}s embassy last night."))
+    messages.append(Message.new(Message.TWITTER, [], "What did happen in {country_1}s embassy?", 0.1))
+    messages.append(Message.new(Message.TWITTER, [], "press conference canceled = free afternoon yay", 0.2))
     messages.append(Message.new(Message.TWITTER, [0,2], "Hallo Welt1", 0.05))
     messages.append(Message.new(Message.TWITTER, [0,2], "Hallo Welt2", 0.06))
     messages.append(Message.new(Message.TWITTER, [0,2], "Hallo Welt3", 0.07))

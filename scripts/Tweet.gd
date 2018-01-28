@@ -17,6 +17,10 @@ onready var border = get_node("Border")
 
 var is_selected
 
+var static_copy
+
+var selectedDropZone = null
+
 func _ready():
     add_to_group("info")
     label.rect_size = Vector2(WIDTH, HEIGHT)
@@ -49,18 +53,59 @@ func move_drag():
     pass
 
 func start_drag():
-    pass
+    if selectedDropZone != null:
+        return
+    #we are in the feed
+    #create a not draggable copy and be moved
+    static_copy = duplicate()
+    static_copy.mouse_filter = MOUSE_FILTER_IGNORE
+    static_copy.init(message)
+    get_parent().add_child(static_copy)
 
 
 func stop_drag():
-    var dropZone = get_node("/root/Main/DropZone")
-    #var infoManager = get_tree().get_current_scene().get_node("InfoArea")
+    var draggables = get_node("/root/Main/Draggables")
+        
+    var i = draggables.get_child_count() - 1
+    while i >= 0:
+        var child = draggables.get_children()[i]
+        i -= 1
+        if (child.is_in_group("dropzone")):
+            print(str(i) + ": " + str(child))
+            if child.current_state == 0:
+                if (child.get_global_rect().has_point(get_viewport().get_mouse_position())):
+                    add_to_dropzone(child)
+                    return
+                    
+    if is_in_feed():
+        selectedDropZone = null
+        #delete copy
+        rect_position = static_copy.rect_position
+        static_copy.queue_free()
+    else:
+        queue_free()
 
-    for dropZone in get_tree().get_nodes_in_group("dropzone"):
-        if dropZone.current_state == 0:
-            is_selected = get_global_rect().intersects(dropZone.get_global_rect())
-            #update_view();
-            return #TODO maybe sort by children index first?
+
+func add_to_dropzone(dropZone):
+    if is_in_feed():
+        #add copy to dropzone and make draggable
+        #original back to feed
+        
+        var tmp_pos = static_copy.rect_position
+        get_parent().remove_child(static_copy)
+        dropZone.add_child(static_copy)
+        static_copy.rect_position = get_global_rect().position - dropZone.get_global_rect().position
+        rect_position = tmp_pos
+        static_copy.selectedDropZone = dropZone
+        static_copy.mouse_filter = MOUSE_FILTER_STOP
+        
+        static_copy = null
+    else:
+        rect_position -= dropZone.rect_position - get_parent().rect_position
+        dropZone.add_child(static_copy)
+    
+func is_in_feed():
+    return selectedDropZone == null
 
 func _on_Info_mouse_entered():
     isMouseIn = true

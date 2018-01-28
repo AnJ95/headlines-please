@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const Message = preload("res://scripts/model/Message.gd")
 const TweetScene = preload("res://scenes/Tweet.tscn")

@@ -229,7 +229,11 @@ _sections_unfolded = [ "Material", "Size Flags", "Theme", "Visibility", "custom_
 
 [node name="Tweetr" parent="." index="8" instance=ExtResource( 13 )]
 
-position = Vector2( 682, 176 )
+margin_left = 682.0
+margin_top = 176.0
+margin_right = 682.0
+margin_bottom = 176.0
+_sections_unfolded = [ "Offset", "Rect", "Transform" ]
 
 [connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
