@@ -46,29 +46,6 @@ func _process(delta):
             
     pass
 
-func move_drag():
-    pass
-
-func start_drag():
-    pass
-
-
-func stop_drag():
-    pass
-    
-
-
-func add_to_dropzone(dropZone):
-    self.rect_position -= dropZone.rect_position - get_parent().rect_position
-    get_parent().remove_child(self)
-    dropZone.add_child(self)
-    
-func add_to_draggables():
-    var draggables = get_node("/root/Main/Draggables")
-    self.rect_position -= draggables.rect_position - get_parent().rect_position
-    get_parent().remove_child(self)
-    draggables.add_child(self)
-
 
 func shuffle_position():
     var outer = get_node("/root/Main/InfoArea").get_global_rect()

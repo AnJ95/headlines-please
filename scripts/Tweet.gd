@@ -22,7 +22,7 @@ var static_copy
 var selectedDropZone = null
 
 func _ready():
-    add_to_group("info")
+    add_to_group("tweet")
     label.rect_size = Vector2(WIDTH, HEIGHT)
     label.set_text(message.text)
 
@@ -53,33 +53,19 @@ func move_drag():
     pass
 
 func start_drag():
-    if selectedDropZone != null:
-        return
-    #we are in the feed
-    #create a not draggable copy and be moved
-    static_copy = duplicate()
-    static_copy.mouse_filter = MOUSE_FILTER_IGNORE
-    static_copy.init(message)
-    get_parent().add_child(static_copy)
+    if is_in_feed():
+        #create a not draggable copy and be moved
+        static_copy = duplicate()
+        static_copy.mouse_filter = MOUSE_FILTER_IGNORE
+        static_copy.init(message)
+        get_parent().add_child(static_copy)
 
 
 func stop_drag():
-    var draggables = get_node("/root/Main/Draggables")
-        
-    var i = draggables.get_child_count() - 1
-    while i >= 0:
-        var child = draggables.get_children()[i]
-        i -= 1
-        if (child.is_in_group("dropzone")):
-            print(str(i) + ": " + str(child))
-            if child.current_state == 0:
-                if (child.get_global_rect().has_point(get_viewport().get_mouse_position())):
-                    add_to_dropzone(child)
-                    return
                     
     if is_in_feed():
         selectedDropZone = null
-        rect_position = static_copy.rect_position
+        #rect_position = static_copy.rect_position
         static_copy.queue_free()
     else:
         queue_free()

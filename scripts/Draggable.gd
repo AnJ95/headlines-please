@@ -4,14 +4,13 @@ var isMouseIn = false
 var isDragging = false
 var startMousePos
 var startThisPos
-var Airmail
 var root
 
-var selected_droppable = null
+var containing_droppable = null
+var hovering_droppable = null
 
 func _ready():
     root = get_node("/root/Main/Draggables") 
-    Airmail = get_node("/root/Main/Draggables/Airmail")
     connect("mouse_entered", self, "on_mouse_entered")
     connect("mouse_exited", self, "on_mouse_exited")
 
@@ -26,37 +25,21 @@ func _process(delta):
             if isDragging:
                 internal_stop_drag()
             isDragging = false
-
-func internal_move_drag():
-    rect_position = startThisPos + (get_viewport().get_mouse_position() - startMousePos)
     
-    
-    move_drag()
-    
-    #var infoManager = get_tree().get_current_scene().get_node("InfoArea")
-    var i = root.get_child_count() - 1
-    while i >= 0:
-        var droppable = root.get_children()[i]
-        i -= 1
-        if (droppable.is_in_group("droppable")):
-            if (droppable.get_global_rect().has_point(get_viewport().get_mouse_position())):
-                if droppable.can_drop(self):
-                    print("Now hovering")
-                    droppable.hovering_now()
-                    selected_droppable = droppable
-                    return
-            else:
-                droppable.not_hovering()    
-                
-    var selected_droppable = null
-    
+# overwrite this
 func move_drag():
     pass
-    
+
+# overwrite this
 func start_drag():
     pass
 
+# overwrite this
 func stop_drag():
+    pass
+    
+# overwrite this
+func on_drop(droppable):
     pass
     
 func move_to_top():
@@ -69,16 +52,61 @@ func on_mouse_entered():
 func on_mouse_exited():
     isMouseIn = false
 
+func internal_move_drag():
+    rect_position = startThisPos + (get_viewport().get_mouse_position() - startMousePos)
+    move_drag()
+    #var infoManager = get_tree().get_current_scene().get_node("InfoArea")
+    var i = root.get_child_count() - 1
+    while i >= 0:
+        var droppable = root.get_children()[i]
+        i -= 1
+        if (droppable.is_in_group("droppable")):
+            if (droppable.get_global_rect().has_point(get_viewport().get_mouse_position())):
+                if droppable.can_drop(self):
+                    droppable.hovering_now()
+                    hovering_droppable = droppable
+                    return
+            else:
+                droppable.not_hovering()    
+                
+    hovering_droppable = null
+    
 func internal_start_drag():
+    if is_in_droppable():
+        internal_on_undrop()
     startMousePos = get_viewport().get_mouse_position()
     startThisPos = Vector2(rect_position.x, rect_position.y)
     move_to_top()
     start_drag()
 
 func internal_stop_drag():
-    if selected_droppable != null:
-        self.rect_position -= selected_droppable.rect_position - get_parent().rect_position
-        self.get_parent().remove_child(self)
-        selected_droppable.add_child(self)
-        selected_droppable.internal_on_drop(self)
+    if hovering_droppable != null:
+        internal_on_drop(hovering_droppable)
     stop_drag()
+    
+func internal_on_drop(droppable):
+    print("drop")
+    containing_droppable = droppable
+    
+    self.rect_position -= droppable.rect_position - get_parent().rect_position
+    
+    self.get_parent().remove_child(self)
+    droppable.add_child(self)
+    
+    droppable.internal_on_drop(self)
+
+    on_drop(droppable)
+    
+func internal_on_undrop():
+    print("undrop")
+    containing_droppable.internal_on_undrop(self)
+    
+    self.rect_position -= root.rect_position - containing_droppable.rect_position
+    
+    containing_droppable.remove_child(self)
+    root.add_child(self)
+    
+    containing_droppable = null
+
+func is_in_droppable():
+    return hovering_droppable != null

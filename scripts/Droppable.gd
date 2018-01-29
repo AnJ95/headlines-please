@@ -29,9 +29,17 @@ func accepted_groups():
 func on_drop(draggable):
     pass
     
+# overwrite this
+func on_undrop(draggable):
+    pass
+    
 func internal_on_drop(draggable):
     contained_draggables.append(draggable)
     on_drop(draggable)
+    
+func internal_on_undrop(draggable):
+    contained_draggables.erase(draggable)
+    on_undrop(draggable)
 
 # called multiple times  
 func hovering_now():

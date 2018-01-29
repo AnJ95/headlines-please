@@ -31,7 +31,7 @@ _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 20
+DAY_CYCLE_TIME = 60
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
