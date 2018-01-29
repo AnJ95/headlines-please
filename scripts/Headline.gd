@@ -1,8 +1,11 @@
 extends Control
 
+onready var Label = get_node("TextureButton/Label")
+onready var Button = get_node("TextureButton")
+
 func init(var headline, var vecPos, var clickElem, var clickMethod):
     rect_position = vecPos
-    get_node("TextureButton/Label").text = headline.text
+    Label.text = headline.text
     if clickElem != null:
-        get_node("TextureButton").connect("pressed", clickElem, clickMethod, [headline])
+        Button.connect("pressed", clickElem, clickMethod, [headline])
 

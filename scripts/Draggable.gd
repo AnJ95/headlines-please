@@ -4,13 +4,12 @@ var isMouseIn = false
 var isDragging = false
 var startMousePos
 var startThisPos
-var root
 
 var containing_droppable = null
 var hovering_droppable = null
+onready var Root = get_node("/root/Main/Draggables") 
 
 func _ready():
-    root = get_node("/root/Main/Draggables") 
     connect("mouse_entered", self, "on_mouse_entered")
     connect("mouse_exited", self, "on_mouse_exited")
 
@@ -61,10 +60,10 @@ func internal_move_drag():
     rect_position = startThisPos + (get_viewport().get_mouse_position() - startMousePos)
     move_drag()
     #var infoManager = get_tree().get_current_scene().get_node("InfoArea")
-    var i = root.get_child_count() - 1
+    var i = Root.get_child_count() - 1
     var foundTarget = false
     while i >= 0:
-        var droppable = root.get_children()[i]
+        var droppable = Root.get_children()[i]
         i -= 1
         if (droppable.is_in_group("droppable")):
             if foundTarget:
@@ -112,10 +111,10 @@ func internal_on_undrop():
     print("undrop")
     containing_droppable.internal_on_leave(self)
     
-    self.rect_position -= root.rect_position - containing_droppable.rect_position
+    self.rect_position -= Root.rect_position - containing_droppable.rect_position
     
     containing_droppable.remove_child(self)
-    root.add_child(self)
+    Root.add_child(self)
     
     containing_droppable = null
 

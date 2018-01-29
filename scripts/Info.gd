@@ -10,19 +10,24 @@ var hasSetSize = false
 export var width = 120
 var message
 
-onready var outer = get_node("/root/Main/InfoArea")
+onready var InfoArea = get_node("/root/Main/InfoArea")
+onready var Label = get_node("Label")
+onready var Border = get_node("Border")
 
 func _ready():
     add_to_group("info")
     reset()
-    get_node("Label").rect_size = Vector2(width, 1000)
-    get_node("Label").set_text(message.text)
+    Label.rect_size = Vector2(width, 1000)
+    Label.set_text(message.text)
 
 func init(message):
     self.message = message
     
 func reset():
     shuffle_position()
+
+func minimum_size_changed():
+    print("changed")
 
 func _process(delta):
     
@@ -31,24 +36,24 @@ func _process(delta):
         if timeYet > 0.1:
             hasSetSize = true
             
-            var size = Vector2(width, get_node("Label").get_combined_minimum_size().y)
+            var size = Vector2(width, Label.get_combined_minimum_size().y)
             
             rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
             
-            get_node("Border").rect_position = Vector2(0, 0)
-            get_node("Border").rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
+            Border.rect_position = Vector2(0, 0)
+            Border.rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
             
             #get_node("Background").rect_position = Vector2(BORDER, BORDER)
             #get_node("Background").rect_size = size + Vector2(2*PADDING, 2*PADDING)
             
-            get_node("Label").rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
-            get_node("Label").rect_size = size
+            Label.rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
+            Label.rect_size = size
             
     pass
 
 
 func shuffle_position():
-    var outer = get_node("/root/Main/InfoArea").get_global_rect()
+    var outer = InfoArea.get_global_rect()
     var inner = get_global_rect()
 
     var maxW = outer.size.x - inner.size.x

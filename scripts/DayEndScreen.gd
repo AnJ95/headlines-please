@@ -9,15 +9,10 @@ var doneScenarios = []
 
 const DropZone = preload("res://scripts/DropZone.gd")
 
-var Airmail
-var DraggableHolder
-onready var label = get_node("ColorRect/Label")
-onready var heading = get_node("ColorRect/Heading")
-
-
-func _ready():
-    Airmail = get_node("/root/Main/Draggables/Airmail")
-    DraggableHolder = get_node("ColorRect/DraggableHolder")
+onready var Airmail = get_node("/root/Main/Draggables/Airmail")
+onready var DraggableHolder = get_node("ColorRect/DraggableHolder")
+onready var Label = get_node("ColorRect/Label")
+onready var Heading = get_node("ColorRect/Heading")
     
 func _process(delta):
     if not isRunning:
@@ -33,7 +28,7 @@ func _process(delta):
         
         if (currentSlot >= Airmail.contained_draggables.size()):
             isRunning = false
-            get_node("/root/Main/DayEndScreen").visible = false # TODO animate fade out
+            self.visible = false # TODO animate fade out
             world.next_day()
         else:
             var draggable = Airmail.contained_draggables[currentSlot]
@@ -57,8 +52,7 @@ func _process(delta):
             else:
                 labelStr = "..."
             
-            label.set_text(labelStr)
-            label.set_text(labelStr)
+            Label.set_text(labelStr)
 
 func get_rating(draggable):
     if self is DropZone and self.selected_headline != null:
@@ -76,9 +70,9 @@ func _on_Main_day_ended(world):
     self.world = world
     doneScenarios = []
     
-    heading.set_text("Day " + str(world.day) + " over!")
+    Heading.set_text("Day " + str(world.day) + " over!")
 
-    get_node("/root/Main/DayEndScreen").visible = true # TODO animate fade in
+    self.visible = true # TODO animate fade in
 
     world.cap_values()
     
