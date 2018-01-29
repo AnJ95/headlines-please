@@ -1,9 +1,28 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/ScrollMessageManager.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Phax.tscn" type="PackedScene" id=2]
-[ext_resource path="res://resources/sprites/phaxogram.png" type="Texture" id=3]
-[ext_resource path="res://resources/sounds/Fax.ogg" type="AudioStream" id=4]
+[ext_resource path="res://resources/sounds/Fax.ogg" type="AudioStream" id=3]
+[ext_resource path="res://resources/sprites/phaxogram.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "leave"
+length = 0.3
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( -4, -4 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -50, 150 ) ]
+}
 
 [node name="phaxogram" type="Control"]
 
@@ -11,36 +30,64 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 100.0
 margin_right = 40.0
-margin_bottom = 40.0
+margin_bottom = 140.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Rect" ]
 MessageScene = ExtResource( 2 )
 anchor_pos = Vector2( -81, -85 )
 message_type = 2
 max_messages = 1
 set_to_back = true
 
-[node name="image" type="Sprite" parent="." index="0"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="0"]
 
-texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="PhaxAnchor" type="Node2D" parent="." index="1"]
-
-position = Vector2( -81, -85 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2"]
-
-stream = ExtResource( 4 )
+stream = ExtResource( 3 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
 bus = "Master"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+
+root_node = NodePath("../animation_root")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/leave = SubResource( 1 )
+blend_times = [  ]
+autoplay = ""
+
+[node name="animation_root" type="Control" parent="." index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 42.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect" ]
+
+[node name="image" type="Sprite" parent="animation_root" index="0"]
+
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PhaxAnchor" type="Node2D" parent="animation_root" index="1"]
+
+position = Vector2( -81, -85 )
+_sections_unfolded = [ "Transform" ]
 
 

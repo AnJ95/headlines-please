@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/table-xl.png" type="Texture" id=2]
@@ -12,26 +12,85 @@
 [ext_resource path="res://resources/sounds/Vaccuum floping.ogg" type="AudioStream" id=10]
 [ext_resource path="res://resources/sounds/Vaccuum grabbing.ogg" type="AudioStream" id=11]
 [ext_resource path="res://scenes/Phaxogram.tscn" type="PackedScene" id=12]
-[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=13]
+[ext_resource path="res://scripts/TweetrContainer.gd" type="Script" id=13]
 [ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=14]
 [ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=15]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=16]
-[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=17]
-[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=18]
+[ext_resource path="res://scripts/PicturesContainer.gd" type="Script" id=17]
+[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=18]
+[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=19]
+[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=20]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="Animation" id=4]
+
+resource_name = "leave"
+length = 0.3
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:margin_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( -4, -4 ),
+"update": 0,
+"values": [ 30.0, -145.0 ]
+}
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "leave"
+length = 0.3
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( -4, -4 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 240, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+
+resource_name = "leave"
+length = 0.3
+loop = false
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( -4, -4 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 50, 120 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
 
 size = 50
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 18 )
+font_data = ExtResource( 20 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 60
+DAY_CYCLE_TIME = 5
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
@@ -100,26 +159,28 @@ margin_bottom = 74.0
 
 [node name="Airmail" type="Control" parent="Draggables" index="1"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 30.0
-margin_top = -221.0
-margin_right = 167.0
-margin_bottom = 51.0
+margin_left = 29.0
+margin_top = -220.0
+margin_right = 166.0
+margin_bottom = 52.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 7 )
+_sections_unfolded = [ "Margin", "Rect" ]
 
 [node name="Sprite" type="Sprite" parent="Draggables/Airmail" index="0"]
 
 texture = ExtResource( 8 )
 centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Draggables/Airmail" index="1"]
 
@@ -145,6 +206,17 @@ autoplay = false
 mix_target = 0
 bus = "Master"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Draggables/Airmail" index="4"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/leave = SubResource( 4 )
+blend_times = [  ]
+autoplay = ""
+
 [node name="Phaxogram" parent="." index="4" instance=ExtResource( 12 )]
 
 margin_left = 117.0
@@ -152,33 +224,42 @@ margin_top = 468.0
 margin_right = 157.0
 margin_bottom = 508.0
 
-[node name="pictsource" type="Sprite" parent="." index="5"]
-
-position = Vector2( 771.792, 508.539 )
-texture = ExtResource( 13 )
-
-[node name="add-on" type="Sprite" parent="." index="6"]
-
-position = Vector2( 612.918, 49.7458 )
-texture = ExtResource( 14 )
-
-[node name="Tweetr" parent="." index="7" instance=ExtResource( 15 )]
-
-margin_left = 763.0
-margin_top = 176.0
-margin_right = 763.0
-margin_bottom = 176.0
-_sections_unfolded = [ "Offset", "Rect", "Transform" ]
-
-[node name="Countdown" type="Label" parent="." index="8"]
+[node name="TweetrContainer" type="Control" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 667.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 13 )
+_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
+
+[node name="add-on" type="Sprite" parent="TweetrContainer" index="0"]
+
+position = Vector2( 611.821, 49.7245 )
+texture = ExtResource( 14 )
+
+[node name="Tweetr" parent="TweetrContainer" index="1" instance=ExtResource( 15 )]
+
+margin_left = 762.0
+margin_top = 176.0
+margin_right = 762.0
+margin_bottom = 176.0
+_sections_unfolded = [ "Offset", "Rect", "Transform" ]
+
+[node name="Countdown" type="Label" parent="TweetrContainer" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 666.0
 margin_top = 30.0
-margin_right = 694.0
+margin_right = 693.0
 margin_bottom = 51.0
 rect_scale = Vector2( 1.7, 1.7 )
 rect_pivot_offset = Vector2( 0, 0 )
@@ -195,15 +276,15 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="Money" type="Label" parent="." index="9"]
+[node name="Money" type="Label" parent="TweetrContainer" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 563.0
+margin_left = 562.0
 margin_top = 62.0
-margin_right = 608.0
+margin_right = 607.0
 margin_bottom = 83.0
 rect_scale = Vector2( 1.5, 1.5 )
 rect_pivot_offset = Vector2( 0, 0 )
@@ -220,7 +301,48 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Anchor", "Margin", "Rect", "Size Flags", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="DayEndScreen" type="Control" parent="." index="10"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TweetrContainer" index="4"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/leave = SubResource( 1 )
+blend_times = [  ]
+autoplay = ""
+
+[node name="PicturesContainer" type="Control" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 17 )
+_sections_unfolded = [ "Rect" ]
+
+[node name="Sprite" type="Sprite" parent="PicturesContainer" index="0"]
+
+position = Vector2( 777.666, 528.373 )
+texture = ExtResource( 18 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PicturesContainer" index="1"]
+
+root_node = NodePath("..")
+autoplay = ""
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/leave = SubResource( 3 )
+blend_times = [  ]
+autoplay = ""
+
+[node name="DayEndScreen" type="Control" parent="." index="7"]
 
 visible = false
 anchor_left = 0.0
@@ -234,26 +356,11 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 17 )
+script = ExtResource( 19 )
 _sections_unfolded = [ "Anchor", "Margin" ]
+leaving_nodes = [ NodePath("../Phaxogram"), NodePath("../Draggables/Airmail"), NodePath("../PicturesContainer"), NodePath("../TweetrContainer") ]
 
-[node name="ColorRect" type="ColorRect" parent="DayEndScreen" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 880.0
-margin_bottom = 500.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 0.566406, 0.566406, 0.566406, 0.718235 )
-_sections_unfolded = [ "Margin" ]
-
-[node name="DraggableHolder" type="Control" parent="DayEndScreen/ColorRect" index="0"]
+[node name="DraggableHolder" type="Control" parent="DayEndScreen" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -261,8 +368,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 440.0
 margin_top = 250.0
-margin_right = 400.0
-margin_bottom = 220.0
+margin_right = 440.0
+margin_bottom = 250.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -270,7 +377,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
-[node name="Heading" type="Label" parent="DayEndScreen/ColorRect" index="1"]
+[node name="Heading" type="Label" parent="DayEndScreen" index="1"]
 
 modulate = Color( 0.298039, 0.12549, 0.0980392, 1 )
 anchor_left = 0.0
@@ -286,7 +393,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Day 1 over!"
 align = 1
 percent_visible = 1.0
@@ -294,51 +401,51 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="Label" type="Label" parent="DayEndScreen/ColorRect" index="2"]
+[node name="Label" type="Label" parent="DayEndScreen" index="2"]
 
 modulate = Color( 0.298039, 0.12549, 0.0980392, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1.0
-margin_top = 362.0
-margin_right = 880.0
-margin_bottom = 432.0
+margin_left = 3.0
+margin_top = 429.0
+margin_right = 882.0
+margin_bottom = 499.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
-
 [connection signal="day_ended" from="." to="PaperArea" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
 
-[connection signal="day_ended" from="." to="Tweetr" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
-[connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
+[connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
 
 [connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
 
 [connection signal="day_started" from="." to="Phaxogram" method="_on_Main_day_started"]
 
-[connection signal="day_started" from="." to="Tweetr" method="_on_Main_day_started"]
+[connection signal="day_started" from="." to="TweetrContainer/Tweetr" method="_on_Main_day_started"]
 
-[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
+[connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
 
 [connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
 
-[connection signal="message_arrived" from="." to="Tweetr" method="_on_Main_message_arrived"]
+[connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="_on_Main_message_arrived"]
+
+[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
 
 

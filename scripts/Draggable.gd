@@ -24,7 +24,7 @@ func _process(delta):
             if isDragging:
                 internal_stop_drag()
             isDragging = false
-    elif isDragging: # happens sometimes
+    elif isDragging: # happens sometimes    
         internal_stop_drag()
         isDragging = false
         

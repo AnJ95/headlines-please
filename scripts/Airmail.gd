@@ -5,6 +5,7 @@ const scrollHeight = 200
 var maxY
 var isVacuuming = false
 
+onready var animation_player = get_node("AnimationPlayer")
 onready var audio_stream_player = get_node("AudioStreamPlayer")
 onready var audio_stream_player_node = get_node("AudioStreamPlayerNode")
 onready var audio_stream_player_grab = get_node("AudioStreamPlayerGrab")
@@ -57,5 +58,4 @@ func stop_drag():
         isVacuuming = false
         audio_stream_player.stop()
     audio_stream_player_grab.stop()
-    
     

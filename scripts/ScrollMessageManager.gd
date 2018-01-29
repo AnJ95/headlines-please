@@ -11,6 +11,7 @@ export var set_to_back = false
 var nodes = []
 
 onready var audio_stream_player = get_node("AudioStreamPlayer")
+onready var animation_player = get_node("AnimationPlayer")
 
 func _on_Main_day_ended(world):
     pass

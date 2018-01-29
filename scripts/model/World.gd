@@ -43,7 +43,7 @@ func _ready():
 
 func _process(delta):
 
-    get_node("Countdown").set_text(str(abs(round(DAY_CYCLE_TIME - time))))
+    get_node("TweetrContainer/Countdown").set_text(str(abs(round(DAY_CYCLE_TIME - time))))
 
 
     if not game_running:
@@ -116,7 +116,7 @@ func end_day():
     
     money -= COSTS_PER_DAY
     money += get_total_readers() * MONEY_PER_READER
-    get_node("Money").set_text(str(round(money)) + "$")
+    get_node("TweetrContainer/Money").set_text(str(round(money)) + "$")
     
     emit_signal("day_ended", self)
 

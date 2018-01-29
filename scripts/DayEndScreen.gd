@@ -10,9 +10,11 @@ var doneScenarios = []
 const DropZone = preload("res://scripts/DropZone.gd")
 
 onready var Airmail = get_node("/root/Main/Draggables/Airmail")
-onready var DraggableHolder = get_node("ColorRect/DraggableHolder")
-onready var Label = get_node("ColorRect/Label")
-onready var Heading = get_node("ColorRect/Heading")
+onready var DraggableHolder = get_node("DraggableHolder")
+onready var Label = get_node("Label")
+onready var Heading = get_node("Heading")
+
+export(Array, NodePath) var leaving_nodes = []
     
 func _process(delta):
     if not isRunning:
@@ -30,6 +32,8 @@ func _process(delta):
             isRunning = false
             self.visible = false # TODO animate fade out
             world.next_day()
+            for leaving_node in leaving_nodes:
+                get_node(leaving_node).animation_player.play_backwards("leave")
         else:
             var draggable = Airmail.contained_draggables[currentSlot]
   
@@ -69,6 +73,9 @@ func _on_Main_day_ended(world):
     currentSlot = -1
     self.world = world
     doneScenarios = []
+
+    for leaving_node in leaving_nodes:
+        get_node(leaving_node).animation_player.play("leave")
     
     Heading.set_text("Day " + str(world.day) + " over!")
 
