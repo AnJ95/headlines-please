@@ -67,7 +67,7 @@ func internal_move_drag():
         if (droppable.is_in_group("droppable")):
             if (droppable.get_global_rect().has_point(get_viewport().get_mouse_position())):
                 if droppable.can_drop(self):
-                    droppable.hovering_now()
+                    droppable.hovering_now(self)
                     hovering_droppable = droppable
                     return
             else:

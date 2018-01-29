@@ -1,7 +1,7 @@
 extends "res://scripts/Draggable.gd"
 
 var hovering_time = 0
-var is_hovering = false
+var hovering_element = null
 var MOVE_TO_TOP_TIME = 1
 var contained_draggables = []
 
@@ -42,16 +42,17 @@ func internal_on_leave(draggable):
     on_leave(draggable)
 
 # called multiple times  
-func hovering_now():
-    is_hovering = true
+func hovering_now(draggable):
+    hovering_element = draggable
     pass
 
 func not_hovering():
-    is_hovering = false
+    hovering_element = null
     hovering_time = 0
     pass
 
 func _process(delta):
     hovering_time += delta
-    #if is_hovering and hovering_time > MOVE_TO_TOP_TIME:
-    #    move_to_top()
+    if hovering_element != null and hovering_time > MOVE_TO_TOP_TIME:
+        move_to_top()
+        hovering_element.move_to_top()
