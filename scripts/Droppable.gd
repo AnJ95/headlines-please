@@ -55,4 +55,7 @@ func _process(delta):
     hovering_time += delta
     if hovering_element != null and hovering_time > MOVE_TO_TOP_TIME:
         move_to_top()
-        hovering_element.move_to_top()
+        if hovering_element != null:
+            #hovering_element.hovering_droppable = self
+            hovering_element.move_to_top()
+            hovering_element = null
