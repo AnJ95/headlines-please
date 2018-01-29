@@ -42,6 +42,10 @@ func stop_drag():
 func on_drop(droppable):
     pass
     
+# overwrite this
+func on_drop_in_root():
+    pass
+    
 func move_to_top():
     get_parent().move_child(self, get_parent().get_child_count() - 1)
     pass
@@ -82,6 +86,8 @@ func internal_start_drag():
 func internal_stop_drag():
     if hovering_droppable != null:
         internal_on_drop(hovering_droppable)
+    else:
+        on_drop_in_root()
     stop_drag()
     
 func internal_on_drop(droppable):
@@ -93,13 +99,13 @@ func internal_on_drop(droppable):
     self.get_parent().remove_child(self)
     droppable.add_child(self)
     
-    droppable.internal_on_drop(self)
+    droppable.internal_on_enter(self)
 
     on_drop(droppable)
     
 func internal_on_undrop():
     print("undrop")
-    containing_droppable.internal_on_undrop(self)
+    containing_droppable.internal_on_leave(self)
     
     self.rect_position -= root.rect_position - containing_droppable.rect_position
     

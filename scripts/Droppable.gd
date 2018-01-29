@@ -26,20 +26,20 @@ func accepted_groups():
     return []
 
 # overwrite this
-func on_drop(draggable):
+func on_enter(draggable):
     pass
     
 # overwrite this
-func on_undrop(draggable):
+func on_leave(draggable):
     pass
     
-func internal_on_drop(draggable):
+func internal_on_enter(draggable):
     contained_draggables.append(draggable)
-    on_drop(draggable)
+    on_enter(draggable)
     
-func internal_on_undrop(draggable):
+func internal_on_leave(draggable):
     contained_draggables.erase(draggable)
-    on_undrop(draggable)
+    on_leave(draggable)
 
 # called multiple times  
 func hovering_now():

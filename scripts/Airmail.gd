@@ -22,7 +22,7 @@ func accepts_drops_now():
     return isVacuuming
 
 # from Droppable
-func on_drop(draggable):
+func on_enter(draggable):
     audio_stream_player_node.play()
     draggable.get_parent().remove_child(draggable)
     

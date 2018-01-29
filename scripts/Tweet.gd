@@ -15,11 +15,8 @@ onready var label = get_node("Label")
 onready var bg = get_node("Background")
 onready var border = get_node("Border")
 
-var is_selected
-
 var static_copy
-
-var selectedDropZone = null
+var is_in_feed = true
 
 func _ready():
     add_to_group("tweet")
@@ -52,8 +49,17 @@ func _process(delta):
 func move_drag():
     pass
 
+func on_drop(droppable):
+    is_in_feed = false
+    static_copy.queue_free()
+    
+func on_drop_in_root():
+    queue_free()
+    if is_in_feed:
+        static_copy.mouse_filter = MOUSE_FILTER_STOP
+    
 func start_drag():
-    if is_in_feed():
+    if is_in_feed:
         #create a not draggable copy and be moved
         static_copy = duplicate()
         static_copy.mouse_filter = MOUSE_FILTER_IGNORE
@@ -61,45 +67,10 @@ func start_drag():
         get_parent().add_child(static_copy)
 
 
-func stop_drag():
-                    
-    if is_in_feed():
-        selectedDropZone = null
-        #rect_position = static_copy.rect_position
-        static_copy.queue_free()
-    else:
-        queue_free()
+func stop_drag():         
+    pass
 
-
-func add_to_dropzone(dropZone):
-    if is_in_feed():
-        #add copy to dropzone and make draggable
-        #original back to feed
-        
-        var tmp_pos = static_copy.rect_position
-        get_parent().remove_child(static_copy)
-        dropZone.add_child(static_copy)
-        static_copy.rect_position = get_global_rect().position - dropZone.get_global_rect().position
-        rect_position = tmp_pos
-        static_copy.selectedDropZone = dropZone
-        static_copy.mouse_filter = MOUSE_FILTER_STOP
-        
-        static_copy = null
-    else:
-        rect_position -= dropZone.rect_position - get_parent().rect_position
-        dropZone.add_child(static_copy)
         
 func reset():
     queue_free()
     
-func add_to_draggables():
-    pass
-    
-func is_in_feed():
-    return selectedDropZone == null
-
-func _on_Info_mouse_entered():
-    isMouseIn = true
-
-func _on_Info_mouse_exited():
-    isMouseIn = false
