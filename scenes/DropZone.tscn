@@ -1,12 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/DropZone.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/news-baseB.png" type="Texture" id=2]
 [ext_resource path="res://resources/sprites/btn-o.png" type="Texture" id=3]
 [ext_resource path="res://resources/sprites/btn-x.png" type="Texture" id=4]
-[ext_resource path="res://scenes/Headline.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/sprites/articletxt.png" type="Texture" id=5]
+[ext_resource path="res://resources/sprites/pic1.png" type="Texture" id=6]
+[ext_resource path="res://scenes/Headline.tscn" type="PackedScene" id=7]
 
-[node name="DropZone" type="Control" index="0"]
+[node name="DropZone" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -144,14 +146,43 @@ texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="Headline" parent="State_2" index="1" instance=ExtResource( 5 )]
+[node name="articletxt" type="Sprite" parent="State_2" index="1"]
+
+position = Vector2( 125.7, 174.961 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="pic1" type="Sprite" parent="State_2" index="2"]
+
+position = Vector2( 200.491, 191.6 )
+texture = ExtResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="State_2" index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 13.0
+margin_top = 37.0
+margin_right = 238.0
+margin_bottom = 89.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.988235, 0.85098, 0.764706, 1 )
+
+[node name="Headline" parent="State_2" index="4" instance=ExtResource( 7 )]
 
 margin_left = 18.0
 margin_top = 39.0
 margin_right = 140.0
 margin_bottom = 109.0
+_sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="TextureButton3" type="TextureButton" parent="State_2" index="2"]
+[node name="TextureButton3" type="TextureButton" parent="State_2" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0

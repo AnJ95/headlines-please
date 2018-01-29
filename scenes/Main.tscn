@@ -31,7 +31,7 @@ _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 120
+DAY_CYCLE_TIME = 20
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
@@ -317,19 +317,19 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[connection signal="day_ended" from="." to="PaperArea" method="_on_Main_day_ended"]
-
 [connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
 
-[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="PaperArea" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="Tweetr" method="_on_Main_day_ended"]
 
-[connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
+[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
 [connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
+
+[connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
 
 [connection signal="day_started" from="." to="Phaxogram" method="_on_Main_day_started"]
 

@@ -31,12 +31,12 @@ func _process(delta):
         for c in DraggableHolder.get_children():
             c.queue_free()
         
-        if (currentSlot >= Airmail.handIns.size()):
+        if (currentSlot >= Airmail.contained_draggables.size()):
             isRunning = false
             get_node("/root/Main/DayEndScreen").visible = false # TODO animate fade out
             world.next_day()
         else:
-            var draggable = Airmail.handIns[currentSlot]
+            var draggable = Airmail.contained_draggables[currentSlot]
   
             DraggableHolder.add_child(draggable)
             draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)

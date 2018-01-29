@@ -5,8 +5,12 @@ var isDragging = false
 var startMousePos
 var startThisPos
 var Airmail
+var root
+
+var selected_droppable = null
 
 func _ready():
+    root = get_node("/root/Main/Draggables") 
     Airmail = get_node("/root/Main/Draggables/Airmail")
     connect("mouse_entered", self, "on_mouse_entered")
     connect("mouse_exited", self, "on_mouse_exited")
@@ -25,7 +29,26 @@ func _process(delta):
 
 func internal_move_drag():
     rect_position = startThisPos + (get_viewport().get_mouse_position() - startMousePos)
+    
+    
     move_drag()
+    
+    #var infoManager = get_tree().get_current_scene().get_node("InfoArea")
+    var i = root.get_child_count() - 1
+    while i >= 0:
+        var droppable = root.get_children()[i]
+        i -= 1
+        if (droppable.is_in_group("droppable")):
+            if (droppable.get_global_rect().has_point(get_viewport().get_mouse_position())):
+                if droppable.can_drop(self):
+                    print("Now hovering")
+                    droppable.hovering_now()
+                    selected_droppable = droppable
+                    return
+            else:
+                droppable.not_hovering()    
+                
+    var selected_droppable = null
     
 func move_drag():
     pass
@@ -53,14 +76,9 @@ func internal_start_drag():
     start_drag()
 
 func internal_stop_drag():
-    if can_be_vacuumed() and Airmail.isVacuuming and Airmail.get_global_rect().has_point(get_viewport().get_mouse_position()):
-        vacuum()
-    else:
-        stop_drag()
-    
-func vacuum():
-    Airmail.handIn(self)
-    self.get_parent().remove_child(self)
-    
-func can_be_vacuumed():
-    return false
+    if selected_droppable != null:
+        self.rect_position -= selected_droppable.rect_position - get_parent().rect_position
+        self.get_parent().remove_child(self)
+        selected_droppable.add_child(self)
+        selected_droppable.internal_on_drop(self)
+    stop_drag()

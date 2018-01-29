@@ -1,10 +1,5 @@
 extends "res://scripts/Draggable.gd"
 
-var selectedDropZone = null
-
-const BORDER_COLOR_DEFAULT = Color(0.4, 0.4, 0.4, 1)
-const BORDER_COLOR_SELECTED = Color(0.9, 0.3, 0.3, 1)
-
 const PADDING = 5
 const BORDER = 2
 
@@ -28,7 +23,6 @@ func init(message):
     
 func reset():
     shuffle_position()
-    update_view()
 
 func _process(delta):
     
@@ -60,25 +54,8 @@ func start_drag():
 
 
 func stop_drag():
+    pass
     
-    var draggables = get_node("/root/Main/Draggables")
-    
-    #var infoManager = get_tree().get_current_scene().get_node("InfoArea")
-    
-    var i = draggables.get_child_count() - 1
-    while i >= 0:
-        var child = draggables.get_children()[i]
-        i -= 1
-        if (child.is_in_group("dropzone")):
-            print(str(i) + ": " + str(child))
-            if child.current_state == 0:
-                if (child.get_global_rect().has_point(get_viewport().get_mouse_position())):
-                    selectedDropZone = child
-                    add_to_dropzone(child)
-                    update_view();
-                    return
-    selectedDropZone = null
-    add_to_draggables()
 
 
 func add_to_dropzone(dropZone):
@@ -91,12 +68,6 @@ func add_to_draggables():
     self.rect_position -= draggables.rect_position - get_parent().rect_position
     get_parent().remove_child(self)
     draggables.add_child(self)
-
-func update_view():
-    if selectedDropZone != null:
-        get_node("Border").color = BORDER_COLOR_SELECTED
-    else:
-        get_node("Border").color = BORDER_COLOR_DEFAULT
 
 
 func shuffle_position():

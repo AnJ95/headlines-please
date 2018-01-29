@@ -1,9 +1,8 @@
-extends "res://scripts/Draggable.gd"
+extends "res://scripts/Droppable.gd"
 
 var minY
 const scrollHeight = 200
 var maxY
-var handIns = []
 var isVacuuming = false
 
 onready var audio_stream_player = get_node("AudioStreamPlayer")
@@ -13,6 +12,19 @@ onready var audio_stream_player_grab = get_node("AudioStreamPlayerGrab")
 func _ready():
     minY = rect_position.y
     maxY = minY + scrollHeight
+
+# from Droppable
+func accepted_groups():
+    return ["dropzone", "info", "phax"]
+
+# from Droppable
+func accepts_drops_now():
+    return isVacuuming
+
+# from Droppable
+func on_drop(draggable):
+    audio_stream_player_node.play()
+    draggable.get_parent().remove_child(draggable)
     
 func move_drag():
     rect_position.x = startThisPos.x
@@ -45,11 +57,5 @@ func stop_drag():
         isVacuuming = false
         audio_stream_player.stop()
     audio_stream_player_grab.stop()
-
-
-
-func handIn(draggable):
-    audio_stream_player_node.play()
-    handIns.append(draggable)
     
     
