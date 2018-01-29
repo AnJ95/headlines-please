@@ -88,7 +88,7 @@ func internal_start_drag():
     start_drag()
 
 func internal_stop_drag():
-    if hovering_droppable != null:
+    if is_hovering_over_droppable():
         internal_on_drop(hovering_droppable)
     else:
         on_drop_in_root()
@@ -117,6 +117,10 @@ func internal_on_undrop():
     Root.add_child(self)
     
     containing_droppable = null
+    hovering_droppable = null
 
-func is_in_droppable():
+func is_hovering_over_droppable():
     return hovering_droppable != null
+    
+func is_in_droppable():
+    return containing_droppable != null

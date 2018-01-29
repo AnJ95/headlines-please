@@ -45,7 +45,8 @@ func goto_state_1():
     for infoNode in contained_draggables:
         infoNode.visible = false
         for headline in infoNode.message.get_headlines():
-            headlines.append(headline)
+            if not headlines.has(headline):
+                headlines.append(headline)
     
     var curY = initial_padY;
     
@@ -59,11 +60,10 @@ func goto_state_1():
     show_current_state()
     
 func go_back_to_state_0():
-    for infoNode in get_tree().get_nodes_in_group("info"):
-        if infoNode.selectedDropZone == self && infoNode is Info : #TODO is??????
-            infoNode.visible = true
-            infoNode.selectedDropZone = null
-            infoNode.add_to_draggables()
+    for infoNode in contained_draggables:
+        infoNode.visible = true
+        if infoNode is Info : #TODO is??????
+            infoNode.internal_on_undrop()
             infoNode.reset()
         if infoNode is Tweet:
             infoNode.reset()
