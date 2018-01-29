@@ -50,8 +50,9 @@ func move_drag():
     pass
 
 func on_drop(droppable):
+    if is_in_feed:
+        static_copy.queue_free()
     is_in_feed = false
-    static_copy.queue_free()
     
 func on_drop_in_root():
     queue_free()
