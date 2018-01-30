@@ -41,7 +41,7 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Rect" ]
 MessageScene = ExtResource( 2 )
-anchor_pos = Vector2( -81, -85 )
+anchor_pos = Vector2( -81, -80 )
 message_type = 2
 max_messages = 1
 set_to_back = true
@@ -87,7 +87,7 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="PhaxAnchor" type="Node2D" parent="animation_root" index="1"]
 
-position = Vector2( -81, -85 )
+position = Vector2( -81, -45.3847 )
 _sections_unfolded = [ "Transform" ]
 
 

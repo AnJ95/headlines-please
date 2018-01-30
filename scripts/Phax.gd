@@ -2,12 +2,16 @@ extends "res://scripts/Draggable.gd"
 
 const PADDING = 5
 const BORDER = 2
+const ROLL_OUT_TIME = 3
 
 var timeYet = 0
-
 var hasSetSize = false
 
-export var width = 120
+var moved_distance = 0
+var start_y = 0
+var rolling_out = true
+
+export var width = 80
 var message
 
 onready var InfoArea = get_node("/root/Main/InfoArea")
@@ -15,23 +19,30 @@ onready var Clipper = get_node("animation_root")
 onready var Label = get_node("animation_root/Label")
 onready var Border = get_node("animation_root/Border")
 
+
+
 func _ready():
-    add_to_group("info")
+    add_to_group("phax")
     reset()
+    start_y = rect_position.y
+    rect_position.y += rect_size.y # to counter ScrollMessageManagers behavior
     Label.rect_size = Vector2(width, 1000)
     Label.set_text(message.text)
 
 func init(message):
     self.message = message
-    move_to_top()
-    
+
 func reset():
-    shuffle_position()
-
-func minimum_size_changed():
-    print("changed")
-
+    pass
+  
 func _process(delta):
+    if hasSetSize:
+        if moved_distance < rect_size.y:
+            moved_distance += (rect_size.y / ROLL_OUT_TIME) * delta
+            rect_position.y = start_y - moved_distance
+        else:
+            rolling_out = false
+        
     
     if not hasSetSize:
         timeYet += delta 
@@ -45,22 +56,7 @@ func _process(delta):
             
             Border.rect_position = Vector2(0, 0)
             Border.rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
-            
-            #get_node("Background").rect_position = Vector2(BORDER, BORDER)
-            #get_node("Background").rect_size = size + Vector2(2*PADDING, 2*PADDING)
-            
+             
             Label.rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
             Label.rect_size = size
-            
-    pass
 
-
-func shuffle_position():
-    var outer = InfoArea.get_global_rect()
-    var inner = get_global_rect()
-
-    var maxW = outer.size.x - inner.size.x
-    var maxH = outer.size.y - inner.size.y
-
-    rect_position = Vector2(randf() * maxW, randf() * maxH)
-    return true

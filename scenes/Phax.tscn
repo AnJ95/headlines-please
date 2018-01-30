@@ -1,28 +1,43 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scripts/Info.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Phax.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/phax-paper.png" type="Texture" id=2]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=3]
 
-[node name="Info" type="Control"]
+[node name="Phax" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 65.0
-margin_bottom = 65.0
+margin_right = 83.0
+margin_bottom = 225.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags", "Theme", "Transform" ]
-width = 65
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Rect", "Size Flags", "Theme", "Transform" ]
+width = 66
 
-[node name="Border" type="ColorRect" parent="." index="0"]
+[node name="animation_root" type="Control" parent="." index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 83.0
+margin_bottom = 225.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect" ]
+
+[node name="Border" type="ColorRect" parent="animation_root" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -38,14 +53,14 @@ size_flags_vertical = 1
 color = Color( 0.320312, 0.320312, 0.320312, 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="Background" type="Sprite" parent="." index="1"]
+[node name="Background" type="Sprite" parent="animation_root" index="1"]
 
 scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
-[node name="Label" type="Label" parent="." index="2"]
+[node name="Label" type="Label" parent="animation_root" index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
