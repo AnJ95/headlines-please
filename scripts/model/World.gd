@@ -95,12 +95,12 @@ func load_scenarios():
 
 
 func next_day():
-    print("next_day")
     current_scenarios = {}
-    for i in range(2):
+    while current_scenarios.size() < 2:
         var next_scenario = get_scenario()
-        current_scenarios[next_scenario.name] = next_scenario
-
+        if !current_scenarios.has(next_scenario.name):
+            current_scenarios[next_scenario.name] = next_scenario
+    
     get_node("Draggables/Map").update(countries)
     emit_signal("day_started", self)
 

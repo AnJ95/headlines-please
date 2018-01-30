@@ -4,7 +4,7 @@ const Headline = preload("res://scripts/model/Headline.gd")
 const Message = preload("res://scripts/model/Message.gd")
 
 func _init():
-    name = "Ambassador died"
+    name = "Rampage in Hotel"
     num_countries = 2
     init_headlines()
     init_messages()
