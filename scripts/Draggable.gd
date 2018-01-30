@@ -69,25 +69,23 @@ func on_mouse_exited():
 func internal_move_drag():
     rect_position = startThisPos + (get_viewport().get_mouse_position() - startMousePos)
     move_drag()
-    #var infoManager = get_tree().get_current_scene().get_node("InfoArea")
     var i = Root.get_child_count() - 1
-    var foundTarget = false
+
+    hovering_droppable = null
     while i >= 0:
         var droppable = Root.get_children()[i]
         i -= 1
         if (droppable.is_in_group("droppable")):
-            if foundTarget:
-                droppable.not_hovering()
-            else:
-                if (droppable.get_global_rect().has_point(get_viewport().get_mouse_position())):
-                    if droppable.can_drop(self):
-                        droppable.hovering_now(self)
-                        hovering_droppable = droppable
-                        foundTarget = true;
-                else:
-                    droppable.not_hovering()    
-    if not foundTarget: 
-        hovering_droppable = null
+            if (droppable.get_global_rect().has_point(get_viewport().get_mouse_position())):
+                if droppable.can_drop(self):
+                    droppable.hovering_now(self)
+                    hovering_droppable = droppable
+                    break
+
+    for droppable in get_tree().get_nodes_in_group("droppable"):
+        if droppable != hovering_droppable:
+            droppable.not_hovering()    
+        
     
 func internal_start_drag():
     if is_in_droppable():
