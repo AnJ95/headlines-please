@@ -43,7 +43,7 @@ func _process(delta):
     if hasSetSize:
         if moved_distance < rect_size.y:
             moved_distance += (rect_size.y / ROLL_OUT_TIME) * delta
-            rect_position.y = start_y - moved_distance
+            rect_position.y = start_y - moved_distance + sin(moved_distance / 2) * 2
         else:
             rolling_out = false
         

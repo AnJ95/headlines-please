@@ -21,9 +21,11 @@ func _ready():
     Label.rect_size = Vector2(width, 1000)
     Label.set_text(message.text)
 
+func _enter_tree():
+    move_to_top()
+
 func init(message):
     self.message = message
-    move_to_top()
     
 func reset():
     shuffle_position()
@@ -62,5 +64,5 @@ func shuffle_position():
     var maxW = outer.size.x - inner.size.x
     var maxH = outer.size.y - inner.size.y
 
-    rect_position = Vector2(randf() * maxW, randf() * maxH)
+    rect_position = Vector2(outer.position.x + randf() * maxW, outer.position.y + randf() * maxH)
     return true
