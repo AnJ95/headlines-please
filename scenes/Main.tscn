@@ -86,11 +86,11 @@ use_filter = false
 font_data = ExtResource( 20 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Main" type="Node2D" index="0"]
+[node name="Main" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 5
+DAY_CYCLE_TIME = 15
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
@@ -149,6 +149,9 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+script = ExtResource( 4 )
+PaperSzene = ExtResource( 5 )
+paper_count = 3
 
 [node name="Map" parent="Draggables" index="0" instance=ExtResource( 6 )]
 
@@ -424,6 +427,8 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
+[connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
+
 [connection signal="day_ended" from="." to="PaperArea" method="_on_Main_day_ended"]
 
 [connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
@@ -432,7 +437,7 @@ _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility"
 
 [connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
-[connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
+[connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
 
 [connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
 
@@ -440,12 +445,10 @@ _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility"
 
 [connection signal="day_started" from="." to="TweetrContainer/Tweetr" method="_on_Main_day_started"]
 
-[connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
+[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
 
 [connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
 
 [connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="_on_Main_message_arrived"]
-
-[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
 
 

@@ -27,6 +27,8 @@ signal day_ended(world)
 signal message_arrived(message)
 
 func _init():
+    randomize()
+    
     countries.append(Country.new("Holsten"))
     countries.append(Country.new("Reldan"))
     countries.append(Country.new("Lemuria"))
