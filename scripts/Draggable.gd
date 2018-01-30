@@ -14,6 +14,8 @@ func _ready():
     connect("mouse_exited", self, "on_mouse_exited")
 
 func _process(delta):
+    if not can_drag_now():
+        return
     if isMouseIn:
         if Input.is_mouse_button_pressed(BUTTON_LEFT):
             if not isDragging:
@@ -48,6 +50,10 @@ func on_drop(droppable):
 # overwrite this
 func on_drop_in_root():
     pass
+
+# overwrite this
+func can_drag_now():
+    return true
     
 func move_to_top():
     if get_parent() != null:

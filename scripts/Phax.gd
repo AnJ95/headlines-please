@@ -34,6 +34,10 @@ func init(message):
 
 func reset():
     pass
+    
+# from Draggable
+func can_drag_now():
+    return !rolling_out
   
 func _process(delta):
     if hasSetSize:
