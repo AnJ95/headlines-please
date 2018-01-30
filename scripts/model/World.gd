@@ -102,7 +102,6 @@ func next_day():
             current_scenarios[next_scenario.name] = next_scenario
     
     get_node("Draggables/Map").update(countries)
-    emit_signal("day_started", self)
 
     day += 1
     time = 0
