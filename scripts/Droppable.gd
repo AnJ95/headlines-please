@@ -43,6 +43,11 @@ func internal_on_leave(draggable):
 
 # called multiple times  
 func hovering_now(draggable):
+    if hovering_element != null and hovering_time > MOVE_TO_TOP_TIME:
+        move_to_top()
+        if hovering_element != null:
+            hovering_time = 0
+            hovering_element.move_to_top()
     hovering_element = draggable
     pass
 
@@ -53,9 +58,4 @@ func not_hovering():
 
 func _process(delta):
     hovering_time += delta
-    if hovering_element != null and hovering_time > MOVE_TO_TOP_TIME:
-        move_to_top()
-        if hovering_element != null:
-            #hovering_element.hovering_droppable = self
-            hovering_element.move_to_top()
-            hovering_element = null
+    

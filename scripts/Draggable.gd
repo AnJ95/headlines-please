@@ -81,11 +81,15 @@ func internal_move_drag():
                     droppable.hovering_now(self)
                     hovering_droppable = droppable
                     break
+    reset_droppable_hovering()
+    
 
+# calls not_hover() on all droppables
+func reset_droppable_hovering():
     for droppable in get_tree().get_nodes_in_group("droppable"):
         if droppable != hovering_droppable:
             droppable.not_hovering()    
-        
+    
     
 func internal_start_drag():
     if is_in_droppable():
@@ -100,6 +104,7 @@ func internal_stop_drag():
         internal_on_drop(hovering_droppable)
     else:
         on_drop_in_root()
+    reset_droppable_hovering()
     stop_drag()
     
 func internal_on_drop(droppable):
