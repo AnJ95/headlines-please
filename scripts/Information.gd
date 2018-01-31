@@ -28,7 +28,7 @@ func on_day_ended(node, world):
         
 func adjust_size():
     if initialized_size:
-        return
+        return false
     initialized_size = true
     
     var size = Vector2(width, Label.get_combined_minimum_size().y)
@@ -38,3 +38,4 @@ func adjust_size():
     
     Label.rect_position = Vector2(padding, padding)
     Label.rect_size = size
+    return true

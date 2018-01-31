@@ -112,6 +112,7 @@ _sections_unfolded = [ "Animation" ]
 
 [node name="bar" type="Sprite" parent="screens" index="1"]
 
+editor/display_folded = true
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -32 )
 texture = ExtResource( 7 )
@@ -127,19 +128,12 @@ playback_speed = 1.0
 anims/move = SubResource( 1 )
 blend_times = [  ]
 
-[node name="TweetAncor" type="Node2D" parent="." index="2"]
-
-position = Vector2( -65, 105 )
-_sections_unfolded = [ "Transform" ]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="3"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2"]
 
 stream = ExtResource( 8 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
 bus = "Master"
-
-[node name="image" type="Sprite" parent="." index="4"]
 
 
