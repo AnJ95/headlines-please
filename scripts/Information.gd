@@ -26,7 +26,7 @@ func on_day_ended(node, world):
     if containing_droppable == null:
         queue_free()
         
-func on_size_change():
+func adjust_size():
     if initialized_size:
         return
     initialized_size = true

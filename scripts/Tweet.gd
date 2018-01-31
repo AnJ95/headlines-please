@@ -1,10 +1,11 @@
-extends "res://scripts/Information.gd"
+extends "res://scripts/ScrollInformation.gd"
 
 var static_copy
 var is_in_feed = true
 
 func _ready():
     pass
+    print("TWEET")
     add_to_group("tweet")
 
 # from Draggable

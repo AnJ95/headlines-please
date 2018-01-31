@@ -87,11 +87,11 @@ use_filter = false
 font_data = ExtResource( 22 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 60
+DAY_CYCLE_TIME = 25
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
@@ -228,6 +228,7 @@ margin_top = 468.0
 margin_right = 157.0
 margin_bottom = 508.0
 InformationScene = ExtResource( 13 )
+anchor_pos = Vector2( -86, -70 )
 
 [node name="TweetrContainer" type="Control" parent="." index="5"]
 
@@ -428,18 +429,18 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
-
 [connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
 
-[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
-[connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
+[connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
 
-[connection signal="message_arrived" from="." to="NoteArea" method="_on_Main_message_arrived"]
+[connection signal="day_started" from="." to="PaperArea" method="on_day_started"]
 
-[connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="_on_Main_message_arrived"]
+[connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
 
-[connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
+[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
+
+[connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
 
 

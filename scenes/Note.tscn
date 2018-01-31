@@ -115,6 +115,6 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "Margin", "custom_colors", "custom_fonts" ]
 
-[connection signal="minimum_size_changed" from="animation_root/Label" to="." method="on_size_change"]
+[connection signal="minimum_size_changed" from="animation_root/Label" to="." method="adjust_size"]
 
 

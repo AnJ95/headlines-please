@@ -13,7 +13,7 @@ var nodes = []
 onready var audio_stream_player = get_node("AudioStreamPlayer")
 onready var animation_player = get_node("AnimationPlayer")
 
-func _on_Main_message_arrived(message):
+func on_message_arrived(message):
     if message.type == message_type:
         add(message)
     

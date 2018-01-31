@@ -67,7 +67,7 @@ func get_rating(draggable):
 func draggable_is_valid(draggable):
     return draggable is DropZone and draggable.selected_headline != null
 
-func _on_Main_day_ended(world):
+func on_day_ended(world):
     isRunning = true
     timeYet = 0
     currentSlot = -1

@@ -10,7 +10,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 82.0
+margin_right = 107.0
 margin_bottom = 18.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
@@ -19,8 +19,9 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Rect", "Size Flags", "Theme", "Transform" ]
-width = 66
+width = 86
 padding = 5
+roll_out_time = 3
 
 [node name="animation_root" type="Control" parent="." index="0"]
 
@@ -28,7 +29,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 83.0
+margin_right = 110.0
 margin_bottom = 225.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
@@ -40,7 +41,6 @@ _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect" ]
 
 [node name="Background" type="Sprite" parent="animation_root" index="0"]
 
-scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
@@ -53,7 +53,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 83.0
+margin_right = 107.0
 margin_bottom = 154.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
@@ -70,6 +70,6 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "Margin", "custom_colors", "custom_fonts" ]
 
-[connection signal="minimum_size_changed" from="animation_root/Label" to="." method="on_size_change_no_overwrite"]
+[connection signal="minimum_size_changed" from="animation_root/Label" to="." method="on_size_change"]
 
 
