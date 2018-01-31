@@ -20,7 +20,7 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Mouse", "Rect", "Transform", "Visibility" ]
 width = 130
 padding = 1
-roll_out_time = 3
+roll_out_time = 1
 
 [node name="animation_root" type="Control" parent="." index="0"]
 

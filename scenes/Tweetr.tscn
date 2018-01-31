@@ -57,6 +57,7 @@ InformationScene = null
 anchor_pos = Vector2( -65, 105 )
 message_type = 0
 max_messages = 5
+information_padding = 7
 set_to_back = false
 
 [node name="front" type="Sprite" parent="." index="0"]

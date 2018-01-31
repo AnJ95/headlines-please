@@ -6,6 +6,7 @@ export(PackedScene) var InformationScene
 export(Vector2) var anchor_pos
 export(int, "TWEET", "NOTE", "PHAX") var message_type
 export var max_messages = 3
+export var information_padding = 7
 export var set_to_back = false
 
 var nodes = []
@@ -60,5 +61,6 @@ func done_rolling():
     nodes.append(currently_rolling)
     currently_rolling = null
     for n in nodes:
+        n.on_next_information()
         n.cache_y()
     
