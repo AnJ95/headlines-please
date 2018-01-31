@@ -19,7 +19,10 @@ func _on_Main_message_arrived(message):
     
 func on_day_ended(world):
     nodes = []
-    
+
+func remove(node):
+    nodes.remove(node)
+        
 func add(message):
     var message_node = MessageScene.instance()
     message_node.rect_position = anchor_pos

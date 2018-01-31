@@ -100,11 +100,11 @@ func internal_start_drag():
     start_drag()
 
 func internal_stop_drag():
+    reset_droppable_hovering()
     if is_hovering_over_droppable():
         internal_on_drop(hovering_droppable)
     else:
         on_drop_in_root()
-    reset_droppable_hovering()
     stop_drag()
     
 func internal_on_drop(droppable):

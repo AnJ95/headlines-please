@@ -16,7 +16,7 @@ func _ready():
 
 # from Droppable
 func accepted_groups():
-    return ["dropzone", "info", "phax"]
+    return ["dropzone", "note", "phax"]
 
 # from Droppable
 func accepts_drops_now():

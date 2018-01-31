@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/Tweet.gd" type="Script" id=1]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=2]
 
-[node name="Tweet" type="Control"]
+[node name="Tweet" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -82,9 +82,5 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "Grow Direction", "custom_fonts" ]
-
-[connection signal="mouse_entered" from="." to="." method="_on_Info_mouse_entered"]
-
-[connection signal="mouse_exited" from="." to="." method="_on_Info_mouse_exited"]
 
 

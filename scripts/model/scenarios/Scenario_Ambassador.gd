@@ -25,15 +25,11 @@ func init_headlines():
 func init_messages():
     m(Message.TWEET, [1,2], "I heard gun shots near {country_1}s embassy last night.")
     m(Message.TWEET, [], "What did happen in {country_1}s embassy?", 0.1)
-    m(Message.TWEET, [], "press conference canceled = free afternoon yay", 0.2)
-    m(Message.TWEET, [0,2], "Hallo Welt1", 0.05)
-    m(Message.TWEET, [0,2], "Hallo Welt2", 0.06)
-    m(Message.TWEET, [0,2], "Hallo Welt3", 0.07)
-    m(Message.TWEET, [0,2], "Hallo Welt4", 0.08)
+    m(Message.TWEET, [], "press conference cancelled = free afternoon yay", 0.2)
 
-    m(Message.NOTE, [0], "Pressconference canceled")
-    m(Message.NOTE, [0], "Late last night Karl Gustav, {country_1}s Ambassador in {country_2}, was brought to the hospital.")
-    m(Message.NOTE, [], "After the death of the aAutopsy")
+    m(Message.NOTE, [0], "Pressconference cancelled")
+    m(Message.NOTE, [0], "Late last night Karl Gustav, {country_1}s ambassador in {country_2}, was brought to the hospital.")
+    m(Message.NOTE, [2], "An Autopsy will be conducted after the ambassadors death")
     m(Message.NOTE, [1,2,3,4,5], "It's still unclear whether the secret service of {country_2} was responsible for the death of {country_1}s ambassador")
 
     m(Message.PHAX, [1,3], "Because of ... an autopsy of the dead ambassador was issued.", 0.25)

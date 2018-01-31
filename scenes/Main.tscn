@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/table-xl.png" type="Texture" id=2]
-[ext_resource path="res://scripts/InfoManager.gd" type="Script" id=3]
+[ext_resource path="res://scripts/NoteManager.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Draggables.gd" type="Script" id=4]
 [ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Map.tscn" type="PackedScene" id=6]
@@ -85,11 +85,11 @@ use_filter = false
 font_data = ExtResource( 20 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Main" type="Node2D" index="0"]
+[node name="Main" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 3
+DAY_CYCLE_TIME = 15
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
@@ -97,7 +97,7 @@ texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="InfoArea" type="Control" parent="." index="1"]
+[node name="NoteArea" type="Control" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -136,6 +136,7 @@ paper_count = 3
 
 [node name="Draggables" type="Control" parent="." index="3"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -423,18 +424,18 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
 [connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
 
-[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
+[connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
 [connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
 
-[connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
+[connection signal="message_arrived" from="." to="NoteArea" method="_on_Main_message_arrived"]
 
 [connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="_on_Main_message_arrived"]
 
-[connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
+[connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
 
 

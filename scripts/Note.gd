@@ -1,4 +1,4 @@
-extends "res://scripts/Draggable.gd"
+extends "res://scripts/Information.gd"
 
 const PADDING = 5
 const BORDER = 2
@@ -8,29 +8,22 @@ var timeYet = 0
 var hasSetSize = false
 
 export var width = 120
-var message
 
-onready var InfoArea = get_node("/root/Main/InfoArea")
+onready var NoteArea = get_node("/root/Main/NoteArea")
 onready var Clipper = get_node("animation_root")
 onready var Label = get_node("animation_root/Label")
 onready var Border = get_node("animation_root/Border")
 
 func _ready():
-    add_to_group("info")
+    pass
     reset()
+    add_to_group("note")
     Label.rect_size = Vector2(width, 1000)
     Label.set_text(message.text)
-    get_tree().get_root().get_node("/root/Main").connect("day_ended", self, "on_day_ended", ["world"])
-
-func on_day_ended(node, world):
-    queue_free()
 
 func _enter_tree():
     move_to_top()
 
-func init(message):
-    self.message = message
-    
 func reset():
     shuffle_position()
 
@@ -38,7 +31,6 @@ func minimum_size_changed():
     print("changed")
 
 func _process(delta):
-    
     if not hasSetSize:
         timeYet += delta 
         if timeYet > 0.1:
@@ -56,13 +48,11 @@ func _process(delta):
             #get_node("Background").rect_size = size + Vector2(2*PADDING, 2*PADDING)
             
             Label.rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
-            Label.rect_size = size
-            
-    pass
+            Label.rect_size = size     
 
 
 func shuffle_position():
-    var outer = InfoArea.get_global_rect()
+    var outer = NoteArea.get_global_rect()
     var inner = get_global_rect()
 
     var maxW = outer.size.x - inner.size.x

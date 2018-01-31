@@ -1,6 +1,6 @@
 extends "res://scripts/Droppable.gd"
 
-const Info = preload("res://scripts/Info.gd")
+const Note = preload("res://scripts/Note.gd")
 const Tweet = preload("res://scripts/Tweet.gd")
 const headlineScene = preload("res://scenes/Headline.tscn")
 
@@ -18,11 +18,12 @@ func _ready():
     get_tree().get_root().get_node("/root/Main").connect("day_ended", self, "on_day_ended", ["world"])
 
 func on_day_ended(node, world):
-    queue_free()
+    if containing_droppable == null:
+        queue_free()
     
 # from Droppable
 func accepted_groups():
-    return ["info", "tweet", "phax"]
+    return ["note", "tweet", "phax"]
 
 # from Droppable
 func accepts_drops_now():
@@ -63,13 +64,13 @@ func goto_state_1():
     show_current_state()
     
 func go_back_to_state_0():
-    for infoNode in contained_draggables:
-        infoNode.visible = true
-        if infoNode is Info : #TODO is??????
-            infoNode.internal_on_undrop()
-            infoNode.reset()
-        if infoNode is Tweet:
-            infoNode.reset()
+    for draggable in contained_draggables:
+        draggable.visible = true
+        if draggable is Note : #TODO is??????
+            draggable.internal_on_undrop()
+            draggable.reset()
+        if draggable is Tweet:
+            draggable.reset()
             
     for headline in get_node("State_1/headlines").get_children():
         headline.queue_free()
