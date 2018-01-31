@@ -118,7 +118,7 @@ func internal_on_drop(droppable):
     self.rect_position -= - self.get_parent().get_global_rect().position + droppable.get_global_rect().position
     
     self.get_parent().remove_child(self)
-    droppable.add_child(self)
+    droppable.drop_root.add_child(self)
     
     droppable.internal_on_enter(self)
 
@@ -128,9 +128,9 @@ func internal_on_undrop():
     print("undrop")
     containing_droppable.internal_on_leave(self)
     
-    self.rect_position -= Root.rect_position - containing_droppable.rect_position
+    self.rect_position = get_global_rect().position - Root.get_global_rect().position
     
-    containing_droppable.remove_child(self)
+    containing_droppable.drop_root.remove_child(self)
     Root.add_child(self)
     
     containing_droppable = null

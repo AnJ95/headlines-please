@@ -165,6 +165,7 @@ paper_count = 3
 
 [node name="Draggables" type="Control" parent="." index="3"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -206,6 +207,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 7 )
 _sections_unfolded = [ "Margin", "Rect" ]
+drop_root_path = ""
 
 [node name="Sprite" type="Sprite" parent="Draggables/Airmail" index="0"]
 

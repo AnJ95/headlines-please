@@ -4,6 +4,8 @@ var hovering_time = 0
 var hovering_element = null
 var MOVE_TO_TOP_TIME = 1
 var contained_draggables = []
+export(NodePath) var drop_root_path = ""
+onready var drop_root = get_node(drop_root_path)
 
 func _ready():
     add_to_group("droppable")
