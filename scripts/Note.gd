@@ -11,6 +11,7 @@ func _ready():
     add_to_group("note")
     move_to_top()
     audio_stream_player_move.play()
+    Background.modulate = Color(0.9 + randf() * 0.1, 0.9 + randf() * 0.1, 0.9 + randf() * 0.1, 1)
     
 # from Draggable
 func on_drop(droppable):
