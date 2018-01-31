@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/TwoStateDraggable.gd" type="Script" id=1]
+
+[node name="TwoStateDraggable" type="Node"]
+
+script = ExtResource( 1 )
+scrollHeight = 260
+tween_speed = 200
+parentPath = NodePath("..")
+bounce = false
+
+[node name="Tween" type="Tween" parent="." index="0"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
+[connection signal="tween_completed" from="Tween" to="." method="on_tween_completed"]
+
+[connection signal="tween_started" from="Tween" to="." method="on_tween_started"]
+
+

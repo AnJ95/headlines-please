@@ -15,6 +15,7 @@ func _ready():
 
 func _process(delta):
     if not can_drag_now():
+        isDragging = false
         return
     if isMouseIn:
         if Input.is_mouse_button_pressed(BUTTON_LEFT):

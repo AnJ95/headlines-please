@@ -1,26 +1,19 @@
 extends "res://scripts/Draggable.gd"
 
-var minY
-const scrollHeight = 200
-var maxY
+onready var twoState = get_node("TwoStateDraggable")
 
-func _ready():
-    minY = rect_position.y
-    maxY = minY + scrollHeight
-
+# from Draggable
 func move_drag():
-    rect_position.x = startThisPos.x
-    if rect_position.y < minY:
-        rect_position.y = minY
-    if rect_position.y > maxY:
-        rect_position.y = maxY
+    twoState.while_moving()
 
-func start_drag():
-    pass
-
+# from Draggable
 func stop_drag():
-    pass
+    twoState.after_moving()
 
+# from Draggable
+func can_drag_now():
+    return not twoState.is_animating()
+    
 func update(countries):
     for country in countries:
         get_node("Country" + country.name).update(country)
