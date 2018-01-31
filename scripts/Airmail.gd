@@ -44,7 +44,7 @@ func can_drag_now():
 
 # from Draggable
 func move_drag():
-    if not twoState.while_moving():
+    if twoState.while_moving():
         if !audio_stream_player.playing:
             audio_stream_player.play()
         if !audio_stream_player_grab.playing:
@@ -59,7 +59,12 @@ func start_drag():
 
 # from Draggable
 func stop_drag():
-    twoState.after_moving()
+    if twoState.after_moving():
+        isVacuuming = true
+    else:
+        isVacuuming = false
+        audio_stream_player.stop()
+
     audio_stream_player_grab.stop()
     
 func start_shaking():

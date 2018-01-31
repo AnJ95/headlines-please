@@ -28,19 +28,21 @@ func _ready():
 
 func while_moving():
     parent.rect_position.x = parent.startThisPos.x
-    if parent.rect_position.y < minY:
+    if parent.rect_position.y <= minY:
         parent.rect_position.y = minY
-    elif parent.rect_position.y > maxY:
+        return false
+    if parent.rect_position.y >= maxY:
         parent.rect_position.y = maxY
-    else:
-        return true
-    return false
+        return false
+    return true
         
 func after_moving():
     if parent.rect_position.y - minY > scrollHeight / 2:
         move_in()
+        return true
     else:
         move_out()
+        return false
 
 func is_animating():
     return is_animating
