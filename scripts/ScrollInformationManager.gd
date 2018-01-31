@@ -34,7 +34,7 @@ func _process(delta):
     
     if currently_rolling != null:
         for n in nodes:
-            n.rect_position.y = n.get_cached_y() - currently_rolling.get_current_height()
+            n.adjust_position(currently_rolling.get_current_height(), currently_rolling.get_maximum_height())
 
 func add(message):
     # create and init child
@@ -55,13 +55,15 @@ func add(message):
     #for n in nodes:
     #    n.rect_position -= Vector2(0, node.rect_size.y)
     
-    #while nodes.size() > max_messages:
-    #    nodes.pop_front().queue_free()
+    
 
 func done_rolling():
     nodes.append(currently_rolling)
     currently_rolling = null
     for n in nodes:
         n.on_next_information()
-        n.cache_y()
+    while nodes.size() > max_messages:
+        var node = nodes.pop_front()
+        remove(node)
+        node.queue_free()
     

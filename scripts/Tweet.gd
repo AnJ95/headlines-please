@@ -28,7 +28,7 @@ func on_drop_in_root():
 func start_drag():
     if not is_copy:
         var copy = duplicate()
-        var target = Root
+        var target = get_tree().get_root().get_node("/root/Main")
         
         # prevent dragging
         isDragging = false

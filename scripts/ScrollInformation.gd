@@ -26,26 +26,25 @@ func on_size_change():
 func set_manager(manager):
     self.manager = manager
 
-# get the current height of the animation or the height if the animation is done 
+# get the current height of the animation
 func get_current_height():
     return moved_distance
-
-# save the current y position
-func cache_y():
-    cached_y = rect_position.y
-
-# get the cached y position
-func get_cached_y():
-    return cached_y
+    
+# get the maximal height this element wil have after the animation
+func get_maximum_height():
+    return rect_size.y + manager.information_padding
 
 # Called when another ScrollInformation is entering
-# Overwrite this
 func on_next_information():
-    pass
+    cached_y = rect_position.y
+    
+# Called when another ScrollInformation is pushin this one upwards
+func adjust_position(current_shift, max_shift):
+    rect_position.y = cached_y - current_shift
 
 func _process(delta):
     if rolling_out:
-        if moved_distance < rect_size.y + manager.information_padding:
+        if moved_distance < get_maximum_height():
             moved_distance += (rect_size.y / roll_out_time) * delta
             rect_position.y = start_y - moved_distance# + sin(moved_distance / 2) * 2
             Clipper.rect_size.y = moved_distance

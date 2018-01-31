@@ -19,7 +19,7 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Mouse", "Rect", "Transform", "Visibility" ]
 width = 130
-padding = 3
+padding = 4
 roll_out_time = 1
 
 [node name="animation_root" type="Control" parent="." index="0"]
@@ -28,8 +28,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 180.0
+margin_bottom = 125.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 2
@@ -45,15 +45,14 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 2.0
-margin_right = 599.0
-margin_bottom = 434.0
+margin_right = 168.0
+margin_bottom = 122.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 0, 0, 0.607726 )
+color = Color( 0, 0, 0, 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
 
 [node name="Label" type="Label" parent="animation_root" index="1"]
@@ -73,13 +72,28 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.0546875, 1, 0, 1 )
+custom_colors/font_color = Color( 0, 1, 0.294118, 1 )
 text = "firefox kittens boobs network capacity"
 autowrap = true
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-_sections_unfolded = [ "BBCode", "Grow Direction", "custom_fonts" ]
+_sections_unfolded = [ "Anchor", "BBCode", "Grow Direction", "Margin", "custom_colors", "custom_fonts" ]
+
+[node name="ColorRect" type="ColorRect" parent="animation_root" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 168.0
+margin_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 1, 0.294118, 1 )
 
 [connection signal="minimum_size_changed" from="animation_root/Label" to="." method="on_size_change"]
 
