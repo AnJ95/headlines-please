@@ -1,8 +1,15 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/Note.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/note.png" type="Texture" id=2]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scripts/RandomAudioStreamPlayer.gd" type="Script" id=4]
+[ext_resource path="res://resources/sounds/Paper Move 1.ogg" type="AudioStream" id=5]
+[ext_resource path="res://resources/sounds/Paper Move 2.ogg" type="AudioStream" id=6]
+[ext_resource path="res://resources/sounds/Paper Flap 1.ogg" type="AudioStream" id=7]
+[ext_resource path="res://resources/sounds/Paper Flap 2.ogg" type="AudioStream" id=8]
+[ext_resource path="res://resources/sounds/Paper Flap 3.ogg" type="AudioStream" id=9]
+[ext_resource path="res://resources/sounds/Paper Flap 4.ogg" type="AudioStream" id=10]
 
 [sub_resource type="Animation" id=1]
 
@@ -123,6 +130,62 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "Margin", "custom_colors", "custom_fonts" ]
+
+[node name="AudioStreamPlayerMove" type="Node" parent="." index="3"]
+
+script = ExtResource( 4 )
+
+[node name="1" type="AudioStreamPlayer" parent="AudioStreamPlayerMove" index="0"]
+
+stream = ExtResource( 5 )
+volume_db = 10.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="2" type="AudioStreamPlayer" parent="AudioStreamPlayerMove" index="1"]
+
+stream = ExtResource( 6 )
+volume_db = 10.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="AudioStreamPlayerFlap" type="Node" parent="." index="4"]
+
+script = ExtResource( 4 )
+
+[node name="1" type="AudioStreamPlayer" parent="AudioStreamPlayerFlap" index="0"]
+
+stream = ExtResource( 7 )
+volume_db = 10.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="2" type="AudioStreamPlayer" parent="AudioStreamPlayerFlap" index="1"]
+
+stream = ExtResource( 8 )
+volume_db = 10.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="3" type="AudioStreamPlayer" parent="AudioStreamPlayerFlap" index="2"]
+
+stream = ExtResource( 9 )
+volume_db = 10.0
+autoplay = false
+mix_target = 0
+bus = "Master"
+
+[node name="4" type="AudioStreamPlayer" parent="AudioStreamPlayerFlap" index="3"]
+
+stream = ExtResource( 10 )
+volume_db = 10.0
+autoplay = false
+mix_target = 0
+bus = "Master"
 
 [connection signal="minimum_size_changed" from="animation_root/Label" to="." method="adjust_size"]
 
