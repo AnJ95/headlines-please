@@ -1,0 +1,18 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bossa-bgm.ogg-0c31e72e9c4b6d3a58212bb6da59144d.oggstr"
+
+[deps]
+
+source_file="res://resources/sounds/bossa-bgm.ogg"
+source_md5="072914bf56a6c391db35ea465dd55aa3"
+
+dest_files=[ "res://.import/bossa-bgm.ogg-0c31e72e9c4b6d3a58212bb6da59144d.oggstr" ]
+dest_md5="53aefefcbf0b7a36f1522db61cc4369e"
+
+[params]
+
+loop=false
+loop_offset=0
