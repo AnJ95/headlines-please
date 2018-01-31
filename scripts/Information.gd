@@ -1,6 +1,8 @@
 extends "res://scripts/Draggable.gd"
 
 var message
+onready var Clipper = get_node("animation_root")
+onready var Label = get_node("animation_root/Label")
 
 func _ready():
     pass

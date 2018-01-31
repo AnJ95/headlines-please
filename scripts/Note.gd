@@ -1,7 +1,6 @@
 extends "res://scripts/Information.gd"
 
 const PADDING = 5
-const BORDER = 2
 
 var timeYet = 0
 
@@ -10,9 +9,6 @@ var hasSetSize = false
 export var width = 120
 
 onready var NoteArea = get_node("/root/Main/NoteArea")
-onready var Clipper = get_node("animation_root")
-onready var Label = get_node("animation_root/Label")
-onready var Border = get_node("animation_root/Border")
 
 func _ready():
     pass
@@ -27,9 +23,6 @@ func _enter_tree():
 func reset():
     shuffle_position()
 
-func minimum_size_changed():
-    print("changed")
-
 func _process(delta):
     if not hasSetSize:
         timeYet += delta 
@@ -38,16 +31,10 @@ func _process(delta):
             
             var size = Vector2(width, Label.get_combined_minimum_size().y)
             
-            rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
+            rect_size = size + Vector2(2*PADDING, 2*PADDING)
             Clipper.rect_size = rect_size
             
-            Border.rect_position = Vector2(0, 0)
-            Border.rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
-            
-            #get_node("Background").rect_position = Vector2(BORDER, BORDER)
-            #get_node("Background").rect_size = size + Vector2(2*PADDING, 2*PADDING)
-            
-            Label.rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
+            Label.rect_position = Vector2(PADDING, PADDING)
             Label.rect_size = size     
 
 

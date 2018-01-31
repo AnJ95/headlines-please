@@ -30,8 +30,6 @@ func accepts_drops_now():
     return current_state == 0
     
 func show_current_state():
-    print("showing state " + str(current_state))
-    
     move_child(get_node("State_" + str(current_state)), get_child_count() - 1)
     for i in range(max_state + 1):
         get_node("State_" + str(i)).visible = current_state == i

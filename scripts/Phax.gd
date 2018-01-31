@@ -1,7 +1,6 @@
 extends "res://scripts/Information.gd"
 
 const PADDING = 5
-const BORDER = 2
 const ROLL_OUT_TIME = 3
 
 var timeYet = 0
@@ -12,10 +11,6 @@ var start_y = 0
 var rolling_out = true
 
 export var width = 80
-
-onready var Clipper = get_node("animation_root")
-onready var Label = get_node("animation_root/Label")
-onready var Border = get_node("animation_root/Border")
 
 func _ready():
     pass
@@ -46,12 +41,9 @@ func _process(delta):
             
             var size = Vector2(width, Label.get_combined_minimum_size().y)
             
-            rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
+            rect_size = size + Vector2(2*PADDING, 2*PADDING)
             Clipper.rect_size = rect_size
             
-            Border.rect_position = Vector2(0, 0)
-            Border.rect_size = size + Vector2(2*PADDING + 2*BORDER, 2*PADDING + 2*BORDER)
-             
-            Label.rect_position = Vector2(BORDER + PADDING, BORDER + PADDING)
+            Label.rect_position = Vector2(PADDING, PADDING)
             Label.rect_size = size
 
