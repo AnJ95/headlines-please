@@ -15,7 +15,10 @@ const padY = 4
 func _ready():
     show_current_state()
     add_to_group("dropzone")
-    pass
+    get_tree().get_root().get_node("/root/Main").connect("day_ended", self, "on_day_ended", ["world"])
+
+func on_day_ended(node, world):
+    queue_free()
     
 # from Droppable
 func accepted_groups():

@@ -13,17 +13,12 @@ var nodes = []
 onready var audio_stream_player = get_node("AudioStreamPlayer")
 onready var animation_player = get_node("AnimationPlayer")
 
-func _on_Main_day_ended(world):
-    pass
-
-func _on_Main_day_started(world):
-    for n in nodes:
-        n.queue_free()
-    nodes = []
-
 func _on_Main_message_arrived(message):
     if message.type == message_type:
         add(message)
+    
+func on_day_ended(world):
+    nodes = []
     
 func add(message):
     var message_node = MessageScene.instance()

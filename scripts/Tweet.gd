@@ -22,6 +22,10 @@ func _ready():
     add_to_group("tweet")
     label.rect_size = Vector2(WIDTH, HEIGHT)
     label.set_text(message.text)
+    get_tree().get_root().get_node("/root/Main").connect("day_ended", self, "on_day_ended", ["world"])
+
+func on_day_ended(node, world):
+    queue_free()
 
 func init(message):
     self.message = message

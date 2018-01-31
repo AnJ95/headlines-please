@@ -89,7 +89,7 @@ _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 80
+DAY_CYCLE_TIME = 3
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
@@ -217,7 +217,6 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/leave = SubResource( 1 )
 blend_times = [  ]
-autoplay = ""
 
 [node name="Phaxogram" parent="." index="4" instance=ExtResource( 12 )]
 
@@ -312,7 +311,6 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/leave = SubResource( 2 )
 blend_times = [  ]
-autoplay = ""
 
 [node name="PicturesContainer" type="Control" parent="." index="6"]
 
@@ -342,7 +340,6 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/leave = SubResource( 3 )
 blend_times = [  ]
-autoplay = ""
 
 [node name="DayEndScreen" type="Control" parent="." index="7"]
 
@@ -428,25 +425,15 @@ _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility"
 
 [connection signal="day_ended" from="." to="DayEndScreen" method="_on_Main_day_ended"]
 
-[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="_on_Main_day_ended"]
+[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
 
-[connection signal="day_ended" from="." to="Phaxogram" method="_on_Main_day_ended"]
-
-[connection signal="day_ended" from="." to="InfoArea" method="_on_Main_day_ended"]
-
-[connection signal="day_ended" from="." to="PaperArea" method="_on_Main_day_ended"]
-
-[connection signal="day_started" from="." to="TweetrContainer/Tweetr" method="_on_Main_day_started"]
-
-[connection signal="day_started" from="." to="Phaxogram" method="_on_Main_day_started"]
-
-[connection signal="day_started" from="." to="InfoArea" method="_on_Main_day_started"]
+[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
 [connection signal="day_started" from="." to="PaperArea" method="_on_Main_day_started"]
 
-[connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="_on_Main_message_arrived"]
-
 [connection signal="message_arrived" from="." to="Phaxogram" method="_on_Main_message_arrived"]
+
+[connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="_on_Main_message_arrived"]
 
 [connection signal="message_arrived" from="." to="InfoArea" method="_on_Main_message_arrived"]
 

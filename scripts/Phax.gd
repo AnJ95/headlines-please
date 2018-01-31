@@ -28,6 +28,10 @@ func _ready():
     rect_position.y += rect_size.y # to counter ScrollMessageManagers behavior
     Label.rect_size = Vector2(width, 1000)
     Label.set_text(message.text)
+    get_tree().get_root().get_node("/root/Main").connect("day_ended", self, "on_day_ended", ["world"])
+
+func on_day_ended(node, world):
+    queue_free()
 
 func init(message):
     self.message = message

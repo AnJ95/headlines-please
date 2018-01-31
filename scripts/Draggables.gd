@@ -6,11 +6,6 @@ export var paper_count = 3
 var papers = []
 
 func _on_Main_day_started( world ):
-    for p in papers:
-        if p != null:
-            p.queue_free()
-    papers = []
-    
     for i in range(paper_count):
         print("create")
         var node = PaperSzene.instance()
