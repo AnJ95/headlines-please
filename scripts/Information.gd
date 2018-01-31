@@ -12,6 +12,7 @@ onready var tween = get_node("Tween")
 
 var initialized_size = false
 var message
+var pin = null
 
 func _ready():
     pass

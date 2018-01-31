@@ -1,7 +1,6 @@
 extends "res://scripts/Droppable.gd"
 
-const Note = preload("res://scripts/Note.gd")
-const Tweet = preload("res://scripts/Tweet.gd")
+const Pin = preload("res://scenes/Pin.tscn")
 const headlineScene = preload("res://scenes/Headline.tscn")
 
 var current_state = 0
@@ -20,6 +19,17 @@ func _ready():
 func on_day_ended(node, world):
     if containing_droppable == null:
         queue_free()
+
+# from Droppable
+func on_enter(draggable):
+    var pin = Pin.instance()
+    pin.rect_position = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
+    draggable.pin = pin
+    get_node("State_0").add_child(pin)
+    
+# from Droppable
+func on_leave(draggable):
+    draggable.pin.remove()
     
 # from Droppable
 func accepted_groups():
@@ -38,14 +48,11 @@ func show_current_state():
 # This means Infos are now selected
 # and headline possibilities should be displayed
 func goto_state_1():
-            
     current_state = 1
-    
     var world = get_node("/root/Main");
     
     var headlines = []
     for infoNode in contained_draggables:
-        infoNode.visible = false
         for headline in infoNode.message.get_headlines():
             if not headlines.has(headline):
                 headlines.append(headline)
@@ -58,18 +65,9 @@ func goto_state_1():
         
         headlineNode.init(headline, Vector2(padX, curY), self, "goto_state_2")
         curY += headlineNode.get_end().y - headlineNode.get_begin().y + padY
-        
     show_current_state()
     
 func go_back_to_state_0():
-    for draggable in contained_draggables:
-        draggable.visible = true
-        if draggable is Note : #TODO is??????
-            draggable.internal_on_undrop()
-            draggable.reset()
-        if draggable is Tweet:
-            draggable.reset()
-            
     for headline in get_node("State_1/headlines").get_children():
         headline.queue_free()
     current_state = 0
@@ -91,7 +89,3 @@ func goto_state_2(headline):
 func goto_state_3():
     current_state = 3
     show_current_state()
-    
-func can_be_vacuumed():
-    return true
-
