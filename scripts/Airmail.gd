@@ -38,7 +38,8 @@ func on_enter(draggable):
 func hovering_now(draggable):
     start_shaking()
     pass
-    
+
+# from Droppable
 func not_hovering():
     stop_shaking()
     pass

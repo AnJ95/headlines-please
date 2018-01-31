@@ -5,9 +5,8 @@ var is_copy = false
 
 func _ready():
     pass
-    print("TWEET")
     add_to_group("tweet")
-
+    
 # from Draggable
 func on_drop(droppable):
     if is_copy and original != null:
@@ -15,7 +14,6 @@ func on_drop(droppable):
         original.queue_free()
         original = null
         pass
-    
     
 # from Draggable
 func on_drop_in_root():

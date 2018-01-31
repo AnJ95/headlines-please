@@ -11,7 +11,12 @@ var cached_y
 func _ready():
     pass
     start_y = rect_position.y
-    
+
+func on_day_ended(node, world):
+    .on_day_ended(node, world)
+    rolling_out = false
+    pass
+        
 # from Draggable
 func can_drag_now():
     return !rolling_out

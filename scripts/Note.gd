@@ -10,9 +10,6 @@ func _ready():
 func _enter_tree():
     move_to_top()
 
-func reset():
-    shuffle_position()
-
 func shuffle_position():
     var outer = NoteArea.get_global_rect()
     var inner = get_global_rect()
@@ -22,3 +19,7 @@ func shuffle_position():
 
     rect_position = Vector2(outer.position.x + randf() * maxW, outer.position.y + randf() * maxH)
     return true
+
+func adjust_size():
+    .adjust_size()
+    shuffle_position()

@@ -23,6 +23,8 @@ func on_message_arrived(message):
     
 func on_day_ended(world):
     nodes = []
+    queue = []
+    currently_rolling = null
 
 func remove(node):
     nodes.erase(node)
@@ -51,11 +53,6 @@ func add(message):
     currently_rolling = node
     
     audio_stream_player.play()
-    
-    #for n in nodes:
-    #    n.rect_position -= Vector2(0, node.rect_size.y)
-    
-    
 
 func done_rolling():
     nodes.append(currently_rolling)
