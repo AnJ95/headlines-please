@@ -1,20 +1,11 @@
 extends "res://scripts/Information.gd"
 
-export var WIDTH = 132
-export var HEIGHT = 44
-
-var timeYet = 0
-
-var hasSetSize = false
-
 var static_copy
 var is_in_feed = true
 
 func _ready():
     pass
     add_to_group("tweet")
-    Label.rect_size = Vector2(WIDTH, HEIGHT)
-    Label.set_text(message.text)
 
 # from Draggable
 func on_drop(droppable):
@@ -27,6 +18,7 @@ func on_drop_in_root():
     queue_free()
     if is_in_feed:
         static_copy.mouse_filter = MOUSE_FILTER_STOP
+
 
 # from Draggable
 func start_drag():
