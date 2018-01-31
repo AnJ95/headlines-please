@@ -10,8 +10,6 @@ var cached_y
 
 func _ready():
     pass
-     # make invisible but still be rendered
-    self.modulate.a = 0
     start_y = rect_position.y
     
 # from Draggable
@@ -22,7 +20,6 @@ func can_drag_now():
 func on_size_change():
     # true if initial, false otherwise
     if adjust_size():
-        self.modulate.a = 1
         rolling_out = true
         
 # set the ScrollInformationManager

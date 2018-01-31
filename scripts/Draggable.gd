@@ -18,17 +18,19 @@ func _process(delta):
         return
     if isMouseIn:
         if Input.is_mouse_button_pressed(BUTTON_LEFT):
-            if not isDragging:
+            if not isDragging and not Root.is_dragging_sth:
+                isDragging = true
+                Root.is_dragging_sth = true
                 internal_start_drag()
-            isDragging = true
-            internal_move_drag();
         else:
             if isDragging:
+                isDragging = false
+                Root.is_dragging_sth = false
                 internal_stop_drag()
-            isDragging = false
-    elif isDragging: # happens sometimes    
-        internal_stop_drag()
-        isDragging = false
+    
+    if isDragging:
+        internal_move_drag();
+
         
     
 # overwrite this
@@ -64,7 +66,8 @@ func on_mouse_entered():
     isMouseIn = true
 
 func on_mouse_exited():
-    isMouseIn = false
+    if not isDragging:
+        isMouseIn = false
 
 func internal_move_drag():
     rect_position = startThisPos + (get_viewport().get_mouse_position() - startMousePos)
@@ -111,7 +114,7 @@ func internal_on_drop(droppable):
     print("drop")
     containing_droppable = droppable
     
-    self.rect_position -= droppable.rect_position - get_parent().rect_position
+    self.rect_position -= - self.get_parent().get_global_rect().position + droppable.get_global_rect().position
     
     self.get_parent().remove_child(self)
     droppable.add_child(self)

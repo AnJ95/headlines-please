@@ -5,6 +5,8 @@ export var paper_count = 3
 
 var papers = []
 
+var is_dragging_sth = false
+
 func on_day_started( world ):
     for i in range(paper_count):
         print("create")

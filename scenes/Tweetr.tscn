@@ -1,13 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/ScrollInformationManager.gd" type="Script" id=1]
-[ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=2]
-[ext_resource path="res://scripts/TweetrScreen.gd" type="Script" id=3]
-[ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=4]
-[ext_resource path="res://resources/sprites/screen1.png" type="Texture" id=5]
-[ext_resource path="res://resources/sprites/screen3.png" type="Texture" id=6]
-[ext_resource path="res://resources/sprites/screen002.png" type="Texture" id=7]
-[ext_resource path="res://resources/sounds/Newsticker.ogg" type="AudioStream" id=8]
+[ext_resource path="res://scenes/Tweet.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/sprites/tweetr.png" type="Texture" id=3]
+[ext_resource path="res://scripts/TweetrScreen.gd" type="Script" id=4]
+[ext_resource path="res://resources/sprites/screen0.png" type="Texture" id=5]
+[ext_resource path="res://resources/sprites/screen1.png" type="Texture" id=6]
+[ext_resource path="res://resources/sprites/screen3.png" type="Texture" id=7]
+[ext_resource path="res://resources/sprites/screen002.png" type="Texture" id=8]
+[ext_resource path="res://resources/sounds/Newsticker.ogg" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 
@@ -40,7 +41,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="Tweetr" type="Control"]
+[node name="Tweetr" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -53,16 +54,17 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Offset", "Transform" ]
-InformationScene = null
+InformationScene = ExtResource( 2 )
 anchor_pos = Vector2( -65, 105 )
 message_type = 0
 max_messages = 5
+root = ""
 information_padding = 7
 set_to_back = false
 
 [node name="front" type="Sprite" parent="." index="0"]
 
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="screens" type="Control" parent="." index="1"]
@@ -79,7 +81,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="random_switch" type="Control" parent="screens" index="0"]
 
@@ -98,17 +100,17 @@ size_flags_vertical = 1
 
 [node name="screen" type="Sprite" parent="screens/random_switch" index="0"]
 
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 _sections_unfolded = [ "Animation" ]
 
 [node name="screen2" type="Sprite" parent="screens/random_switch" index="1"]
 
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform" ]
 
 [node name="screen3" type="Sprite" parent="screens/random_switch" index="2"]
 
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 _sections_unfolded = [ "Animation" ]
 
 [node name="bar" type="Sprite" parent="screens" index="1"]
@@ -116,7 +118,7 @@ _sections_unfolded = [ "Animation" ]
 editor/display_folded = true
 modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -32 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 _sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="screens/bar" index="0"]
@@ -131,10 +133,28 @@ blend_times = [  ]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="2"]
 
-stream = ExtResource( 8 )
+stream = ExtResource( 9 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
 bus = "Master"
+
+[node name="root" type="Control" parent="." index="3"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -66.0
+margin_top = -122.0
+margin_right = 66.0
+margin_bottom = 110.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Rect" ]
 
 

@@ -19,7 +19,7 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Mouse", "Rect", "Transform", "Visibility" ]
 width = 130
-padding = 1
+padding = 3
 roll_out_time = 1
 
 [node name="animation_root" type="Control" parent="." index="0"]
@@ -53,7 +53,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 0.293579, 0.507812, 0.607726 )
+color = Color( 0, 0, 0, 0.607726 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin" ]
 
 [node name="Label" type="Label" parent="animation_root" index="1"]

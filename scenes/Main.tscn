@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/table-xl.png" type="Texture" id=2]
@@ -16,12 +16,11 @@
 [ext_resource path="res://scripts/TweetrContainer.gd" type="Script" id=14]
 [ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=15]
 [ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=16]
-[ext_resource path="res://scenes/Tweet.tscn" type="PackedScene" id=17]
-[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=18]
-[ext_resource path="res://scripts/PicturesContainer.gd" type="Script" id=19]
-[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=20]
-[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=21]
-[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=22]
+[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=17]
+[ext_resource path="res://scripts/PicturesContainer.gd" type="Script" id=18]
+[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=19]
+[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=20]
+[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=21]
 
 [sub_resource type="Animation" id=1]
 
@@ -84,14 +83,14 @@ tracks/0/keys = {
 size = 50
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 22 )
+font_data = ExtResource( 21 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [node name="Main" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 25
+DAY_CYCLE_TIME = 60
 
 [node name="table-xl" type="Sprite" parent="." index="0"]
 
@@ -229,6 +228,7 @@ margin_right = 157.0
 margin_bottom = 508.0
 InformationScene = ExtResource( 13 )
 anchor_pos = Vector2( -86, -70 )
+root = NodePath("animation_root")
 information_padding = 0
 
 [node name="TweetrContainer" type="Control" parent="." index="5"]
@@ -257,8 +257,8 @@ margin_top = 176.0
 margin_right = 762.0
 margin_bottom = 176.0
 _sections_unfolded = [ "Offset", "Rect", "Transform" ]
-InformationScene = ExtResource( 17 )
-information_padding = 7
+anchor_pos = Vector2( 0, 230 )
+root = NodePath("root")
 
 [node name="Countdown" type="Label" parent="TweetrContainer" index="2"]
 
@@ -276,7 +276,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 18 )
+custom_fonts/font = ExtResource( 17 )
 custom_colors/font_color = Color( 0.96875, 0.745247, 0.151367, 1 )
 text = "60"
 align = 1
@@ -301,7 +301,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 18 )
+custom_fonts/font = ExtResource( 17 )
 custom_colors/font_color = Color( 0.96875, 0.745247, 0.151367, 1 )
 text = "100$"
 align = 1
@@ -331,13 +331,13 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 19 )
+script = ExtResource( 18 )
 _sections_unfolded = [ "Rect" ]
 
 [node name="Sprite" type="Sprite" parent="PicturesContainer" index="0"]
 
 position = Vector2( 777.666, 528.373 )
-texture = ExtResource( 20 )
+texture = ExtResource( 19 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PicturesContainer" index="1"]
 
@@ -363,7 +363,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 21 )
+script = ExtResource( 20 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 leaving_nodes = [ NodePath("../Phaxogram"), NodePath("../Draggables/Airmail"), NodePath("../PicturesContainer"), NodePath("../TweetrContainer") ]
 
@@ -441,8 +441,8 @@ _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility"
 
 [connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
 
-[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
-
 [connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
+
+[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
 
 

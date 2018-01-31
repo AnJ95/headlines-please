@@ -5,6 +5,7 @@ export var padding = 5
 
 onready var Clipper = get_node("animation_root")
 onready var Label = get_node("animation_root/Label")
+onready var Background = get_node("animation_root/Background")
 
 var initialized_size = false
 var message

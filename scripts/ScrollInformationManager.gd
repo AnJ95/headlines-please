@@ -6,6 +6,7 @@ export(PackedScene) var InformationScene
 export(Vector2) var anchor_pos
 export(int, "TWEET", "NOTE", "PHAX") var message_type
 export var max_messages = 3
+export(NodePath) var root = ""
 export var information_padding = 7
 export var set_to_back = false
 
@@ -24,7 +25,7 @@ func on_day_ended(world):
     nodes = []
 
 func remove(node):
-    nodes.remove(node)
+    nodes.erase(node)
 
 func _process(delta):
     if not queue.empty() and currently_rolling == null:
@@ -43,7 +44,7 @@ func add(message):
     node.set_manager(self)
     
     # add child to right position
-    add_child(node)
+    get_node(root).add_child(node)
     if set_to_back:
         node.get_parent().move_child(node, 0)
     

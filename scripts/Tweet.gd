@@ -1,7 +1,7 @@
 extends "res://scripts/ScrollInformation.gd"
 
-var static_copy
-var is_in_feed = true
+var original
+var is_copy = false
 
 func _ready():
     pass
@@ -10,23 +10,47 @@ func _ready():
 
 # from Draggable
 func on_drop(droppable):
-    if is_in_feed:
-        static_copy.queue_free()
-    is_in_feed = false
+    if is_copy and original != null:
+        manager.remove(original)
+        original.queue_free()
+        original = null
+        pass
+    
     
 # from Draggable
 func on_drop_in_root():
-    queue_free()
-    if is_in_feed:
-        static_copy.mouse_filter = MOUSE_FILTER_STOP
+    if is_copy:
+        queue_free()
+    pass
 
 
 # from Draggable
 func start_drag():
-    if is_in_feed:
-        #create a not draggable copy and be moved
-        static_copy = duplicate()
-        static_copy.mouse_filter = MOUSE_FILTER_IGNORE
-        static_copy.init(message)
-        get_parent().add_child(static_copy)
+    if not is_copy:
+        var copy = duplicate()
+        var target = Root
+        
+        # prevent dragging
+        isDragging = false
+        isMouseIn = false
+        
+        # initialize copy
+        copy.init(message)
+        copy.rolling_out = false
+        copy.initialized_size = true
+        copy.is_copy = true
+        copy.original = self
+        copy.manager = manager
+        copy.rect_position = get_global_rect().position
+        
+        # add copy to absolute root
+        target.add_child(copy)
+        
+        # fake copy to be dragging
+        copy.isMouseIn = true
+        copy.isDragging = true
+        copy.startMousePos = startMousePos
+        copy.startThisPos = copy.rect_position
+        copy.Background.visible = true
+        
     

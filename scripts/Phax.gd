@@ -6,3 +6,10 @@ func _ready():
     reset()
     rect_position.y += rect_size.y # to counter ScrollMessageManagers behavior
 
+
+# from Draggable
+func start_drag():
+    manager.remove(self)
+        
+    
+
