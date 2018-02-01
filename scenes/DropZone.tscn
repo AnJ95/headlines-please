@@ -8,7 +8,7 @@
 [ext_resource path="res://resources/sprites/pic1.png" type="Texture" id=6]
 [ext_resource path="res://scenes/Headline.tscn" type="PackedScene" id=7]
 
-[node name="DropZone" type="Control"]
+[node name="DropZone" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -83,6 +83,15 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
+
+[node name="Tween" type="Tween" parent="State_0" index="3"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 [node name="State_1" type="Control" parent="." index="1"]
 

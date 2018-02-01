@@ -2,13 +2,17 @@ extends "res://scripts/Droppable.gd"
 
 const Pin = preload("res://scenes/Pin.tscn")
 const headlineScene = preload("res://scenes/Headline.tscn")
+const padX = 18
+const initial_padY = 40
+const padY = 4
+const INFO_POS_ADJUST_TIME = 0.25
+const INFO_POS_ADJUST_MIN_PADDING = 10
+
+onready var tween = get_node("State_0/Tween")
 
 var current_state = 0
 var max_state = 2
 var selected_headline = null
-const padX = 18
-const initial_padY = 40
-const padY = 4
 
 var notified_headlines_count_max
 var notified_headlines_count
@@ -25,8 +29,28 @@ func on_day_ended(node, world):
 
 # from Droppable
 func on_enter(draggable):
+    
+    var pin_pos_original = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
+    var pin_pos = pin_pos_original
+
+    if (pin_pos_original.x < INFO_POS_ADJUST_MIN_PADDING):
+        pin_pos.x = INFO_POS_ADJUST_MIN_PADDING
+    if (pin_pos_original.x > rect_size.x - INFO_POS_ADJUST_MIN_PADDING):
+        pin_pos.x = rect_size.x - INFO_POS_ADJUST_MIN_PADDING
+    if (pin_pos_original.y < INFO_POS_ADJUST_MIN_PADDING):
+        pin_pos.y = INFO_POS_ADJUST_MIN_PADDING
+    if (pin_pos_original.y > rect_size.y - INFO_POS_ADJUST_MIN_PADDING):
+        pin_pos.y = rect_size.y - INFO_POS_ADJUST_MIN_PADDING
+    
+    if pin_pos != pin_pos_original:
+        var start = draggable.rect_position
+        var end = start + pin_pos - pin_pos_original
+        tween.interpolate_property(draggable, "rect_position", start, end, INFO_POS_ADJUST_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+        tween.start()
+
+    
     var pin = Pin.instance()
-    pin.rect_position = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
+    pin.rect_position = pin_pos
     draggable.pin = pin
     get_node("State_0").add_child(pin)
     
