@@ -12,11 +12,21 @@ func get_propability(world, countries):
 #TODO set an effect for each Headline
 
 func init_headlines():
-    h("Industrialist Handlers stock gambling leaves his workers unemployed.",0.20,0.55,0.72)
-    h("Industrialist Handler looses on stock market and has to fire all workers.",0.28,0.42,0.66)
-    h("Handler Glass Company has to close factory, dismissing the workers.",0.39,0.50,0.58)
-    h("Handler Glass has to file for insolvency after stock market crash.",0.45,0.53,0.46)
-    h("Handler Glass has to close its doors after 60 years.",0.52,0.62,0.39)
+    h("Industrialist Handlers stock gambling leaves his workers unemployed.", 0.20, {
+
+    })
+    h("Industrialist Handler looses on stock market and has to fire all workers.", 0.28, {
+
+    })
+    h("Handler Glass Company has to close factory, dismissing the workers.", 0.39, {
+
+    })
+    h("Handler Glass has to file for insolvency after stock market crash.", 0.45, {
+
+    })
+    h("Handler Glass has to close its doors after 60 years.", 0.52, {
+
+    })
 
 
 func init_messages():

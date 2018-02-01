@@ -12,11 +12,26 @@ func get_propability(world, countries):
 #TODO set an effect for each Headline
 
 func init_headlines():
-    h("Training flight of {country_1} went wrong, causing international conflict.",0.35,0.42,0.70)
-    h("{country_1}s military pilots accidentaly crossed border on training flight.",0.40,0.50,0.60)
-    h("{country_1}s army made mistake while drill. Pilot crossing border of {country_2}.",0.65,0.50,0.40)
-    h("{country_1}s army is advancing over border of {country_2}",0.55,0.70,0.50)
-    h("{country_1}s army provoked {country_2} with drill mistake at border.",0.37,0.60,0.80)
+    h("Training flight of {country_1} went wrong, causing international conflict.", 0.70, {
+      "progress" : -0.4,
+      "tolerance" : -0.2
+    })
+    h("{country_1}s military pilots accidentaly crossed border on training flight.", 0.30, {
+      "progress" : -0.1,
+      "tolerance" : 0
+    })
+    h("{country_1}s army made mistake while drill. Pilot crossing border of {country_2}.", 0.40, {
+      "progress" : -0.13,
+      "tolerance" : -0.1
+    })
+    h("{country_1}s army is advancing over border of {country_2}", 0.80, {
+      "progress" : -0.4,
+      "tolerance" : -0.2
+    })
+    h("{country_1}s army provoked {country_2} with drill mistake at border.", 0.50, {
+      "progress" : -0.2,
+      "tolerance" : -0.1
+    })
 
 
 func init_messages():

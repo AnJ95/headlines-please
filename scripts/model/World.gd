@@ -65,8 +65,8 @@ var Scenario_Factory = load("res://scripts/model/scenarios/Scenario_factory.gd")
 var Scenario_Ghettofire = load("res://scripts/model/scenarios/Scenario_ghettofire.gd")
 var Scenario_Hotel = load("res://scripts/model/scenarios/Scenario_hotel.gd")
 var Scenario_Practice_Flight = load("res://scripts/model/scenarios/Scenario_practice_flight.gd")
-var Scenario_small_1 = load("res://scripts/model/scenarios/Scenario_practice_flight.gd")
-var Scenario_small_2 = load("res://scripts/model/scenarios/Scenario_practice_flight.gd")
+var Scenario_small_1 = load("res://scripts/model/scenarios/Scenario_small_online_salt.gd")
+var Scenario_small_2 = load("res://scripts/model/scenarios/Scenario_small_singer_dead.gd")
 #var Scenario_Ambassador = load("res://scripts/model/scenarios/Scenario_Ambassador.gd")
 
 func load_scenarios():
@@ -143,31 +143,13 @@ func make_format_dic(countries):
        format_dic["country_" + str(c + 1)] = countries[c].name
     return format_dic
 
-const MAX_READERS_CHANGE = 0.08
-const MAX_PARAM_CHANGE = 0.08
-
 func broadcast_headline(headline):
 
     print("adding headline: " + params_to_string(headline.params))
-
-    var readerChanges = {}
+    
     var totalReaders = get_total_readers()
-
     for country in countries:
-        print("country before: " + params_to_string(country.params) + " readers: " + str(country.readers))
-        var sum_dist = 0 # sth between 0 (best case) and params_num (worst case)
-        for p in headline.params:
-            # assert: country params in (0,1]
-            #         headline params in (0,1)
-            var dist = headline.params[p]- country.params[p]
-            country.params[p] += dist * MAX_PARAM_CHANGE * country.readers
-            sum_dist += abs(dist)
-        var norm_dist = sum_dist / country.params.size()
-
-        readerChanges[country.name] = (0.5 - norm_dist) * 2 * MAX_READERS_CHANGE * headline.drama
-        country.readers += readerChanges[country.name]
-        print("country after: " + params_to_string(country.params) + " readers: " + str(country.readers))
-
+        country.broadcast_headline(headline)
     return get_total_readers() - totalReaders
 
 

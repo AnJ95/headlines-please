@@ -12,11 +12,22 @@ func get_propability(world, countries):
 #TODO set an effect for each Headline
 
 func init_headlines():
-    h("{country_1} allows people to treat citizens of {country_2} derogatory.",0.19,0.50,0.75)
-    h("Racist {country_1}ian hotelowner Eduard Glitz bans other nations from entering.",0.38,0.40,0.65)
-    h("Controversial {country_1}ian hotelowner bans group of misbehaving foreigners.",0.55,0.55,0.42)
-    h("Enraged {country_1}ian hotelowner throws out a group of vandalizing {country_2}ian visitors.",0.60,0.60,0.40)
-    h("Drunken {country_2}ian hooligans wreck Glitz hotel, get banned.",0.55,0.80,0.65)
+    h("{country_1} allows people to treat citizens of {country_2} derogatory.", 0.75, {
+      "tolerance" : -0.3,
+      "democracy" : 0.1
+    })
+    h("Racist {country_1}ian hotelowner Eduard Glitz bans other nations from entering.", 0.65, {
+      "tolerance" : -0.2,
+    })
+    h("Controversial {country_1}ian hotelowner bans group of misbehaving foreigners.", 0.42, {
+      "tolerance" : 0,
+    })
+    h("Enraged {country_1}ian hotelowner throws out a group of vandalizing {country_2}ian visitors.", 0.40, {
+      "tolerance" : -0.1,
+    })
+    h("Drunk {country_2}ian hooligans wreck Glitz hotel, get banned.", 0.65, {
+      "tolerance" : 0,
+    })
 
 
 func init_messages():

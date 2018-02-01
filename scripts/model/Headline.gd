@@ -9,10 +9,9 @@ var params = {
 var drama = 0
 var format_string
 
-func _init(format_string, satisfaction, bias, drama):
+func _init(format_string, drama, params):
     self.format_string = format_string
-    self.params.satisfaction = satisfaction
-    self.params.bias = bias
+    self.params = params
     self.drama = drama
 
 func prepare(world, scenario):

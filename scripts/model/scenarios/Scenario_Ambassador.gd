@@ -12,14 +12,14 @@ func get_propability(world, countries):
 #TODO set an effect for each Headline
 
 func init_headlines():
-    h("{country_1}s Amassador in {country_2} in hospital.",1,1,1)
-    h("{country_1}s Amassador in {country_2} died.",1,1,1)
-    h("{country_2}: Amassador of {country_1} died under unresolved circumstances.",1,1,1)
-    h("{country_1}s Amassador in {country_2} was murdered.",1,1,1)
-    h("{country_1}s Amassador in {country_2} was poisoned! Was the secret service involved?",1,1,1)
-    h("{country_1}s Amassador in {country_2} died! Secret service possible?!",1,1,1)
-    h("{country_2}: {country_1}s Amassador was arrested.",1,1,1)
-    h("{country_2}: {country_1}s Amassador died after having a stroke.",1,1,1)
+    h("{country_1}s Amassador in {country_2} in hospital.", 1, {})
+    h("{country_1}s Amassador in {country_2} died.", 1, {})
+    h("{country_2}: Amassador of {country_1} died under unresolved circumstances.", 1, {})
+    h("{country_1}s Amassador in {country_2} was murdered.", 1, {})
+    h("{country_1}s Amassador in {country_2} was poisoned! Was the secret service involved?", 1, {})
+    h("{country_1}s Amassador in {country_2} died! Secret service possible?!", 1, {})
+    h("{country_2}: {country_1}s Amassador was arrested.", 1, {})
+    h("{country_2}: {country_1}s Amassador died after having a stroke.", 1, {})
 
 
 func init_messages():

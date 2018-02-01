@@ -12,11 +12,21 @@ func get_propability(world, countries):
 #TODO set an effect for each Headline
 
 func init_headlines():
-    h("Public authorities fail to care about a huge fire in Hoffenkamm district.",0.12,0.50,0.82)
-    h("82 people die in tragic fire. Authorities were too late on site.",0.30,0.50,0.52)
-    h("82 people die in tragic fire. Authorities had problems getting to Hoffenkamm.",0.38,0.50,0.52)
-    h("Authorities could not arrive in Hoffenkamm due to damaged and blocked roads.",0.55,0.55,0.45)
-    h("Hoffenkamm roads were impassable. Authorities could not help in local fire.",0.50,0.66,0.65)
+    h("Public authorities fail to care about a huge fire in Hoffenkamm district.", 0.82, {
+      "democracy" : 0.4
+    })
+    h("82 people die in tragic fire. Authorities were too late on site.", 0.52, {
+      "democracy" : 0.1
+    })
+    h("82 people die in tragic fire. Authorities had problems getting to Hoffenkamm.", 0.52, {
+      "democracy" : 0
+    })
+    h("Authorities could not arrive in Hoffenkamm due to damaged and blocked roads.", 0.45, {
+      "democracy" : 0.1
+    })
+    h("Hoffenkamm roads were impassable. Authorities could not help in local fire.", 0.65, {
+      "democracy" : 0.2
+    })
 
 
 func init_messages():
