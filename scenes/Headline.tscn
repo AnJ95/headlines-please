@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Headline.gd" type="Script" id=1]
-[ext_resource path="res://resources/sprites/news-choice.png" type="Texture" id=2]
+[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=2]
+[ext_resource path="res://resources/sprites/headline_underline.png" type="Texture" id=3]
 
 [node name="Headline" type="Control" index="0"]
 
@@ -9,8 +10,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 216.0
-margin_bottom = 48.0
+margin_right = 220.0
+margin_bottom = 47.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -19,15 +20,38 @@ size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin" ]
 
-[node name="TextureButton" type="TextureButton" parent="." index="0"]
+[node name="Label" type="Label" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 1.0
-margin_right = 216.0
-margin_bottom = 48.0
+margin_right = 220.0
+margin_bottom = 43.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "After continuing conflicts, Holstenian President says: \"This is War!\""
+align = 1
+valign = 1
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "custom_colors", "custom_fonts" ]
+
+[node name="TextureButton" type="TextureButton" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 220.0
+margin_bottom = 47.0
 rect_pivot_offset = Vector2( 0, 0 )
 focus_mode = 2
 mouse_filter = 0
@@ -38,30 +62,17 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 2 )
-stretch_mode = 2
-_sections_unfolded = [ "Textures" ]
+_sections_unfolded = [ "Anchor", "Margin", "Textures" ]
 
-[node name="Label" type="Label" parent="TextureButton" index="0"]
+[node name="headline_underline" type="Sprite" parent="." index="2"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 5.0
-margin_top = 3.0
-margin_right = 211.0
-margin_bottom = 42.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-autowrap = true
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_colors" ]
+position = Vector2( 110.046, 45.0197 )
+texture = ExtResource( 3 )
+
+[connection signal="minimum_size_changed" from="Label" to="." method="on_size_changed"]
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="on_mouse_entered"]
+
+[connection signal="mouse_exited" from="TextureButton" to="." method="on_mouse_exited"]
 
 

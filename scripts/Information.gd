@@ -11,6 +11,7 @@ onready var Background = get_node("animation_root/Background")
 onready var tween = get_node("Tween")
 
 var initialized_size = false
+var is_deleting = false
 var message
 var pin = null
 
@@ -20,7 +21,7 @@ func _ready():
     Label.set_text(message.text)
     add_to_group("information")
     get_tree().get_root().get_node("/root/Main").connect("day_ended", self, "on_day_ended", ["world"])
-    tween.connect("tween_completed", self, "on_tween_completed", ["object", "key"])
+    tween.connect("tween_completed", self, "on_tween_completed")
 
 func init(message):
     self.message = message
@@ -44,8 +45,11 @@ func on_day_ended(node, world):
         tween.interpolate_property(self, "rect_position", rect_position, target - rect_size / 2, distance_left / FLY_OUT_SPEED, Tween.TRANS_CUBIC, Tween.EASE_OUT)
         tween.start()
         
+        is_deleting = true
+        
 func on_tween_completed(object, key):
-    queue_free()
+    if is_deleting:
+        queue_free()
         
 func adjust_size():
     if initialized_size:

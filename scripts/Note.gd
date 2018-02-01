@@ -7,7 +7,6 @@ onready var audio_stream_player_flap = get_node("AudioStreamPlayerFlap")
 
 func _ready():
     pass
-    reset()
     add_to_group("note")
     move_to_top()
     audio_stream_player_move.play()
@@ -32,5 +31,5 @@ func shuffle_position():
     return true
 
 func adjust_size():
-    .adjust_size()
-    shuffle_position()
+    if .adjust_size():
+        shuffle_position()
