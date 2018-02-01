@@ -10,6 +10,9 @@ const padX = 18
 const initial_padY = 40
 const padY = 4
 
+var notified_headlines_count_max
+var notified_headlines_count
+
 
 func _ready():
     show_current_state()
@@ -56,17 +59,20 @@ func goto_state_1():
         for headline in infoNode.message.get_headlines():
             if not headlines.has(headline):
                 headlines.append(headline)
-    
-    var curY = initial_padY;
-    
+ 
+    initialize_headline_size_adjust_waiting(headlines.size())
     for headline in headlines:
         var headlineNode = headlineScene.instance()
-        get_node("State_1/headlines").add_child(headlineNode)
-        
-        headlineNode.init(headline, Vector2(padX, curY), self, "goto_state_2")
-        curY += headlineNode.get_end().y - headlineNode.get_begin().y + padY
+        get_node("State_1/headlines").add_child(headlineNode)    
+        headlineNode.init(headline, self, "goto_state_2")
+        headlineNode.register_dropzone(self)
     show_current_state()
-    
+
+# initialize for waiting for all headlines to adjust size
+func initialize_headline_size_adjust_waiting(count_max):
+    notified_headlines_count = 0
+    notified_headlines_count_max = count_max
+
 func go_back_to_state_0():
     for headline in get_node("State_1/headlines").get_children():
         headline.queue_free()
@@ -82,10 +88,27 @@ func go_back_to_state_1():
 func goto_state_2(headline):
     current_state = 2
     selected_headline = headline
-    get_node("State_2/Headline").init(headline, Vector2(padX, initial_padY), null, null)
+    get_node("State_2/Headline").size_adjusted = false
+    get_node("State_2/Headline").init(headline, null, null)
+    get_node("State_2/Headline").rect_position = Vector2(padX, initial_padY)
     show_current_state()
 
 # This means everything is done
 func goto_state_3():
     current_state = 3
     show_current_state()
+    
+# called whenever a headline adjusted its size
+func notify_size_adjusted():
+    if current_state != 1:
+        return
+    notified_headlines_count += 1
+    if notified_headlines_count >= notified_headlines_count_max:
+        adjust_headline_positions()
+
+# called when all headlines have adjusted their size and need positioning
+func adjust_headline_positions():
+    var curY = initial_padY;
+    for headline in get_node("State_1/headlines").get_children():
+        headline.rect_position =  Vector2(padX, curY)
+        curY += headline.rect_size.y + padY
