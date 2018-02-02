@@ -1,28 +1,29 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
-[ext_resource path="res://resources/sprites/table-xl.png" type="Texture" id=2]
-[ext_resource path="res://scripts/NoteManager.gd" type="Script" id=3]
-[ext_resource path="res://scripts/Draggables.gd" type="Script" id=4]
-[ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/Map.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scripts/Airmail.gd" type="Script" id=7]
-[ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=8]
-[ext_resource path="res://resources/sounds/Vaccuum sucking.ogg" type="AudioStream" id=9]
-[ext_resource path="res://resources/sounds/Vaccuum floping.ogg" type="AudioStream" id=10]
-[ext_resource path="res://resources/sounds/Vaccuum grabbing.ogg" type="AudioStream" id=11]
-[ext_resource path="res://scenes/TwoStateDraggable.tscn" type="PackedScene" id=12]
-[ext_resource path="res://scenes/Phaxogram.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/Phax.tscn" type="PackedScene" id=14]
-[ext_resource path="res://scripts/TweetrContainer.gd" type="Script" id=15]
-[ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=16]
-[ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=17]
-[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=18]
-[ext_resource path="res://scripts/PicturesContainer.gd" type="Script" id=19]
-[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=20]
-[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=21]
-[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=22]
-[ext_resource path="res://resources/sounds/bossa-bgm.ogg" type="AudioStream" id=23]
+[ext_resource path="res://scripts/model/WorldDef.gd" type="Script" id=2]
+[ext_resource path="res://resources/sprites/table-xl.png" type="Texture" id=3]
+[ext_resource path="res://scripts/NoteManager.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Draggables.gd" type="Script" id=5]
+[ext_resource path="res://scenes/DropZone.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Map.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scripts/Airmail.gd" type="Script" id=8]
+[ext_resource path="res://resources/sprites/r-post.png" type="Texture" id=9]
+[ext_resource path="res://resources/sounds/Vaccuum sucking.ogg" type="AudioStream" id=10]
+[ext_resource path="res://resources/sounds/Vaccuum floping.ogg" type="AudioStream" id=11]
+[ext_resource path="res://resources/sounds/Vaccuum grabbing.ogg" type="AudioStream" id=12]
+[ext_resource path="res://scenes/TwoStateDraggable.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/Phaxogram.tscn" type="PackedScene" id=14]
+[ext_resource path="res://scenes/Phax.tscn" type="PackedScene" id=15]
+[ext_resource path="res://scripts/TweetrContainer.gd" type="Script" id=16]
+[ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=17]
+[ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=18]
+[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=19]
+[ext_resource path="res://scripts/PicturesContainer.gd" type="Script" id=20]
+[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=21]
+[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=22]
+[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=23]
+[ext_resource path="res://resources/sounds/bossa-bgm.ogg" type="AudioStream" id=24]
 
 [sub_resource type="Animation" id=1]
 
@@ -102,7 +103,7 @@ tracks/0/keys = {
 size = 50
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 22 )
+font_data = ExtResource( 23 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [node name="Main" type="Control"]
@@ -118,15 +119,19 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
-DAY_CYCLE_TIME = 60
+DAY_CYCLE_TIME = 180
 
-[node name="table-xl" type="Sprite" parent="." index="0"]
+[node name="world_def" type="Node" parent="." index="0"]
 
-texture = ExtResource( 2 )
+script = ExtResource( 2 )
+
+[node name="table-xl" type="Sprite" parent="." index="1"]
+
+texture = ExtResource( 3 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="NoteArea" type="Control" parent="." index="1"]
+[node name="NoteArea" type="Control" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -141,10 +146,10 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Rect", "Transform", "Z Index" ]
 
-[node name="PaperArea" type="Control" parent="." index="2"]
+[node name="PaperArea" type="Control" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -159,13 +164,12 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 4 )
-PaperSzene = ExtResource( 5 )
+script = ExtResource( 5 )
+PaperSzene = ExtResource( 6 )
 paper_count = 3
 
-[node name="Draggables" type="Control" parent="." index="3"]
+[node name="Draggables" type="Control" parent="." index="4"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -177,12 +181,12 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 _sections_unfolded = [ "Margin" ]
-PaperSzene = ExtResource( 5 )
+PaperSzene = ExtResource( 6 )
 paper_count = 3
 
-[node name="Map" parent="Draggables" index="0" instance=ExtResource( 6 )]
+[node name="Map" parent="Draggables" index="0" instance=ExtResource( 7 )]
 
 margin_left = 134.0
 margin_top = -203.0
@@ -205,13 +209,13 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 _sections_unfolded = [ "Margin", "Rect" ]
 drop_root_path = ""
 
 [node name="Sprite" type="Sprite" parent="Draggables/Airmail" index="0"]
 
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 centered = false
 _sections_unfolded = [ "Offset", "Region", "Transform" ]
 
@@ -227,7 +231,7 @@ blend_times = [  ]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Draggables/Airmail" index="1"]
 
-stream = ExtResource( 9 )
+stream = ExtResource( 10 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
@@ -235,7 +239,7 @@ bus = "Master"
 
 [node name="AudioStreamPlayerNode" type="AudioStreamPlayer" parent="Draggables/Airmail" index="2"]
 
-stream = ExtResource( 10 )
+stream = ExtResource( 11 )
 volume_db = 20.0
 autoplay = false
 mix_target = 0
@@ -243,7 +247,7 @@ bus = "Master"
 
 [node name="AudioStreamPlayerGrab" type="AudioStreamPlayer" parent="Draggables/Airmail" index="3"]
 
-stream = ExtResource( 11 )
+stream = ExtResource( 12 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0
@@ -259,24 +263,24 @@ playback_speed = 1.0
 anims/leave = SubResource( 2 )
 blend_times = [  ]
 
-[node name="TwoStateDraggable" parent="Draggables/Airmail" index="5" instance=ExtResource( 12 )]
+[node name="TwoStateDraggable" parent="Draggables/Airmail" index="5" instance=ExtResource( 13 )]
 
 scrollHeight = 200
 tween_speed = 100
 bounce = true
 
-[node name="Phaxogram" parent="." index="4" instance=ExtResource( 13 )]
+[node name="Phaxogram" parent="." index="5" instance=ExtResource( 14 )]
 
 margin_left = 117.0
 margin_top = 468.0
 margin_right = 157.0
 margin_bottom = 508.0
-InformationScene = ExtResource( 14 )
+InformationScene = ExtResource( 15 )
 anchor_pos = Vector2( -86, -70 )
 root = NodePath("animation_root")
 information_padding = 0
 
-[node name="TweetrContainer" type="Control" parent="." index="5"]
+[node name="TweetrContainer" type="Control" parent="." index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -287,15 +291,15 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 15 )
+script = ExtResource( 16 )
 _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
 [node name="add-on" type="Sprite" parent="TweetrContainer" index="0"]
 
 position = Vector2( 611.821, 49.7245 )
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 
-[node name="Tweetr" parent="TweetrContainer" index="1" instance=ExtResource( 17 )]
+[node name="Tweetr" parent="TweetrContainer" index="1" instance=ExtResource( 18 )]
 
 margin_left = 762.0
 margin_top = 176.0
@@ -321,7 +325,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 18 )
+custom_fonts/font = ExtResource( 19 )
 custom_colors/font_color = Color( 0.96875, 0.745247, 0.151367, 1 )
 text = "60"
 align = 1
@@ -346,7 +350,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 18 )
+custom_fonts/font = ExtResource( 19 )
 custom_colors/font_color = Color( 0.96875, 0.745247, 0.151367, 1 )
 text = "100$"
 align = 1
@@ -365,7 +369,7 @@ playback_speed = 1.0
 anims/leave = SubResource( 3 )
 blend_times = [  ]
 
-[node name="PicturesContainer" type="Control" parent="." index="6"]
+[node name="PicturesContainer" type="Control" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -376,13 +380,13 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 19 )
+script = ExtResource( 20 )
 _sections_unfolded = [ "Rect" ]
 
 [node name="Sprite" type="Sprite" parent="PicturesContainer" index="0"]
 
 position = Vector2( 777.666, 528.373 )
-texture = ExtResource( 20 )
+texture = ExtResource( 21 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PicturesContainer" index="1"]
 
@@ -394,7 +398,7 @@ playback_speed = 1.0
 anims/leave = SubResource( 4 )
 blend_times = [  ]
 
-[node name="DayEndScreen" type="Control" parent="." index="7"]
+[node name="DayEndScreen" type="Control" parent="." index="8"]
 
 visible = false
 anchor_left = 0.0
@@ -408,7 +412,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 21 )
+script = ExtResource( 22 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 leaving_nodes = [ NodePath("../Phaxogram"), NodePath("../Draggables/Airmail"), NodePath("../PicturesContainer"), NodePath("../TweetrContainer") ]
 
@@ -476,9 +480,9 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="8"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="9"]
 
-stream = ExtResource( 23 )
+stream = ExtResource( 24 )
 volume_db = 5.0
 autoplay = true
 mix_target = 0
@@ -487,15 +491,17 @@ _sections_unfolded = [ "Pause" ]
 
 [connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
 
-[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
-
 [connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
+
+[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
 [connection signal="day_started" from="." to="PaperArea" method="on_day_started"]
 
-[connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
+[connection signal="game_started" from="." to="Draggables/Map" method="on_game_started"]
 
 [connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
+
+[connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
 
 [connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
 

@@ -1,15 +1,14 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Map.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/map.png" type="Texture" id=2]
 [ext_resource path="res://resources/sprites/pins.png" type="Texture" id=3]
-[ext_resource path="res://scenes/CountryInfo.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/TwoStateDraggable.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/RandomAudioStreamPlayer.gd" type="Script" id=6]
-[ext_resource path="res://resources/sounds/Map In 1.ogg" type="AudioStream" id=7]
-[ext_resource path="res://resources/sounds/Map In 2.ogg" type="AudioStream" id=8]
-[ext_resource path="res://resources/sounds/Map Out 1.ogg" type="AudioStream" id=9]
-[ext_resource path="res://resources/sounds/Map Out 2.ogg" type="AudioStream" id=10]
+[ext_resource path="res://scenes/TwoStateDraggable.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/RandomAudioStreamPlayer.gd" type="Script" id=5]
+[ext_resource path="res://resources/sounds/Map In 1.ogg" type="AudioStream" id=6]
+[ext_resource path="res://resources/sounds/Map In 2.ogg" type="AudioStream" id=7]
+[ext_resource path="res://resources/sounds/Map Out 1.ogg" type="AudioStream" id=8]
+[ext_resource path="res://resources/sounds/Map Out 2.ogg" type="AudioStream" id=9]
 
 [node name="Map" type="Control"]
 
@@ -37,46 +36,20 @@ _sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="pins" type="Sprite" parent="." index="1"]
 
+visible = false
 position = Vector2( 160.756, 108.797 )
 texture = ExtResource( 3 )
 
-[node name="CountryHolsten" parent="." index="2" instance=ExtResource( 4 )]
+[node name="TwoStateDraggable" parent="." index="2" instance=ExtResource( 4 )]
 
-margin_left = 48.0
-margin_top = -6.0
-margin_right = 175.0
-margin_bottom = 82.0
+[node name="AudioStreamPlayerIn" type="Node" parent="." index="3"]
 
-[node name="CountryReldan" parent="." index="3" instance=ExtResource( 4 )]
-
-margin_left = -92.0
-margin_top = 114.0
-margin_right = 35.0
-margin_bottom = 202.0
-
-[node name="CountryLemuria" parent="." index="4" instance=ExtResource( 4 )]
-
-margin_left = 288.0
-margin_top = -26.0
-margin_right = 415.0
-margin_bottom = 62.0
-
-[node name="CountryHesperdia" parent="." index="5" instance=ExtResource( 4 )]
-
-margin_left = 262.0
-margin_top = 166.0
-margin_right = 389.0
-margin_bottom = 254.0
-
-[node name="TwoStateDraggable" parent="." index="6" instance=ExtResource( 5 )]
-
-[node name="AudioStreamPlayerIn" type="Node" parent="." index="7"]
-
-script = ExtResource( 6 )
+editor/display_folded = true
+script = ExtResource( 5 )
 
 [node name="1" type="AudioStreamPlayer" parent="AudioStreamPlayerIn" index="0"]
 
-stream = ExtResource( 7 )
+stream = ExtResource( 6 )
 volume_db = 5.0
 autoplay = false
 mix_target = 0
@@ -84,19 +57,20 @@ bus = "Master"
 
 [node name="2" type="AudioStreamPlayer" parent="AudioStreamPlayerIn" index="1"]
 
-stream = ExtResource( 8 )
+stream = ExtResource( 7 )
 volume_db = 5.0
 autoplay = false
 mix_target = 0
 bus = "Master"
 
-[node name="AudioStreamPlayerOut" type="Node" parent="." index="8"]
+[node name="AudioStreamPlayerOut" type="Node" parent="." index="4"]
 
-script = ExtResource( 6 )
+editor/display_folded = true
+script = ExtResource( 5 )
 
 [node name="1" type="AudioStreamPlayer" parent="AudioStreamPlayerOut" index="0"]
 
-stream = ExtResource( 9 )
+stream = ExtResource( 8 )
 volume_db = 5.0
 autoplay = false
 mix_target = 0
@@ -104,10 +78,24 @@ bus = "Master"
 
 [node name="2" type="AudioStreamPlayer" parent="AudioStreamPlayerOut" index="1"]
 
-stream = ExtResource( 10 )
+stream = ExtResource( 9 )
 volume_db = 5.0
 autoplay = false
 mix_target = 0
 bus = "Master"
+
+[node name="country_infos" type="Control" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 40.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
 

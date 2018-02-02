@@ -11,7 +11,7 @@ onready var world_def = $world_def
 
 export var DAY_CYCLE_TIME = 45
 
-
+var params = []
 var countries = []
 var scenarios = []
 
@@ -24,6 +24,7 @@ var last_time = -1;
 var money = 100
 var popularity = {}
 
+signal game_started(world)
 signal day_started(world)
 signal day_ended(world)
 signal message_arrived(message)
@@ -38,6 +39,10 @@ func _ready():
         c.prepare(self)
         
     scenarios = world_def.get_scenarios()
+    
+    params = world_def.get_params()
+    
+    emit_signal("game_started", self)
     
     next_day()
 

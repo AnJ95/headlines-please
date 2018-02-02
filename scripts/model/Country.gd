@@ -27,8 +27,11 @@ var params = {
 var readers = 0.1 # between 0 and 1, representing fraction of inhabitants
 var relationships = {} # between 0 and 1, 1 for each other country
 
-func _init(name):
+var country_info_pos
+
+func _init(name, country_info_pos):
     self.name = name
+    self.country_info_pos = country_info_pos
 
 func prepare(world):
     for p in params:
