@@ -7,6 +7,8 @@ const Message = preload("res://scripts/model/Message.gd")
 const COSTS_PER_DAY = 35
 const MONEY_PER_READER = 1
 
+onready var world_def = $world_def
+
 export var DAY_CYCLE_TIME = 45
 
 
@@ -29,18 +31,14 @@ signal message_arrived(message)
 func _init():
     randomize()
 
-    countries.append(Country.new("Holsten"))
-    countries.append(Country.new("Reldan"))
-    countries.append(Country.new("Lemuria"))
-    countries.append(Country.new("Hesperdia"))
-
-    for c in countries:
-        c.prepare(self)
-
-    load_scenarios()
-
 
 func _ready():
+    countries = world_def.get_countries()
+    for c in countries:
+        c.prepare(self)
+        
+    scenarios = world_def.get_scenarios()
+    
     next_day()
 
 func _process(delta):
@@ -61,16 +59,8 @@ func _process(delta):
     if time >= DAY_CYCLE_TIME:
         end_day()
 
+# currently unused
 func load_scenarios():
-    #scenarios.append(Scenario_Ambassador.new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_factory.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_ghettofire.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_hotel.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_practice_flight.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_small_online_salt.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_small_singer_dead.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_pedophile.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_fish.gd").new())
     return
     #TODO geht das so überhaubt?
     var dir = Directory.new()
