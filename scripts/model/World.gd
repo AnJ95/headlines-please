@@ -60,23 +60,16 @@ func _process(delta):
     time += delta
     if time >= DAY_CYCLE_TIME:
         end_day()
-
-var Scenario_Factory = load("res://scripts/model/scenarios/Scenario_factory.gd")
-var Scenario_Ghettofire = load("res://scripts/model/scenarios/Scenario_ghettofire.gd")
-var Scenario_Hotel = load("res://scripts/model/scenarios/Scenario_hotel.gd")
-var Scenario_Practice_Flight = load("res://scripts/model/scenarios/Scenario_practice_flight.gd")
-var Scenario_small_1 = load("res://scripts/model/scenarios/Scenario_small_online_salt.gd")
-var Scenario_small_2 = load("res://scripts/model/scenarios/Scenario_small_singer_dead.gd")
-#var Scenario_Ambassador = load("res://scripts/model/scenarios/Scenario_Ambassador.gd")
-
+        
 func load_scenarios():
     #scenarios.append(Scenario_Ambassador.new())
-    scenarios.append(Scenario_Factory.new())
-    scenarios.append(Scenario_Ghettofire.new())
-    scenarios.append(Scenario_Hotel.new())
-    scenarios.append(Scenario_Practice_Flight.new())
-    scenarios.append(Scenario_small_1.new())
-    scenarios.append(Scenario_small_2.new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_factory.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_ghettofire.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_hotel.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_practice_flight.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_small_online_salt.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_small_singer_dead.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_pedophile.gd").new())
     return
     #TODO geht das so überhaubt?
     var dir = Directory.new()
