@@ -9,13 +9,19 @@ const MAX_RELATIONSHIP = 0.75
 const MIN_PARAM = -0.6
 const MAX_PARAM = 0.6
 
+const MIN_READERS = 0.2
+const MAX_READERS = 0.3
+
+const MIN_HAPPYNESS = 0.5
+const MAX_HAPPYNESS = 0.8
+
 const MAX_READERS_CHANGE = 0.08
 const MAX_PARAM_CHANGE = 0.08
 
 var inhabitants = randi() % (MAX_INHABITANTS - MIN_INHABITANTS) + MIN_INHABITANTS
 
-var happyness = randf() * (MAX_PARAM - MIN_PARAM) + MIN_PARAM
-var economy = randf() * (MAX_PARAM - MIN_PARAM) + MIN_PARAM
+var readers = randf() * (MAX_READERS - MIN_READERS) + MIN_READERS
+var happyness = randf() * (MAX_HAPPYNESS - MIN_HAPPYNESS) + MIN_HAPPYNESS
 
 var params = {
     "democracy" : 0,
@@ -24,7 +30,7 @@ var params = {
     "science" : 0,
     "culture" : 0
 }
-var readers = 0.1 # between 0 and 1, representing fraction of inhabitants
+
 var relationships = {} # between 0 and 1, 1 for each other country
 
 var country_info_pos

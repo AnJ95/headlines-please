@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/CountryInfo.gd" type="Script" id=1]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/ProgressBar.tscn" type="PackedScene" id=3]
 
 [node name="CountryInfo" type="Control" index="0"]
 
@@ -18,7 +19,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin", "Rect" ]
-progress_bar_space = 20
+progress_bar_space = 18
 
 [node name="background" type="ColorRect" parent="." index="0"]
 
@@ -36,16 +37,40 @@ size_flags_vertical = 1
 color = Color( 1, 0.934665, 0.508065, 1 )
 _sections_unfolded = [ "Rect" ]
 
-[node name="lblPopValue" type="Label" parent="." index="1"]
+[node name="lblTitle" type="Label" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 173.0
+margin_bottom = 18.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.223529, 0.0627451, 0.0352941, 1 )
+text = "Hesperdia"
+uppercase = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Rect", "custom_colors", "custom_fonts" ]
+
+[node name="lblPopValue" type="Label" parent="." index="2"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 134.0
-margin_top = 31.0
+margin_top = 24.0
 margin_right = 174.0
-margin_bottom = 45.0
+margin_bottom = 38.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
@@ -60,16 +85,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Rect", "custom_colors", "custom_fonts" ]
 
-[node name="lblPopText" type="Label" parent="." index="2"]
+[node name="lblPopText" type="Label" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 6.0
-margin_top = 31.0
+margin_top = 24.0
 margin_right = 144.0
-margin_bottom = 46.0
+margin_bottom = 39.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
@@ -83,16 +108,16 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Rect", "custom_colors", "custom_fonts" ]
 
-[node name="lblTitle" type="Label" parent="." index="3"]
+[node name="lbReaders" type="Label" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 6.0
-margin_top = 6.0
+margin_top = 38.0
 margin_right = 144.0
-margin_bottom = 33.0
+margin_bottom = 53.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
@@ -100,23 +125,59 @@ size_flags_horizontal = 1
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.223529, 0.0627451, 0.0352941, 1 )
-text = "Hesperdia
-"
+text = "Readers......................."
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Rect", "custom_colors", "custom_fonts" ]
 
-[node name="params" type="Control" parent="." index="4"]
+[node name="prgReaders" parent="." index="5" instance=ExtResource( 3 )]
+
+margin_left = 126.0
+margin_top = 37.0
+margin_right = 174.0
+margin_bottom = 47.0
+
+[node name="lblHappyText" type="Label" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 6.0
+margin_top = 52.0
+margin_right = 144.0
+margin_bottom = 67.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.223529, 0.0627451, 0.0352941, 1 )
+text = "Happyness.................."
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Margin", "Rect", "custom_colors", "custom_fonts" ]
+
+[node name="prgHappy" parent="." index="7" instance=ExtResource( 3 )]
+
+margin_left = 126.0
+margin_top = 51.0
+margin_right = 174.0
+margin_bottom = 61.0
+
+[node name="params" type="Control" parent="." index="8"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 66.0
-margin_top = 62.0
+margin_top = 72.0
 margin_right = 114.0
-margin_bottom = 107.0
+margin_bottom = 117.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0

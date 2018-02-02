@@ -2,11 +2,13 @@ extends Control
 
 onready var lblPopValue = $lblPopValue
 onready var lblTitle = $lblTitle
+onready var prgReaders = $prgReaders
+onready var prgHappy = $prgHappy
 onready var params = $params
 
-export var progress_bar_space = 20
+export var progress_bar_space = 18
 
-var ProgressBar = preload("res://scenes/ProgressBar.tscn")
+var ParamBar = preload("res://scenes/ParamBar.tscn")
 
 var param_elems = {}
 
@@ -17,7 +19,7 @@ func init(country, params):
     
     var cur_y = 0
     for param in params:
-        var node = ProgressBar.instance()
+        var node = ParamBar.instance()
         node.rect_position = Vector2(0, cur_y)
         self.params.add_child(node)
         node.init(param)
@@ -28,15 +30,9 @@ func init(country, params):
 
 func update(country):
     lblPopValue.set_text(str(round(country.inhabitants)) + "M")
-    
+    prgReaders.update(country.readers)
+    prgHappy.update(country.happyness)
     for param in param_elems:
-        param_elems[param].update(country.params[param] / 2 + 0.5)
-        
-    #for progressBar in params:
-         #progressBar.
-    #get_node("lblReaders").set_text(str(round(country.inhabitants * country.readers)) + "M")
-    #get_node("Economy").update(country.params["economy"])
-    #get_node("Satisfaction").update(country.params["satisfaction"])
-    #get_node("Bias").update(country.params["bias"])
+        param_elems[param].update(country.params[param])
     
     

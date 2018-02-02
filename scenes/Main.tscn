@@ -489,20 +489,20 @@ mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
 
+[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
+
 [connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
 
 [connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
-
-[connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
 [connection signal="day_started" from="." to="PaperArea" method="on_day_started"]
 
 [connection signal="game_started" from="." to="Draggables/Map" method="on_game_started"]
 
+[connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
+
 [connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
 
 [connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
-
-[connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
 
 
