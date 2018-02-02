@@ -60,7 +60,7 @@ func _process(delta):
     time += delta
     if time >= DAY_CYCLE_TIME:
         end_day()
-        
+
 func load_scenarios():
     #scenarios.append(Scenario_Ambassador.new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_factory.gd").new())
@@ -70,6 +70,7 @@ func load_scenarios():
     scenarios.append(load("res://scripts/model/scenarios/Scenario_small_online_salt.gd").new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_small_singer_dead.gd").new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_pedophile.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_fish.gd").new())
     return
     #TODO geht das so überhaubt?
     var dir = Directory.new()
