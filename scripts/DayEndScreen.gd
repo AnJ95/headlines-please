@@ -80,6 +80,4 @@ func on_day_ended(world):
     Heading.set_text("Day " + str(world.day) + " over!")
 
     self.visible = true # TODO animate fade in
-
-    world.cap_values()
     

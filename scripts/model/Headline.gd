@@ -2,15 +2,13 @@ const FormatUtils = preload("res://scripts/FormatUtils.gd")
 
 var scenario_name
 var text
-var params = {
-    "bias" : 0,
-    "satisfaction" : 0
-}
+var params = {}
 var drama = 0
 var format_string
 
 func _init(format_string, drama, params):
     self.format_string = format_string
+
     self.params = params
     self.drama = drama
 

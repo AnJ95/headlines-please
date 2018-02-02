@@ -28,7 +28,7 @@ signal message_arrived(message)
 
 func _init():
     randomize()
-    
+
     countries.append(Country.new("Holsten"))
     countries.append(Country.new("Reldan"))
     countries.append(Country.new("Lemuria"))
@@ -100,7 +100,7 @@ func next_day():
         var next_scenario = get_scenario()
         if !current_scenarios.has(next_scenario.name):
             current_scenarios[next_scenario.name] = next_scenario
-    
+
     get_node("Draggables/Map").update(countries)
 
     day += 1
@@ -114,11 +114,11 @@ func next_day():
 func end_day():
     print("end_day")
     game_running = false
-    
+
     money -= COSTS_PER_DAY
     money += get_total_readers() * MONEY_PER_READER
     get_node("TweetrContainer/Money").set_text(str(round(money)) + "$")
-    
+
     emit_signal("day_ended", self)
 
 
@@ -145,8 +145,9 @@ func make_format_dic(countries):
 
 func broadcast_headline(headline):
 
-    print("adding headline: " + params_to_string(headline.params))
-    
+    print("adding headline: " + str(headline.params))
+    print("drama : " + str(headline.drama))
+
     var totalReaders = get_total_readers()
     for country in countries:
         country.broadcast_headline(headline)
@@ -158,23 +159,6 @@ func get_total_readers():
     for country in countries:
         total += country.readers * country.inhabitants
     return total
-
-func params_to_string(p):
-    return str(p)
-
-func cap_values():
-    for c in countries:
-        for p in c.params:
-            c.params[p] = cap(c.params[p])
-        c.readers = cap(c.readers)
-    pass
-
-func cap(val):
-    if (val > 1):
-        return 1
-    if (val < 0):
-        return 0
-    return val
 
 func fisher_yates(array):
     for i in range(0, array.size()-2):
