@@ -10,7 +10,7 @@
 [ext_resource path="res://resources/sounds/Map Out 1.ogg" type="AudioStream" id=8]
 [ext_resource path="res://resources/sounds/Map Out 2.ogg" type="AudioStream" id=9]
 
-[node name="Map" type="Control"]
+[node name="Map" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -26,6 +26,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+map_day_end_position = Vector2( 27, 90 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
@@ -97,5 +98,14 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
+
+[node name="Tween" type="Tween" parent="." index="6"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 
