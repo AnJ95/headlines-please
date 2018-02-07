@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://scripts/model/World.gd" type="Script" id=1]
 [ext_resource path="res://scripts/model/WorldDef.gd" type="Script" id=2]
@@ -19,11 +19,12 @@
 [ext_resource path="res://resources/sprites/add-on.png" type="Texture" id=17]
 [ext_resource path="res://scenes/Tweetr.tscn" type="PackedScene" id=18]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=19]
-[ext_resource path="res://scripts/PicturesContainer.gd" type="Script" id=20]
-[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=21]
-[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=22]
-[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=23]
-[ext_resource path="res://resources/sounds/bossa-bgm.ogg" type="AudioStream" id=24]
+[ext_resource path="res://scripts/Debug.gd" type="Script" id=20]
+[ext_resource path="res://scripts/PicturesContainer.gd" type="Script" id=21]
+[ext_resource path="res://resources/sprites/pictsource.png" type="Texture" id=22]
+[ext_resource path="res://scripts/DayEndScreen.gd" type="Script" id=23]
+[ext_resource path="res://resources/fonts/PlayfairDisplaySC-Regular.otf" type="DynamicFontData" id=24]
+[ext_resource path="res://resources/sounds/bossa-bgm.ogg" type="AudioStream" id=25]
 
 [sub_resource type="Animation" id=1]
 
@@ -103,10 +104,10 @@ tracks/0/keys = {
 size = 50
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 23 )
+font_data = ExtResource( 24 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -170,6 +171,7 @@ paper_count = 3
 
 [node name="Draggables" type="Control" parent="." index="4"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -369,8 +371,33 @@ playback_speed = 1.0
 anims/leave = SubResource( 3 )
 blend_times = [  ]
 
+[node name="Button" type="Button" parent="TweetrContainer" index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 836.0
+margin_top = 94.0
+margin_right = 848.0
+margin_bottom = 114.0
+rect_pivot_offset = Vector2( 0, 0 )
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+script = ExtResource( 20 )
+
 [node name="PicturesContainer" type="Control" parent="." index="7"]
 
+editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -380,13 +407,13 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 20 )
+script = ExtResource( 21 )
 _sections_unfolded = [ "Rect" ]
 
 [node name="Sprite" type="Sprite" parent="PicturesContainer" index="0"]
 
 position = Vector2( 777.666, 528.373 )
-texture = ExtResource( 21 )
+texture = ExtResource( 22 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PicturesContainer" index="1"]
 
@@ -400,6 +427,7 @@ blend_times = [  ]
 
 [node name="DayEndScreen" type="Control" parent="." index="8"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -412,7 +440,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = ExtResource( 22 )
+script = ExtResource( 23 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 leaving_nodes = [ NodePath("../Phaxogram"), NodePath("../Draggables/Airmail"), NodePath("../PicturesContainer"), NodePath("../TweetrContainer") ]
 
@@ -482,7 +510,7 @@ _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="9"]
 
-stream = ExtResource( 24 )
+stream = ExtResource( 25 )
 volume_db = 5.0
 autoplay = true
 mix_target = 0
@@ -491,18 +519,20 @@ _sections_unfolded = [ "Pause" ]
 
 [connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
-[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
-
 [connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
+
+[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
 
 [connection signal="day_started" from="." to="PaperArea" method="on_day_started"]
 
 [connection signal="game_started" from="." to="Draggables/Map" method="on_game_started"]
 
+[connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
+
 [connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
 
 [connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
 
-[connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
+[connection signal="pressed" from="TweetrContainer/Button" to="TweetrContainer/Button" method="on_clicked"]
 
 
