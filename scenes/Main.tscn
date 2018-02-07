@@ -107,7 +107,7 @@ use_filter = false
 font_data = ExtResource( 24 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -194,7 +194,6 @@ margin_top = -203.0
 margin_right = 481.0
 margin_bottom = 61.0
 _sections_unfolded = [ "Material", "Rect", "Visibility" ]
-map_day_end_position = Vector2( 30, 90 )
 
 [node name="Airmail" type="Control" parent="Draggables" index="1"]
 
@@ -428,8 +427,6 @@ blend_times = [  ]
 
 [node name="DayEndScreen" type="Control" parent="." index="8"]
 
-editor/display_folded = true
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -445,16 +442,34 @@ script = ExtResource( 23 )
 _sections_unfolded = [ "Anchor", "Margin" ]
 leaving_nodes = [ NodePath("../Phaxogram"), NodePath("../Draggables/Airmail"), NodePath("../PicturesContainer"), NodePath("../TweetrContainer") ]
 
-[node name="DraggableHolder" type="Control" parent="DayEndScreen" index="0"]
+[node name="folder" type="ColorRect" parent="DayEndScreen" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 440.0
-margin_top = 250.0
-margin_right = 440.0
-margin_bottom = 250.0
+margin_left = 528.0
+margin_top = 10.0
+margin_right = 868.0
+margin_bottom = 490.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.952941, 0.709804, 0.631373, 1 )
+_sections_unfolded = [ "Rect" ]
+
+[node name="DraggableHolder" type="Control" parent="DayEndScreen/folder" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 170.0
+margin_top = 240.0
+margin_right = 170.0
+margin_bottom = 240.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -462,17 +477,16 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Anchor", "Margin", "Rect" ]
 
-[node name="Heading" type="Label" parent="DayEndScreen" index="1"]
+[node name="Heading" type="Label" parent="DayEndScreen/folder" index="1"]
 
 modulate = Color( 0.298039, 0.12549, 0.0980392, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1.0
-margin_top = -9.0
-margin_right = 880.0
-margin_bottom = 61.0
+margin_left = 4.0
+margin_right = 335.0
+margin_bottom = 70.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
@@ -486,17 +500,17 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="Label" type="Label" parent="DayEndScreen" index="2"]
+[node name="Label" type="Label" parent="DayEndScreen/folder" index="2"]
 
 modulate = Color( 0.298039, 0.12549, 0.0980392, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 3.0
-margin_top = 429.0
-margin_right = 882.0
-margin_bottom = 499.0
+margin_left = 7.0
+margin_top = 402.0
+margin_right = 335.0
+margin_bottom = 472.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
 mouse_default_cursor_shape = 0
@@ -518,25 +532,25 @@ mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
 
-[connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
+[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
 
 [connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
-[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
+[connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
 
 [connection signal="day_ended" from="." to="Draggables/Map" method="day_ended"]
 
-[connection signal="day_started" from="." to="PaperArea" method="on_day_started"]
-
 [connection signal="day_started" from="." to="Draggables/Map" method="day_started"]
 
+[connection signal="day_started" from="." to="PaperArea" method="on_day_started"]
+
 [connection signal="game_started" from="." to="Draggables/Map" method="on_game_started"]
+
+[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
 
 [connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
 
 [connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
-
-[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
 
 [connection signal="pressed" from="TweetrContainer/Button" to="TweetrContainer/Button" method="on_clicked"]
 
