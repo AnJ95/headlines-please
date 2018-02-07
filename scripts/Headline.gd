@@ -8,10 +8,12 @@ onready var button = get_node("TextureButton")
 onready var underline = get_node("headline_underline")
 var size_adjusted = false
 var dropzone = null
+var is_clickable = false
 
 func init(var headline, var clickElem, var clickMethod):
     label.text = headline.text
     if clickElem != null:
+        is_clickable = true
         button.connect("pressed", clickElem, clickMethod, [headline])
 
 func on_size_changed():
@@ -32,8 +34,10 @@ func register_dropzone(dropzone):
     self.dropzone = dropzone
 
 func on_mouse_entered():
-    rect_position.y += 1
+    if is_clickable:
+        rect_position.y += 1
 
 
 func on_mouse_exited():
-    rect_position.y -= 1
+    if is_clickable:
+        rect_position.y -= 1
