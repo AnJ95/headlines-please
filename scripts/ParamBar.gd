@@ -2,10 +2,12 @@ extends Control
 
 var current_value
 
+export var arrow_position = Vector2(125, 5)
 onready var progress_bar = $progress_bar
 onready var lbl_left = $lbl_left
 onready var lbl_right = $lbl_right
 
+var Arrow = preload("res://scenes/Arrow.tscn")
 
 func init(param):
     lbl_left.set_text(param.name_left)
@@ -13,5 +15,28 @@ func init(param):
     pass
 
 func update(value):
+    if current_value != null:
+        if value > current_value:
+            value_increase(value)
+        elif value < current_value:
+            value_decrease(value)
+    else:
+        progress_bar.set(value / 2 + 0.5)
     current_value = value
+    
+func value_increase(value):
+    value_changed(value, Arrow.instance().init("up"))
+    
+func value_decrease(value):
+    value_changed(value, Arrow.instance().init("down"))
+    
+func value_changed(value, arrow):
+    # animate bar movement
     progress_bar.update(value / 2 + 0.5)
+    
+    # add arrow indicator
+    arrow.rect_position = arrow_position
+    add_child(arrow)
+    
+    
+    

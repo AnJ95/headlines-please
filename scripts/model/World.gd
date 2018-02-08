@@ -42,6 +42,8 @@ func _ready():
     
     params = world_def.get_params()
     
+    get_node("Draggables/Map").update(self)
+    
     emit_signal("game_started", self)
     
     next_day()
@@ -89,8 +91,6 @@ func next_day():
         var next_scenario = get_scenario()
         if !current_scenarios.has(next_scenario.name):
             current_scenarios[next_scenario.name] = next_scenario
-
-    get_node("Draggables/Map").update(countries)
 
     day += 1
     time = 0
@@ -148,6 +148,12 @@ func get_total_readers():
     for country in countries:
         total += country.readers * country.inhabitants
     return total
+    
+func get_country(country_name):
+    for country in countries:
+        if country.name == country_name:
+            return country
+    return null
 
 func fisher_yates(array):
     for i in range(0, array.size()-2):

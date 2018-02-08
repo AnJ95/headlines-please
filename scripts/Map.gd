@@ -2,6 +2,7 @@ extends "res://scripts/Draggable.gd"
 
 onready var twoState = $TwoStateDraggable
 onready var country_infos = $country_infos
+onready var country_info_dic = {}
 
 onready var audio_stream_player_in = get_node("AudioStreamPlayerIn")
 onready var audio_stream_player_out = get_node("AudioStreamPlayerOut")
@@ -10,7 +11,6 @@ onready var tween = get_node("Tween")
 export var map_day_end_position = Vector2(27, 90)
 
 var CountryInfo = preload("res://scenes/CountryInfo.tscn")
-
 var start_position = null
 
 # from Draggable
@@ -28,14 +28,15 @@ func stop_drag():
 func can_drag_now():
     return not twoState.is_animating()
     
-func update(countries):
-#    for country in countries:
-#        get_node("Country" + country.name).update(country)
+func update(world):
+    for country_name in country_info_dic:
+        country_info_dic[country_name].update(world.get_country(country_name))
     pass
 
 func on_game_started(world):
     for country in world.countries:
         var country_info = CountryInfo.instance()
+        country_info_dic[country.name] = country_info
         country_infos.add_child(country_info)
         country_info.init(country, world.params)
 

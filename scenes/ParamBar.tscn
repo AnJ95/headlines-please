@@ -19,6 +19,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Rect" ]
+arrow_position = Vector2( 125, 5 )
 
 [node name="progress_bar" parent="." index="0" instance=ExtResource( 2 )]
 

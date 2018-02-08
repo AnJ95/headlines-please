@@ -74,4 +74,7 @@ func start_shaking():
 func stop_shaking():
     if shake_animation_player.is_playing():
         shake_animation_player.stop()
+        
+func clear_children():
+    contained_draggables = []
     

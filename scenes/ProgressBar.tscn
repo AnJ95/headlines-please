@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/ProgressBar.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/param_progress.png" type="Texture" id=2]
 
-[node name="ProgressBar" type="Control"]
+[node name="ProgressBar" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -40,5 +40,14 @@ color = Color( 0.459761, 1, 0.413979, 1 )
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="Tween" type="Tween" parent="." index="2"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 

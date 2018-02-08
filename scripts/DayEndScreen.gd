@@ -29,34 +29,48 @@ func _process(delta):
             c.queue_free()
         
         if (currentSlot >= Airmail.contained_draggables.size()):
+            # if done showing all draggables
             isRunning = false
-            self.visible = false # TODO animate fade out
             world.next_day()
-            for leaving_node in leaving_nodes:
-                get_node(leaving_node).animation_player.play_backwards("leave")
+            Airmail.clear_children()
+            hide()
         else:
             var draggable = Airmail.contained_draggables[currentSlot]
-  
-            DraggableHolder.add_child(draggable)
-            draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)
+            show_draggable(draggable)
+
+func show():
+    for leaving_node in leaving_nodes:
+        get_node(leaving_node).animation_player.play("leave")
+    self.visible = true # TODO animate fade in
+    
+func hide():
+    self.visible = false # TODO animate fade out
+    for leaving_node in leaving_nodes:
+        get_node(leaving_node).animation_player.play_backwards("leave")
+
+func show_draggable(draggable):
+    draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)
+    DraggableHolder.add_child(draggable)
+    
+    var labelStr
+    
+    if draggable_is_valid(draggable):
+        var scenario = draggable.selected_headline.scenario_name
+        if (doneScenarios.has(scenario)):
+            labelStr = "Redundant Article!"
+        else:
+            doneScenarios.append(scenario)
+            var rating = round(world.broadcast_headline(draggable.selected_headline))
+            # TODO better updating
+            get_node("/root/Main/Draggables/Map").update(world)
+            labelStr = "Readers "
+            if rating > 0:
+                labelStr += "+"
+            labelStr += str(rating)
+    else:
+        labelStr = "..."
             
-            var labelStr
-            
-            if draggable_is_valid(draggable):
-                var scenario = draggable.selected_headline.scenario_name
-                if (doneScenarios.has(scenario)):
-                    labelStr = "Redundant Article!"
-                else:
-                    doneScenarios.append(scenario)
-                    var rating = round(world.broadcast_headline(draggable.selected_headline))
-                    labelStr = "Readers "
-                    if rating > 0:
-                        labelStr += "+"
-                    labelStr += str(rating)
-            else:
-                labelStr = "..."
-            
-            Label.set_text(labelStr)
+    Label.set_text(labelStr)
 
 func get_rating(draggable):
     if self is DropZone and self.selected_headline != null:
@@ -74,10 +88,8 @@ func on_day_ended(world):
     self.world = world
     doneScenarios = []
 
-    for leaving_node in leaving_nodes:
-        get_node(leaving_node).animation_player.play("leave")
-    
+    show()
     Heading.set_text("Day " + str(world.day) + " over!")
 
-    self.visible = true # TODO animate fade in
+    
     
