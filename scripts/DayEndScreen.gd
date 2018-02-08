@@ -10,9 +10,9 @@ var doneScenarios = []
 const DropZone = preload("res://scripts/DropZone.gd")
 
 onready var Airmail = get_node("/root/Main/Draggables/Airmail")
-onready var DraggableHolder = get_node("folder/DraggableHolder")
-onready var Label = get_node("folder/Label")
-onready var Heading = get_node("folder/Heading")
+#onready var DraggableHolder = get_node("folder/DraggableHolder")
+#onready var Label = get_node("folder/Label")
+#onready var Heading = get_node("folder/Heading")
 
 export(Array, NodePath) var leaving_nodes = []
     
