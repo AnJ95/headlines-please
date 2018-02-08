@@ -23,6 +23,7 @@ func get_scenarios():
     scenarios.append(load("res://scripts/model/scenarios/Scenario_small_singer_dead.gd").new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_pedophile.gd").new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_fish.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_refugees_in_albrahm.gd").new())
     return scenarios
     
 func get_params():
