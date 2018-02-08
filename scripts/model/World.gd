@@ -104,8 +104,7 @@ func end_day():
     print("end_day")
     game_running = false
 
-    money -= COSTS_PER_DAY
-    money += get_total_readers() * MONEY_PER_READER
+    money += get_current_bilances()
     get_node("TweetrContainer/Money").set_text(str(round(money)) + "$")
 
     emit_signal("day_ended", self)
@@ -148,6 +147,9 @@ func get_total_readers():
     for country in countries:
         total += country.readers * country.inhabitants
     return total
+    
+func get_current_bilances():
+    return get_total_readers() * MONEY_PER_READER - COSTS_PER_DAY
     
 func get_country(country_name):
     for country in countries:

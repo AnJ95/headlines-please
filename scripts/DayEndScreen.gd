@@ -1,8 +1,6 @@
 extends Control
 
-const timeSlot = 2.5
 var isRunning = false
-var timeYet = 0
 var currentSlot = -1
 var world
 var doneScenarios = []
@@ -11,9 +9,6 @@ const ReportPage = preload("res://scenes/ReportPage.tscn")
 const DropZone = preload("res://scripts/DropZone.gd")
 
 onready var Airmail = get_node("/root/Main/Draggables/Airmail")
-#onready var DraggableHolder = get_node("folder/DraggableHolder")
-#onready var Label = get_node("folder/Label")
-#onready var Heading = get_node("folder/Heading")
 
 export(Array, NodePath) var leaving_nodes = []
     
@@ -37,17 +32,36 @@ func init_report_page(reportPage, draggable):
     
     reportPage.rect_position = Vector2(528, 10)
     
-    #init(draggable, report_num, item_num, item_max_num, countries, country_reader_changes, total_reader_change, financial_impact, note)
+    
+    # prepare values before they are changed
+    var country_reader_changes = []
+    for country in world.countries:
+        country_reader_changes.append(-country.get_readers())
+    var total_reader_change = -world.get_total_readers()
+    var financial_impact = -world.get_current_bilances()
+    
+    # broadcast message to countries
+    if draggable_is_valid(draggable):
+        world.broadcast_headline(draggable.selected_headline)
+        
+    # calculate changes using old and new values
+    for country_id in range(world.countries.size()):
+        country_reader_changes[country_id] = round(10 * (country_reader_changes[country_id] + world.countries[country_id].get_readers())) / 10
+    total_reader_change += world.get_total_readers()
+    financial_impact += world.get_current_bilances()
+    
+    #init(dayEndScreen, draggable, report_num, item_num, item_max_num, countries, country_reader_changes, total_reader_change, financial_impact, note)
     reportPage.init(
+        self,
         draggable,
         world.day,
         currentSlot + 1,
         Airmail.contained_draggables.size(),
         world.countries,
-        [], # TODO get/calculate them!
-        2, # TODO get/calculate
-        12, # TODO get/calculate
-        "Solid news, bro" # TODO get/calculate
+        country_reader_changes,
+        round(10 * total_reader_change) / 10,
+        round(10 * financial_impact) / 10,
+        "Solid news, bro" # TODO get
         )
     
 
@@ -95,8 +109,6 @@ func draggable_is_valid(draggable):
     return draggable is DropZone and draggable.selected_headline != null
 
 func on_day_ended(world):
-    isRunning = true
-    timeYet = 0
     currentSlot = -1
     self.world = world
     doneScenarios = []

@@ -6,7 +6,7 @@
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=4]
 [ext_resource path="res://resources/sprites/btn-o.png" type="Texture" id=5]
 
-[node name="report_page" type="ColorRect" index="0"]
+[node name="report_page" type="ColorRect"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -40,7 +40,7 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
+_sections_unfolded = [ "Anchor", "Margin", "Mouse", "Rect" ]
 
 [node name="lblReport" type="Label" parent="." index="1"]
 
@@ -243,7 +243,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
-text = "Estimated financial impact:"
+text = "Financial impact:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
@@ -255,7 +255,32 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 184.0
+margin_left = 182.0
+margin_top = 375.0
+margin_right = 291.0
+margin_bottom = 396.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
+text = "+4"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
+
+[node name="lblImpactSuffix" type="Label" parent="." index="12"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 295.0
 margin_top = 380.0
 margin_right = 333.0
 margin_bottom = 401.0
@@ -267,14 +292,14 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
-text = "+230$"
+text = "k$/day"
 align = 2
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblReaderChangesTitle" type="Label" parent="." index="12"]
+[node name="lblReaderChangesTitle" type="Label" parent="." index="13"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -298,7 +323,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblReaderChanges" type="Label" parent="." index="13"]
+[node name="lblReaderChanges" type="Label" parent="." index="14"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -326,7 +351,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblTotalReaderChange" type="Label" parent="." index="14"]
+[node name="lblTotalReaderChange" type="Label" parent="." index="15"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -351,7 +376,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblTotalReaderChangeTitle" type="Label" parent="." index="15"]
+[node name="lblTotalReaderChangeTitle" type="Label" parent="." index="16"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -375,7 +400,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblNotes" type="Label" parent="." index="16"]
+[node name="lblNotes" type="Label" parent="." index="17"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -400,16 +425,20 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="TextureButton" type="TextureButton" parent="." index="17"]
+[node name="btn-o" type="Sprite" parent="." index="18"]
+
+position = Vector2( 317, 458 )
+texture = ExtResource( 5 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Button" type="TextureButton" parent="." index="19"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 300.0
-margin_top = 444.0
-margin_right = 332.0
-margin_bottom = 476.0
+margin_right = 340.0
+margin_bottom = 480.0
 rect_pivot_offset = Vector2( 0, 0 )
 focus_mode = 2
 mouse_filter = 0
@@ -420,7 +449,10 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 5 )
-_sections_unfolded = [ "Anchor", "Textures" ]
+_sections_unfolded = [ "Mouse", "Rect" ]
+
+[connection signal="button_down" from="Button" to="." method="on_button_down"]
+
+[connection signal="pressed" from="Button" to="." method="on_click"]
 
 

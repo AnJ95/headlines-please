@@ -38,6 +38,9 @@ var country_info_pos
 func _init(name, country_info_pos):
     self.name = name
     self.country_info_pos = country_info_pos
+    
+func get_readers():
+    return inhabitants * readers
 
 func prepare(world):
     for p in params:

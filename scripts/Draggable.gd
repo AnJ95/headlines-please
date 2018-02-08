@@ -9,7 +9,7 @@ var containing_droppable = null
 var hovering_droppable = null
 onready var Root = get_node("/root/Main/Draggables") 
 
-func _ready():
+func _init():
     connect("mouse_entered", self, "on_mouse_entered")
     connect("mouse_exited", self, "on_mouse_exited")
 
