@@ -13,6 +13,10 @@ onready var lblNotes = $lblNotes
 
 
 func init(draggable, report_num, item_num, item_max_num, countries, country_reader_changes, total_reader_change, financial_impact, note):
+    draggable.rect_position = draggableHolder.rect_size / 2 - draggable.rect_size / 2
+    draggableHolder.add_child(draggable)
+    
+    
     lblReport.set_text("Report #" + str(report_num))
     lblItem.set_text("Item " + str(item_num) + "/" + str(item_max_num))
     
