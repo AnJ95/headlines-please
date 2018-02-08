@@ -1,17 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scripts/ReportPage.gd" type="Script" id=1]
 [ext_resource path="res://resources/fonts/BigPrintedText.tres" type="DynamicFont" id=2]
 [ext_resource path="res://resources/fonts/MediumPrintedText.tres" type="DynamicFont" id=3]
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=4]
 [ext_resource path="res://resources/sprites/btn-o.png" type="Texture" id=5]
-
-[sub_resource type="DynamicFont" id=1]
-
-size = 50
-use_mipmaps = false
-use_filter = false
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
 [node name="report_page" type="ColorRect" index="0"]
 
@@ -96,30 +89,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="Label" type="Label" parent="." index="3"]
-
-modulate = Color( 0.298039, 0.12549, 0.0980392, 1 )
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 7.0
-margin_top = 402.0
-margin_right = 335.0
-margin_bottom = 472.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-custom_fonts/font = SubResource( 1 )
-align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Margin", "Material", "Size Flags", "Theme", "Visibility", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
-
-[node name="ColorRect" type="ColorRect" parent="." index="4"]
+[node name="ColorRect" type="ColorRect" parent="." index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -136,7 +106,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.294118, 0.121569, 0.0941176, 1 )
 
-[node name="ColorRect2" type="ColorRect" parent="." index="5"]
+[node name="ColorRect2" type="ColorRect" parent="." index="4"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -153,7 +123,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.294118, 0.121569, 0.0941176, 1 )
 
-[node name="ColorRect3" type="ColorRect" parent="." index="6"]
+[node name="ColorRect3" type="ColorRect" parent="." index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -170,7 +140,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.294118, 0.121569, 0.0941176, 1 )
 
-[node name="ColorRect4" type="ColorRect" parent="." index="7"]
+[node name="ColorRect4" type="ColorRect" parent="." index="6"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -187,7 +157,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.294118, 0.121569, 0.0941176, 1 )
 
-[node name="ColorRect5" type="ColorRect" parent="." index="8"]
+[node name="ColorRect5" type="ColorRect" parent="." index="7"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -204,7 +174,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.294118, 0.121569, 0.0941176, 1 )
 
-[node name="lblCountriesTitle" type="Label" parent="." index="9"]
+[node name="lblCountriesTitle" type="Label" parent="." index="8"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -228,104 +198,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblImpact" type="Label" parent="." index="10"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 126.0
-margin_top = 380.0
-margin_right = 275.0
-margin_bottom = 401.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
-text = "Estimated financial impact:"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
-
-[node name="lblImpact2" type="Label" parent="." index="11"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 184.0
-margin_top = 380.0
-margin_right = 333.0
-margin_bottom = 401.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
-text = "+230$"
-align = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
-
-[node name="lblReaderChangeTitle" type="Label" parent="." index="12"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 73.0
-margin_top = 380.0
-margin_right = 143.0
-margin_bottom = 401.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
-text = "Readers"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
-
-[node name="lblTotalTitle" type="Label" parent="." index="13"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 7.0
-margin_top = 464.0
-margin_right = 77.0
-margin_bottom = 479.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
-text = "Total"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
-
-[node name="lblCountries" type="Label" parent="." index="14"]
+[node name="lblCountries" type="Label" parent="." index="9"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -352,32 +225,80 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblNotes" type="Label" parent="." index="15"]
+[node name="lblImpactTitle" type="Label" parent="." index="10"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 126.0
-margin_top = 403.0
-margin_right = 332.0
-margin_bottom = 461.0
+margin_top = 380.0
+margin_right = 275.0
+margin_bottom = 401.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
-text = "Good story, further establishing our newspaper..."
-autowrap = true
+text = "Estimated financial impact:"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblReaderChange" type="Label" parent="." index="16"]
+[node name="lblImpact" type="Label" parent="." index="11"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 184.0
+margin_top = 380.0
+margin_right = 333.0
+margin_bottom = 401.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
+text = "+230$"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
+
+[node name="lblReaderChangesTitle" type="Label" parent="." index="12"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 73.0
+margin_top = 380.0
+margin_right = 143.0
+margin_bottom = 401.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
+text = "Readers"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
+
+[node name="lblReaderChanges" type="Label" parent="." index="13"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -405,7 +326,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="lblTotal" type="Label" parent="." index="17"]
+[node name="lblTotalReaderChange" type="Label" parent="." index="14"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -430,7 +351,56 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
 
-[node name="TextureButton" type="TextureButton" parent="." index="18"]
+[node name="lblTotalReaderChangeTitle" type="Label" parent="." index="15"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 7.0
+margin_top = 464.0
+margin_right = 77.0
+margin_bottom = 479.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
+text = "Total"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
+
+[node name="lblNotes" type="Label" parent="." index="16"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 126.0
+margin_top = 403.0
+margin_right = 332.0
+margin_bottom = 461.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = true
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.294118, 0.121569, 0.0941176, 1 )
+text = "Good story, further establishing our newspaper..."
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "BBCode", "custom_colors", "custom_fonts" ]
+
+[node name="TextureButton" type="TextureButton" parent="." index="17"]
 
 anchor_left = 0.0
 anchor_top = 0.0

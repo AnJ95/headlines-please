@@ -7,6 +7,7 @@ var currentSlot = -1
 var world
 var doneScenarios = []
 
+const ReportPage = preload("res://scenes/ReportPage.tscn")
 const DropZone = preload("res://scripts/DropZone.gd")
 
 onready var Airmail = get_node("/root/Main/Draggables/Airmail")
@@ -16,27 +17,39 @@ onready var Airmail = get_node("/root/Main/Draggables/Airmail")
 
 export(Array, NodePath) var leaving_nodes = []
     
-func _process(delta):
-    if not isRunning:
-        return
 
-    timeYet += delta
-    if timeYet >= timeSlot:
-        timeYet -= timeSlot
-        currentSlot += 1
+func next_page():
+    currentSlot += 1
+    if (currentSlot >= Airmail.contained_draggables.size()):
+        # if done showing all draggables
+        isRunning = false
+        world.next_day()
+        Airmail.clear_children()
+        hide()
+    else:
+        var draggable = Airmail.contained_draggables[currentSlot]
         
-        for c in DraggableHolder.get_children():
-            c.queue_free()
-        
-        if (currentSlot >= Airmail.contained_draggables.size()):
-            # if done showing all draggables
-            isRunning = false
-            world.next_day()
-            Airmail.clear_children()
-            hide()
-        else:
-            var draggable = Airmail.contained_draggables[currentSlot]
-            show_draggable(draggable)
+        var reportPage = ReportPage.instance()
+        add_child(reportPage)
+        init_report_page(reportPage, draggable)
+
+func init_report_page(reportPage, draggable):
+    
+    reportPage.rect_position = Vector2(528, 10)
+    
+    #init(draggable, report_num, item_num, item_max_num, countries, country_reader_changes, total_reader_change, financial_impact, note)
+    reportPage.init(
+        draggable,
+        world.day,
+        currentSlot + 1,
+        Airmail.contained_draggables.size(),
+        world.countries,
+        [], # TODO get/calculate them!
+        2, # TODO get/calculate
+        12, # TODO get/calculate
+        "Solid news, bro" # TODO get/calculate
+        )
+    
 
 func show():
     for leaving_node in leaving_nodes:
@@ -48,29 +61,29 @@ func hide():
     for leaving_node in leaving_nodes:
         get_node(leaving_node).animation_player.play_backwards("leave")
 
-func show_draggable(draggable):
-    draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)
-    DraggableHolder.add_child(draggable)
-    
-    var labelStr
-    
-    if draggable_is_valid(draggable):
-        var scenario = draggable.selected_headline.scenario_name
-        if (doneScenarios.has(scenario)):
-            labelStr = "Redundant Article!"
-        else:
-            doneScenarios.append(scenario)
-            var rating = round(world.broadcast_headline(draggable.selected_headline))
-            # TODO better updating
-            get_node("/root/Main/Draggables/Map").update(world)
-            labelStr = "Readers "
-            if rating > 0:
-                labelStr += "+"
-            labelStr += str(rating)
-    else:
-        labelStr = "..."
-            
-    Label.set_text(labelStr)
+#func show_draggable(draggable):
+#    draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)
+#    DraggableHolder.add_child(draggable)
+#
+#    var labelStr
+#
+#    if draggable_is_valid(draggable):
+#        var scenario = draggable.selected_headline.scenario_name
+#        if (doneScenarios.has(scenario)):
+#            labelStr = "Redundant Article!"
+#        else:
+#            doneScenarios.append(scenario)
+#            var rating = round(world.broadcast_headline(draggable.selected_headline))
+#            # TODO better updating
+#            get_node("/root/Main/Draggables/Map").update(world)
+#            labelStr = "Readers "
+#            if rating > 0:
+#                labelStr += "+"
+#            labelStr += str(rating)
+#    else:
+#        labelStr = "..."
+#
+#    Label.set_text(labelStr)
 
 func get_rating(draggable):
     if self is DropZone and self.selected_headline != null:
@@ -87,9 +100,11 @@ func on_day_ended(world):
     currentSlot = -1
     self.world = world
     doneScenarios = []
-
+    
     show()
-    Heading.set_text("Day " + str(world.day) + " over!")
+    
+    currentSlot = -1
+    next_page()
 
     
     

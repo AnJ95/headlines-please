@@ -99,7 +99,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 50, 120 ) ]
 }
 
-[node name="Main" type="Control" index="0"]
+[node name="Main" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -418,6 +418,7 @@ blend_times = [  ]
 
 [node name="DayEndScreen" type="Control" parent="." index="8"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -435,6 +436,8 @@ leaving_nodes = [ NodePath("../Phaxogram"), NodePath("../Draggables/Airmail"), N
 
 [node name="report_page" parent="DayEndScreen" index="0" instance=ExtResource( 24 )]
 
+visible = false
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="9"]
 
 stream = ExtResource( 25 )
@@ -444,11 +447,11 @@ mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
 
-[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
-
 [connection signal="day_ended" from="." to="Draggables/Map" method="day_ended"]
 
 [connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
+
+[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
 
 [connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
@@ -458,9 +461,9 @@ _sections_unfolded = [ "Pause" ]
 
 [connection signal="game_started" from="." to="Draggables/Map" method="on_game_started"]
 
-[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
-
 [connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
+
+[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
 
 [connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
 
