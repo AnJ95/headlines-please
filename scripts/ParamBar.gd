@@ -1,6 +1,7 @@
 extends Control
 
 var current_value
+var current_arrow = null
 
 export var arrow_position = Vector2(125, 5)
 onready var progress_bar = $progress_bar
@@ -15,6 +16,13 @@ func init(param):
     pass
 
 func update(value):
+    # First hide previous arrow if exists
+    if current_arrow != null:
+        current_arrow.vanish()
+        current_arrow = null
+        print ("vanish + " + str(value))
+    
+    # Then check if value actually changed
     if current_value != null:
         if value > current_value:
             value_increase(value)
@@ -31,6 +39,8 @@ func value_decrease(value):
     value_changed(value, Arrow.instance().init("down"))
     
 func value_changed(value, arrow):
+    current_arrow = arrow
+    
     # animate bar movement
     progress_bar.update(value / 2 + 0.5)
     

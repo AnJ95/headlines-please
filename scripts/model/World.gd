@@ -41,8 +41,6 @@ func _ready():
     
     params = world_def.get_params()
     
-    get_node("Draggables/Map").update(self)
-    
     emit_signal("game_started", self)
     
     next_day()
@@ -96,6 +94,8 @@ func next_day():
     last_time = -1
     game_running = true
 
+    get_node("Draggables/Map").update(self)
+    
     emit_signal("day_started", self)
 
 
