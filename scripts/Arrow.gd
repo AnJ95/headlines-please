@@ -12,9 +12,9 @@ func init(dir):
     return self
     
 func _ready():
-    appear()
     spriteUp.visible = !is_down
     spriteDown.visible = is_down
+    appear()
 
 func appear():
     if is_down:
