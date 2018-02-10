@@ -1,8 +1,11 @@
 extends Control
 
+const INITIAL_WAIT = 1.2
+const MIN_PAGE_TIME = 2
 var isRunning = false
-var currentSlot = -1
+var currentSlot = -2
 var world
+var time = 0
 var doneScenarios = []
 
 const ReportPage = preload("res://scenes/ReportPage.tscn")
@@ -37,7 +40,24 @@ const NOTE_ORDERED_BY_IMPACT = [
 onready var Airmail = get_node("/root/Main/Draggables/Airmail")
 
 export(Array, NodePath) var leaving_nodes = []
-    
+
+var has_clicked = false
+
+func _process(delta):
+    time += delta
+    if currentSlot == -1:
+        if time > INITIAL_WAIT:
+            time = 0
+            has_clicked = false
+            next_page()
+    elif currentSlot >= 0:
+        if time > MIN_PAGE_TIME and has_clicked:
+            time = 0
+            has_clicked = false
+            next_page() 
+          
+func on_click():
+    has_clicked = true
 
 func next_page():
     currentSlot += 1
@@ -47,6 +67,7 @@ func next_page():
         world.next_day()
         Airmail.clear_children()
         hide()
+        currentSlot = -2
     else:
         var draggable = Airmail.contained_draggables[currentSlot]
         var reportPage = ReportPage.instance()
@@ -109,9 +130,14 @@ func get_custom_note(draggable, total_reader_change_in_percent):
     if doneScenarios.has(draggable.selected_headline.scenario_name):
         return get_random_in(NOTE_REDUNDANT_ARTICLE)
     
-    var score = round(((total_reader_change_in_percent / 2 + 0.5) * NOTE_ORDERED_BY_IMPACT.size()))
+    # first amplify effect * 10
+    # Then norm from [-1,1] to [0,1] (ignoring prev amplification)
+    # Then norm to [0, amount of notes]
+    var score = round((((total_reader_change_in_percent * 15) / 2 + 0.5) * NOTE_ORDERED_BY_IMPACT.size()))
     if score >= NOTE_ORDERED_BY_IMPACT.size():
         return NOTE_ORDERED_BY_IMPACT[NOTE_ORDERED_BY_IMPACT.size() - 1]
+    elif score <= 0:
+        return NOTE_ORDERED_BY_IMPACT[0]
     else:
         return NOTE_ORDERED_BY_IMPACT[score]
         
@@ -129,12 +155,14 @@ func draggable_is_valid(draggable):
     return draggable is DropZone and draggable.selected_headline != null
 
 func on_day_ended(world):
+    for child in get_children():
+        child.queue_free()
     currentSlot = -1
+    time = 0
+    has_clicked = false
     self.world = world
     doneScenarios = []
     show()
-    currentSlot = -1
-    next_page()
 
     
     

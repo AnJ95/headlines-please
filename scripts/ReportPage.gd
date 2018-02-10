@@ -43,7 +43,7 @@ func init(dayEndScreen, draggable, report_num, item_num, item_max_num, countries
     
     # Show Notes
     lblNotes.set_text(note)
-    
+        
 func relativy(value, suffix, alternative = "None"):
     var result = ""
     if value < 0:
@@ -55,7 +55,7 @@ func relativy(value, suffix, alternative = "None"):
     return result
 
 func on_click():
-    dayEndScreen.next_page()
+    dayEndScreen.on_click()
 
 
 func on_button_down():
