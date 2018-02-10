@@ -32,7 +32,6 @@ signal message_arrived(message)
 func _init():
     randomize()
 
-
 func _ready():
     countries = world_def.get_countries()
     for c in countries:
@@ -141,7 +140,12 @@ func broadcast_headline(headline):
         country.broadcast_headline(headline)
     return get_total_readers() - totalReaders
 
-
+func get_total_population():
+    var total = 0
+    for country in countries:
+        total += country.inhabitants
+    return total
+    
 func get_total_readers():
     var total = 0
     for country in countries:

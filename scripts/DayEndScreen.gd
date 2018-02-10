@@ -7,6 +7,32 @@ var doneScenarios = []
 
 const ReportPage = preload("res://scenes/ReportPage.tscn")
 const DropZone = preload("res://scripts/DropZone.gd")
+const NOTE_UNFINISHED = [
+"You need to finish your article before handing it in...",
+"I can't anticipate what you are thinking, next time finish your work!",
+"How did this unfinished newspaper get here?",
+]
+const NOTE_NO_NEWSPAPER = [
+"The Airmail is for finished articles only...",
+"How did this junk get inside here?",
+]
+const NOTE_REDUNDANT_ARTICLE = [
+"Didn't we report about this in one of the previous articles?",
+"You do realize, that you wrote two articles about the same topic, right?",
+]
+const NOTE_ORDERED_BY_IMPACT = [
+"Are you trying to get the people to hate us?",
+"What were you thinking with this one?",
+"You have to foresee what the people want to read. This is not it!",
+"That headline was boring, wasn't it?",
+"That didn't quite hit the spot",
+"Seems like the people didn't really notice this article.",
+"You managed to convince a few people with that headline.",
+"That article is going in the right direction.",
+"A solid article, further establishing our newspaper",
+"Looks like you really managed to hit the nerve of most people!",
+"I have to admit this piece of art could be worth the pulitzer price!"
+]
 
 onready var Airmail = get_node("/root/Main/Draggables/Airmail")
 
@@ -27,10 +53,9 @@ func next_page():
         add_child(reportPage)
         init_report_page(reportPage, draggable)
 
+
 func init_report_page(reportPage, draggable):
-    
     reportPage.rect_position = Vector2(528, 10)
-    
     
     # prepare values before they are changed
     var country_reader_changes = []
@@ -39,10 +64,10 @@ func init_report_page(reportPage, draggable):
     var total_reader_change = -world.get_total_readers()
     var financial_impact = -world.get_current_bilances()
     
-    # broadcast message to countries
+    # broadcast message to countries if valid
     if draggable_is_valid(draggable):
-        world.broadcast_headline(draggable.selected_headline)
-    var rating = round(world.broadcast_headline(draggable.selected_headline))
+        if not doneScenarios.has(draggable.selected_headline.scenario_name):
+            world.broadcast_headline(draggable.selected_headline)
     # TODO better updating
     get_node("/root/Main/Draggables/Map").update(world)
     
@@ -63,10 +88,33 @@ func init_report_page(reportPage, draggable):
         country_reader_changes,
         round(10 * total_reader_change) / 10,
         round(10 * financial_impact) / 10,
-        "Solid news, bro" # TODO get
-        )
+        get_custom_note(draggable, total_reader_change / world.get_total_population())
+        )    
     
+    # add scenario name to list
+    if draggable_is_valid(draggable):
+        if not doneScenarios.has(draggable.selected_headline.scenario_name):
+            doneScenarios.append(draggable.selected_headline.scenario_name)
 
+
+func get_random_in(array):
+    return array[randi() % array.size()]
+
+
+func get_custom_note(draggable, total_reader_change_in_percent):
+    if not draggable is DropZone:
+        return get_random_in(NOTE_NO_NEWSPAPER)
+    if draggable is DropZone and draggable.selected_headline == null:
+        return get_random_in(NOTE_UNFINISHED)
+    if doneScenarios.has(draggable.selected_headline.scenario_name):
+        return get_random_in(NOTE_REDUNDANT_ARTICLE)
+    
+    var score = round(((total_reader_change_in_percent / 2 + 0.5) * NOTE_ORDERED_BY_IMPACT.size()))
+    if score >= NOTE_ORDERED_BY_IMPACT.size():
+        return NOTE_ORDERED_BY_IMPACT[NOTE_ORDERED_BY_IMPACT.size() - 1]
+    else:
+        return NOTE_ORDERED_BY_IMPACT[score]
+        
 func show():
     for leaving_node in leaving_nodes:
         get_node(leaving_node).animation_player.play("leave")
@@ -77,36 +125,6 @@ func hide():
     for leaving_node in leaving_nodes:
         get_node(leaving_node).animation_player.play_backwards("leave")
 
-#func show_draggable(draggable):
-#    draggable.rect_position = Vector2(-draggable.rect_size.x / 2, -draggable.rect_size.y / 2)
-#    DraggableHolder.add_child(draggable)
-#
-#    var labelStr
-#
-#    if draggable_is_valid(draggable):
-#        var scenario = draggable.selected_headline.scenario_name
-#        if (doneScenarios.has(scenario)):
-#            labelStr = "Redundant Article!"
-#        else:
-#            doneScenarios.append(scenario)
-#            var rating = round(world.broadcast_headline(draggable.selected_headline))
-#            # TODO better updating
-#            get_node("/root/Main/Draggables/Map").update(world)
-#            labelStr = "Readers "
-#            if rating > 0:
-#                labelStr += "+"
-#            labelStr += str(rating)
-#    else:
-#        labelStr = "..."
-#
-#    Label.set_text(labelStr)
-
-func get_rating(draggable):
-    if self is DropZone and self.selected_headline != null:
-        return 0
-    else:
-        return randi(10)
-
 func draggable_is_valid(draggable):
     return draggable is DropZone and draggable.selected_headline != null
 
@@ -114,9 +132,7 @@ func on_day_ended(world):
     currentSlot = -1
     self.world = world
     doneScenarios = []
-    
     show()
-    
     currentSlot = -1
     next_page()
 
