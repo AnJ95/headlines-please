@@ -17,15 +17,19 @@ var selected_headline = null
 var notified_headlines_count_max
 var notified_headlines_count
 
-
 func _ready():
     show_current_state()
     add_to_group("dropzone")
     get_tree().get_root().get_node("/root/Main").connect("day_ended", self, "on_day_ended", ["world"])
+        
 
 func on_day_ended(node, world):
     if containing_droppable == null:
         queue_free()
+    else:
+        get_node("State_0/TextureButton").visible = false
+        get_node("State_1/TextureButton2").visible = false
+        get_node("State_2/TextureButton3").visible = false
 
 # from Droppable
 func on_enter(draggable):

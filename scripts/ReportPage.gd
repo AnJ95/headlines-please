@@ -16,6 +16,7 @@ func init(dayEndScreen, draggable, report_num, item_num, item_max_num, countries
     self.dayEndScreen = dayEndScreen
     
     draggable.rect_position = draggableHolder.rect_size / 2 - draggable.rect_size / 2
+    draggable.enabled = false
     draggableHolder.add_child(draggable)
     
     

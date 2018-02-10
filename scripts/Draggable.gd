@@ -5,6 +5,7 @@ var isDragging = false
 var startMousePos
 var startThisPos
 
+var enabled = true
 var containing_droppable = null
 var hovering_droppable = null
 onready var Root = get_node("/root/Main/Draggables") 
@@ -14,6 +15,8 @@ func _init():
     connect("mouse_exited", self, "on_mouse_exited")
 
 func _process(delta):
+    if not enabled:
+        return
     if not can_drag_now():
         isDragging = false
         return

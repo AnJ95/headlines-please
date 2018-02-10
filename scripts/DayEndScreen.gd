@@ -23,7 +23,6 @@ func next_page():
         hide()
     else:
         var draggable = Airmail.contained_draggables[currentSlot]
-        
         var reportPage = ReportPage.instance()
         add_child(reportPage)
         init_report_page(reportPage, draggable)
@@ -43,7 +42,10 @@ func init_report_page(reportPage, draggable):
     # broadcast message to countries
     if draggable_is_valid(draggable):
         world.broadcast_headline(draggable.selected_headline)
-        
+    var rating = round(world.broadcast_headline(draggable.selected_headline))
+    # TODO better updating
+    get_node("/root/Main/Draggables/Map").update(world)
+    
     # calculate changes using old and new values
     for country_id in range(world.countries.size()):
         country_reader_changes[country_id] = round(10 * (country_reader_changes[country_id] + world.countries[country_id].get_readers())) / 10
