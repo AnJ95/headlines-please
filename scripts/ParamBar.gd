@@ -29,7 +29,7 @@ func update(value):
         elif value < current_value:
             value_decrease(value)
     else:
-        progress_bar.set(value / 2 + 0.5)
+        progress_bar.update(value / 2 + 0.5)
     current_value = value
     
 func value_increase(value):
