@@ -32,21 +32,23 @@ func reset():
 func on_day_ended(node, world):
     if containing_droppable == null:
         #queue_free()
-        var start = get_global_rect().position + rect_size / 2
-        var middle = Root.rect_position + Root.rect_size / 2
-
-        var angle = start.angle_to_point(middle)
-        
-        var distance_from_middle = 800
-        var distance_left = distance_from_middle - start.distance_to(middle)
-        
-        var target = start + Vector2(distance_left, 0).rotated(angle)
-        
-        tween.interpolate_property(self, "rect_position", rect_position, target - rect_size / 2, distance_left / FLY_OUT_SPEED, Tween.TRANS_CUBIC, Tween.EASE_OUT)
-        tween.start()
+        fly_away(Root, 800)
         
         is_deleting = true
-        
+
+func fly_away(from, distance):
+    var start = get_global_rect().position + rect_size / 2
+    var middle = from.rect_position + from.rect_size / 2
+
+    var angle = start.angle_to_point(middle)
+    
+    var distance_left = distance - start.distance_to(middle)
+    
+    var target = start + Vector2(distance_left, 0).rotated(angle)
+    
+    tween.interpolate_property(self, "rect_position", rect_position, target - rect_size / 2, distance_left / FLY_OUT_SPEED, Tween.TRANS_CUBIC, Tween.EASE_OUT)
+    tween.start()
+    
 func on_tween_completed(object, key):
     if is_deleting:
         queue_free()
