@@ -7,6 +7,7 @@ const initial_padY = 40
 const padY = 4
 const INFO_POS_ADJUST_TIME = 0.25
 const INFO_POS_ADJUST_MIN_PADDING = 10
+const MIN_INFOS = 3
 
 onready var anim_root = $animation_root
 onready var state0 = anim_root.get_node("State_0")
@@ -52,42 +53,17 @@ func on_enter(draggable):
                 return
     move_draggable_in(draggable)
     
-   
-func move_draggable_in(draggable):
-    var pin_pos_original = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
-    var pin_pos = pin_pos_original
-
-    if (pin_pos_original.x < INFO_POS_ADJUST_MIN_PADDING):
-        pin_pos.x = INFO_POS_ADJUST_MIN_PADDING
-    if (pin_pos_original.x > rect_size.x - INFO_POS_ADJUST_MIN_PADDING):
-        pin_pos.x = rect_size.x - INFO_POS_ADJUST_MIN_PADDING
-    if (pin_pos_original.y < INFO_POS_ADJUST_MIN_PADDING):
-        pin_pos.y = INFO_POS_ADJUST_MIN_PADDING
-    if (pin_pos_original.y > rect_size.y - INFO_POS_ADJUST_MIN_PADDING):
-        pin_pos.y = rect_size.y - INFO_POS_ADJUST_MIN_PADDING
-    
-    if pin_pos != pin_pos_original:
-        var start = draggable.rect_position
-        var end = start + pin_pos - pin_pos_original
-        tween.interpolate_property(draggable, "rect_position", start, end, INFO_POS_ADJUST_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
-        tween.start()
-    
-    var pin = Pin.instance()
-    pin.rect_position = pin_pos
-    draggable.pin = pin
-    state0.add_child(pin)
-    
-func move_draggable_out(draggable):
-    var pos_original = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
-    var pos = pos_original
-
-    draggable.fly_away(self, 200)
+    if contained_draggables.size() >= MIN_INFOS:
+        state0.get_node("TextureButton").visible = true
  
 # from Droppable
 func on_leave(draggable):
     if draggable.pin != null:
         draggable.pin.remove()
         draggable.pin = null
+        
+    if contained_draggables.size() < MIN_INFOS:
+        state0.get_node("TextureButton").visible = false
     
 # from Droppable
 func accepted_groups():
@@ -168,3 +144,33 @@ func adjust_headline_positions():
     for headline in state1.get_node("headlines").get_children():
         headline.rect_position =  Vector2(padX, curY)
         curY += headline.rect_size.y + padY
+        
+func move_draggable_in(draggable):
+    var pin_pos_original = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
+    var pin_pos = pin_pos_original
+
+    if (pin_pos_original.x < INFO_POS_ADJUST_MIN_PADDING):
+        pin_pos.x = INFO_POS_ADJUST_MIN_PADDING
+    if (pin_pos_original.x > rect_size.x - INFO_POS_ADJUST_MIN_PADDING):
+        pin_pos.x = rect_size.x - INFO_POS_ADJUST_MIN_PADDING
+    if (pin_pos_original.y < INFO_POS_ADJUST_MIN_PADDING):
+        pin_pos.y = INFO_POS_ADJUST_MIN_PADDING
+    if (pin_pos_original.y > rect_size.y - INFO_POS_ADJUST_MIN_PADDING):
+        pin_pos.y = rect_size.y - INFO_POS_ADJUST_MIN_PADDING
+    
+    if pin_pos != pin_pos_original:
+        var start = draggable.rect_position
+        var end = start + pin_pos - pin_pos_original
+        tween.interpolate_property(draggable, "rect_position", start, end, INFO_POS_ADJUST_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+        tween.start()
+    
+    var pin = Pin.instance()
+    pin.rect_position = pin_pos
+    draggable.pin = pin
+    state0.add_child(pin)
+    
+func move_draggable_out(draggable):
+    var pos_original = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
+    var pos = pos_original
+
+    draggable.fly_away(self, 200)
