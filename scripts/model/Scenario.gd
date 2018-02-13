@@ -11,12 +11,12 @@ var messages = []
 
 var headlines = []
 
-func prepare(world, countries):
+func prepare(scenarioManager, countries):
     self.countries = countries
     for h in headlines:
-        h.prepare(world, self)
+        h.prepare(scenarioManager, self)
     for m in messages:
-        m.prepare(world, self)
+        m.prepare(scenarioManager, self)
     
 
 func get_propability(world, countries):

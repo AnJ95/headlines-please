@@ -22,9 +22,9 @@ func _init(type, headlines, format_string, arrival_time = -1):
     else:
         self.arrival_time = arrival_time
 
-func prepare(world, scenario):
+func prepare(scenarioManager, scenario):
     self.scenario = scenario
-    text = FormatUtils.format(format_string, world.make_format_dic(scenario.countries))
+    text = FormatUtils.format(format_string, scenarioManager.make_format_dic(scenario.countries))
 
 func get_headlines():
     var headlines = []

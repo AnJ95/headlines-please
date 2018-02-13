@@ -13,9 +13,9 @@ func _init(format_string, drama, params, relations):
     self.params = params
     self.relations = relations
 
-func prepare(world, scenario):
+func prepare(scenarioManager, scenario):
     self.scenario = scenario
-    text = FormatUtils.format(format_string, world.make_format_dic(scenario.countries))
+    text = FormatUtils.format(format_string, scenarioManager.make_format_dic(scenario.countries))
 
 func effect(world):
     pass
