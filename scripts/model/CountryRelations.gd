@@ -10,9 +10,12 @@ func _init(countries):
     for i in range(get_size()):
         relationships.append(randf() * (MAX_RELATIONSHIP - MIN_RELATIONSHIP) + MIN_RELATIONSHIP)
 
+func get_all():
+    return relationships
+    
 func get_by_relation_id(id):
     if id < 0 or id >= get_size():
-        print("Tried getting country relationship with invalid id " + id)
+        print("Tried getting country relationship with invalid id " + str(id))
         return null
     return relationships[id]
 

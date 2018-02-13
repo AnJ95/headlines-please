@@ -2,7 +2,9 @@ extends "res://scripts/Draggable.gd"
 
 onready var twoState = $TwoStateDraggable
 onready var country_infos = $country_infos
+onready var country_relations = $country_relations
 onready var country_info_dic = {}
+onready var country_relation_dic = {}
 
 onready var audio_stream_player_in = get_node("AudioStreamPlayerIn")
 onready var audio_stream_player_out = get_node("AudioStreamPlayerOut")
@@ -10,6 +12,7 @@ onready var tween = get_node("Tween")
 
 export var map_day_end_position = Vector2(27, 90)
 
+var RelationThread = preload("res://scenes/RelationThread.tscn")
 var CountryInfo = preload("res://scenes/CountryInfo.tscn")
 var start_position = null
 
@@ -39,6 +42,18 @@ func on_game_started(world):
         country_info_dic[country.name] = country_info
         country_infos.add_child(country_info)
         country_info.init(country, world.params)
+        
+    var r = world.relations
+    for a in world.countries:
+        for b in world.countries:
+            if not a.name == b.name:
+                var rel_id = r.get_relation_id_by_country_ids(r.get_country_id_by_name(a.name), r.get_country_id_by_name(b.name))
+                if not country_relation_dic.has(rel_id) and not rel_id == -1:
+                    var thread = RelationThread.instance()
+                    country_relation_dic[rel_id] = thread
+                    country_relations.add_child(thread)
+                    thread.init(r.get_by_relation_id(rel_id), country_info_dic[a.name], country_info_dic[b.name])
+        
 
 func day_ended(world):
     start_position = rect_position
