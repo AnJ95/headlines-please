@@ -144,7 +144,7 @@ func broadcast_headline(headline):
     for rel in headline.relations:
         var c_a = headline.scenario.countries[rel[0] - 1]
         var c_b = headline.scenario.countries[rel[1] - 1]
-        relations.change_by_country_names(c_a, c_b, rel[2])
+        relations.change_by_country_names(c_a.name, c_b.name, rel[2])
         
     for country in countries:
         country.broadcast_headline(headline)

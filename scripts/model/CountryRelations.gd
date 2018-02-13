@@ -1,8 +1,9 @@
-const MIN_RELATIONSHIP = 0.25
-const MAX_RELATIONSHIP = 0.75
+const MIN_RELATIONSHIP = -0.25
+const MAX_RELATIONSHIP = 0.25
 const MAX_RELATION_CHANGE = 0.3
 var relationships = []
 var country_names = []
+
 
 func _init(countries):
     for i in countries:

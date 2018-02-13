@@ -20,7 +20,9 @@ func init_headlines():
     ])
     h("Racist {country_1}ian hotelowner Eduard Glitz bans other nations from entering.", 0.65, {
       "tolerance" : -0.2,
-    })
+    }, [
+        [1, 2, -0.2]
+    ])
     h("Controversial {country_1}ian hotelowner bans group of misbehaving foreigners.", 0.42, {
       "tolerance" : 0,
     })

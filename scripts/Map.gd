@@ -34,6 +34,8 @@ func can_drag_now():
 func update(world):
     for country_name in country_info_dic:
         country_info_dic[country_name].update(world.get_country(country_name))
+    for relation_id in country_relation_dic:
+        country_relation_dic[relation_id].update(world.relations.get_by_relation_id(relation_id))
     pass
 
 func on_game_started(world):
