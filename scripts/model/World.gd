@@ -7,6 +7,7 @@ const CountryRelations = preload("res://scripts/model/CountryRelations.gd")
 
 const COSTS_PER_DAY = 35
 const MONEY_PER_READER = 1
+const MAX_RELATION_CHANGE = 0.4
 
 onready var world_def = $world_def
 
@@ -119,6 +120,7 @@ func get_scenario():
     var s_countries = []
     for i in range(s.num_countries):
         s_countries.append(countries[i])
+    fisher_yates(s_countries)
     s.prepare(self, s_countries)
     return s
 
@@ -139,10 +141,13 @@ func broadcast_headline(headline):
     print("adding headline: " + str(headline.params))
     print("drama : " + str(headline.drama))
 
-    var totalReaders = get_total_readers()
+    for rel in headline.relations:
+        var c_a = headline.scenario.countries[rel[0] - 1]
+        var c_b = headline.scenario.countries[rel[1] - 1]
+        relations.change_by_country_names(c_a, c_b, rel[2])
+        
     for country in countries:
         country.broadcast_headline(headline)
-    return get_total_readers() - totalReaders
 
 func get_total_population():
     var total = 0

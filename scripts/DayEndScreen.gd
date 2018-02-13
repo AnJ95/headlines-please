@@ -16,8 +16,10 @@ const NOTE_UNFINISHED = [
 "How did this unfinished newspaper get here?",
 ]
 const NOTE_NO_NEWSPAPER = [
-"The Airmail is for finished articles only...",
+"The Airmail is for articles only...",
 "How did this junk get inside here?",
+"This gotta be a joke, right?",
+"What kind of humor is that?"
 ]
 const NOTE_REDUNDANT_ARTICLE = [
 "Didn't we report about this in one of the previous articles?",
@@ -87,7 +89,7 @@ func init_report_page(reportPage, draggable):
     
     # broadcast message to countries if valid
     if draggable_is_valid(draggable):
-        if not doneScenarios.has(draggable.selected_headline.scenario_name):
+        if not doneScenarios.has(draggable.selected_headline.scenario.name):
             world.broadcast_headline(draggable.selected_headline)
     # TODO better updating
     get_node("/root/Main/Draggables/Map").update(world)
@@ -114,8 +116,8 @@ func init_report_page(reportPage, draggable):
     
     # add scenario name to list
     if draggable_is_valid(draggable):
-        if not doneScenarios.has(draggable.selected_headline.scenario_name):
-            doneScenarios.append(draggable.selected_headline.scenario_name)
+        if not doneScenarios.has(draggable.selected_headline.scenario.name):
+            doneScenarios.append(draggable.selected_headline.scenario.name)
 
 
 func get_random_in(array):
@@ -127,7 +129,7 @@ func get_custom_note(draggable, total_reader_change_in_percent):
         return get_random_in(NOTE_NO_NEWSPAPER)
     if draggable is DropZone and draggable.selected_headline == null:
         return get_random_in(NOTE_UNFINISHED)
-    if doneScenarios.has(draggable.selected_headline.scenario_name):
+    if doneScenarios.has(draggable.selected_headline.scenario.name):
         return get_random_in(NOTE_REDUNDANT_ARTICLE)
     
     # first amplify effect * 10

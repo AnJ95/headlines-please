@@ -27,11 +27,15 @@ func init_headlines():
     h("{country_1}s army is advancing over border of {country_2}", 0.80, {
       "progress" : -0.4,
       "tolerance" : -0.2
-    })
+    }, [
+        [1, 2, -0.8]
+    ])
     h("{country_1}s army provoked {country_2} with drill mistake at border.", 0.50, {
       "progress" : -0.2,
       "tolerance" : -0.1
-    })
+    }, [
+        [1, 2, -0.3]
+    ])
 
 
 func init_messages():

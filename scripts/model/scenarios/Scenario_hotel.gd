@@ -15,7 +15,9 @@ func init_headlines():
     h("{country_1} allows people to treat citizens of {country_2} derogatory.", 0.75, {
       "tolerance" : -0.3,
       "democracy" : 0.1
-    })
+    }, [
+        [1, 2, -0.4]
+    ])
     h("Racist {country_1}ian hotelowner Eduard Glitz bans other nations from entering.", 0.65, {
       "tolerance" : -0.2,
     })
@@ -24,7 +26,9 @@ func init_headlines():
     })
     h("Enraged {country_1}ian hotelowner throws out a group of vandalizing {country_2}ian visitors.", 0.40, {
       "tolerance" : -0.1,
-    })
+    }, [
+        [1, 2, -0.2]
+    ])
     h("Drunk {country_2}ian hooligans wreck Glitz hotel, get banned.", 0.65, {
       "tolerance" : 0,
     })
