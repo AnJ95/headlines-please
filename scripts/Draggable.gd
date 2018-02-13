@@ -88,8 +88,6 @@ func internal_move_drag():
                     droppable.hovering_now(self)
                     hovering_droppable = droppable
                     break
-                else:
-                    return
     reset_droppable_hovering()
     
 

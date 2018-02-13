@@ -3,9 +3,6 @@ var name = ""
 const MIN_INHABITANTS = 10
 const MAX_INHABITANTS = 100
 
-const MIN_RELATIONSHIP = 0.25
-const MAX_RELATIONSHIP = 0.75
-
 const MIN_PARAM = -0.6
 const MAX_PARAM = 0.6
 
@@ -23,6 +20,8 @@ var inhabitants = randi() % (MAX_INHABITANTS - MIN_INHABITANTS) + MIN_INHABITANT
 var readers = randf() * (MAX_READERS - MIN_READERS) + MIN_READERS
 var happyness = randf() * (MAX_HAPPYNESS - MIN_HAPPYNESS) + MIN_HAPPYNESS
 
+var country_info_pos
+
 var params = {
     "democracy" : 0,
     "tolerance" : 0,
@@ -31,9 +30,6 @@ var params = {
     "culture" : 0
 }
 
-var relationships = {} # between 0 and 1, 1 for each other country
-
-var country_info_pos
 
 func _init(name, country_info_pos):
     self.name = name
@@ -48,7 +44,6 @@ func prepare(world):
     for c in world.countries:
         if c.name == self.name:
             continue
-        relationships[c.name] = randf() * (MAX_RELATIONSHIP - MIN_RELATIONSHIP) + MIN_RELATIONSHIP
 
 func broadcast_headline(headline):
     print("country before: " + str(params) + " readers: " + str(readers))

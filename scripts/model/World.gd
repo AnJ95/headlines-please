@@ -3,6 +3,7 @@ extends Node
 const Scenario = preload("res://scripts/model/Scenario.gd")
 const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
+const CountryRelations = preload("res://scripts/model/CountryRelations.gd")
 
 const COSTS_PER_DAY = 35
 const MONEY_PER_READER = 1
@@ -14,6 +15,7 @@ export var DAY_CYCLE_TIME = 45
 var params = []
 var countries = []
 var scenarios = []
+var relations
 
 var current_scenarios = {}
 
@@ -40,6 +42,8 @@ func _ready():
     scenarios = world_def.get_scenarios()
     
     params = world_def.get_params()
+    
+    relations = CountryRelations.new(countries)
     
     emit_signal("game_started", self)
     
