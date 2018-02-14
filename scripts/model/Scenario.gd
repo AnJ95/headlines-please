@@ -14,6 +14,7 @@ var headlines = []
 
 var param_conditions = {}
 var relation_conditions = []
+var scenario_conditions = []
 
 func prepare(scenarioManager, countries):
     self.countries = countries

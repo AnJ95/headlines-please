@@ -138,6 +138,16 @@ func filter_by_preconditions(src):
                     valid = false
                 if condition[2] == Scenario.Op.LESS and val_actual >= val_thresh:
                     valid = false
+                    
+            # iterate each relation-precondition of this scenario
+            for condition in scenario.scenario_conditions:
+                var check = false
+                for day in past_scenarios:
+                    for past_scenario in day:
+                        if past_scenario == condition:
+                            check = true
+                if not check:
+                    valid = false
             
             # iterate each country that has preconditions
             for country_num in scenario.param_conditions:

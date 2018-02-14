@@ -1,7 +1,7 @@
 extends "res://scripts/model/Scenario.gd"
 
 func _init():
-    name = "Less fish"
+    name = "test"
     num_countries = 2
     init_headlines()
     init_messages()
@@ -17,6 +17,10 @@ func _init():
     
     relation_conditions = [
         [1, 2, GREATER, 0.2]
+    ]
+    
+    scenario_conditions = [
+        "test"
     ]
 
 func init_headlines():
