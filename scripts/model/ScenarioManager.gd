@@ -61,7 +61,7 @@ func next_day():
     # Also save these selected scenarios name
     past_scenarios.append([])
     for scenario_name in current_scenarios:
-        past_scenarios[past_scenarios.size() - 1].append(scenario_name)
+        past_scenarios[past_scenarios.size() - 1].append([scenario_name, current_scenarios[scenario_name].countries])
 
 func filter_by_occurence(scenarios):
     var result = []
@@ -72,7 +72,7 @@ func filter_by_occurence(scenarios):
             day = 0
         while day < past_scenarios.size():
             for past_scenario in past_scenarios[day]:
-                if past_scenario == scenario.name:
+                if past_scenario[0] == scenario.name:
                     valid = false
             day += 1
         if valid:
@@ -126,6 +126,14 @@ func filter_by_preconditions(src):
     for scenario in src:
         var perms = get_all_coutry_permutations(scenario.num_countries)
         
+        # If previous scenarios are assumed: take its countries
+        if scenario.scenario_conditions.size() > 1:
+            for day_id in range(past_scenarios.size - 1, 0, -1):
+                var day = past_scenarios[day_id]
+                for past_scenario in day:
+                    if scenario.name == past_scenario[0].name:
+                         perms = [past_scenario[1]]
+        
         # iterate every country combination possibility
         for perm in perms:
             var valid = true
@@ -144,7 +152,7 @@ func filter_by_preconditions(src):
                 var check = false
                 for day in past_scenarios:
                     for past_scenario in day:
-                        if past_scenario == condition:
+                        if past_scenario[0] == condition:
                             check = true
                 if not check:
                     valid = false

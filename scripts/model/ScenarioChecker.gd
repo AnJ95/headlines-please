@@ -118,6 +118,10 @@ func second_check(world, s):
         var cond = s.scenario_conditions[i]
         if !names.has(cond):
             print("Error with scenario \"" + s.name + "\" at scenario_conditions index " + str(i) + ": assumes existence of scenario with name \"" + cond + "\", but it does not seem to exist!")
+        for scenario in world.scenarioManager.scenarios:
+            if scenario.name == cond:
+                if scenario.num_countries != s.num_countries:
+                    print("Error with scenario \"" + s.name + "\" at scenario_conditions index " + str(i) + ": has different num_countries than \"" + scenario.name + "\"!")
         
         
 func is_valid_param_name(world, name):
