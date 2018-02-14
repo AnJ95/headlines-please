@@ -5,6 +5,7 @@ const Country = preload("res://scripts/model/Country.gd")
 const Message = preload("res://scripts/model/Message.gd")
 const CountryRelations = preload("res://scripts/model/CountryRelations.gd")
 const ScenarioManager = preload("res://scripts/model/ScenarioManager.gd")
+const ScenarioChecker = preload("res://scripts/model/ScenarioChecker.gd")
 
 const COSTS_PER_DAY = 35
 const MONEY_PER_READER = 1
@@ -43,6 +44,7 @@ func _ready():
     relations = CountryRelations.new(countries)
     
     scenarioManager = ScenarioManager.new(relations, countries, world_def.get_scenarios())
+    ScenarioChecker.new(self, scenarioManager)
     
     emit_signal("game_started", self)
     
