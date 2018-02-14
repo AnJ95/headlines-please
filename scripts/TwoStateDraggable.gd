@@ -26,6 +26,9 @@ func _ready():
         ease_trans = Tween.TRANS_QUART
         ease_type = Tween.EASE_IN_OUT
 
+func get_progress():
+    return (parent.rect_position.y - minY) / (maxY - minY)
+
 func while_moving():
     parent.rect_position.x = parent.startThisPos.x
     if parent.rect_position.y <= minY:

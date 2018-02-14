@@ -16,9 +16,18 @@ var RelationThread = preload("res://scenes/RelationThread.tscn")
 var CountryInfo = preload("res://scenes/CountryInfo.tscn")
 var start_position = null
 
+func _ready():
+    update_info_modulation()
+
 # from Draggable
 func move_drag():
     twoState.while_moving()
+    update_info_modulation()
+
+func update_info_modulation():
+    var p = twoState.get_progress()
+    country_infos.modulate.a = p * p
+    country_relations.modulate.a = p * p
 
 # from Draggable
 func stop_drag():
@@ -31,6 +40,10 @@ func stop_drag():
 func can_drag_now():
     return not twoState.is_animating()
     
+func _process(delta):
+    if twoState.is_animating:
+        update_info_modulation()
+        
 func update(world):
     for country_name in country_info_dic:
         country_info_dic[country_name].update(world.get_country(country_name))

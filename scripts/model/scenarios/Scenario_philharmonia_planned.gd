@@ -27,7 +27,7 @@ func init_headlines():
     })
     h("President of {country_1}: The \"Grand Philharmonia\" is a very important project for {country_1}s people and image", 0.4, {
         "culture" : 0.3,
-        "progress" : 0.5
+        "progress" : 0.5,
         "democracy" : -0.3
     })
 

@@ -12,17 +12,19 @@ func _init():
     }
 
 func init_headlines():
-    h("No end to pedophile in church!", 0.75, {
+    h("No end to pedophilia in church!", 0.75, {
         "science" : 1
     })
     h("Bishop raped multiple children!", 0.5, {
         "science" : 0.6
     })
     h("Pedophile Bishop uncovered after 12 years of abusement!", 0.8, {
-        "science" : 0.7
+        "science" : 0.7,
+        "progress" : -0.2
     })
-    h("Wrongdoings of Pedophile uncovered", 0.3, {
-        "science" : 0
+    h("Wrongdoings of serial Pedophile uncovered", 0.3, {
+        "democracy" : -0.2,
+        "progress" : 0.2
     })
 
 
