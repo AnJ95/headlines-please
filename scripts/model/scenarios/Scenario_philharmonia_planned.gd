@@ -30,7 +30,7 @@ func init_headlines():
 
 
 func init_messages():
-    m(Message.NOTE, [0, 2], "{country_1} planning to build costly theatre, the \"Grad Philharmonia\"")
+    m(Message.NOTE, [0, 2], "{country_1} planning to build costly theatre, the \"Grand Philharmonia\"")
     m(Message.NOTE, [1], "{country_1} has commissioned several top-architects with designing the Grand Philharmonia")
     m(Message.PHAX, [3], "The president of {country_1} just held a press conference, stating the Grand Philharmonia is important for the people", 0.2)
     m(Message.TWEET, [1], "Great, who even needs new school equipment? Just throw out money for some theatre :(")
