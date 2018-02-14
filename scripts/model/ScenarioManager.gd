@@ -5,6 +5,9 @@ var last_day_progress = -1
 var current_scenarios = {}
 var past_scenarios = []
 const Scenario = preload("res://scripts/model/Scenario.gd")
+const MIN_SCENARIO_DAY_DISTANCE = 3
+const MIN_SCENARIOS_PER_DAY = 2
+const MAX_SCENARIOS_PER_DAY = 3
 
 func _init(relations, countries, scenarios):
     self.relations = relations
@@ -39,19 +42,42 @@ func load_scenarios():
 func next_day():
     current_scenarios = {}
     
+    var scenarios_unused = filter_by_occurence(scenarios)
+    
     # This gives us a data structure of all valid scenarios with every country permutation possibility
-    var scenarios_valid_perms = filter_by_preconditions(scenarios)
+    var scenarios_valid_perms = filter_by_preconditions(scenarios_unused)
     
     # This selects just one of these possibilities and prepares the scenario with its corresponding country permutation
     var scenarios_valid = select_one_per_scenario(scenarios_valid_perms)
 
-    var scenario_count = 1#2 + randi() % 2
+    var scenario_count = rand_range(MIN_SCENARIOS_PER_DAY, MAX_SCENARIOS_PER_DAY + 1)
     if scenario_count > scenarios_valid.size():
         print("ERROR, did not find enough valid scenarios")
         return
     
     # Finally we just need to get exactly scenario_count of the scenarios, taking their corresponding probabilities into account
     current_scenarios = select_at_random(scenarios_valid, scenario_count)
+    
+    # Also save these selected scenarios name
+    past_scenarios.append([])
+    for scenario_name in current_scenarios:
+        past_scenarios[past_scenarios.size() - 1].append(scenario_name)
+
+func filter_by_occurence(scenarios):
+    var result = []
+    for scenario in scenarios:
+        var valid = true
+        var day = past_scenarios.size() - MIN_SCENARIO_DAY_DISTANCE
+        if day < 0:
+            day = 0
+        while day < past_scenarios.size():
+            for past_scenario in past_scenarios[day]:
+                if past_scenario == scenario.name:
+                    valid = false
+            day += 1
+        if valid:
+            result.append(scenario)
+    return result
 
 func select_at_random(scenarios, amount):
     var result = {}
