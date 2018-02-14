@@ -90,6 +90,12 @@ func internal_move_drag():
                     break
     reset_droppable_hovering()
     
+    var p = get_parent()
+    var count = p.get_child_count()
+    if p.get_child(count - 1) != self:
+        p.move_child(self, count - 1)
+        
+    
 
 # calls not_hover() on all droppables
 func reset_droppable_hovering():
