@@ -34,14 +34,15 @@ func init_headlines():
 
 func init_messages():
     m(Message.TWEET, [0,1], "The {country_2}ians were cruely beat up by hotel security!")
-    m(Message.TWEET, [4], "The {country_2}ians allegedly snuck in and plundered the bar.", 0.38)
-    m(Message.TWEET, [1], "Eduard Glitz is known to be a racist, isn't he?", 0.55)
+    #m(Message.TWEET, [4], "The {country_2}ians allegedly snuck in and plundered the bar.", 0.38)
+    m(Message.TWEET, [1], "wtf {country_1}? #notcool #stopviolence", 0.55)
+    m(Message.TWEET, [1], "Eduard Glitz is a racist, isn't he?", 0.55)
 
     m(Message.NOTE, [3,4], "{country_2}ians cause $15,000 damage at hotel.")
-    m(Message.NOTE, [0,1], "Hotelowner Eduard Glitz forcefully removed group of {country_2}ians.")
-    m(Message.NOTE, [1,2], "The misbehaving {country_2}ians recieved a ban from the Glitz hotels.")
-    m(Message.NOTE, [2,3], "A group of hooligans caused $8,000 damage at the couches of a hotel lounge.")
-    m(Message.NOTE, [3,4], "The hotel vandals were unemployed and at the time heavily intoxicated.")
+    m(Message.NOTE, [1,2], "Hotelowner Eduard Glitz forcefully removed group of {country_2}ians.")
+    #m(Message.NOTE, [1,2], "The misbehaving {country_2}ians recieved a ban from the Glitz hotels.")
+    #m(Message.NOTE, [2,3], "A group of hooligans caused $8,000 damage at the couches of a hotel lounge.")
+    m(Message.NOTE, [4], "The hotel vandals were unemployed and at the time heavily intoxicated.")
 
-    m(Message.PHAX, [1], "Hotelowner Eduard Glitz refused to employ the vandals numerous times in the past.", 0.25)
+    #m(Message.PHAX, [1], "Hotelowner Eduard Glitz refused to employ the vandals numerous times in the past.", 0.25)
     m(Message.PHAX, [3,4], "The vandals have all a criminal record in property damage or molestation.", 0.48)

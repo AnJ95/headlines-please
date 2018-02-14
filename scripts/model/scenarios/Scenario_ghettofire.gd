@@ -35,10 +35,10 @@ func init_messages():
     m(Message.TWEET, [1], "The fire probably started because of those gangsters meeting in there.", 0.55)
 
     m(Message.NOTE, [0,1,2], "At the time of the fire, the adjacent road was impassable due to neglected and unfinished roadwork.")
-    m(Message.NOTE, [2,3,4], "On their way to the site, the authorities were stopped by two abandonned cars standing on the street.")
+    #m(Message.NOTE, [2,3,4], "On their way to the site, the authorities were stopped by two abandonned cars standing on the street.")
     m(Message.NOTE, [2,3], "Hoffenkamm is known for its horrible infrastructure and run down buildings.")
     m(Message.NOTE, [2], "The building where the fire started did not meet the building regulation standards.")
-    m(Message.NOTE, [0,3], "Investigations suggest that the fire started from a faulty wire.")
+    #m(Message.NOTE, [0,3], "Investigations suggest that the fire started from a faulty wire.")
 
     m(Message.PHAX, [1,2], "The local hydrants were incapable of supplying the firefighters.", 0.25)
     m(Message.PHAX, [3,4], "Investigators confirmed the source of the fire to be an illegal distillery.", 0.75)
