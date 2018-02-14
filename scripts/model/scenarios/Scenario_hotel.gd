@@ -6,10 +6,6 @@ func _init():
     init_headlines()
     init_messages()
 
-func get_propability(world, countries):
-    return randf() < 0.05
-
-#TODO set an effect for each Headline
 
 func init_headlines():
     h("{country_1} allows people to treat citizens of {country_2} derogatory.", 0.75, {

@@ -5,11 +5,9 @@ func _init():
     num_countries = 2
     init_headlines()
     init_messages()
-
-func get_propability(world, countries):
-    return randf() < 0.05
-
-#TODO set an effect for each Headline
+    relation_conditions = [
+        [1, 2, LESS, -0.2]
+    ]
 
 func init_headlines():
     h("Training flight of {country_1} went wrong, causing international conflict.", 0.70, {

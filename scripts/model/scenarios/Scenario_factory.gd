@@ -2,14 +2,9 @@ extends "res://scripts/model/Scenario.gd"
 
 func _init():
     name = "Factory closing"
-    num_countries = 2
+    num_countries = 1
     init_headlines()
     init_messages()
-
-func get_propability(world, countries):
-    return randf() < 0.05
-
-#TODO set an effect for each Headline
 
 func init_headlines():
     h("Industrialist Handlers stock gambling leaves his workers unemployed.", 0.20, {

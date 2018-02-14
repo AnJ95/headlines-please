@@ -5,11 +5,11 @@ func _init():
     num_countries = 1
     init_headlines()
     init_messages()
-
-func get_propability(world, countries):
-    return randf() < 0.05
-
-#TODO set an effect for each Headline
+    param_conditions = {
+        1 : [
+            ["science", GREATER, 0.3]
+        ]
+    }
 
 func init_headlines():
     h("Institute of Medical Studies might just have found a way to treat cancer!", 0.4, {

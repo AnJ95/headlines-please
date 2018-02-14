@@ -6,10 +6,6 @@ func _init():
     init_headlines()
     init_messages()
 
-func get_propability(world, countries):
-    #this should be based on the relation of the two countries (and maybe previous events)
-    return randf() < 0.05
-
 func init_headlines():
     h("{country_1} deems {country_2} unsafe", 0.55, {
     })
@@ -17,7 +13,6 @@ func init_headlines():
     })
     h("{country_1} provokes {country_2} with a travel warning", 0.6, {
     })
-
 
 func init_messages():
     m(Message.TWEET, [], "I was just booking a holiday trip to {country_2}. Guess I will wait")

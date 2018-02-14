@@ -5,9 +5,11 @@ func _init():
     num_countries = 1
     init_headlines()
     init_messages()
-
-func get_propability(world, countries):
-    return randf() < 0.05
+    param_conditions = {
+        1 : [
+            ["science", LESS, 0]
+        ]
+    }
 
 func init_headlines():
     h("No end to pedophile in church!", 0.75, {

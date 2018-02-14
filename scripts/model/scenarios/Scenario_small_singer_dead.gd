@@ -2,14 +2,9 @@ extends "res://scripts/model/Scenario.gd"
 
 func _init():
     name = "Singer dead"
-    num_countries = 2
+    num_countries = 1
     init_headlines()
     init_messages()
-
-func get_propability(world, countries):
-    return randf() < 0.05
-
-#TODO set an effect for each Headline
 
 func init_headlines():
     h("Singer McDole dies in car crash due to drunkenness.", 0.21, {

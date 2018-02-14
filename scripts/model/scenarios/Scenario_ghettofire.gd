@@ -5,11 +5,11 @@ func _init():
     num_countries = 2
     init_headlines()
     init_messages()
-
-func get_propability(world, countries):
-    return randf() < 0.05
-
-#TODO set an effect for each Headline
+    param_conditions = {
+        1 : [
+            ["progress", LESS, -0.2]
+        ]
+    }
 
 func init_headlines():
     h("Public authorities fail to care about a huge fire in Hoffenkamm district.", 0.82, {
