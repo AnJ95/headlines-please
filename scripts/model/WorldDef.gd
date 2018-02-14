@@ -26,6 +26,7 @@ func get_scenarios():
     scenarios.append(load("res://scripts/model/scenarios/Scenario_refugees_in_albrahm.gd").new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_cancer_progress.gd").new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_philharmonia_planned.gd").new())
+    scenarios.append(load("res://scripts/model/scenarios/Scenario_philharmonia_postponed.gd").new())
     return scenarios
     
 func get_params():

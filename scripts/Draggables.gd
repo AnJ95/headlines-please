@@ -14,6 +14,10 @@ func on_day_started( world ):
         node.rect_position = rand_position()
         get_node("/root/Main/Draggables").add_child(node)
 
+func _process(delta):
+    if not Input.is_mouse_button_pressed(BUTTON_LEFT):
+        is_dragging_sth = false
+                
 func rand_position():
     var outer = get_node("/root/Main/Draggables").get_global_rect()
     var inner = get_global_rect()
