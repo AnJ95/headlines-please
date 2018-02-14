@@ -9,7 +9,7 @@ func _init(countries, scenarios):
     self.countries = countries
     self.scenarios = scenarios
 
-func check_for_new_scenarios(signal_emitter, day_progress):
+func check_for_new_messages(signal_emitter, day_progress):
     for s in current_scenarios:
         for m in current_scenarios[s].messages:
             if m.arrival_time > last_day_progress && m.arrival_time <= day_progress:
@@ -37,34 +37,46 @@ func load_scenarios():
 func next_day():
     current_scenarios = {}
     
-    var valids = filter_by_preconditions(scenarios)
+    # This gives us a data structure of all valid scenarios with every country permutation possibility
+    var scenarios_valid_perms = filter_by_preconditions(scenarios)
     
+    # This selects just one of these possibilities and prepares the scenario with its corresponding country permutation
+    var scenarios_valid = select_one_per_scenario(scenarios_valid_perms)
+
+    var scenario_count = 2 + randi() % 2
+    if scenario_count > scenarios_valid.size():
+        print("ERROR, did not find enough valid scenarios")
+        return
+    
+    # Finally we just need to get exactly scenario_count of the scenarios, taking their corresponding probabilities into account
+    current_scenarios = select_at_random(scenarios_valid, scenario_count)
+
+func select_at_random(scenarios, amount):
+    var result = {}
+    # repeat until we got exactly as many scenarios as we want
+    while result.size() < amount:
+        # iterate all valid scenarios in random order
+        fisher_yates(scenarios)
+        for scenario in scenarios:
+            # check probability
+            if randf() <= scenario.prob:
+                result[scenario.name] = scenario
+                if result.size() >= amount:
+                    break
+    return result
+
+# Takes the data structure, filter_by_preconditions returns and randomly selects one country permutation per scenario 
+func select_one_per_scenario(scenarios):
     # Iterate valid scenarios
-    var valid_scenarios = []
-    for scenario_name in valids:
-        var perm_possibilites = valids[scenario_name]
+    var result = []
+    for scenario_name in scenarios:
+        var perm_possibilites = scenarios[scenario_name]
         # Randomly select a country permutation
         var tuple = perm_possibilites[randi() % perm_possibilites.size()]
         # Prepare and add this scenario
         tuple[0].prepare(self, tuple[1])
-        valid_scenarios.append(tuple[0])
-      
-    var scenario_count = 1
-    if scenario_count > valid_scenarios.size():
-        print("ERROR, did not find enough valid scenarios")
-        return
-        
-    # repeat until we got exactly as many scenarios as we want
-    while current_scenarios.size() < scenario_count:
-        # iterate all valid scenarios in random order
-        fisher_yates(valid_scenarios)
-        for valid_scenario in valid_scenarios:
-            # check probability
-            if randf() <= valid_scenario.prob:
-                current_scenarios[valid_scenario.name] = valid_scenario
-                if current_scenarios.size() >= scenario_count:
-                    break
-
+        result.append(tuple[0])
+    return result
 
 # Filters an array of scenarios and returns a data structure containing results and information about its countries        
 """ Example return:

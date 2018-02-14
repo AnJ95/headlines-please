@@ -55,7 +55,7 @@ func _process(delta):
     if not game_running:
         return
     
-    scenarioManager.check_for_new_scenarios(self, time / DAY_CYCLE_TIME)
+    scenarioManager.check_for_new_messages(self, time / DAY_CYCLE_TIME)
 
     time += delta
     if time >= DAY_CYCLE_TIME:
