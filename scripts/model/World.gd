@@ -37,12 +37,12 @@ func _ready():
     countries = world_def.get_countries()
     for c in countries:
         c.prepare(self)
-        
-    scenarioManager = ScenarioManager.new(countries, world_def.get_scenarios())
     
     params = world_def.get_params()
     
     relations = CountryRelations.new(countries)
+    
+    scenarioManager = ScenarioManager.new(relations, countries, world_def.get_scenarios())
     
     emit_signal("game_started", self)
     

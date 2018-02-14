@@ -12,11 +12,8 @@ var countries = []
 var messages = []
 var headlines = []
 
-var param_conditions = {
-        1 : [
-            ["progress", GREATER, 2]
-        ],
-    }
+var param_conditions = {}
+var relation_conditions = []
 
 func prepare(scenarioManager, countries):
     self.countries = countries

@@ -1,3 +1,4 @@
+var relations
 var countries
 var scenarios = []
 var last_day_progress = -1
@@ -5,7 +6,8 @@ var current_scenarios = {}
 var past_scenarios = []
 const Scenario = preload("res://scripts/model/Scenario.gd")
 
-func _init(countries, scenarios):
+func _init(relations, countries, scenarios):
+    self.relations = relations
     self.countries = countries
     self.scenarios = scenarios
 
@@ -43,7 +45,7 @@ func next_day():
     # This selects just one of these possibilities and prepares the scenario with its corresponding country permutation
     var scenarios_valid = select_one_per_scenario(scenarios_valid_perms)
 
-    var scenario_count = 2 + randi() % 2
+    var scenario_count = 1#2 + randi() % 2
     if scenario_count > scenarios_valid.size():
         print("ERROR, did not find enough valid scenarios")
         return
@@ -102,12 +104,21 @@ func filter_by_preconditions(src):
         for perm in perms:
             var valid = true
             
+            # iterate each relation-precondition of this scenario
+            for condition in scenario.relation_conditions:
+                var val_actual = relations.get_by_country_names(perm[condition[0] - 1].name, perm[condition[1] - 1].name)
+                var val_thresh = condition[3]
+                if condition[2] == Scenario.Op.GREATER and val_actual <= val_thresh:
+                    valid = false
+                if condition[2] == Scenario.Op.LESS and val_actual >= val_thresh:
+                    valid = false
+            
             # iterate each country that has preconditions
             for country_num in scenario.param_conditions:
                 var countries_preconditions = scenario.param_conditions[country_num]
                 var country = perm[country_num - 1]
                 
-                # iterate each precondition of this country
+                # iterate each param-precondition of this country
                 for condition in countries_preconditions:
                     var val_actual = country.params[condition[0]]
                     var val_thresh = condition[2]
@@ -115,6 +126,7 @@ func filter_by_preconditions(src):
                         valid = false
                     if condition[1] == Scenario.Op.LESS and val_actual >= val_thresh:
                         valid = false
+
             if valid:
                 if !dst.has(scenario.name):
                     dst[scenario.name] = []
