@@ -62,9 +62,11 @@ func can_drag_now():
     return true
     
 func move_to_top():
-    if get_parent() != null:
-        get_parent().move_child(self, get_parent().get_child_count() - 1)
-    pass
+    var p = get_parent()
+    if p != null:
+        var count = p.get_child_count()
+        if p.get_child(count - 1) != self:
+            p.move_child(self, count - 1)
     
 func on_mouse_entered():
     isMouseIn = true
@@ -90,10 +92,7 @@ func internal_move_drag():
                     break
     reset_droppable_hovering()
     
-    var p = get_parent()
-    var count = p.get_child_count()
-    if p.get_child(count - 1) != self:
-        p.move_child(self, count - 1)
+    move_to_top()
         
     
 

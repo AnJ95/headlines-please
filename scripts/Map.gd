@@ -72,10 +72,16 @@ func on_game_started(world):
 
 func day_ended(world):
     start_position = rect_position
+    twoState.is_animating = true
     tween.interpolate_property(self, "rect_position", rect_position, map_day_end_position, 0.4, Tween.TRANS_QUART, Tween.EASE_IN_OUT)
     tween.start()
     
 func day_started(world):
     if start_position != null:
+        twoState.is_animating = true
         tween.interpolate_property(self, "rect_position", rect_position, start_position, 0.4, Tween.TRANS_QUART, Tween.EASE_IN_OUT)
         tween.start()
+
+
+func on_tween_completed( object, key ):
+    twoState.is_animating = false

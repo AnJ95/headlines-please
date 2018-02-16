@@ -5,7 +5,7 @@
 [ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=3]
 [ext_resource path="res://scenes/ProgressBar.tscn" type="PackedScene" id=4]
 
-[node name="CountryInfo" type="Control" index="0"]
+[node name="CountryInfo" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -14,12 +14,12 @@ anchor_bottom = 0.0
 margin_right = 200.0
 margin_bottom = 151.0
 rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Margin", "Rect" ]
+_sections_unfolded = [ "Margin", "Mouse", "Rect" ]
 progress_bar_space = 15
 
 [node name="background" type="Sprite" parent="." index="0"]

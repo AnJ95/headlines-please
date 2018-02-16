@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/RelationThread.gd" type="Script" id=1]
 
-[node name="RelationThread" type="Control" index="0"]
+[node name="RelationThread" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -12,12 +12,12 @@ margin_right = 100.0
 margin_bottom = 5.0
 rect_pivot_offset = Vector2( 2.5, 2.5 )
 rect_clip_content = true
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Anchor", "Rect", "Visibility" ]
+_sections_unfolded = [ "Anchor", "Mouse", "Rect", "Visibility" ]
 
 [node name="ColorRect" type="ColorRect" parent="." index="0"]
 
@@ -28,12 +28,12 @@ anchor_bottom = 0.0
 margin_right = 500.0
 margin_bottom = 5.0
 rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
+mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 1 )
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Visibility" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Mouse", "Rect", "Visibility" ]
 
 [node name="Tween" type="Tween" parent="." index="1"]
 

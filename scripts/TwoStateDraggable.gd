@@ -27,7 +27,10 @@ func _ready():
         ease_type = Tween.EASE_IN_OUT
 
 func get_progress():
-    return (parent.rect_position.y - minY) / (maxY - minY)
+    var progress = (parent.rect_position.y - minY) / (maxY - minY)
+    if progress > 1:
+        return 1
+    return progress
 
 func while_moving():
     parent.rect_position.x = parent.startThisPos.x

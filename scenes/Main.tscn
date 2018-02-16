@@ -98,7 +98,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 50, 120 ) ]
 }
 
-[node name="Main" type="Control" index="0"]
+[node name="Main" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -442,23 +442,23 @@ mix_target = 0
 bus = "Master"
 _sections_unfolded = [ "Pause" ]
 
-[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
-
-[connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
-
 [connection signal="day_ended" from="." to="TweetrContainer/Tweetr" method="on_day_ended"]
 
 [connection signal="day_ended" from="." to="Draggables/Map" method="day_ended"]
 
-[connection signal="day_started" from="." to="PaperArea" method="on_day_started"]
+[connection signal="day_ended" from="." to="Phaxogram" method="on_day_ended"]
+
+[connection signal="day_ended" from="." to="DayEndScreen" method="on_day_ended"]
 
 [connection signal="day_started" from="." to="Draggables/Map" method="day_started"]
 
+[connection signal="day_started" from="." to="PaperArea" method="on_day_started"]
+
 [connection signal="game_started" from="." to="Draggables/Map" method="on_game_started"]
 
-[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
-
 [connection signal="message_arrived" from="." to="TweetrContainer/Tweetr" method="on_message_arrived"]
+
+[connection signal="message_arrived" from="." to="Phaxogram" method="on_message_arrived"]
 
 [connection signal="message_arrived" from="." to="NoteArea" method="on_message_arrived"]
 
