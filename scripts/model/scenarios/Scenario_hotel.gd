@@ -33,10 +33,10 @@ func init_headlines():
 
 
 func init_messages():
-    m(Message.TWEET, [0,1], "The {country_2}ians were cruely beat up by hotel security!")
+    m(Message.TWEET, [0], "The {country_2}ians were cruely beat up by hotel security!")
     #m(Message.TWEET, [4], "The {country_2}ians allegedly snuck in and plundered the bar.", 0.38)
-    m(Message.TWEET, [1], "wtf {country_1}? #notcool #stopviolence", 0.55)
-    m(Message.TWEET, [1], "Eduard Glitz is a racist, isn't he?", 0.55)
+    m(Message.TWEET, [0], "wtf {country_1}? #glitz #stopviolence", 0.67)
+    m(Message.TWEET, [1], "Eduard #glitz is a racist, isn't he?", 0.23)
 
     m(Message.NOTE, [3,4], "{country_2}ians cause $15,000 damage at hotel.")
     m(Message.NOTE, [1,2], "Hotelowner Eduard Glitz forcefully removed group of {country_2}ians.")

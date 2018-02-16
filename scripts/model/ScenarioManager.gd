@@ -50,13 +50,15 @@ func next_day():
     # This selects just one of these possibilities and prepares the scenario with its corresponding country permutation
     var scenarios_valid = select_one_per_scenario(scenarios_valid_perms)
 
-    var scenario_count = rand_range(MIN_SCENARIOS_PER_DAY, MAX_SCENARIOS_PER_DAY + 1)
+    var scenario_count = rand_range(MIN_SCENARIOS_PER_DAY, MAX_SCENARIOS_PER_DAY)
     if scenario_count > scenarios_valid.size():
         print("ERROR, did not find enough valid scenarios")
         return
     
     # Finally we just need to get exactly scenario_count of the scenarios, taking their corresponding probabilities into account
     current_scenarios = select_at_random(scenarios_valid, scenario_count)
+    
+    print("Serving " + str(current_scenarios.size()) + " scenarios")
     
     # Also save these selected scenarios name
     past_scenarios.append([])

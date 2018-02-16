@@ -9,6 +9,8 @@ func _init(world, scenarioManager):
         check(world, scenario)
     for scenario in scenarioManager.scenarios:
         second_check(world, scenario)
+    print("##########")
+    print("Done checking " + str(scenarioManager.scenarios.size()) + " scenarios ")
 
 func check(world, s):
     print("### checking scenario " + s.name)
