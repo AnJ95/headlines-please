@@ -43,7 +43,7 @@ func _ready():
     
     relations = CountryRelations.new(countries)
     
-    scenarioManager = ScenarioManager.new(relations, countries, world_def.get_scenarios())
+    scenarioManager = ScenarioManager.new(self, relations, countries, world_def.get_scenarios())
     ScenarioChecker.new(self, scenarioManager)
     
     emit_signal("game_started", self)

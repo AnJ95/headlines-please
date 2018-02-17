@@ -5,9 +5,12 @@ func _init():
     num_countries = 1
     init_headlines()
     init_messages()
-    scenario_conditions = [
-        "Philharmonia planned"
-    ]
+    
+func is_valid(world, countries):   
+    if not world.scenarioManager.did_scenario_happen("Philharmonia planned", countries):
+        return false
+        
+    return true
 
 
 func init_headlines():

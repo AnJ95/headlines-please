@@ -15,6 +15,7 @@ func get_countries():
 
 func get_scenarios():
     var scenarios = []
+    scenarios.append(load("res://scenarios/Scenario_ambassador.gd").new())
     scenarios.append(load("res://scenarios/Scenario_factory.gd").new())
     scenarios.append(load("res://scenarios/Scenario_ghettofire.gd").new())
     scenarios.append(load("res://scenarios/Scenario_hotel.gd").new())

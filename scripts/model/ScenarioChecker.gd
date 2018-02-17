@@ -31,6 +31,7 @@ func check(world, s):
     if s.headlines.size() < 3:
         e("too few headlines, should be at least 3")
     
+    """
     if typeof(s.param_conditions) != TYPE_DICTIONARY:
         e("invalid param_condition, must be a dictionary")
     for country_num in s.param_conditions:
@@ -72,7 +73,8 @@ func check(world, s):
             e("invalid relation_conditions at index " + str(i) + ", third value must be enum value LESS or GREATER, was " + str(cond[2]))
         if (typeof(cond[3]) != TYPE_REAL and typeof(cond[3]) != TYPE_INT) or cond[3] < -1 or cond[3] > 1:
             e("invalid relation_conditions at index " + str(i) + ", fourth value must be float between -1 and 1")
-            
+    """
+
     for i in range(s.messages.size()):
         var m = s.messages[i]
         if m.type != Message.NOTE and m.type != Message.PHAX and m.type != Message.TWEET:
@@ -116,6 +118,8 @@ func check(world, s):
                 e("invalid headline at index " + str(i) + ", relation at index " + str(o) + "; third value must be value between -1 and 1")
 
 func second_check(world, s):
+    return
+    
     for i in range(s.scenario_conditions.size()):
         var cond = s.scenario_conditions[i]
         if !names.has(cond):

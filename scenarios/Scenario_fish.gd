@@ -5,11 +5,13 @@ func _init():
     num_countries = 1
     init_headlines()
     init_messages()
-    param_conditions = {
-        1 : [
-            ["progress", LESS, -0.2]
-        ]
-    }
+
+func is_valid(world, countries):
+    if not countries[0].params["progress"] < -0.2:
+        return false
+        
+    return true
+
 
 func init_headlines():
     h("We are out of fish!", 0.5, {

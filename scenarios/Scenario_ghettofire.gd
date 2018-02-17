@@ -5,11 +5,14 @@ func _init():
     num_countries = 2
     init_headlines()
     init_messages()
-    param_conditions = {
-        1 : [
-            ["progress", LESS, -0.2]
-        ]
-    }
+
+
+func is_valid(world, countries):
+    if not countries[0].params["progress"] < -0.2:
+        return false
+        
+    return true
+
 
 func init_headlines():
     h("Public authorities fail to care about a huge fire in Hoffenkamm district.", 0.82, {

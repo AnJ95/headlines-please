@@ -5,9 +5,14 @@ func _init():
     num_countries = 2
     init_headlines()
     init_messages()
-    relation_conditions = [
-        [1, 2, LESS, -0.2]
-    ]
+    
+func is_valid(world, countries):
+    var relation_value = world.relations.get_by_country_names(countries[0].name, countries[1].name)
+    if not relation_value < -0.2:
+        return false
+        
+    return true
+
 
 func init_headlines():
     h("Training flight of {country_1} went wrong, causing international conflict.", 0.70, {

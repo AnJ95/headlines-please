@@ -1,7 +1,6 @@
 
 const Headline = preload("res://scripts/model/Headline.gd")
 const Message = preload("res://scripts/model/Message.gd")
-enum Op {GREATER, LESS}
 
 # values to be set by concrete scenario
 var name = "test scenario"
@@ -12,10 +11,6 @@ var countries = []
 var messages = []
 var headlines = []
 
-var param_conditions = {}
-var relation_conditions = []
-var scenario_conditions = []
-
 func prepare(scenarioManager, countries):
     self.countries = countries
     for h in headlines:
@@ -23,9 +18,15 @@ func prepare(scenarioManager, countries):
     for m in messages:
         m.prepare(scenarioManager, self)
 
+func is_valid(world, countries):
+    return true
+
+func get_propability():
+    return 1
+
 func h(format_string, drama, params, relations=[]):
     headlines.append(Headline.new(format_string, drama, params, relations))
-    
+
 func m(type, headlines, format_string, arrival_time = -1):
     messages.append(Message.new(type, headlines, format_string, arrival_time))
 
