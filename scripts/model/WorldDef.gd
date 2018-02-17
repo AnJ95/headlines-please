@@ -29,24 +29,6 @@ func get_scenarios():
     scenarios.append(load("res://scripts/model/scenarios/Scenario_philharmonia_postponed.gd").new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_religion_clash_in_schools.gd").new())
     scenarios.append(load("res://scripts/model/scenarios/Scenario_ministry_pope.gd").new())
-
-    # load additional scenarios from the user dircetory (e.g. ~/.local/share/godot/app_userdata/HeadlinesPlease/scenarios)
-    var dir = Directory.new()
-    if dir.open("user://scenarios") == OK:
-        dir.list_dir_begin(true)
-        var file_name = dir.get_next()
-        while (file_name != ""):
-            if dir.current_is_dir():
-                continue
-            var LoadedScenario = load("user://scenarios/" + file_name)
-            LoadedScenario = LoadedScenario.new()
-            scenarios.append(LoadedScenario)
-            print("added " + LoadedScenario.name + " from user://scenarios/" + file_name)
-            file_name = dir.get_next()
-        dir.list_dir_end()
-    else:
-        print("An error occurred when trying to access the path.")
-
     return scenarios
     
 func get_params():

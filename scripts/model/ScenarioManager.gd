@@ -13,6 +13,7 @@ func _init(relations, countries, scenarios):
     self.relations = relations
     self.countries = countries
     self.scenarios = scenarios
+    load_user_scenarios()
 
 func check_for_new_messages(signal_emitter, day_progress):
     for s in current_scenarios:
@@ -21,20 +22,21 @@ func check_for_new_messages(signal_emitter, day_progress):
                 signal_emitter.emit_signal("message_arrived", m);
     last_day_progress = day_progress
 
-# currently unused
-func load_scenarios():
-    return
+# load additional scenarios from the user dircetory (on Linux ~/.local/share/godot/app_userdata/HeadlinesPlease/scenarios)
+func load_user_scenarios():
     var dir = Directory.new()
-    if dir.open("res://scripts/model/scenarios") == OK:
+    if dir.open("user://scenarios") == OK:
         dir.list_dir_begin(true)
         var file_name = dir.get_next()
         while (file_name != ""):
             if dir.current_is_dir():
                 continue
-            var LoadedScenario = load("res://scripts/model/scenarios/" + file_name)
-            scenarios.append(LoadedScenario.new())
+            var LoadedScenario = load("user://scenarios/" + file_name)
+            LoadedScenario = LoadedScenario.new()
+            scenarios.append(LoadedScenario)
+            print("added " + LoadedScenario.name + " from user://scenarios/" + file_name)
             file_name = dir.get_next()
-        dir.list_dir_end ( )
+        dir.list_dir_end()
     else:
         print("An error occurred when trying to access the path.")
 
