@@ -5,12 +5,9 @@ func _init():
     num_countries = 1
     init_headlines()
     init_messages()
-    param_conditions = {
-        1 : [
-            ["culture", GREATER, 0.7],
-            ["progress", GREATER, 0.3]
-        ]
-    }
+        
+func is_valid(world, countries):
+    return countries[0].params["culture"] > 0.7 and countries[0].params["progress"] > 0.3
 
 
 func init_headlines():

@@ -13,6 +13,8 @@ const MAX_RELATION_CHANGE = 0.4
 
 onready var world_def = $world_def
 
+onready var tweetr_cntd = get_node("TweetrContainer/Countdown")
+
 export var DAY_CYCLE_TIME = 45
 
 var params = []
@@ -43,7 +45,7 @@ func _ready():
     
     relations = CountryRelations.new(countries)
     
-    scenarioManager = ScenarioManager.new(relations, countries, world_def.get_scenarios())
+    scenarioManager = ScenarioManager.new(self, relations, countries, world_def.get_scenarios())
     ScenarioChecker.new(self, scenarioManager)
     
     emit_signal("game_started", self)
@@ -52,7 +54,7 @@ func _ready():
 
 func _process(delta):
 
-    get_node("TweetrContainer/Countdown").set_text(str(abs(round(DAY_CYCLE_TIME - time))))
+    tweetr_cntd.set_text(str(abs(round(DAY_CYCLE_TIME - time))))
 
     if not game_running:
         return

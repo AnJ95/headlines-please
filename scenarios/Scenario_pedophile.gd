@@ -5,11 +5,13 @@ func _init():
     num_countries = 1
     init_headlines()
     init_messages()
-    param_conditions = {
-        1 : [
-            ["science", LESS, 0]
-        ]
-    }
+    
+func is_valid(world, countries):
+    if not countries[0].params["science"] < 0.2:
+        return false
+        
+    return true
+
 
 func init_headlines():
     h("No end to pedophilia in church!", 0.75, {

@@ -15,20 +15,21 @@ func get_countries():
 
 func get_scenarios():
     var scenarios = []
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_factory.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_ghettofire.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_hotel.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_practice_flight.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_small_online_salt.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_small_singer_dead.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_pedophile.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_fish.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_refugees_in_albrahm.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_cancer_progress.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_philharmonia_planned.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_philharmonia_postponed.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_religion_clash_in_schools.gd").new())
-    scenarios.append(load("res://scripts/model/scenarios/Scenario_ministry_pope.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_ambassador.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_factory.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_ghettofire.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_hotel.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_practice_flight.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_small_online_salt.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_small_singer_dead.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_pedophile.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_fish.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_refugees_in_albrahm.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_cancer_progress.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_philharmonia_planned.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_philharmonia_postponed.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_religion_clash_in_schools.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_ministry_pope.gd").new())
     return scenarios
     
 func get_params():

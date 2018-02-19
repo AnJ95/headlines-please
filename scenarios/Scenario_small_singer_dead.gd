@@ -6,6 +6,7 @@ func _init():
     init_headlines()
     init_messages()
 
+
 func init_headlines():
     h("Singer McDole dies in car crash due to drunkenness.", 0.21, {
       "culture" : 0.2,

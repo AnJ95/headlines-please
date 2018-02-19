@@ -6,6 +6,7 @@ func _init():
     init_headlines()
     init_messages()
 
+
 func init_headlines():
     h("Industrialist Handlers stock gambling leaves his workers unemployed.", 0.20, {
 

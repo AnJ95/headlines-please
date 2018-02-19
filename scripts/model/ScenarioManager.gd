@@ -1,3 +1,4 @@
+var world
 var relations
 var countries
 var scenarios = []
@@ -9,10 +10,12 @@ const MIN_SCENARIO_DAY_DISTANCE = 3
 const MIN_SCENARIOS_PER_DAY = 2
 const MAX_SCENARIOS_PER_DAY = 3
 
-func _init(relations, countries, scenarios):
+func _init(world, relations, countries, scenarios):
+    self.world = world
     self.relations = relations
     self.countries = countries
     self.scenarios = scenarios
+    load_user_scenarios()
 
 func check_for_new_messages(signal_emitter, day_progress):
     for s in current_scenarios:
@@ -21,20 +24,21 @@ func check_for_new_messages(signal_emitter, day_progress):
                 signal_emitter.emit_signal("message_arrived", m);
     last_day_progress = day_progress
 
-# currently unused
-func load_scenarios():
-    return
+# load additional scenarios from the user dircetory (on Linux ~/.local/share/godot/app_userdata/HeadlinesPlease/scenarios)
+func load_user_scenarios():
     var dir = Directory.new()
-    if dir.open("res://scripts/model/scenarios") == OK:
+    if dir.open("user://scenarios") == OK:
         dir.list_dir_begin(true)
         var file_name = dir.get_next()
         while (file_name != ""):
             if dir.current_is_dir():
                 continue
-            var LoadedScenario = load("res://scripts/model/scenarios/" + file_name)
-            scenarios.append(LoadedScenario.new())
+            var LoadedScenario = load("user://scenarios/" + file_name)
+            LoadedScenario = LoadedScenario.new()
+            scenarios.append(LoadedScenario)
+            print("added " + LoadedScenario.name + " from user://scenarios/" + file_name)
             file_name = dir.get_next()
-        dir.list_dir_end ( )
+        dir.list_dir_end()
     else:
         print("An error occurred when trying to access the path.")
 
@@ -59,6 +63,10 @@ func next_day():
     current_scenarios = select_at_random(scenarios_valid, scenario_count)
     
     print("Serving " + str(current_scenarios.size()) + " scenarios")
+    var scenario_str = ""
+    for s in current_scenarios:
+        scenario_str += s + " - "
+    print(scenario_str)
     
     # Also save these selected scenarios name
     past_scenarios.append([])
@@ -80,19 +88,54 @@ func filter_by_occurence(scenarios):
         if valid:
             result.append(scenario)
     return result
-
-func select_at_random(scenarios, amount):
+    
+# Filters an array of scenarios and returns a data structure containing results and information about its countries        
+""" Example return:
+   {
+    "Ghettofire": [
+        [scenario_object, [country_1_object]],
+        [scenario_object, [country_4_object]]
+    ]
+    "This is war": [
+        [scenario_object, [country_1_object, country_2_object]]
+        [scenario_object, [country_1_object, country_3_object]]
+    ]
+   } 
+"""
+func filter_by_preconditions(scenarios):
     var result = {}
-    # repeat until we got exactly as many scenarios as we want
+    
+    # iterate every scenario
+    for scenario in scenarios:
+        var perms = get_all_coutry_permutations(scenario.num_countries)
+        
+        # iterate every country combination for this scenario and check if it is valid
+        for countries_permutation in perms:            
+            if scenario.is_valid(world, countries_permutation):
+                if !result.has(scenario.name):
+                    result[scenario.name] = []
+                result[scenario.name].append([scenario, countries_permutation])
+    return result
+
+# TODO: does this work? a check to not select multiple of the same scenario is neeed (currently done by "select_one_per_scenario"
+# but im am not happy with the math
+func select_by_probability(scenarios, amount):
+    var result = {}
     while result.size() < amount:
-        # iterate all valid scenarios in random order
-        fisher_yates(scenarios)
+        var total_prob = 0
         for scenario in scenarios:
-            # check probability
-            if randf() <= scenario.prob:
-                result[scenario.name] = scenario
-                if result.size() >= amount:
-                    break
+            total_prob += scenario.prob
+            
+        var rand = rand_range(0, total_prob)
+        
+        var last_prob = 0;
+        var cur_prob = 0;
+        for scenario in scenarios:
+            cur_prob += scenario.prob
+            if rand >= last_prob && rand < cur_prob:
+                result.append(scenario)
+            last_prob = cur_prob
+            
     return result
 
 # Takes the data structure, filter_by_preconditions returns and randomly selects one country permutation per scenario 
@@ -108,79 +151,26 @@ func select_one_per_scenario(scenarios):
         result.append(tuple[0])
     return result
 
-# Filters an array of scenarios and returns a data structure containing results and information about its countries        
-""" Example return:
-   {
-    "Ghettofire": [
-        [scenario_object, [country_1_object]],
-        [scenario_object, [country_4_object]]
-    ]
-    "This is war": [
-        [scenario_object, [country_1_object, country_2_object]]
-        [scenario_object, [country_1_object, country_3_object]]
-    ]
-   } 
-"""
-func filter_by_preconditions(src):
-    var dst = {}
+func select_at_random(scenarios, amount):
+    var result = {}
+    # repeat until we got exactly as many scenarios as we want
+    while result.size() < amount:
+        # iterate all valid scenarios in random order
+        fisher_yates(scenarios)
+        for scenario in scenarios:
+            # check probability
+            if randf() <= scenario.prob:
+                result[scenario.name] = scenario
+                if result.size() >= amount:
+                    break
+    return result
     
-    # iterate every scenario
-    for scenario in src:
-        var perms = get_all_coutry_permutations(scenario.num_countries)
-        
-        # If previous scenarios are assumed: take its countries
-        if scenario.scenario_conditions.size() > 1:
-            for day_id in range(past_scenarios.size - 1, 0, -1):
-                var day = past_scenarios[day_id]
-                for past_scenario in day:
-                    if scenario.name == past_scenario[0].name:
-                         perms = [past_scenario[1]]
-        
-        # iterate every country combination possibility
-        for perm in perms:
-            var valid = true
-            
-            # iterate each relation-precondition of this scenario
-            for condition in scenario.relation_conditions:
-                var val_actual = relations.get_by_country_names(perm[condition[0] - 1].name, perm[condition[1] - 1].name)
-                var val_thresh = condition[3]
-                if condition[2] == Scenario.Op.GREATER and val_actual <= val_thresh:
-                    valid = false
-                if condition[2] == Scenario.Op.LESS and val_actual >= val_thresh:
-                    valid = false
-                    
-            # iterate each relation-precondition of this scenario
-            for condition in scenario.scenario_conditions:
-                var check = false
-                for day in past_scenarios:
-                    for past_scenario in day:
-                        if past_scenario[0] == condition:
-                            check = true
-                if not check:
-                    valid = false
-            
-            # iterate each country that has preconditions
-            for country_num in scenario.param_conditions:
-                var countries_preconditions = scenario.param_conditions[country_num]
-                var country = perm[country_num - 1]
-                
-                # iterate each param-precondition of this country
-                for condition in countries_preconditions:
-                    var val_actual = country.params[condition[0]]
-                    var val_thresh = condition[2]
-                    if condition[1] == Scenario.Op.GREATER and val_actual <= val_thresh:
-                        valid = false
-                    if condition[1] == Scenario.Op.LESS and val_actual >= val_thresh:
-                        valid = false
-
-            if valid:
-                if !dst.has(scenario.name):
-                    dst[scenario.name] = []
-                dst[scenario.name].append([scenario, perm])
-    return dst
-
-func filter_by_probability(src):
-    pass
+# did a scenario happen for this exact country combination (if empty countries then any combination)
+func did_scenario_happen(scenario, country_combination = []):
+    for day in past_scenarios:
+        for past_scenario in day:
+            if past_scenario[0] == scenario && (country_combination == [] || country_combination == past_scenario[1]) :
+                return true
 
 func get_scenario():
     var s_num = randi() % scenarios.size()
