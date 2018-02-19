@@ -7,7 +7,8 @@ const CountryRelations = preload("res://scripts/model/CountryRelations.gd")
 const ScenarioManager = preload("res://scripts/model/ScenarioManager.gd")
 const ScenarioChecker = preload("res://scripts/model/ScenarioChecker.gd")
 
-const COSTS_PER_DAY = 35
+const COSTS_PER_DAY = 30
+const COSTS_PER_HEADLINE = 5
 const MONEY_PER_READER = 1
 const MAX_RELATION_CHANGE = 0.4
 
@@ -78,13 +79,14 @@ func next_day():
     emit_signal("day_started", self)
 
 
+func update_money():
+    get_node("TweetrContainer/Money").set_text(str(round(money)) + "$")
+
+
 func end_day():
     print("end_day")
     game_running = false
-
-    money += get_current_bilances()
-    get_node("TweetrContainer/Money").set_text(str(round(money)) + "$")
-
+    
     emit_signal("day_ended", self)
 
 func broadcast_headline(headline):    
@@ -97,6 +99,11 @@ func broadcast_headline(headline):
     # Then evaluate for each country itself
     for country in countries:
         country.broadcast_headline(headline)
+        
+    # Also, pay for this headline
+    money -= COSTS_PER_HEADLINE
+    update_money()
+    
 
 func get_total_population():
     var total = 0
@@ -110,8 +117,14 @@ func get_total_readers():
         total += country.readers * country.inhabitants
     return total
     
-func get_current_bilances():
-    return get_total_readers() * MONEY_PER_READER - COSTS_PER_DAY
+func get_current_income():
+    return get_total_readers() * MONEY_PER_READER
+    
+func get_current_expenses_per_day():
+    return COSTS_PER_DAY
+    
+func get_current_expenses_per_headline(num_headlines):
+    return num_headlines * COSTS_PER_HEADLINE
     
 func get_country(country_name):
     for country in countries:

@@ -2,14 +2,23 @@ extends Control
 
 const INITIAL_WAIT = 1.2
 const MIN_PAGE_TIME = 2
+
+# For internal state
 var isRunning = false
 var currentSlot = -2
 var world
 var time = 0
 var doneScenarios = []
 
+# for ReportSummaryPage
+var readers_before
+var headlines_num
+var money_before
+
 const ReportPage = preload("res://scenes/ReportPage.tscn")
+const ReportSummaryPage = preload("res://scenes/ReportSummaryPage.tscn")
 const DropZone = preload("res://scripts/DropZone.gd")
+
 const NOTE_UNFINISHED = [
 "You need to finish your article before handing it in...",
 "I can't anticipate what you are thinking, next time finish your work!",
@@ -63,19 +72,41 @@ func on_click():
 
 func next_page():
     currentSlot += 1
-    if (currentSlot >= Airmail.contained_draggables.size()):
+    if (currentSlot > Airmail.contained_draggables.size()):
         # if done showing all draggables
         isRunning = false
         world.next_day()
         Airmail.clear_children()
         hide()
         currentSlot = -2
+    elif currentSlot == Airmail.contained_draggables.size():
+        var reportSummaryPage = ReportSummaryPage.instance()
+        add_child(reportSummaryPage)
+        init_report_summary_page(reportSummaryPage)
     else:
         var draggable = Airmail.contained_draggables[currentSlot]
         var reportPage = ReportPage.instance()
         add_child(reportPage)
         init_report_page(reportPage, draggable)
 
+func init_report_summary_page(reportSummaryPage):
+    reportSummaryPage.rect_position = Vector2(528, 10)
+    reportSummaryPage.init(
+        self,
+        world.day,
+        readers_before,
+        world.get_total_readers(),
+        world.MONEY_PER_READER,
+        world.get_current_expenses_per_day(),
+        headlines_num,
+        world.get_current_expenses_per_headline(1),
+        money_before,
+        "")
+        
+    world.money += world.get_current_income()
+    world.money -= world.get_current_expenses_per_day()
+    
+    world.update_money()
 
 func init_report_page(reportPage, draggable):
     reportPage.rect_position = Vector2(528, 10)
@@ -85,12 +116,14 @@ func init_report_page(reportPage, draggable):
     for country in world.countries:
         country_reader_changes.append(-country.get_readers())
     var total_reader_change = -world.get_total_readers()
-    var financial_impact = -world.get_current_bilances()
+    var financial_impact = -world.get_current_income()
     
     # broadcast message to countries if valid
     if draggable_is_valid(draggable):
         if not doneScenarios.has(draggable.selected_headline.scenario.name):
             world.broadcast_headline(draggable.selected_headline)
+            headlines_num += 1
+            
     # TODO better updating
     get_node("/root/Main/Draggables/Map").update(world)
     
@@ -98,7 +131,7 @@ func init_report_page(reportPage, draggable):
     for country_id in range(world.countries.size()):
         country_reader_changes[country_id] = round(10 * (country_reader_changes[country_id] + world.countries[country_id].get_readers())) / 10
     total_reader_change += world.get_total_readers()
-    financial_impact += world.get_current_bilances()
+    financial_impact += world.get_current_income()
     
     #init(dayEndScreen, draggable, report_num, item_num, item_max_num, countries, country_reader_changes, total_reader_change, financial_impact, note)
     reportPage.init(
@@ -159,11 +192,20 @@ func draggable_is_valid(draggable):
 func on_day_ended(world):
     for child in get_children():
         child.queue_free()
+   
+    # Save these for report summary page
+    readers_before = world.get_total_readers()
+    headlines_num = 0
+    money_before = world.money
+    
+    # reset internal state
     currentSlot = -1
     time = 0
     has_clicked = false
-    self.world = world
     doneScenarios = []
+    
+    #
+    self.world = world
     show()
 
     
