@@ -42,7 +42,8 @@ func init_headlines():
 func init_messages():
     m(Message.TWEET, [4], "praise the lord for he is #glorious")
     m(Message.TWEET, [2], "#middleages #ministryofthepope", 0.3)
-    m(Message.NOTE, [0, 1], "{country_1}s government founded a religious Ministry of the Pope")
+    m(Message.NOTE, [0, 1], "{country_1}s government founded a religious Ministry of the Pope")#
+    m(Message.NOTE, [0], "The Ministry of the Popes was installed to \"handle all godly affairs\".")
     m(Message.NOTE, [2], "It is unclear how much influce the new ministry in {country_1} will have.")
     m(Message.PHAX, [4], "Study on {country_1}ians shows 73% share of religious devotees")
     m(Message.PHAX, [3], "Some bishops from the Vatican were send to the Ministry of the Pope")

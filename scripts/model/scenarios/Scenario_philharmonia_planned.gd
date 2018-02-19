@@ -7,7 +7,8 @@ func _init():
     init_messages()
     param_conditions = {
         1 : [
-            ["culture", GREATER, 0.4]
+            ["culture", GREATER, 0.7],
+            ["progress", GREATER, 0.3]
         ]
     }
 
