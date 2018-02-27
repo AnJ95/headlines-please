@@ -3,13 +3,19 @@ extends Control
 const underline_pad = 4
 const underline_height = 4
 
-onready var label = get_node("Label")
-onready var button = get_node("TextureButton")
-onready var underline = get_node("headline_underline")
+onready var label = $Label
+onready var button = $TextureButton
+onready var underline = $headline_underline
+onready var tween = $Tween
+
+var is_disappearing = false
 var size_adjusted = false
 var dropzone = null
 var is_clickable = false
 var model
+
+func _ready():
+    modulate = Color(1,1,1,0)
 
 func init(var headline, var clickElem, var clickMethod):
     model = headline
@@ -39,7 +45,21 @@ func on_mouse_entered():
     if is_clickable:
         rect_position.y += 1
 
-
 func on_mouse_exited():
     if is_clickable:
         rect_position.y -= 1
+
+func appear():
+    tween.interpolate_property(self, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.3, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+    tween.start()
+    
+func disappear():
+    is_disappearing = true
+    tween.interpolate_property(self, "modulate", Color(1,1,1,1), Color(1,1,1,0), 0.3, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+    tween.start()
+
+func tween_completed(object, key):
+    if is_disappearing:
+        queue_free()
+        get_parent().remove_child(self)
+        dropzone.adjust_headline_positions()

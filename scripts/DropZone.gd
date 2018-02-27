@@ -67,17 +67,17 @@ func update_headlines():
         if not new_headlines.has(headline):
             for node in headline_container.get_children():
                 if node.model == headline:
-                    headline_container.remove_child(node)
+                    node.disappear()
                     notified_headlines_count -= 1
                     
     headlines = new_headlines
-    adjust_headline_positions()
 
 func add_headline(model):
     var headlineNode = headlineScene.instance()
     headline_container.add_child(headlineNode)    
     headlineNode.init(model, self, "goto_finalized")
     headlineNode.register_dropzone(self)
+    headlineNode.appear()
 
 
 # from Droppable

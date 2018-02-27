@@ -69,10 +69,21 @@ _sections_unfolded = [ "Anchor", "Margin", "Textures" ]
 position = Vector2( 110.046, 45.0197 )
 texture = ExtResource( 3 )
 
+[node name="Tween" type="Tween" parent="." index="3"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
+
 [connection signal="minimum_size_changed" from="Label" to="." method="on_size_changed"]
 
 [connection signal="mouse_entered" from="TextureButton" to="." method="on_mouse_entered"]
 
 [connection signal="mouse_exited" from="TextureButton" to="." method="on_mouse_exited"]
+
+[connection signal="tween_completed" from="Tween" to="." method="tween_completed"]
 
 
