@@ -48,7 +48,6 @@ func on_enter(draggable):
         update_headlines()
  
 func update_headlines():
-    
     if contained_draggables.size() < MIN_INFOS:
         for node in headline_container.get_children():
             node.disappear()
@@ -146,7 +145,7 @@ func notify_size_adjusted():
 func adjust_headline_positions():
     var curY = 0;
     for headline in unfinalized.get_node("headlines").get_children():
-        headline.rect_position =  Vector2(0, curY)
+        headline.move_to(curY)
         curY += headline.rect_size.y + padY
     
     # Move all Notes downwards if they overlap with headlines

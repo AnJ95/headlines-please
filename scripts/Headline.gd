@@ -13,6 +13,7 @@ var size_adjusted = false
 var dropzone = null
 var is_clickable = false
 var model
+var has_initiated_y = false
 
 func _ready():
     modulate = Color(1,1,1,0)
@@ -57,6 +58,15 @@ func disappear():
     is_disappearing = true
     tween.interpolate_property(self, "modulate", Color(1,1,1,1), Color(1,1,1,0), 0.3, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
     tween.start()
+    
+func move_to(y):
+    var end = Vector2(rect_position.x, y)
+    if has_initiated_y:
+        tween.interpolate_property(self, "rect_position", rect_position, end, 0.3, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
+        tween.start()
+    else:
+        rect_position = Vector2(rect_position.x, y)
+    has_initiated_y = true
 
 func tween_completed(object, key):
     if is_disappearing:
