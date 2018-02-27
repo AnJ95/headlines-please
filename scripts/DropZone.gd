@@ -47,7 +47,6 @@ func on_enter(draggable):
         
         #if contained_draggables.size() >= MIN_INFOS:
         update_headlines()
-        # TODO start showing headlines
  
 func update_headlines():
     var new_headlines = []
@@ -66,11 +65,13 @@ func update_headlines():
     # check for removed headlines
     for headline in headlines:
         if not new_headlines.has(headline):
-            for node in headline_container:
+            for node in headline_container.get_children():
                 if node.model == headline:
                     headline_container.remove_child(node)
-            
+                    notified_headlines_count -= 1
+                    
     headlines = new_headlines
+    adjust_headline_positions()
 
 func add_headline(model):
     var headlineNode = headlineScene.instance()
@@ -81,13 +82,13 @@ func add_headline(model):
 
 # from Droppable
 func on_leave(draggable):
+    unpin(draggable)
+    update_headlines()
+    
+func unpin(draggable):
     if draggable.pin != null:
         draggable.pin.remove()
         draggable.pin = null
-        
-    if contained_draggables.size() < MIN_INFOS:
-        is_finalized = is_finalized
-        # TODO hide headlines
  
 # from Droppable
 func accepted_groups():
@@ -139,30 +140,43 @@ func adjust_headline_positions():
     for headline in unfinalized.get_node("headlines").get_children():
         headline.rect_position =  Vector2(0, curY)
         curY += headline.rect_size.y + padY
+    
+    # Move all Notes downwards if they overlap with headlines
+    cur_headlines_size = curY
+    for draggable in contained_draggables:
+        move_draggable_in(draggable)
         
 func move_draggable_in(draggable):
     var pin_pos_original = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
     var pin_pos = pin_pos_original
-
-    if (pin_pos_original.x < INFO_POS_ADJUST_MIN_PADDING):
-        pin_pos.x = INFO_POS_ADJUST_MIN_PADDING
-    if (pin_pos_original.x > rect_size.x - INFO_POS_ADJUST_MIN_PADDING):
-        pin_pos.x = rect_size.x - INFO_POS_ADJUST_MIN_PADDING
-    if (pin_pos_original.y < INFO_POS_ADJUST_MIN_PADDING):
-        pin_pos.y = INFO_POS_ADJUST_MIN_PADDING
-    if (pin_pos_original.y > rect_size.y - INFO_POS_ADJUST_MIN_PADDING):
-        pin_pos.y = rect_size.y - INFO_POS_ADJUST_MIN_PADDING
     
-    if pin_pos != pin_pos_original:
+    var minX = INFO_POS_ADJUST_MIN_PADDING
+    var maxX = rect_size.x - INFO_POS_ADJUST_MIN_PADDING
+    var minY = headline_container.rect_position.y + cur_headlines_size
+    var maxY = rect_size.y - INFO_POS_ADJUST_MIN_PADDING
+    
+    if (pin_pos_original.x < minX):
+        pin_pos.x = minX
+    if (pin_pos_original.x > maxX):
+        pin_pos.x = maxX
+    if (pin_pos_original.y < minY):
+        pin_pos.y = minY
+    if (pin_pos_original.y > maxY):
+        pin_pos.y = maxY
+    
+    if pin_pos.x != pin_pos_original.x or pin_pos.y != pin_pos_original.y:
         var start = draggable.rect_position
         var end = start + pin_pos - pin_pos_original
+        if draggable.pin != null:
+            tween.interpolate_property(draggable.pin, "rect_position", pin_pos_original, pin_pos, INFO_POS_ADJUST_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
         tween.interpolate_property(draggable, "rect_position", start, end, INFO_POS_ADJUST_TIME, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
         tween.start()
     
-    var pin = Pin.instance()
-    pin.rect_position = pin_pos
-    draggable.pin = pin
-    unfinalized.add_child(pin)
+    if draggable.pin == null:
+        var pin = Pin.instance()
+        pin.rect_position = pin_pos
+        draggable.pin = pin
+        unfinalized.add_child(pin)
 
 func refuse_draggable(draggable):
     # force undrop
