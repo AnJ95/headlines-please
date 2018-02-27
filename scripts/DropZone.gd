@@ -45,10 +45,17 @@ func on_enter(draggable):
                 return
         move_draggable_in(draggable)
         
-        #if contained_draggables.size() >= MIN_INFOS:
         update_headlines()
  
 func update_headlines():
+    
+    if contained_draggables.size() < MIN_INFOS:
+        for node in headline_container.get_children():
+            node.disappear()
+            notified_headlines_count -= 1
+        headlines = []
+        return
+    
     var new_headlines = []
     for infoNode in contained_draggables:
         for headline in infoNode.message.get_headlines():
@@ -123,6 +130,7 @@ func goto_finalized(headline):
     node.size_adjusted = false
     node.init(headline, null, null)
     node.rect_position = headline_container.rect_position
+    node.modulate = Color(1,1,1,1)
     show_current_state()
 
 

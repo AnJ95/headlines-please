@@ -120,7 +120,6 @@ func internal_stop_drag():
     stop_drag()
     
 func internal_on_drop(droppable):
-    print("drop")
     containing_droppable = droppable
     
     self.rect_position -= - self.get_parent().get_global_rect().position + droppable.get_global_rect().position
@@ -133,7 +132,6 @@ func internal_on_drop(droppable):
     on_drop(droppable)
     
 func internal_on_undrop():
-    print("undrop")
     containing_droppable.internal_on_leave(self)
     
     self.rect_position = get_global_rect().position - Root.get_global_rect().position
