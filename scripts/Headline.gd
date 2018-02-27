@@ -9,8 +9,10 @@ onready var underline = get_node("headline_underline")
 var size_adjusted = false
 var dropzone = null
 var is_clickable = false
+var model
 
 func init(var headline, var clickElem, var clickMethod):
+    model = headline
     label.text = headline.text
     if clickElem != null:
         is_clickable = true

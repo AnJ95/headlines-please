@@ -3,10 +3,10 @@
 [ext_resource path="res://scripts/DropZone.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/news-baseB.png" type="Texture" id=2]
 [ext_resource path="res://resources/sprites/btn-o.png" type="Texture" id=3]
-[ext_resource path="res://resources/sprites/btn-x.png" type="Texture" id=4]
-[ext_resource path="res://resources/sprites/articletxt.png" type="Texture" id=5]
-[ext_resource path="res://resources/sprites/pic1.png" type="Texture" id=6]
-[ext_resource path="res://scenes/Headline.tscn" type="PackedScene" id=7]
+[ext_resource path="res://resources/sprites/articletxt.png" type="Texture" id=4]
+[ext_resource path="res://resources/sprites/pic1.png" type="Texture" id=5]
+[ext_resource path="res://scenes/Headline.tscn" type="PackedScene" id=6]
+[ext_resource path="res://resources/sprites/btn-x.png" type="Texture" id=7]
 
 [sub_resource type="Animation" id=1]
 
@@ -27,7 +27,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( -3, 0 ), Vector2( 3, 0 ), Vector2( -3, 0 ), Vector2( 0, 0 ) ]
 }
 
-[node name="DropZone" type="Control" index="0"]
+[node name="DropZone" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -42,7 +42,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Material", "Rect", "Transform" ]
-drop_root_path = NodePath("animation_root/State_0/drop_root")
+drop_root_path = NodePath("animation_root/unfinalized/drop_root")
 
 [node name="animation_root" type="Control" parent="." index="0"]
 
@@ -58,14 +58,14 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 
-[node name="State_0" type="Control" parent="animation_root" index="0"]
+[node name="unfinalized" type="Control" parent="animation_root" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 1.0
-margin_right = 41.0
+margin_left = 2.0
+margin_right = 42.0
 margin_bottom = 40.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
@@ -74,13 +74,13 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="news-baseB" type="Sprite" parent="animation_root/State_0" index="0"]
+[node name="news-baseB" type="Sprite" parent="animation_root/unfinalized" index="0"]
 
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="TextureButton" type="TextureButton" parent="animation_root/State_0" index="1"]
+[node name="TextureButton" type="TextureButton" parent="animation_root/unfinalized" index="1"]
 
 visible = false
 anchor_left = 0.0
@@ -104,7 +104,24 @@ group = null
 texture_normal = ExtResource( 3 )
 _sections_unfolded = [ "Textures", "Visibility" ]
 
-[node name="drop_root" type="Control" parent="animation_root/State_0" index="2"]
+[node name="headlines" type="Control" parent="animation_root/unfinalized" index="2"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 18.0
+margin_top = 39.0
+margin_right = 230.0
+margin_bottom = 293.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+_sections_unfolded = [ "Mouse", "Rect" ]
+
+[node name="drop_root" type="Control" parent="animation_root/unfinalized" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -119,7 +136,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="Tween" type="Tween" parent="animation_root/State_0" index="3"]
+[node name="Tween" type="Tween" parent="animation_root/unfinalized" index="4"]
 
 repeat = false
 playback_process_mode = 1
@@ -128,9 +145,8 @@ playback/active = false
 playback/repeat = false
 playback/speed = 1.0
 
-[node name="State_1" type="Control" parent="animation_root" index="1"]
+[node name="finalized" type="Control" parent="animation_root" index="1"]
 
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -144,83 +160,24 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 _sections_unfolded = [ "Mouse" ]
 
-[node name="news-baseB" type="Sprite" parent="animation_root/State_1" index="0"]
+[node name="news-baseB2" type="Sprite" parent="animation_root/finalized" index="0"]
 
 texture = ExtResource( 2 )
 centered = false
 _sections_unfolded = [ "Offset", "Transform" ]
 
-[node name="TextureButton2" type="TextureButton" parent="animation_root/State_1" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 234.0
-margin_top = 294.0
-margin_right = 266.0
-margin_bottom = 326.0
-rect_pivot_offset = Vector2( 0, 0 )
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
-texture_normal = ExtResource( 4 )
-_sections_unfolded = [ "Textures" ]
-
-[node name="headlines" type="Control" parent="animation_root/State_1" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-
-[node name="State_2" type="Control" parent="animation_root" index="2"]
-
-editor/display_folded = true
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_right = 40.0
-margin_bottom = 40.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-_sections_unfolded = [ "Mouse" ]
-
-[node name="news-baseB2" type="Sprite" parent="animation_root/State_2" index="0"]
-
-texture = ExtResource( 2 )
-centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="articletxt" type="Sprite" parent="animation_root/State_2" index="1"]
+[node name="articletxt" type="Sprite" parent="animation_root/finalized" index="1"]
 
 position = Vector2( 125.7, 174.961 )
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="pic1" type="Sprite" parent="animation_root/State_2" index="2"]
+[node name="pic1" type="Sprite" parent="animation_root/finalized" index="2"]
 
 position = Vector2( 200.491, 191.6 )
-texture = ExtResource( 6 )
+texture = ExtResource( 5 )
 
-[node name="ColorRect" type="ColorRect" parent="animation_root/State_2" index="3"]
+[node name="ColorRect" type="ColorRect" parent="animation_root/finalized" index="3"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -237,7 +194,7 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.988235, 0.85098, 0.764706, 1 )
 
-[node name="Headline" parent="animation_root/State_2" index="4" instance=ExtResource( 7 )]
+[node name="Headline" parent="animation_root/finalized" index="4" instance=ExtResource( 6 )]
 
 margin_left = 18.0
 margin_top = 39.0
@@ -245,7 +202,7 @@ margin_right = 140.0
 margin_bottom = 109.0
 _sections_unfolded = [ "Anchor", "Margin" ]
 
-[node name="TextureButton3" type="TextureButton" parent="animation_root/State_2" index="5"]
+[node name="TextureButton" type="TextureButton" parent="animation_root/finalized" index="5"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -265,7 +222,7 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 group = null
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 7 )
 _sections_unfolded = [ "Textures" ]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
@@ -278,10 +235,8 @@ playback_speed = 1.0
 anims/shake = SubResource( 1 )
 blend_times = [  ]
 
-[connection signal="pressed" from="animation_root/State_0/TextureButton" to="." method="goto_state_1"]
+[connection signal="pressed" from="animation_root/unfinalized/TextureButton" to="." method="goto_state_1"]
 
-[connection signal="pressed" from="animation_root/State_1/TextureButton2" to="." method="go_back_to_state_0"]
-
-[connection signal="pressed" from="animation_root/State_2/TextureButton3" to="." method="go_back_to_state_1"]
+[connection signal="pressed" from="animation_root/finalized/TextureButton" to="." method="go_back_to_state_1"]
 
 

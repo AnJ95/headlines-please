@@ -6,9 +6,8 @@ onready var audio_stream_player_move = get_node("AudioStreamPlayerMove")
 onready var audio_stream_player_flap = get_node("AudioStreamPlayerFlap")
 
 func _ready():
-    pass
     add_to_group("note")
-    move_to_top()
+    # move_to_top()
     audio_stream_player_move.play()
     Background.modulate = Color(0.9 + randf() * 0.1, 0.9 + randf() * 0.1, 0.9 + randf() * 0.1, 1)
     

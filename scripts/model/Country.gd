@@ -6,8 +6,8 @@ const MAX_INHABITANTS = 100
 const MIN_PARAM = -0.6
 const MAX_PARAM = 0.6
 
-const MIN_READERS = 0.2
-const MAX_READERS = 0.3
+const MIN_READERS = 0.08
+const MAX_READERS = 0.12
 
 const MIN_HAPPYNESS = 0.5
 const MAX_HAPPYNESS = 0.8

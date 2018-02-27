@@ -2,60 +2,83 @@ extends "res://scripts/Droppable.gd"
 
 const Pin = preload("res://scenes/Pin.tscn")
 const headlineScene = preload("res://scenes/Headline.tscn")
-const padX = 18
-const initial_padY = 40
 const padY = 4
 const INFO_POS_ADJUST_TIME = 0.25
 const INFO_POS_ADJUST_MIN_PADDING = 10
 const MIN_INFOS = 3
 
 onready var anim_root = $animation_root
-onready var state0 = anim_root.get_node("State_0")
-onready var state1 = anim_root.get_node("State_1")
-onready var state2 = anim_root.get_node("State_2")
-onready var tween = state0.get_node("Tween")
+onready var unfinalized = anim_root.get_node("unfinalized")
+onready var finalized = anim_root.get_node("finalized")
+onready var headline_container = unfinalized.get_node("headlines")
+onready var tween = unfinalized.get_node("Tween")
 onready var animationPlayer = $AnimationPlayer
 
-var current_state = 0
-var max_state = 2
+var cur_headlines_size = 0
+
+var headlines = []
+var is_finalized = false
 var selected_headline = null
 
-var notified_headlines_count_max
-var notified_headlines_count
+var notified_headlines_count_max = 0
+var notified_headlines_count = 0
 
 func _ready():
     show_current_state()
     add_to_group("dropzone")
     get_tree().get_root().get_node("/root/Main").connect("day_ended", self, "on_day_ended", ["world"])
         
-
 func on_day_ended(node, world):
     if containing_droppable == null:
         queue_free()
     else:
-        state0.get_node("TextureButton").visible = false
-        state1.get_node("TextureButton2").visible = false
-        state2.get_node("TextureButton3").visible = false
+        finalized.get_node("TextureButton").visible = false
 
 # from Droppable
 func on_enter(draggable):
-    # only one scenario allowed
+    # must be in correct group
     if draggable.is_in_group("information"):
+        # only one scenario allowed
         for other in contained_draggables:
             if other.message.scenario != draggable.message.scenario:
-                # force undrop
-                draggable.internal_on_undrop()
-                draggable.isMouseIn = false
-                # move info away
-                move_draggable_out(draggable)
-                # let DropZone shake
-                animationPlayer.play("shake")
+                refuse_draggable(draggable)
                 return
-    move_draggable_in(draggable)
-    
-    if contained_draggables.size() >= MIN_INFOS:
-        state0.get_node("TextureButton").visible = true
+        move_draggable_in(draggable)
+        
+        #if contained_draggables.size() >= MIN_INFOS:
+        update_headlines()
+        # TODO start showing headlines
  
+func update_headlines():
+    var new_headlines = []
+    for infoNode in contained_draggables:
+        for headline in infoNode.message.get_headlines():
+            if not new_headlines.has(headline):
+                new_headlines.append(headline)
+    
+    notified_headlines_count_max = new_headlines.size()
+    
+    # check for new headlines
+    for headline in new_headlines:
+        if not headlines.has(headline):
+            add_headline(headline)
+            
+    # check for removed headlines
+    for headline in headlines:
+        if not new_headlines.has(headline):
+            for node in headline_container:
+                if node.model == headline:
+                    headline_container.remove_child(node)
+            
+    headlines = new_headlines
+
+func add_headline(model):
+    var headlineNode = headlineScene.instance()
+    headline_container.add_child(headlineNode)    
+    headlineNode.init(model, self, "goto_finalized")
+    headlineNode.register_dropzone(self)
+
+
 # from Droppable
 func on_leave(draggable):
     if draggable.pin != null:
@@ -63,75 +86,48 @@ func on_leave(draggable):
         draggable.pin = null
         
     if contained_draggables.size() < MIN_INFOS:
-        state0.get_node("TextureButton").visible = false
-    
+        is_finalized = is_finalized
+        # TODO hide headlines
+ 
 # from Droppable
 func accepted_groups():
     return ["note", "tweet", "phax"]
 
 # from Droppable
 func accepts_drops_now():
-    return current_state == 0
+    return not is_finalized
     
 func show_current_state():
-    for i in range(max_state + 1):
-        anim_root.get_node("State_" + str(i)).visible = current_state == i
-    
-
-# This means Infos are now selected
-# and headline possibilities should be displayed
-func goto_state_1():
-    current_state = 1
-    var world = get_node("/root/Main");
-    
-    var headlines = []
-    for infoNode in contained_draggables:
-        for headline in infoNode.message.get_headlines():
-            if not headlines.has(headline):
-                headlines.append(headline)
- 
-    initialize_headline_size_adjust_waiting(headlines.size())
-    for headline in headlines:
-        var headlineNode = headlineScene.instance()
-        state1.get_node("headlines").add_child(headlineNode)    
-        headlineNode.init(headline, self, "goto_state_2")
-        headlineNode.register_dropzone(self)
-    show_current_state()
+    if is_finalized:
+        unfinalized.visible = false
+        finalized.visible = true
+    else:
+        unfinalized.visible = true
+        finalized.visible = false
 
 # initialize for waiting for all headlines to adjust size
 func initialize_headline_size_adjust_waiting(count_max):
     notified_headlines_count = 0
     notified_headlines_count_max = count_max
 
-func go_back_to_state_0():
-    for headline in state1.get_node("headlines").get_children():
-        headline.queue_free()
-    current_state = 0
-    show_current_state()
-    
-func go_back_to_state_1():
-    current_state = 1
-    selected_headline = null
+func go_back_to_unfinalized():
+    is_finalized = false
     show_current_state()
 
 # This means headline has been selected
-func goto_state_2(headline):
-    current_state = 2
+func goto_finalized(headline):
+    is_finalized = true
     selected_headline = headline
-    var node = state2.get_node("Headline")
+    var node = finalized.get_node("Headline")
     node.size_adjusted = false
     node.init(headline, null, null)
-    node.rect_position = Vector2(padX, initial_padY)
+    node.rect_position = headline_container.rect_position
     show_current_state()
 
-# This means everything is done
-func goto_state_3():
-    current_state = 3
-    show_current_state()
-    
+
 # called whenever a headline adjusted its size
 func notify_size_adjusted():
-    if current_state != 1:
+    if is_finalized:
         return
     notified_headlines_count += 1
     if notified_headlines_count >= notified_headlines_count_max:
@@ -139,9 +135,9 @@ func notify_size_adjusted():
 
 # called when all headlines have adjusted their size and need positioning
 func adjust_headline_positions():
-    var curY = initial_padY;
-    for headline in state1.get_node("headlines").get_children():
-        headline.rect_position =  Vector2(padX, curY)
+    var curY = 0;
+    for headline in unfinalized.get_node("headlines").get_children():
+        headline.rect_position =  Vector2(0, curY)
         curY += headline.rect_size.y + padY
         
 func move_draggable_in(draggable):
@@ -166,7 +162,16 @@ func move_draggable_in(draggable):
     var pin = Pin.instance()
     pin.rect_position = pin_pos
     draggable.pin = pin
-    state0.add_child(pin)
+    unfinalized.add_child(pin)
+
+func refuse_draggable(draggable):
+    # force undrop
+    draggable.internal_on_undrop()
+    draggable.isMouseIn = false
+    # move info away
+    move_draggable_out(draggable)
+    # let DropZone shake
+    animationPlayer.play("shake")
     
 func move_draggable_out(draggable):
     var pos_original = draggable.rect_position + Vector2(draggable.rect_size.x / 2, 5)
