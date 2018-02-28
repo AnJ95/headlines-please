@@ -9,7 +9,7 @@ const ScenarioChecker = preload("res://scripts/model/ScenarioChecker.gd")
 
 const COSTS_PER_DAY = 30
 const COSTS_PER_HEADLINE = 5
-const MONEY_PER_READER = 1
+const MONEY_PER_READER = 1.2
 const MAX_RELATION_CHANGE = 0.4
 
 onready var world_def = $world_def

@@ -9,13 +9,13 @@ func get_countries():
     var countries = []
     countries.append(Country.new("Holsten", Vector2(-5,-54)))
     countries.append(Country.new("Reldan", Vector2(260,-48)))
-    countries.append(Country.new("Lemuria", Vector2(14,140)))
-    countries.append(Country.new("Hesperdia", Vector2(290,130)))
+    countries.append(Country.new("Lemuria", Vector2(64,140)))
+    #countries.append(Country.new("Hesperdia", Vector2(290,130)))
     return countries
 
 func get_scenarios():
     var scenarios = []
-    scenarios.append(load("res://scenarios/Scenario_ambassador.gd").new())
+    #scenarios.append(load("res://scenarios/Scenario_ambassador.gd").new()) TODO
     scenarios.append(load("res://scenarios/Scenario_factory.gd").new())
     scenarios.append(load("res://scenarios/Scenario_ghettofire.gd").new())
     scenarios.append(load("res://scenarios/Scenario_hotel.gd").new())
@@ -30,6 +30,9 @@ func get_scenarios():
     scenarios.append(load("res://scenarios/Scenario_philharmonia_postponed.gd").new())
     scenarios.append(load("res://scenarios/Scenario_religion_clash_in_schools.gd").new())
     scenarios.append(load("res://scenarios/Scenario_ministry_pope.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_travel_warning.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_international_sports_festival.gd").new())
+    
     return scenarios
     
 func get_params():

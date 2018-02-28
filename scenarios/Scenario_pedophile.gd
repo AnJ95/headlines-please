@@ -15,10 +15,10 @@ func is_valid(world, countries):
 
 func init_headlines():
     h("No end to pedophilia in church!", 0.75, {
-        "science" : 1
+        "science" : 0.8
     })
     h("Bishop raped multiple children!", 0.5, {
-        "science" : 0.6
+        "science" : 0.5
     })
     h("Pedophile Bishop uncovered after 12 years of abusement!", 0.8, {
         "science" : 0.7,
