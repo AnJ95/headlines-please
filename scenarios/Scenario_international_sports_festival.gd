@@ -2,7 +2,7 @@ extends "res://scripts/model/Scenario.gd"
 
 func _init():
     name = "International Sports Festival"
-    num_countries = 2
+    num_countries = 3
     init_headlines()
     init_messages()
     
