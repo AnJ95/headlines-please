@@ -49,10 +49,10 @@ func init_messages():
 
     m(Message.NOTE, [4], "{country_1} has conducted a practice flight at the border to {country_2}.")
     m(Message.NOTE, [3], "{country_1}ian military airplane just crossed the border of {country_2}!")
-    #m(Message.NOTE, [1], "{country_1} drills units against possible invasion of {country_2}.")
+    #m(Message.NOTE, [3], "{country_1} drills units against possible invasion of {country_2}.")
     #m(Message.NOTE, [0,4], "{country_1} deliberately accepts accidentaly provoking {country_2}.")
     #m(Message.NOTE, [1,2,3,4], "{country_1}ian jet planes accidentaly flew over border of {country_2}.")
 
     m(Message.PHAX, [0, 1], "{country_1} ordered only a standard training flight at the border to {country_2}.", 0.25)
     m(Message.PHAX, [2], "One of the {country_1} pilots flew off to wrong coordinates after radio miscommunication.", 0.48)
-    m(Message.PHAX, [], "{country_1}s generals have issued an official appology on the matter.", 0.66)
+    m(Message.PHAX, [0, 1], "{country_1}s generals have issued an official appology on the matter.", 0.66)
