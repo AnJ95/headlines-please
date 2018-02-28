@@ -31,6 +31,7 @@ func _process(delta):
                 isDragging = false
                 Root.is_dragging_sth = false
                 internal_stop_drag()
+        
     
     if isDragging:
         internal_move_drag();
@@ -85,7 +86,7 @@ func internal_move_drag():
         var droppable = Root.get_children()[i]
         i -= 1
         if (droppable.is_in_group("droppable")):
-            if (droppable.get_global_rect().has_point(get_viewport().get_mouse_position())):
+            if (has_current_mouse_pos(droppable)):
                 if droppable.can_drop(self):
                     droppable.hovering_now(self)
                     hovering_droppable = droppable
@@ -93,7 +94,10 @@ func internal_move_drag():
     reset_droppable_hovering()
     
     move_to_top()
-        
+
+
+func has_current_mouse_pos(object):
+    return object.get_global_rect().has_point(get_viewport().get_mouse_position())
     
 
 # calls not_hover() on all droppables

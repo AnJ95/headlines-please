@@ -27,7 +27,7 @@ tracks/0/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 3, 0 ), Vector2( -3, 0 ), Vector2( 3, 0 ), Vector2( -3, 0 ), Vector2( 0, 0 ) ]
 }
 
-[node name="DropZone" type="Control"]
+[node name="DropZone" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -237,6 +237,8 @@ blend_times = [  ]
 
 [connection signal="pressed" from="animation_root/unfinalized/TextureButton" to="." method="goto_state_1"]
 
-[connection signal="pressed" from="animation_root/finalized/TextureButton" to="." method="go_back_to_state_1"]
+[connection signal="tween_completed" from="animation_root/unfinalized/Tween" to="." method="tween_completed"]
+
+[connection signal="pressed" from="animation_root/finalized/TextureButton" to="." method="go_back_to_unfinalized"]
 
 

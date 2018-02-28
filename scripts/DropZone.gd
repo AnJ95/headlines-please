@@ -6,6 +6,7 @@ const padY = 4
 const INFO_POS_ADJUST_TIME = 0.25
 const INFO_POS_ADJUST_MIN_PADDING = 10
 const MIN_INFOS = 3
+const Draggable = preload("res://scripts/Draggable.gd")
 
 onready var anim_root = $animation_root
 onready var unfinalized = anim_root.get_node("unfinalized")
@@ -199,3 +200,10 @@ func move_draggable_out(draggable):
     var pos = pos_original
 
     draggable.fly_away(self, 200)
+
+# Used after an Info has animated, where the Draggable sometimes does not recognize the mouse_exited()
+# Sets Draggable.isMouseIn to false if the Draggable does not longer contain the mouse position
+func tween_completed(object, key):
+    if object is Draggable:
+        if object.isMouseIn and !object.has_current_mouse_pos(object):
+            object.isMouseIn = false
