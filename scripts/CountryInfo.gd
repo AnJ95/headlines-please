@@ -6,7 +6,8 @@ onready var prgReaders = $prgReaders
 onready var prgHappy = $prgHappy
 onready var params = $params
 
-export var progress_bar_space = 18
+const progress_bar_space = 14
+
 
 var ParamBar = preload("res://scenes/ParamBar.tscn")
 
@@ -26,7 +27,7 @@ func init(country, params):
         cur_y += progress_bar_space
         param_elems[param.name] = node
     
-    update(country)
+    #update(country)
 
 func update(country):
     lblPopValue.set_text(str(round(country.inhabitants)) + "M")

@@ -20,7 +20,6 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
 _sections_unfolded = [ "Margin", "Mouse", "Rect" ]
-progress_bar_space = 15
 
 [node name="background" type="Sprite" parent="." index="0"]
 
@@ -168,9 +167,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 76.0
+margin_left = 82.0
 margin_top = 72.0
-margin_right = 124.0
+margin_right = 130.0
 margin_bottom = 117.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0

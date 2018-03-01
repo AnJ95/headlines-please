@@ -27,7 +27,10 @@ func init_headlines():
     h("{country_1} bribes International Sports Festivals committee!", 0.5, {
         "democracy" : 0.3,
         "culture" : -0.3
-    })
+    }, [
+        [1,2,-0.3],
+        [1,3,-0.3]
+    ])
     h("{country_2} invested a lot in sports clubs recently to win the ISF!", 0.3, {
         "progress" : 0.2,
         "culture" : 0.3
@@ -43,7 +46,7 @@ func init_headlines():
 
 
 func init_messages():
-    m(Message.TWEET, [4], "theres much more important stuff to play than sports #isf", 0.2)
+    m(Message.TWEET, [4], "theres much more important stuff to pay than sports #isf", 0.2)
     m(Message.TWEET, [2], "{country_1} elected host AGAIN?", 0.2)
     m(Message.TWEET, [], "Go {country_3}!", 0.2)
     
