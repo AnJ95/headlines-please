@@ -9,7 +9,7 @@ func _init():
 
 func is_valid(world, countries):
     var relation_value = world.relations.get_by_country_names(countries[0].name, countries[1].name)
-    if not relation_value < - 0.5:
+    if not relation_value < - 0.3:
         return false
         
     return true
