@@ -34,7 +34,8 @@ func get_scenarios():
     scenarios.append(load("res://scenarios/Scenario_international_sports_festival.gd").new())
     scenarios.append(load("res://scenarios/Scenario_cultural_exchange.gd").new())
     scenarios.append(load("res://scenarios/Scenario_police_brutality.gd").new())
-    
+    scenarios.append(load("res://scenarios/Scenario_box_urinator.gd").new())
+        
     return scenarios
     
 func get_params():
