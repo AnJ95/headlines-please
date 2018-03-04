@@ -38,9 +38,9 @@ func init_headlines():
 
 
 func init_messages():
-    m(Message.TWEET, [], "#imagineallthepeople")
-    m(Message.TWEET, [3], "how bad can a #crucifix over the board be?")
-    m(Message.TWEET, [0, 1], "i just dont want my kid to be an outsider :(")
+    m(Message.TWEET, [], "#imagineallthepeople", 0.3)
+    m(Message.TWEET, [3], "how bad can a #crucifix over the board be?", 0.5)
+    m(Message.TWEET, [0, 1], "i just dont want my kid to be an outsider :(", 0.1)
 
     m(Message.NOTE, [2, 3], "Several non-Christian parents have lodged a complaint about Christian symbols in schools")
     m(Message.NOTE, [1, 2], "Many schools have Christian traditions on christmas and easter as well as crucifixes")
