@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/ProgressBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resources/fonts/MediumPrintedText.tres" type="DynamicFont" id=4]
 
-[node name="ParamBar" type="Control" index="0"]
+[node name="ParamBar" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -22,6 +22,8 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Rect" ]
 color_left = Color( 0.356863, 0.14902, 0.615686, 1 )
 color_right = Color( 0.113725, 0.490196, 0.65098, 1 )
+arrow_right_position = Vector2( 125, 5 )
+arrow_left_position = Vector2( -80, 5 )
 
 [node name="bar" type="ColorRect" parent="." index="0"]
 
@@ -40,19 +42,13 @@ size_flags_vertical = 1
 color = Color( 0.0196078, 0.392157, 0.996078, 0.196078 )
 _sections_unfolded = [ "Rect" ]
 
-[node name="param_bar" type="Sprite" parent="." index="1"]
-
-texture = ExtResource( 2 )
-centered = false
-_sections_unfolded = [ "Offset", "Transform" ]
-
-[node name="last" type="ColorRect" parent="." index="2"]
+[node name="bar_less" type="ColorRect" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 37.0
+margin_left = 36.0
 margin_right = 39.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
@@ -60,25 +56,32 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 0.751495, 0.769531, 1 )
+color = Color( 0.0196078, 0.392157, 0.996078, 0.0980392 )
 _sections_unfolded = [ "Rect" ]
 
-[node name="handle" type="ColorRect" parent="." index="3"]
+[node name="bar_more" type="ColorRect" parent="." index="2"]
 
+visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 36.0
-margin_right = 38.0
+margin_right = 39.0
 margin_bottom = 14.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-color = Color( 0, 0.352941, 0.996078, 1 )
-_sections_unfolded = [ "Rect" ]
+color = Color( 0.0196078, 0.392157, 0.996078, 0.392157 )
+_sections_unfolded = [ "Rect", "Visibility" ]
+
+[node name="param_bar" type="Sprite" parent="." index="3"]
+
+texture = ExtResource( 2 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="progress_bar" parent="." index="4" instance=ExtResource( 3 )]
 
@@ -130,5 +133,14 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_colors", "custom_fonts" ]
+
+[node name="Tween" type="Tween" parent="." index="7"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 
