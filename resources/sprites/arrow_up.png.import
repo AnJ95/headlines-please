@@ -7,10 +7,10 @@ path="res://.import/arrow_up.png-f7518d0b319be80baf34b3f9b1a7a48f.stex"
 [deps]
 
 source_file="res://resources/sprites/arrow_up.png"
-source_md5="0b4decb91923a540288e916bc6698093"
+source_md5="3814f2fb5d818c9e546ec008349a1f1d"
 
 dest_files=[ "res://.import/arrow_up.png-f7518d0b319be80baf34b3f9b1a7a48f.stex" ]
-dest_md5="56be02086b1b7a5a57bc33e86574c240"
+dest_md5="00b44c834b30afc22607bfcd703aae4f"
 
 [params]
 

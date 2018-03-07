@@ -3,9 +3,9 @@
 [ext_resource path="res://scripts/ParamBar.gd" type="Script" id=1]
 [ext_resource path="res://resources/sprites/param_bar.png" type="Texture" id=2]
 [ext_resource path="res://scenes/ProgressBar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://resources/fonts/MediumPrintedText.tres" type="DynamicFont" id=4]
+[ext_resource path="res://resources/fonts/SmallPrintedText.tres" type="DynamicFont" id=4]
 
-[node name="ParamBar" type="Control"]
+[node name="ParamBar" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -19,11 +19,9 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect" ]
+_sections_unfolded = [ "Rect", "Visibility" ]
 color_left = Color( 0.356863, 0.14902, 0.615686, 1 )
 color_right = Color( 0.113725, 0.490196, 0.65098, 1 )
-arrow_right_position = Vector2( 125, 5 )
-arrow_left_position = Vector2( -80, 5 )
 
 [node name="bar" type="ColorRect" parent="." index="0"]
 
@@ -93,9 +91,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 52.0
+margin_left = 59.0
 margin_top = 2.0
-margin_right = 132.0
+margin_right = 139.0
 margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2
@@ -116,9 +114,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = -83.0
+margin_left = -90.0
 margin_top = 2.0
-margin_right = -3.0
+margin_right = -10.0
 margin_bottom = 24.0
 rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 2

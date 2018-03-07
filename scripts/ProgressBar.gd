@@ -16,12 +16,12 @@ func _ready():
     height = progress.rect_size.y
     
 func value_increase(value):
-    value_changed(value, Arrow.instance().init("up"))
+    value_changed(value, Arrow.instance().init("up"), get_color(1))
     
 func value_decrease(value):
-    value_changed(value, Arrow.instance().init("down"))
+    value_changed(value, Arrow.instance().init("down"), get_color(0))
     
-func value_changed(value, arrow):
+func value_changed(value, arrow, color):
     current_arrow = arrow
     
     animate_to(value)
@@ -29,6 +29,7 @@ func value_changed(value, arrow):
     # add arrow indicator
     arrow.rect_position = arrow_position
     add_child(arrow)
+    arrow.set_color(color)
 
 func animate_to(value):
     tween.interpolate_property(progress, "rect_size", progress.rect_size, get_size(value), 1.5, Tween.TRANS_QUART, Tween.EASE_IN_OUT)

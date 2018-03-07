@@ -26,6 +26,11 @@ func vanish():
     animationPlayer.play("vanish")
     is_vanishing = true      
 
+func set_color(color):
+    spriteUp.modulate = color
+    spriteDown.modulate = color
+    return self
+
 func on_animation_finished(anim_name):
     if is_vanishing:
         queue_free()
