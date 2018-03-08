@@ -16,11 +16,11 @@ func init_headlines():
         "democracy" : 0.6,
     })
     h("Handler Glass Company has to close factory, firing all workers!", 0.4, {
-        "democracy" : 0.1,
+        "democracy" : 0.2,
         "tolerance" : -0.4
     })
     h("Handler Glass has to file for insolvency after miss investments", 0.3, {
-        "progress" : -0.2,
+        "progress" : -0.32,
     })
     h("Handler Glass has to close its doors after 60 years.", 0.3, {
         "progress" : 0.4
@@ -36,7 +36,6 @@ func init_messages():
     m(Message.NOTE, [2], "Industrialist William Handler has to close his last glass factory.")
     #m(Message.NOTE, [4], "Handler inherited the 60 year old company after his fathers death.")
     m(Message.NOTE, [1,3], "Handler tried to get money via stocks to save his company from ruin.")
-    m(Message.NOTE, [4], "Handler Glass Company was known for treating workers fairly.")
 
     m(Message.PHAX, [0,1], "Handler gambled and lost a lot of money on the stock market recently.", 0.25)
     m(Message.PHAX, [2], "Workers of Handler are not getting compensated for sudden loss of job.")

@@ -2,7 +2,7 @@ extends "res://scripts/model/Scenario.gd"
 
 func _init():
     name = "Less fish"
-    num_countries = 1
+    num_countries = 3
     init_headlines()
     init_messages()
 
@@ -23,10 +23,17 @@ func init_headlines():
     h("{country_1}s lacking reglementations lead to extinction of multiple fish species", 0.3, {
         "science" : 0.15,
         "democracy" : 0.1
-    })
+    }, [
+        [1,2,-0.2],
+        [1,3,-0.2]
+    ])
     h("{country_1}ian scientist on declining fish populations: \"It's a recurring natural phenomenon\"", 0.3, {
-        "science" : -0.5
-    })
+        "science" : -0.4,
+        "progress" : -0.3
+    }, [
+        [1,2,-0.1],
+        [1,3,-0.1]
+    ])
 
 
 func init_messages():

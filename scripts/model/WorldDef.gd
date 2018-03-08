@@ -23,6 +23,7 @@ func get_scenarios():
     scenarios.append(load("res://scenarios/Scenario_small_online_salt.gd").new())
     scenarios.append(load("res://scenarios/Scenario_small_singer_dead.gd").new())
     scenarios.append(load("res://scenarios/Scenario_pedophile.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_pedophile_killed.gd").new())
     scenarios.append(load("res://scenarios/Scenario_fish.gd").new())
     scenarios.append(load("res://scenarios/Scenario_refugees_in_albrahm.gd").new())
     scenarios.append(load("res://scenarios/Scenario_cancer_progress.gd").new())
