@@ -25,4 +25,5 @@ func init_messages():
     m(Message.NOTE, [0,1], "Prof. Harold Hegsworth found new way of producing sodium via online gaming.")
     m(Message.PHAX, [2], "Hegsworth: \"There will be more we can learn from the world of online gaming\"", 0.2)
     m(Message.PHAX, [0], "Breakthrough in salt refining processes")
-    m(Message.TWEET, [1], "onlinegaming ftw #hegsworth #salty")
+    m(Message.TWEET, [], "onlinegaming ftw #hegsworth #salty")
+    m(Message.TWEET, [], "i always knew i wasnt just gaming but doing science!")

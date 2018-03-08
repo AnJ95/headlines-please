@@ -21,8 +21,8 @@ func init_headlines():
         "science" : 0.5
     })
     h("Pedophile Bishop uncovered after 12 years of abusement!", 0.8, {
-        "science" : 0.7,
-        "progress" : -0.2
+        "science" : 0.6,
+        "progress" : -0.23
     })
     h("Wrongdoings of serial Pedophile uncovered", 0.3, {
         "democracy" : -0.2,
@@ -32,8 +32,9 @@ func init_headlines():
 
 func init_messages():
     m(Message.TWEET, [0], "That rapist bishop shall burn in hell")
-    m(Message.TWEET, [], "Religion strikes back! #hideyourwife #hideyourkids")
-
-    m(Message.NOTE, [0,1,3], "Bishop Ainsworth committed sexual harrassment in multiple cases")
+    m(Message.TWEET, [0], "Religion strikes back! #hideyourwife #hideyourkids")
+    
+    m(Message.NOTE, [1], "Multiple victims of sexual harrassment in the past are now contacting the authorities")
+    m(Message.NOTE, [3], "Bishop Ainsworth committed sexual harrassment in multiple cases")
 
     m(Message.PHAX, [2], "First case of sexual assault was 12 years ago", 0.35)

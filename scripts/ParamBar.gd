@@ -53,12 +53,6 @@ func update(value):
     # On first iteration set last value to current
     if last_value == null:
         last_value = value
-    
-    # Set colors for bars
-    bar.color = get_rgba(last_value)
-    bar_more.color = get_rgba(value)
-    bar_less.color = bar.color
-    bar_less.color.a *= 0.5
 
     # calculate some widths
     var width = scale_value(last_value)
@@ -104,14 +98,27 @@ func update(value):
     var more_a = 0
     if more_visible:
         more_a = 1
+        
+    var col_bar = get_rgba(last_value)
+    var col_more = get_rgba(value)
+    col_more.a *= 1.2
+    var col_less = get_rgba(last_value)
+    col_less.a *= 0.6
+    
     tween.interpolate_property(bar, "rect_position", bar.rect_position, Vector2(bar_pos, bar.rect_position.y), t, e, d)
     tween.interpolate_property(bar, "rect_size", bar.rect_size, Vector2(bar_size, bar.rect_size.y), t, e, d)
+    tween.interpolate_property(bar, "color", bar.color, col_bar, t, e, d)#
+    
     tween.interpolate_property(bar_less, "rect_position", bar_less.rect_position, Vector2(less_pos, bar_less.rect_position.y), t, e, d)
     tween.interpolate_property(bar_less, "rect_size", bar_less.rect_size, Vector2(less_size, bar_less.rect_size.y), t, e, d)
     tween.interpolate_property(bar_less, "modulate", bar_less.modulate, Color(1, 1, 1, less_a), t, e, d)
+    tween.interpolate_property(bar_less, "color", bar_less.color, col_less, t, e, d)
+    
     tween.interpolate_property(bar_more, "rect_position", bar_more.rect_position, Vector2(more_pos, bar_more.rect_position.y), t, e, d)
     tween.interpolate_property(bar_more, "rect_size", bar_more.rect_size, Vector2(more_size, bar_more.rect_size.y), t, e, d)
     tween.interpolate_property(bar_more, "modulate", bar_more.modulate, Color(1, 1, 1, more_a), t, e, d)
+    tween.interpolate_property(bar_more, "color", bar_more.color, col_more, t, e, d)
+    
     tween.start()
     
     # Show arrow
