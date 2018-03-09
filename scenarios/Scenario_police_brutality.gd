@@ -7,11 +7,11 @@ func _init():
     init_messages()
 
 func is_valid(world, countries):
-    return countries[0].params["democracy"] < -0.4 and countries[0].params["culture"] < -0.4
+    return countries[0].params["democracy"] < -0.3 and countries[0].params["culture"] < -0.3
 
 
 func init_headlines():
-    h("Shop owner brutaly beat up by the Police of {country_1}", 0.6, {
+    h("Shop owner brutaly beat up by the Police of {country_1}", 0.7, {
         "democracy" : 0.52,
         "progress" : 0.41
     })
@@ -27,7 +27,7 @@ func init_headlines():
         "democracy" : -0.68,
         "progress" : -0.42
     })
-    h("{country_1} forces regional libraries to close!", 0.5, {
+    h("{country_1} forces regional libraries to close!", 0.6, {
         "culture" : 0.5,
         "democracy" : 0.4
     })
@@ -42,5 +42,5 @@ func init_messages():
     m(Message.NOTE, [0], "There was a violent police operation in {country_1} in a bookshop.", 0.3)
     m(Message.NOTE, [1], "The librarian is said to have committed tax fraud", 0.12)
 
-    m(Message.PHAX, [3], "Police stated the bookshop owner \"is a terrorist spreading inappropriate rumours\"", 0.25)
+    m(Message.PHAX, [3], "Police stated the bookshop owner is \"a terrorist spreading inappropriate rumours\"", 0.25)
     m(Message.PHAX, [4], "Statistics show actual decline in bookshops and libraries in {country_1}", 0.39)

@@ -24,6 +24,7 @@ func get_scenarios():
     scenarios.append(load("res://scenarios/Scenario_small_singer_dead.gd").new())
     scenarios.append(load("res://scenarios/Scenario_pedophile.gd").new())
     scenarios.append(load("res://scenarios/Scenario_pedophile_killed.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_pedophile_released.gd").new())
     scenarios.append(load("res://scenarios/Scenario_fish.gd").new())
     scenarios.append(load("res://scenarios/Scenario_refugees_in_albrahm.gd").new())
     scenarios.append(load("res://scenarios/Scenario_cancer_progress.gd").new())
@@ -32,13 +33,15 @@ func get_scenarios():
     scenarios.append(load("res://scenarios/Scenario_religion_clash_in_schools.gd").new())
     scenarios.append(load("res://scenarios/Scenario_ministry_pope.gd").new())
     scenarios.append(load("res://scenarios/Scenario_travel_warning.gd").new())
-    scenarios.append(load("res://scenarios/Scenario_international_sports_festival.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_isf_host.gd").new())
+    scenarios.append(load("res://scenarios/Scenario_isf_start.gd").new())
     scenarios.append(load("res://scenarios/Scenario_cultural_exchange.gd").new())
     scenarios.append(load("res://scenarios/Scenario_police_brutality.gd").new())
     scenarios.append(load("res://scenarios/Scenario_box_urinator.gd").new())
-        
+    scenarios.append(load("res://scenarios/Scenario_direct_democracy.gd").new())
+
     return scenarios
-    
+
 func get_params():
     var params = []
     params.append(Param.new("science", "Religious", "Sciencific"))

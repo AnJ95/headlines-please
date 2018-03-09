@@ -1,11 +1,11 @@
 extends "res://scripts/model/Scenario.gd"
 
 func _init():
-    name = "International Sports Festival"
+    name = "International Sports Festival Host"
     num_countries = 3
     init_headlines()
     init_messages()
-    
+
 func is_valid(world, countries):
     return true
 
@@ -42,16 +42,16 @@ func init_headlines():
         "democracy" : 0.35,
         "culture" : -0.3
     })
-    
+
 
 
 func init_messages():
     m(Message.TWEET, [4], "theres much more important stuff to pay than sports #isf", 0.2)
     m(Message.TWEET, [2], "{country_1} elected host AGAIN?", 0.2)
     m(Message.TWEET, [], "Go {country_3}!", 0.2)
-    
+
     m(Message.NOTE, [1], "Committee of the International Sports Festival decided {country_1} to be this years host")
     m(Message.NOTE, [0], "50ths International Sports Festival is closing in!")
-    
+
     m(Message.PHAX, [2], "Rumours claim questionable deals were made for the hosts election", 0.4)
     m(Message.PHAX, [3, 4], "{country_2} raised its annual budget for sportive activies (sometime last year)", 0.33)

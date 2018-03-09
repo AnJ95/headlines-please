@@ -25,7 +25,7 @@ func init_headlines():
       "democracy" : -0.4,
       "progress" : 0.4
     }, [
-        [1, 2, -0.1]
+        [1, 2, -0.1],
         [1, 3, -0.1]
     ])
 
