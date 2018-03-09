@@ -8,7 +8,7 @@ func _init():
 
 
 func init_headlines():
-    h("{country_1} allows people to treat citizens of {country_2} derogatory.", 0.75, {
+    h("{country_1} treats citizens of {country_2} disadvantageous!", 0.75, {
       "tolerance" : -0.3,
       "democracy" : 0.1
     }, [
